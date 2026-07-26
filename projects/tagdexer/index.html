@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="tagdexer — tag-based code navigation and append-only decision logging for any repo. Find files by what they do, and keep a record of why. CLI-first, with an optional VSCodium sidebar.">
+  <meta name="description" content="tagdexer — two CLI tools that share one vocabulary: a tag index that finds files by what they do, and an append-only decision log that records why they are the way they are.">
   <title>tagdexer</title>
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="stylesheet" href="style.css">
@@ -21,9 +21,9 @@
     <header class="site-header">
       <h1>tagdexer</h1>
       <p class="tagline">
-        Tag-based code navigation and append-only decision logging for any repo —
-        find files by what they do, not where they live, and keep a record of why
-        things were built the way they were.
+        Find files by what they do, not where they live — and keep the reasoning
+        that produced them. A tag index and an append-only decision log, sharing
+        one vocabulary, for any repo.
       </p>
       <img class="logo" src="logo/logo.png" alt="tagdexer logo">
       <nav class="site-nav" aria-label="Primary">
@@ -34,49 +34,105 @@
 
     <main>
       <p class="lead">
-        <strong>tagdexer</strong> gives every file in a repo a set of short labels —
-        <code>recorder</code>, <code>active</code>, <code>deprecated</code> — and
-        indexes them into a single file you can search from the command line. Next
-        to it sits <code>tracker.js</code>, an append-only architectural decision
-        log, so the next person to open the repo — or the next AI coding agent —
-        doesn't have to rediscover the reasoning from scratch.
+        Two questions cost more time than almost anything else in an unfamiliar
+        codebase: <em>where is the code that does this?</em> and <em>why on earth
+        was it built this way?</em> Neither is answered by the file tree, and
+        neither survives in anyone's head for long. <strong>tagdexer</strong> is
+        two small command-line tools that answer one each — and, because they
+        share a vocabulary, answer them together.
       </p>
 
-      <section class="card" aria-labelledby="use-heading">
-        <h2 id="use-heading">Use it when</h2>
+      <section class="card" aria-labelledby="index-heading">
+        <h2 id="index-heading">The tag index — finding the code</h2>
         <p>
-          A repo has grown past the point where folder names tell you where
-          anything is, and full-text grep returns too much. Tags describe a file's
-          role; the combination of tags is its fingerprint.
+          Directory structure encodes one way of slicing a project, chosen early
+          and rarely revisited. But the thing you actually want is usually a role:
+          everything that writes to the database, everything still live, everything
+          touching the network. Those files are scattered across folders, and
+          grepping for them means guessing the words their authors happened to use.
         </p>
-        <ul>
-          <li>Search by role and status instead of guessing at directories</li>
-          <li>Schema-validated decision log — decision, intent, context, files affected</li>
-          <li>CLI-first, so it works with any coding agent and needs no editor</li>
-          <li>Optional VS Code / VSCodium sidebar for tag search and editing</li>
-          <li>Portable — copy the folder into any repo, or deploy in one click</li>
-          <li>Free software under the MIT licence</li>
-        </ul>
         <p>
-          <a href="https://github.com/oisinmcgrath/tagdexer"><strong>Source &amp; full docs on GitHub</strong></a>
+          tagdexer labels files by <strong>what they do</strong>. A tag goes in a
+          header comment, or — for JSON, images and folders that can't carry
+          comments — in a companion <code>.tags</code> file:
+        </p>
+        <pre><code># @tagdex: recorder, online, active</code></pre>
+        <p>
+          The indexer scans the repo, resolves aliases so <code>db</code>,
+          <code>.db</code> and <code>sqlite</code> all collapse to the canonical
+          <code>database</code>, and writes one <code>.tagindex.json</code> at the
+          root. Searches then take include and exclude terms together:
+        </p>
+        <pre><code>node tagdexer/indexer.js --search "database,active,-deprecated"</code></pre>
+        <p>
+          That asks a question the directory tree can't: everything that touches
+          the database and is still in service, minus what's already on its way
+          out. No file has to move for its tags to change, so the index tracks how
+          you actually think about the code rather than how it was once filed.
         </p>
       </section>
 
-      <section class="card" aria-labelledby="how-heading">
-        <h2 id="how-heading">How it works</h2>
+      <section class="card" aria-labelledby="log-heading">
+        <h2 id="log-heading">The decision log — keeping the reasoning</h2>
         <p>
-          Tags are declared either as a header comment in the file's own syntax, or
-          — for JSON, images and folders that can't carry comments — in a companion
-          <code>.tags</code> file. The indexer scans the repo, resolves aliases so
-          <code>db</code> and <code>sqlite</code> both find <code>database</code>,
-          and writes a single <code>.tagindex.json</code> at the root.
+          Finding the code is only half the problem. The expensive knowledge is the
+          part that never makes it into the repo: the approach that was tried and
+          abandoned, the constraint that isn't obvious from any single file, the
+          reason a sensible-looking refactor will break something three modules
+          away. Commit messages record what changed. They rarely record what was
+          rejected, or why.
         </p>
-        <pre><code># in a source file
-# @tagdex: recorder, online, active</code></pre>
-        <pre><code>node tagdexer/indexer.js --search "active,-deprecated"</code></pre>
         <p>
-          Searches combine include and exclude terms, so you can ask for everything
-          that is live without seeing the parts already on their way out.
+          <code>tracker.js</code> is an append-only decision log for exactly that.
+          Entries are schema-validated, so they can't be vague — a decision needs
+          an <strong>intent</strong> (why it matters), a <strong>context</strong>
+          (how it was reached), tags, and the files it affects. Entries can record
+          alternatives rejected, constraints discovered, and consequences, and can
+          supersede earlier entries without deleting them.
+        </p>
+        <pre><code>node tagdexer/tracker.js --add --type finding \
+  --decision "Vendor VIN does not encode drivetrain" \
+  --intent "Determine if VIN can backfill missing drivetrain" \
+  --context "Checked against the NHTSA vPIC schema" \
+  --tags "vin,drivetrain"</code></pre>
+        <p>
+          The test for whether something is worth logging is simple: <em>if you
+          walked away right now, would the next person have to rediscover what you
+          already know?</em> Routine refactors and dependency bumps fail that test.
+          A dead end you spent two days in passes it easily — and a dead end is
+          precisely the kind of thing that never gets written down anywhere else.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="compose-heading">
+        <h2 id="compose-heading">Why they belong together</h2>
+        <p>
+          The two halves share one vocabulary. Decision entries are tagged with the
+          same canonical tags as files, resolved through the same aliases — so a
+          tag is not just a label on a file, it is a thread running through the
+          repo's history.
+        </p>
+        <pre><code># what runs
+node tagdexer/indexer.js --search "database,active"
+
+# why it runs that way
+node tagdexer/tracker.js --search --tag database</code></pre>
+        <p>
+          Ask the first question and you get the code as it stands. Ask the second
+          and you get the arguments that produced it, including the options that
+          were considered and dropped. Kept separately, an index goes stale and a
+          decision log goes unread; sharing a vocabulary, each one gives you a way
+          into the other.
+        </p>
+        <p>
+          Both are plain CLI tools, so this works the same whether the reader is a
+          new engineer, you in six months, or an AI coding agent that has no memory
+          of the last session at all. The optional VSCodium sidebar puts the same
+          search, tag editing and decision browsing in a panel for people who
+          prefer to click.
+        </p>
+        <p>
+          <a href="https://github.com/oisinmcgrath/tagdexer"><strong>Source &amp; full docs on GitHub</strong></a>
         </p>
       </section>
 

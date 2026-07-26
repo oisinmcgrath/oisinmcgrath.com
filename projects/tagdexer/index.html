@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="tagdexer — tag-based code navigation and append-only decision logging for any repo. Find files by what they do, and keep a record of why. CLI-first, with an optional VSCodium sidebar.">
+  <title>tagdexer</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Back link to the projects index, sitting above the page header. */
+    .backnav{padding:1rem 0 0 1.25rem}
+    .backnav a{display:inline-flex;align-items:center;gap:.4rem;font-size:.9rem;
+               text-decoration:none;font-weight:500}
+    .backnav a:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <nav class="backnav"><a href="https://oisinmcgrath.com/projects/"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Projects</a></nav>
+  <div class="wrap">
+    <header class="site-header">
+      <h1>tagdexer</h1>
+      <p class="tagline">
+        Tag-based code navigation and append-only decision logging for any repo —
+        find files by what they do, not where they live, and keep a record of why
+        things were built the way they were.
+      </p>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="https://oisinmcgrath.com/">Home</a>
+        <a href="https://github.com/oisinmcgrath/tagdexer">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <p class="lead">
+        <strong>tagdexer</strong> gives every file in a repo a set of short labels —
+        <code>recorder</code>, <code>active</code>, <code>deprecated</code> — and
+        indexes them into a single file you can search from the command line. Next
+        to it sits <code>tracker.js</code>, an append-only architectural decision
+        log, so the next person to open the repo — or the next AI coding agent —
+        doesn't have to rediscover the reasoning from scratch.
+      </p>
+
+      <section class="card" aria-labelledby="use-heading">
+        <h2 id="use-heading">Use it when</h2>
+        <p>
+          A repo has grown past the point where folder names tell you where
+          anything is, and full-text grep returns too much. Tags describe a file's
+          role; the combination of tags is its fingerprint.
+        </p>
+        <ul>
+          <li>Search by role and status instead of guessing at directories</li>
+          <li>Schema-validated decision log — decision, intent, context, files affected</li>
+          <li>CLI-first, so it works with any coding agent and needs no editor</li>
+          <li>Optional VS Code / VSCodium sidebar for tag search and editing</li>
+          <li>Portable — copy the folder into any repo, or deploy in one click</li>
+          <li>Free software under the MIT licence</li>
+        </ul>
+        <p>
+          <a href="https://github.com/oisinmcgrath/tagdexer"><strong>Source &amp; full docs on GitHub</strong></a>
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="how-heading">
+        <h2 id="how-heading">How it works</h2>
+        <p>
+          Tags are declared either as a header comment in the file's own syntax, or
+          — for JSON, images and folders that can't carry comments — in a companion
+          <code>.tags</code> file. The indexer scans the repo, resolves aliases so
+          <code>db</code> and <code>sqlite</code> both find <code>database</code>,
+          and writes a single <code>.tagindex.json</code> at the root.
+        </p>
+        <pre><code># in a source file
+# @tagdex: recorder, online, active</code></pre>
+        <pre><code>node tagdexer/indexer.js --search "active,-deprecated"</code></pre>
+        <p>
+          Searches combine include and exclude terms, so you can ask for everything
+          that is live without seeing the parts already on their way out.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="req-heading">
+        <h2 id="req-heading">Requirements</h2>
+        <ul>
+          <li>Node.js 22 or newer</li>
+          <li><a href="https://github.com/BurntSushi/ripgrep">ripgrep</a> on your <code>PATH</code></li>
+          <li>VSCodium or VS Code 1.85+ — only for the optional sidebar</li>
+        </ul>
+        <p class="meta">
+          The CLI is plain Node and cross-platform; it is developed and tested on
+          Fedora Linux.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Oisin McGrath · MIT licensed · <a href="https://github.com/oisinmcgrath/tagdexer">github.com/oisinmcgrath/tagdexer</a></p>
+      <p>No tracking on this page.</p>
+    </footer>
+  </div>
+</body>
+</html>

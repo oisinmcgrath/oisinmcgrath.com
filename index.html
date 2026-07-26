@@ -18,6 +18,8 @@
     .projcard:hover{transform:translateY(-2px);border-color:#14507d;
                     box-shadow:0 3px 10px rgba(20,60,100,.08)}
     .projcard img{width:2.4rem;height:2.4rem;object-fit:contain;margin-bottom:.65rem}
+    /* Cards without a mark reserve the same height, so every title starts on one line. */
+    .projcard:not(:has(img)) h3{margin-top:calc(2.4rem + .65rem)}
     .projcard h3{margin:0 0 .4rem;font-size:1.05rem;color:#15191d}
     .projcard p{margin:0 0 .9rem;font-size:.92rem;color:#3b424a;flex:1}
     .projcard .more{font-size:.88rem;font-weight:600;color:#14507d}
@@ -78,6 +80,25 @@
           <h3>N-of-1</h3>
           <p>Offline health tracker for Android, Linux and Windows. See what actually
              drives your energy, mood and focus. No account, no cloud, no subscription.</p>
+          <span class="more">Read more &rarr;</span>
+        </a>
+        <a class="projcard" href="/projects/epson-rr70w-autofeed/">
+          <img src="/projects/logos/epson-rr70w-autofeed.png" alt="">
+          <h3>Epson RR-70W batch scanner</h3>
+          <p>Driver-free batch scanning for the Epson RR-70W on Linux. Feed page after
+             page straight to PNG or PDF — no OEM software, no cloud account.</p>
+          <span class="more">Read more &rarr;</span>
+        </a>
+        <a class="projcard" href="/projects/tagdexer/">
+          <h3>tagdexer</h3>
+          <p>Tag-based code navigation and append-only decision logging for any repo.
+             Find files by what they do, and keep a record of why.</p>
+          <span class="more">Read more &rarr;</span>
+        </a>
+        <a class="projcard" href="/projects/nitrotune/">
+          <h3>NitroTune</h3>
+          <p>Fan and thermal control for the Acer Nitro AN515-55 on Linux — a native
+             replacement for Windows-only NitroSense.</p>
           <span class="more">Read more &rarr;</span>
         </a>
       </div>

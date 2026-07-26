@@ -25,10 +25,14 @@ here depend on that being true.
     projects/capsule/       Capsule — page, policies, own stylesheet
     projects/cadence/       Cadence — page, policies, demo video, own stylesheet
     projects/n-of-1/        N-of-1 — page, policies, screenshots, own stylesheet
+    projects/epson-rr70w-autofeed/  Epson RR-70W scanner — page, own stylesheet
+    projects/tagdexer/      tagdexer — page, own stylesheet
+    projects/nitrotune/     NitroTune — page, own stylesheet
 
-Each project directory carries its own `style.css`, favicon and logo. They are
-independent copies, not layers over the root stylesheet, and the themes differ
-on purpose.
+Each project directory carries its own `style.css`. They are independent copies,
+not layers over the root stylesheet, and the themes differ on purpose. The four
+apps that publish policy URLs have `privacy.html` and `terms.html`; the three
+developer tools are a single page each.
 
 ## The two policy pairs
 
@@ -65,3 +69,6 @@ Cloudflare Pages, by direct upload from the repo root:
 - **Capsule** — sandboxed dev containers for running AI coding agents safely
 - **Cadence** — offline hold-to-talk dictation for Linux
 - **N-of-1** — offline health tracker for Android, Linux and Windows
+- **Epson RR-70W batch scanner** — driver-free batch scanning on Linux
+- **tagdexer** — tag-based code navigation and decision logging for any repo
+- **NitroTune** — fan and thermal control for the Acer Nitro AN515-55 on Linux

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A free, driver-free Linux batch scanner for the Epson RR-70W. Talks to the scanner directly over USB, drives its automatic feeding mode, and outputs PNG or PDF. No OEM software, no cloud account.">
+  <title>Epson RR-70W batch scanner</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Back link to the projects index, sitting above the page header. */
+    .backnav{padding:1rem 0 0 1.25rem}
+    .backnav a{display:inline-flex;align-items:center;gap:.4rem;font-size:.9rem;
+               text-decoration:none;font-weight:500}
+    .backnav a:hover{text-decoration:underline}
+    /* The logo is a photo of the device, so it wants a softer edge than a flat mark. */
+    header.site-header img.logo{width:120px;height:auto;margin-top:1.25rem;margin-bottom:.75rem;border-radius:12px}
+  </style>
+</head>
+<body>
+  <nav class="backnav"><a href="https://oisinmcgrath.com/projects/"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Projects</a></nav>
+  <div class="wrap">
+    <header class="site-header">
+      <h1>Epson RR-70W batch scanner</h1>
+      <p class="tagline">
+        Driver-free batch scanning for the Epson RR-70W on Linux — feed page after
+        page and it keeps going, straight to PNG or PDF. No OEM software, no cloud
+        account.
+      </p>
+      <img class="logo" src="logo/logo.png" alt="The Epson RR-70W portable scanner">
+      <nav class="site-nav" aria-label="Primary">
+        <a href="https://oisinmcgrath.com/">Home</a>
+        <a href="https://github.com/oisinmcgrath/epson-rr70w-autofeed">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <p class="lead">
+        Epson ships no Linux drivers and no Linux scanning software for the RR-70W
+        portable document scanner. This is a command-line tool that talks to the
+        device directly over USB using the eSCI2 protocol, and drives its
+        <strong>Automatic Feeding Mode</strong>: insert a page, it scans, insert the
+        next, and it keeps going until you tell it to stop. Built for batches of
+        receipts and invoices.
+      </p>
+
+      <section class="card" aria-labelledby="use-heading">
+        <h2 id="use-heading">Use it when</h2>
+        <p>
+          You have a stack of loose pages, an RR-70W, and a Linux machine — the one
+          combination the manufacturer doesn't support.
+        </p>
+        <ul>
+          <li>Continuous batch scanning, with no per-page clicking</li>
+          <li>Output as PNG, one PDF per page, or a single multi-page PDF</li>
+          <li>Auto-crop to the paper edge, even against the dark ADF backing</li>
+          <li>Batches named <code>{date}_{prefix}_{HHMM}_{NNN}</code>, so they sort chronologically</li>
+          <li>Entirely offline — no account, no cloud service</li>
+          <li>Free software under the GPL, version 2</li>
+        </ul>
+        <p>
+          <a href="https://github.com/oisinmcgrath/epson-rr70w-autofeed"><strong>Source &amp; full docs on GitHub</strong></a>
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="run-heading">
+        <h2 id="run-heading">Running it</h2>
+        <pre><code>pip3 install --user -r requirements.txt
+python3 rr70w_batch_scan.py --outdir ~/scans/rr70w</code></pre>
+        <p>
+          Feed pages as it runs and press <strong>Backspace</strong> when the stack
+          is done. It scans at 150 dpi by default, falling back through 200, 300,
+          400 and 600 if the device refuses. White margins are cropped
+          automatically; <code>--no-crop</code> keeps the full frame. If no pages
+          were fed, no batch folder is created.
+        </p>
+        <p>
+          Close any other scanning application first — the tool claims the USB
+          device directly.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="modes-heading">
+        <h2 id="modes-heading">Output modes</h2>
+        <p>
+          Chosen before the first page is fed, and fixed for the whole batch.
+        </p>
+        <div class="table-wrap">
+          <table class="modes">
+            <thead>
+              <tr><th scope="col">Key</th><th scope="col">Mode</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>1</code></td><td>PNG, one file per page — the default, no key needed</td></tr>
+              <tr><td><code>2</code></td><td>PDF, one file per page</td></tr>
+              <tr><td><code>3</code></td><td>PDF, multi-page — press Enter to close a document and start the next without ending the batch</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="req-heading">
+        <h2 id="req-heading">Requirements</h2>
+        <ul>
+          <li>Linux with USB access to the device — <code>lsusb</code> should show <code>04b8:018b</code></li>
+          <li>Python 3, with <a href="https://github.com/pyusb/pyusb">pyusb</a> and <a href="https://github.com/python-pillow/Pillow">Pillow</a></li>
+        </ul>
+        <p class="meta">
+          Developed and tested on Fedora 44 KDE. Any distribution with Python 3 and
+          libusb should behave the same way.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Oisin McGrath · GPL-2.0-only · <a href="https://github.com/oisinmcgrath/epson-rr70w-autofeed">github.com/oisinmcgrath/epson-rr70w-autofeed</a></p>
+      <p>No tracking on this page.</p>
+    </footer>
+  </div>
+</body>
+</html>

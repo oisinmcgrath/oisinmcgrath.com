@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Privacy policy for Cadence: free GPL-2.0 offline dictation software. No telemetry, no accounts, no cloud. Explains exactly why it reads the keyboard and microphone, and what the code does with each.">
+  <title>Privacy policy — Cadence</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-header">
+      <h1>Privacy policy</h1>
+      <p class="tagline">Cadence · Oisin McGrath</p>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="privacy.html" aria-current="page">Privacy policy</a>
+        <a href="terms.html">Terms of use</a>
+      </nav>
+    </header>
+
+    <main>
+      <p class="meta"><strong>Last updated:</strong> 26 July 2026</p>
+
+      <p>
+        This privacy policy describes how <strong>Cadence</strong> (“the Software”)
+        handles information when you run it. Cadence is free software developed by
+        <strong>Oisin McGrath</strong> (“I”, “me”, “the developer”) under the
+        <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html">GNU General
+        Public License, version 2</a>.
+      </p>
+      <p>
+        <strong>Plain summary:</strong> Cadence collects nothing. It is a program you
+        run on your own computer. There is no Cadence account, no Cadence server, no
+        telemetry, and no analytics. I never receive your voice, your transcripts, your
+        keystrokes, or any information about how you use the Software.
+      </p>
+      <p>
+        Cadence is dictation software, so it genuinely does need access to your
+        microphone and your keyboard. Those are strong permissions and you deserve a
+        straight explanation of each one rather than a reassuring sentence. Sections
+        3 to 5 give exactly that: what is accessed, why it is unavoidable, and what
+        the code actually does with it. The source is public — every claim on this
+        page can be checked against it.
+      </p>
+      <p>
+        This document is not legal advice. For the “use at your own risk” rules, see
+        the <a href="terms.html">Terms of use</a> and the <code>LICENSE</code> file
+        shipped with the Software.
+      </p>
+
+      <h2>1. What Cadence is</h2>
+      <p>
+        Cadence is a small desktop application that lives in your system tray. You
+        hold a key, speak, and it types what you said into whatever window has focus.
+        It is not a hosted service, has no login, and does not sync anything.
+      </p>
+      <p>
+        I <strong>operate no Cadence server</strong>. There is nowhere for your data
+        to go, because the Software never sends anything off your machine on its own
+        initiative.
+      </p>
+
+      <h2>2. Where speech recognition happens</h2>
+      <p>
+        Transcription is done by a speech-recognition server <strong>running on your
+        own computer</strong> — by default <code>whisper.cpp</code> listening on
+        <code>127.0.0.1</code>, the loopback address that never leaves the machine.
+        Your audio is sent to that local address and nowhere else.
+      </p>
+      <p>
+        Every network address compiled into Cadence is a <code>127.0.0.1</code>
+        loopback address. There are no others in the source code. If you deliberately
+        reconfigure it to point at a remote transcription server, that is your choice
+        and your audio then goes wherever you sent it — the Software will not stop
+        you, and I have no involvement in or visibility of that.
+      </p>
+
+      <h2>3. The microphone, and when it is live</h2>
+      <p>
+        Cadence needs the microphone because it is dictation software. It is not
+        listening continuously and there is no wake word.
+      </p>
+      <ul>
+        <li>
+          Recording starts when you <strong>press the trigger key</strong> and stops
+          when you <strong>release it</strong>. Between holds no recording process
+          is running at all.
+        </li>
+        <li>
+          The recorder is a separate <code>pw-record</code> process that Cadence
+          starts on press and terminates on release. It is tied to Cadence's own
+          lifetime by the kernel (<code>PR_SET_PDEATHSIG</code>), so it cannot
+          survive the app and keep holding the microphone — even if Cadence crashes.
+        </li>
+        <li>
+          Your desktop's own microphone indicator will show when capture is active,
+          independently of anything Cadence claims.
+        </li>
+      </ul>
+      <p>
+        <strong>One honest detail about disk.</strong> Each phrase is written to a
+        temporary WAV file (<code>cadence_phrase.wav</code> in your system temp
+        directory) so it can be posted to the local transcription server. The same
+        file is overwritten by the next phrase, but the most recent one
+        <strong>remains on disk</strong> until your temp directory is cleared,
+        typically at reboot. It is readable by your user account. Nothing uploads it;
+        it is simply a local file, and I mention it because “nothing touches disk”
+        would not be true.
+      </p>
+
+      <h2>4. The keyboard, and why access is broader than one key</h2>
+      <p>
+        To support a real press-and-hold, Cadence has to know the exact moment the
+        trigger key goes down and comes back up. On Linux this means reading the
+        keyboard input device, which requires membership of the <code>input</code>
+        group.
+      </p>
+      <p>
+        <strong>That group grants the ability to read all key events, not just
+        one.</strong> Linux permissions on input devices are per-device; there is no
+        mechanism to request a single key. I am not going to pretend otherwise, and
+        it would be dishonest to describe this as narrow access.
+      </p>
+      <p>What the Software does with that access:</p>
+      <ul>
+        <li>
+          it watches for the configured trigger key only (Right Ctrl by default) and
+          reacts to its press and release;
+        </li>
+        <li>
+          every other key event is discarded immediately in the same loop — not
+          stored, not buffered, not counted, not transmitted;
+        </li>
+        <li>
+          keystrokes are never written to disk, never included in any log, and never
+          sent anywhere.
+        </li>
+      </ul>
+      <p>
+        This is roughly 90 lines of readable code in
+        <code>src/hold_to_talk_over_evdev.rs</code>. If you are evaluating whether to
+        trust it, that file is the one to read — and reading it is a more reliable
+        basis for trust than this paragraph.
+      </p>
+      <p>
+        An earlier version avoided the <code>input</code> group entirely by using the
+        desktop's own global-shortcuts portal, which never exposes the raw key
+        stream. It was abandoned for a functional reason: that portal force-releases
+        a held shortcut after about 3.6 seconds, which cut dictation off mid-sentence.
+        The tradeoff is recorded in the project's decision log rather than hidden.
+      </p>
+
+      <h2>5. Typing into other applications</h2>
+      <p>
+        Transcribed text has to get into the application you are using, so Cadence
+        creates a virtual keyboard device and types the text as if you had typed it
+        yourself. This is what allows dictation to work in any window rather than in
+        one special box.
+      </p>
+      <ul>
+        <li>
+          The privileged helper that owns the virtual device
+          (<code>ydotoold</code>) is started by Cadence on a private socket, not left
+          running as a permanent system service.
+        </li>
+        <li>
+          The kernel terminates that helper the instant Cadence exits, including on a
+          crash, so no always-on component with typing privileges is left behind.
+        </li>
+        <li>
+          Access to the underlying device is granted by a <code>uaccess</code> rule,
+          which hands it to whoever is physically logged in at the screen rather than
+          opening it to every account on the machine.
+        </li>
+        <li>
+          If the helper cannot start, Cadence falls back to putting the text on your
+          clipboard instead, and you paste it yourself.
+        </li>
+      </ul>
+      <p>
+        Cadence types only what the transcription server returned for audio you
+        recorded. It does not read the contents of the window it types into, and has
+        no ability to see what is on your screen.
+      </p>
+
+      <h2>6. What is stored on your machine</h2>
+      <p>Cadence keeps very little, all of it local and all of it yours to delete:</p>
+      <ul>
+        <li>a small settings file holding preferences such as microphone gain;</li>
+        <li>the temporary phrase WAV described in section 3;</li>
+        <li>the speech model file you downloaded during installation.</li>
+      </ul>
+      <p>
+        There is no transcript history, no dictation log, and no database of anything
+        you have said. Text goes to the focused window and is not retained by Cadence
+        afterwards.
+      </p>
+
+      <h2>7. No accounts, no cloud storage</h2>
+      <p>
+        There is no Cadence account to create, no cloud database, and no cloud
+        backup. Nothing about your identity is collected, because nothing is
+        collected.
+      </p>
+
+      <h2>8. Third-party components</h2>
+      <p>
+        Cadence drives tools that are not mine — <code>whisper.cpp</code>,
+        PipeWire, <code>ydotool</code> — and uses openly published speech models. They
+        are governed by their own licences and privacy practices. During installation
+        the setup script downloads the speech model from Hugging Face and the
+        <code>whisper.cpp</code> source from GitHub; those are ordinary downloads from
+        third parties, visible in the script, and happen once at your direction.
+      </p>
+
+      <h2>9. Security</h2>
+      <p>
+        <strong>You</strong> remain responsible for your machine's security — who has
+        local access to it, what else runs on it, and keeping it updated. A program
+        that can read the keyboard and type into windows is worth installing only from
+        a source you trust; that is true of Cadence as much as of anything else, which
+        is why the source is public and the sensitive parts are small enough to read.
+      </p>
+
+      <h2>10. Children</h2>
+      <p>
+        Cadence is a desktop utility intended for adults aged 18 and over. It is not
+        directed at children.
+      </p>
+
+      <h2>11. Free software and honesty about risk</h2>
+      <p>
+        Cadence is free software, provided in the hope that it is useful. This page
+        describes <strong>how the Software is designed to behave</strong>. Bugs,
+        misuse, or problems in third-party components it relies on can still cause
+        unexpected results — that risk sits with you under the GPL and the
+        <a href="terms.html">Terms of use</a>.
+      </p>
+
+      <h2>12. This website</h2>
+      <p>
+        Public pages on this site are static. They use <strong>no tracking, no
+        analytics, and no advertising cookies</strong> that I configure. Your browser
+        and host may still produce ordinary server or TLS logs outside my product
+        design; I do not run ad trackers on these pages.
+      </p>
+
+      <h2>13. Changes</h2>
+      <p>
+        If Cadence's behaviour changes in a way that affects this policy, I will
+        update this page and the “Last updated” date.
+      </p>
+
+      <h2>14. Contact</h2>
+      <p>
+        Privacy questions about Cadence:
+        <a href="mailto:privacy@oisinmcgrath.com">privacy@oisinmcgrath.com</a>
+      </p>
+      <p>
+        Developer: Oisin McGrath ·
+        <a href="https://github.com/oisinmcgrath">github.com/oisinmcgrath</a>
+      </p>
+      <p class="meta">
+        This policy is provided for transparency. It is not a guarantee against all
+        legal claims in every jurisdiction.
+      </p>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        <a href="index.html">Home</a> ·
+        <a href="terms.html">Terms of use</a> ·
+        Free software · No tracking on this page.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

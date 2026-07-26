@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Cadence — offline hold-to-talk dictation for Linux. Hold a key, speak, and your words are typed into any app. Runs entirely on your own machine.">
+  <title>Cadence</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-header">
+      <h1>Cadence</h1>
+      <p class="tagline">
+        Offline hold-to-talk dictation for Linux — hold Right Ctrl, speak, and
+        your words are typed straight into whatever app you're using. Nothing
+        is sent to the cloud.
+      </p>
+      <img class="logo" src="logo/logo.png" alt="Cadence logo">
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="privacy.html">Privacy policy</a>
+        <a href="terms.html">Terms of use</a>
+        <a href="https://github.com/oisinmcgrath/cadence">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <p class="lead">
+        <strong>Cadence</strong> is a small Rust tray app that turns speech into
+        typed text. Hold the trigger key and it records; as you speak it streams
+        the audio to a speech-recognition server running on your own machine and
+        types the result at your cursor. Release the key and it finishes the last
+        phrase. No account, no subscription, no network.
+      </p>
+
+      <section class="card" aria-labelledby="use-heading">
+        <h2 id="use-heading">Use it when</h2>
+        <p>
+          You want dictation that works in every application — editor, browser,
+          chat, terminal — without handing your voice to a cloud service.
+        </p>
+        <ul>
+          <li>Fully offline: speech recognition runs locally, nothing leaves your machine</li>
+          <li>Types at the cursor in any focused window, Wayland or X11</li>
+          <li>Live streaming — text appears while you are still speaking</li>
+          <li>Hardware accelerated via whisper.cpp on an AMD Radeon iGPU (Vulkan)</li>
+          <li>Free software under the GPL, version 2</li>
+        </ul>
+        <p>
+          <a href="https://github.com/oisinmcgrath/cadence"><strong>Source &amp; full docs on GitHub</strong></a>
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="perm-heading">
+        <h2 id="perm-heading">What it needs, and why</h2>
+        <p>
+          Dictation needs two permissions that sound alarming in the abstract, so
+          they are worth stating plainly up front. Both are explained in full in
+          the <a href="privacy.html">Privacy policy</a>, and the code that uses
+          them is short and readable.
+        </p>
+        <ul>
+          <li>
+            <strong>Reading the keyboard</strong> — to notice the moment you press
+            and release the trigger key. Linux cannot grant access to one single
+            key, so the app joins the <code>input</code> group and reads the
+            keyboard device. It matches only the trigger key and discards every
+            other event.
+          </li>
+          <li>
+            <strong>Typing into other windows</strong> — to put the transcribed
+            text where your cursor is. This uses a virtual input device, run by a
+            helper the app starts itself and the kernel shuts down the instant the
+            app exits.
+          </li>
+        </ul>
+        <p>
+          Neither capability sends anything anywhere. There is no Cadence server
+          to send it to.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2024–2026 Oisin McGrath · GPL-2.0-only · <a href="https://github.com/oisinmcgrath/cadence">github.com/oisinmcgrath/cadence</a></p>
+      <p>
+        <a href="privacy.html">Privacy</a> ·
+        <a href="terms.html">Terms</a> ·
+        No tracking on this page.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

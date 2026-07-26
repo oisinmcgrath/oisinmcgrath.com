@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Terms of use for Cadence: free GPL-2.0 offline dictation software, no warranty, use at your own risk, Australian consumer law note.">
+  <title>Terms of use — Cadence</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-header">
+      <h1>Terms of use</h1>
+      <p class="tagline">Cadence · Oisin McGrath</p>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="privacy.html">Privacy policy</a>
+        <a href="terms.html" aria-current="page">Terms of use</a>
+      </nav>
+    </header>
+
+    <main>
+      <p class="meta"><strong>Last updated:</strong> 26 July 2026</p>
+
+      <p>
+        These Terms of use (“Terms”) apply when you download, install, run, or
+        redistribute <strong>Cadence</strong> (the “Software”), free software by
+        <strong>Oisin McGrath</strong> (“I”, “me”, “the developer”).
+      </p>
+      <p>
+        <strong>Short version:</strong> the Software is free. You use it at your own
+        risk. There is no warranty. Cadence reads your keyboard, records your
+        microphone, and types into other applications — all of which it needs in order
+        to be dictation software, and all of which are explained in the
+        <a href="privacy.html">Privacy policy</a>. You are responsible for deciding
+        whether to grant it those permissions on your machine.
+      </p>
+      <p>
+        These Terms are written in plain language for users of free software. They
+        are <strong>not legal advice</strong> and do not create a paid professional
+        engagement.
+      </p>
+
+      <h2>1. What the Software is</h2>
+      <p>
+        Cadence is a desktop application that records speech while you hold a key,
+        has it transcribed by a speech-recognition server running on your own
+        machine, and types the resulting text into the focused window. It runs on
+        <em>your</em> computer and drives components on <em>your</em> computer. I do
+        not operate a hosted Cadence service.
+      </p>
+
+      <h2>2. Licence — GPL version 2</h2>
+      <p>
+        The Software is free software licensed under the <strong>GNU General Public
+        License, version 2 only</strong>, as set out in the <code>LICENSE</code> file
+        distributed with the source. That licence gives you freedom to use, study,
+        modify, and redistribute the Software, provided derivative works are
+        distributed under the same licence and the source is made available as the
+        GPL requires.
+      </p>
+      <p>
+        If anything in these Terms conflicts with the GPL regarding your rights to
+        copy, modify, or redistribute the Software, the <strong>GPL controls</strong>
+        for those rights. These Terms restate the no-warranty and risk rules for
+        clarity and add product-use notes.
+      </p>
+      <p>
+        Speech models, <code>whisper.cpp</code>, and other third-party components are
+        copyright their respective owners under their own licences, and are not
+        redistributed by this project by default.
+      </p>
+
+      <h2>3. Free software — no paid service, no support contract</h2>
+      <p>
+        I make Cadence available free of charge in the hope that it is useful. Unless
+        we separately agree in writing:
+      </p>
+      <ul>
+        <li>you are not buying a service, SLA, or guaranteed update schedule;</li>
+        <li>I am not obliged to provide support, training, or custom work;</li>
+        <li>I may stop maintaining the project at any time;</li>
+        <li>
+          any help I give (email, issues, chat) is voluntary and does not create a
+          duty of care beyond what the law requires for free software distribution.
+        </li>
+      </ul>
+
+      <h2>4. System permissions you are granting</h2>
+      <p>
+        Installing Cadence for full functionality involves granting permissions that
+        you should understand before you proceed. In summary — with the detail in the
+        <a href="privacy.html">Privacy policy</a>:
+      </p>
+      <ul>
+        <li>
+          <strong>Keyboard access.</strong> Detecting a key being held requires
+          reading the keyboard input device, which on Linux means access to all key
+          events, not one key. The Software matches only its trigger key and discards
+          the rest, but the operating system permission itself is broad. You are
+          choosing to grant it.
+        </li>
+        <li>
+          <strong>Microphone access.</strong> Capture runs only between pressing and
+          releasing the trigger key.
+        </li>
+        <li>
+          <strong>Virtual input (typing).</strong> The Software creates a virtual
+          keyboard in order to type into other applications.
+        </li>
+      </ul>
+      <p>
+        You are responsible for deciding whether these permissions are appropriate on
+        your machine, particularly on a shared, managed, or employer-owned system
+        where local policy may prohibit them. Check before installing if you are not
+        the sole owner of the machine.
+      </p>
+
+      <h2>5. Accuracy of transcription</h2>
+      <p>
+        Speech recognition is imperfect. Cadence will sometimes mishear words,
+        mispunctuate, drop audio, or insert text you did not say, and it types
+        directly into whatever window has focus. <strong>Do not rely on it for
+        anything where a transcription error would be costly</strong> without
+        reviewing the output first — including but not limited to medical, legal,
+        financial, safety-critical, or contractual text.
+      </p>
+      <p>
+        Because it types into the focused window, text can also land somewhere you
+        did not intend if focus changes mid-dictation. Checking what was typed is
+        your responsibility.
+      </p>
+
+      <h2>6. Entire risk is yours (no warranty)</h2>
+      <p>
+        The Software is distributed in the hope that it will be useful, but
+        <strong>WITHOUT ANY WARRANTY</strong>. To the extent permitted by applicable
+        law:
+      </p>
+      <p style="text-transform: uppercase; font-size: 0.95em; line-height: 1.45;">
+        The Software is provided “as is”, without warranty of any kind, express or
+        implied, including but not limited to the implied warranties of
+        merchantability and fitness for a particular purpose. The entire risk as to
+        the quality and performance of the Software is with you. Should the Software
+        prove defective, you assume the cost of all necessary servicing, repair, or
+        correction.
+      </p>
+      <p>
+        In practical terms: if a transcription is wrong, text is typed into the wrong
+        window, audio is missed, or the Software interferes with your audio devices or
+        input, <strong>you</strong> bear that risk, not me — except only where a law
+        says a disclaimer cannot apply.
+      </p>
+
+      <h2>7. Limitation of liability</h2>
+      <p style="text-transform: uppercase; font-size: 0.95em; line-height: 1.45;">
+        In no event, unless required by applicable law or agreed to in writing, will
+        the author or any other party who modifies and/or redistributes the Software
+        as permitted by the GPL be liable to you for damages, including any general,
+        special, incidental, or consequential damages arising out of the use or
+        inability to use the Software (including but not limited to loss of data, data
+        being rendered inaccurate, losses sustained by you or third parties, or a
+        failure of the Software to operate with any other programs), even if such
+        holder or other party has been advised of the possibility of such damages.
+      </p>
+      <p>
+        Without limiting the above, I am not liable for lost time, lost work, damage
+        to a system, incorrect text produced by speech recognition, or reputational
+        harm connected with your use of the Software, to the maximum extent the law
+        allows.
+      </p>
+
+      <h2>8. Australian Consumer Law (important honesty note)</h2>
+      <p>
+        If you are a consumer under the <strong>Australian Consumer Law</strong>
+        (ACL) and the ACL applies to a particular supply, some guarantees cannot be
+        excluded. Where the ACL applies and liability cannot be excluded, then to the
+        extent the law allows liability to be limited, my liability is limited to one
+        or more of: re-supply of the Software; or the cost of re-supply. Where the
+        Software is supplied free of charge, remedies may be limited further by the
+        nature of a free supply.
+      </p>
+      <p>
+        Nothing in these Terms is intended to exclude liability that cannot legally
+        be excluded (for example, fraud or certain non-excludable guarantees).
+        Everything else is disclaimed to the fullest extent allowed.
+        <strong>No disclaimer is a magic shield in every situation</strong> — that is
+        true of all free software.
+      </p>
+
+      <h2>9. Not professional advice</h2>
+      <p>
+        The Software is a tool only. It does <strong>not</strong> provide security,
+        medical, legal, or professional advice, and transcribed text carries no
+        assurance of accuracy. You alone are responsible for reviewing what it
+        produces before relying on it.
+      </p>
+
+      <h2>10. Your responsibilities</h2>
+      <ul>
+        <li>
+          <strong>Authorisation:</strong> only install the Software, and grant it
+          keyboard, microphone, and virtual-input permissions, on machines you are
+          permitted to configure that way.
+        </li>
+        <li>
+          <strong>Consent:</strong> comply with the law where you are regarding
+          recording, including any obligation to inform other people if their voices
+          would be captured.
+        </li>
+        <li>
+          <strong>Review:</strong> check transcribed text before relying on it, and
+          confirm it went where you intended.
+        </li>
+        <li>
+          <strong>Security:</strong> protect your machine and its credentials (see the
+          <a href="privacy.html">Privacy policy</a>).
+        </li>
+        <li><strong>Lawful use:</strong> no use of the Software for unlawful purposes.</li>
+      </ul>
+
+      <h2>11. Third-party components</h2>
+      <p>
+        Cadence relies on third-party software and models — <code>whisper.cpp</code>,
+        PipeWire, <code>ydotool</code>, and openly published speech models — and its
+        setup script downloads some of them at your direction. Those components are
+        not mine, can change or break independently of Cadence, and are governed by
+        their own licences and terms. I am not responsible for third-party defects,
+        outages, or licence changes.
+      </p>
+
+      <h2>12. Privacy</h2>
+      <p>
+        How the Software handles data is described in the
+        <a href="privacy.html">Privacy policy</a>. In short: nothing is collected by
+        me, and audio is transcribed locally on your own machine.
+      </p>
+
+      <h2>13. Website</h2>
+      <p>
+        These pages are informational. They are provided “as is”. I do not promise
+        continuous availability. No tracking cookies or analytics are intentionally
+        embedded by me on these static pages.
+      </p>
+
+      <h2>14. Acceptable use</h2>
+      <p>You must not use the Software to:</p>
+      <ul>
+        <li>record people without a lawful basis or required consent;</li>
+        <li>capture keystrokes, credentials, or input on systems or accounts you are not authorised to use;</li>
+        <li>infringe others' rights; or</li>
+        <li>violate applicable law.</li>
+      </ul>
+
+      <h2>15. Changes</h2>
+      <p>
+        I may update these Terms by publishing a new version on this site with a new
+        “Last updated” date. The licence text for the Software changes only if a new
+        version is adopted. If you do not agree with updated Terms, stop using the
+        Software.
+      </p>
+
+      <h2>16. Governing law</h2>
+      <p>
+        These Terms are governed by the laws of <strong>Australia</strong> and, where
+        they apply, the laws of <strong>Western Australia</strong>. Courts of
+        Australia have non-exclusive jurisdiction. Mandatory consumer protections in
+        your place of residence may still apply.
+      </p>
+
+      <h2>17. Contact</h2>
+      <p>
+        Questions:
+        <a href="mailto:privacy@oisinmcgrath.com">privacy@oisinmcgrath.com</a>
+      </p>
+      <p class="meta" style="margin-top: 1.5rem;">
+        Free software under the GPL, version 2. Use at your own risk. No warranty.
+      </p>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        <a href="index.html">Home</a> ·
+        <a href="privacy.html">Privacy policy</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

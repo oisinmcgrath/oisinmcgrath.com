@@ -26,12 +26,16 @@
     </header>
 
     <main>
-      <video class="demo" controls preload="none" poster="demo-poster.jpg"
-             aria-label="Screen recording: Cadence transcribing speech into a document, an email, and a terminal">
-        <source src="demo.mp4" type="video/mp4">
-        <p>Your browser cannot play this video.
-           <a href="demo.mp4">Download it instead</a> (2 MB).</p>
-      </video>
+      <div class="demo-wrap">
+        <video class="demo" controls autoplay muted loop playsinline
+               poster="demo-poster.jpg"
+               aria-label="Screen recording: Cadence transcribing speech into a document, an email, and a terminal">
+          <source src="demo.mp4" type="video/mp4">
+          <p>Your browser cannot play this video.
+             <a href="demo.mp4">Download it instead</a> (2 MB).</p>
+        </video>
+      </div>
+      <p class="demo-note">Starts muted — unmute for the voiceover.</p>
 
       <p class="lead">
         <strong>Cadence</strong> is a small Rust tray app that turns speech into

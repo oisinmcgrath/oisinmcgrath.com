@@ -54,11 +54,12 @@ header.site-header {
 header.site-header img.logo {
   width: 160px;
   height: auto;
+  margin-top: 1.75rem;
   margin-bottom: 0.75rem;
 }
 
 header.site-header h1 {
-  margin: 0 0 0.35rem;
+  margin: 0 0 0.9rem;
   font-size: 1.65rem;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -67,6 +68,7 @@ header.site-header h1 {
 
 header.site-header .tagline {
   margin: 0 auto;
+  line-height: 1.7;
   max-width: 34rem;
   color: #96a0b6;
   font-size: 0.95rem;
@@ -180,14 +182,35 @@ footer.site-footer a {
 
 /* Demo video: matches the text column width and centres with it.
    No width/height attributes on the element — they would override this. */
+/* The video is wider than the 42rem text column. Its wrapper spans the full
+   viewport width so the video centres on the page rather than the column,
+   while max-width keeps the page from ever scrolling sideways. */
+.demo-wrap {
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 0.6rem;
+  padding: 0 1.25rem;
+  display: flex;
+  justify-content: center;
+}
+
 .demo {
   display: block;
-  width: 100%;
+  width: 52rem;
   max-width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
-  margin: 0 auto 1.75rem;
   border: 1px solid #232a40;
   border-radius: 8px;
   background: #0b0f18;
+}
+
+/* Audio hint under the player: autoplay must start muted, so tell the
+   viewer the sound is there to be turned on. */
+.demo-note {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #8b95ab;
+  margin: 0 0 1.9rem;
 }

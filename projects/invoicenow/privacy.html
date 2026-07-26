@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Privacy policy for invoiceNow: free GPLv2 desktop invoicing software, Google Gmail OAuth Limited Use, local-only data, no backend.">
+  <title>Privacy policy — invoiceNow</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.png" type="image/png">
+  </head>
+<body>
+  <div class="wrap">
+    <header class="site-header">
+      <h1>Privacy policy</h1>
+      <p class="tagline">invoiceNow · Oisin McGrath</p>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="https://oisinmcgrath.com/">Home</a>
+        <a href="index.html">invoiceNow</a>
+        <a href="privacy.html" aria-current="page">Privacy policy</a>
+        <a href="terms.html">Terms of use</a>
+      </nav>
+    </header>
+
+    <main>
+      <p class="meta"><strong>Last updated:</strong> 15 July 2026</p>
+
+      <p>
+        This privacy policy describes how <strong>invoiceNow</strong> (“the Software”,
+        “the app”) handles information when you use the desktop application and when you
+        optionally connect a Google account to send invoices via Gmail.
+        invoiceNow is free software developed by <strong>Oisin McGrath</strong>
+        (“I”, “me”, “the developer”) under the
+        <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html">GNU General Public License, version 2 (GPLv2) only</a>
+        — not any later version.
+      </p>
+      <p>
+        <strong>Plain summary:</strong> invoiceNow runs on <em>your</em> computer. I do
+        not run a cloud account system for your invoices. I do not receive your email
+        content or Gmail tokens on any server of mine. Optional Gmail access is only to
+        send messages <em>you</em> approve, using Google’s API from your machine.
+      </p>
+      <p>
+        This document is written so you (and Google’s OAuth review) can see exactly what
+        the Software does with data. It is not legal advice. For how the Software is
+        licensed and the “use at your own risk” rules, see the
+        <a href="terms.html">Terms of use</a> and the <code>LICENSE</code> file shipped
+        with the Software.
+      </p>
+
+      <h2>1. What invoiceNow is</h2>
+      <p>
+        invoiceNow is a <strong>desktop application</strong> for people who create tax
+        invoices (especially Australian sole traders). It can store business profile
+        details, contacts, invoices, and PDF files <strong>on your device</strong>, and
+        optionally help you email a PDF using:
+      </p>
+      <ul>
+        <li>a desktop mail program (for example Thunderbird), or</li>
+        <li>your own Gmail account (Google OAuth + Gmail API), or</li>
+        <li>your own Microsoft / Outlook account (Microsoft OAuth + Graph).</li>
+      </ul>
+      <p>
+        I <strong>operate no invoiceNow backend server</strong> that stores your invoices,
+        contacts, or mail. There is no invoiceNow cloud login for your business data.
+        If you never connect Gmail or Outlook, the app never talks to Google or Microsoft
+        about your mail.
+      </p>
+
+      <h2>2. Who is the “controller” of what?</h2>
+      <ul>
+        <li>
+          <strong>Data on your computer</strong> (profile, contacts, invoices, local
+          database, PDFs, OAuth tokens): you control that environment. The Software
+          processes it locally so the features work. I do not host it.
+        </li>
+        <li>
+          <strong>Google account data</strong> when you Connect Gmail: Google remains the
+          provider of your Gmail account. The Software requests limited API access
+          <em>from your machine</em> after you consent in Google’s screens.
+        </li>
+        <li>
+          <strong>This website</strong> (oisinmcgrath.com pages): static information only;
+          see section 11.
+        </li>
+        <li>
+          <strong>Email to <a href="mailto:privacy@oisinmcgrath.com">privacy@oisinmcgrath.com</a></strong>: if you write to me, I may
+          retain the message to respond. I do not use that inbox as a dump of app usage
+          analytics.
+        </li>
+      </ul>
+
+      <h2>3. Google user data — what we access, use, store, and share</h2>
+      <p>
+        Google requires apps that use Google APIs to disclose clearly how they
+        <strong>access, use, store, or share</strong> Google user data. That is the purpose
+        of this section.
+      </p>
+
+      <h3>3.1 Scopes (access)</h3>
+      <p>
+        If you choose Gmail and click <strong>Connect</strong>, the Software requests only:
+      </p>
+      <ul>
+        <li>
+          <code>https://www.googleapis.com/auth/gmail.send</code>
+          (<strong>gmail.send</strong>) — permission to send email
+          <strong>on your behalf</strong> after you compose and explicitly approve a
+          message in the app (recipient, subject, body, and PDF attachment). The Software
+          does <strong>not</strong> use this scope to read your inbox, list messages, or
+          browse existing mail.
+        </li>
+        <li>
+          <code>https://www.googleapis.com/auth/userinfo.email</code>
+          (<strong>userinfo.email</strong>) — to learn the email address of the Google
+          account you connected, so the app can show “Connected as …” and identify the
+          account.
+        </li>
+        <li>
+          <code>openid</code> — standard OpenID Connect scope used as part of identifying
+          the signed-in Google account.
+        </li>
+      </ul>
+      <p>
+        The Software does <strong>not</strong> request broader Gmail scopes such as
+        full mailbox read, modify, or <code>mail.google.com</code>.
+      </p>
+
+      <h3>3.2 How Google user data is used</h3>
+      <p>Google user data obtained through these APIs is used only to:</p>
+      <ul>
+        <li>complete the sign-in you started and show which account is connected;</li>
+        <li>
+          send the single invoice (or similar) email <strong>you</strong> started and
+          confirmed, by calling Google’s Gmail API from your computer; and
+        </li>
+        <li>refresh access tokens so Connect stays working until you disconnect or revoke access.</li>
+      </ul>
+      <p>
+        It is <strong>not</strong> used for advertising, analytics products, credit scoring,
+        AI model training on your mail, resale, or any purpose other than those user-facing
+        features.
+      </p>
+
+      <h3>3.3 How Google user data is stored</h3>
+      <p>
+        After you sign in, OAuth access and refresh tokens (and the connected email address
+        returned by Google) are stored <strong>only on your own machine</strong>, inside
+        invoiceNow’s local application-data directory. They are never uploaded to a server
+        the developer controls.
+      </p>
+      <p>Example locations of that application-data directory:</p>
+      <ul>
+        <li>Linux: <code>~/.local/share/invoiceNow/</code></li>
+        <li>Windows: <code>%APPDATA%\invoiceNow\</code></li>
+      </ul>
+      <p>
+        Message content you type for an invoice email, and PDF attachments generated by the
+        app, also live on your device (and, when you send via Gmail API, are transmitted
+        over an encrypted TLS connection from your device to Google so Google can deliver
+        the message — that transmission is part of using Gmail, not a transfer to me).
+      </p>
+
+      <h3>3.4 Sharing / transfer of Google user data</h3>
+      <p>
+        I do <strong>not sell, rent, or trade</strong> Google user data. I do
+        <strong>not</strong> share Google user data with advertisers, data brokers, or
+        information resellers.
+      </p>
+      <p>The only “transfers” of Google-related data in normal use are:</p>
+      <ul>
+        <li>
+          between <strong>your computer and Google</strong> (OAuth, token refresh, and
+          Gmail send), which you initiate by using Connect / Send; and
+        </li>
+        <li>
+          none to me, because the desktop app does not upload that data to any developer
+          backend.
+        </li>
+      </ul>
+      <p>
+        If you yourself forward, export, or back up files from your computer, that is under
+        your control, not mine.
+      </p>
+
+      <h3>3.5 Google API Services User Data Policy — Limited Use</h3>
+      <p>
+        invoiceNow’s use of information received from Google APIs adheres to the
+        <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>,
+        including the <strong>Limited Use</strong> requirements.
+      </p>
+      <ul>
+        <li>
+          Google user data is used only to provide or improve user-facing features that are
+          prominent in the app (connect account; send mail you approve).
+        </li>
+        <li>
+          Transfers are limited to what is needed for those features (for example sending
+          your approved message to Google’s API), security/legal compliance, or your clear
+          direction — not for ads or sale.
+        </li>
+        <li>Google user data is not used to serve advertisements.</li>
+        <li>
+          Humans (including me) do not read your Gmail data in normal operation because
+          that data never reaches my servers. Exceptions under Limited Use (security, law,
+          or your affirmative agreement for specific items) do not apply to routine use of
+          this app as shipped.
+        </li>
+      </ul>
+
+      <h2>4. Email is sent only on your explicit action</h2>
+      <p>
+        The Software does <strong>not</strong> send email automatically in the background
+        or on a schedule. A Gmail API send happens only when you start an email action and
+        confirm the preview. Desktop mail opens a draft in your mail program; you still
+        press Send there.
+      </p>
+
+      <h2>5. Other data the app processes locally (not Google)</h2>
+      <p>On your device, the Software may store, for example:</p>
+      <ul>
+        <li>business profile fields you enter (name, ABN, bank details, address, logo path);</li>
+        <li>contacts and invoice line items you create;</li>
+        <li>PDF paths, settings, and tutorial/onboarding flags;</li>
+        <li>optional advanced OAuth client ID overrides if you paste them;</li>
+        <li>your chosen email method (desktop / Gmail / Outlook).</li>
+      </ul>
+      <p>
+        That information is not uploaded to me. I have no server that receives your
+        invoicing database.
+      </p>
+
+      <h2>6. Security</h2>
+      <p>
+        Reasonable steps for a local desktop app include: using HTTPS for OAuth and API
+        calls to Google/Microsoft; storing tokens in your user profile data directory
+        rather than shipping them in the installer; and not logging token secrets to a
+        developer backend.
+      </p>
+      <p>
+        <strong>You</strong> are responsible for device security (OS updates, account
+        passwords, disk encryption, backups, who can use your login). Anyone with access
+        to your user account can typically access the local database and tokens. I cannot
+        secure a computer I do not control.
+      </p>
+
+      <h2>7. Retention and deletion</h2>
+      <h3>Google access</h3>
+      <p>
+        Revoke the app at any time:
+        <a href="https://myaccount.google.com/permissions">https://myaccount.google.com/permissions</a>
+        (Google Account → third-party access / connections). After revocation, Google will
+        reject the app’s tokens.
+      </p>
+      <h3>Local data</h3>
+      <ul>
+        <li>
+          In the app: <strong>Settings → Email → Disconnect</strong> clears stored OAuth
+          tokens for that provider.
+        </li>
+        <li>
+          Delete the application data folder (and invoice PDFs you no longer want) to remove
+          local business data. That is under your control.
+        </li>
+      </ul>
+      <p>
+        Because I hold no server-side copy of your Google tokens or invoice database,
+        revoking Google access and deleting local files is a complete removal from the
+        product’s perspective.
+      </p>
+      <p>
+        Tokens remain on disk until you disconnect or delete them. There is no separate
+        cloud retention period on my side.
+      </p>
+
+      <h2>8. Microsoft / Outlook (for completeness)</h2>
+      <p>
+        If you connect Outlook, the Software uses Microsoft identity and Graph delegated
+        permissions appropriate to sending mail (for example Mail.Send and User.Read), with
+        tokens stored locally the same way. The same principles apply: no developer backend,
+        send only on your action, tokens on your machine. Microsoft’s own terms and privacy
+        policy apply to Microsoft’s services.
+      </p>
+
+      <h2>9. Children</h2>
+      <p>
+        invoiceNow is a business tool intended for adults aged 18 and over. It is not
+        directed at children, and Connect features should not be used with a child's
+        Google account.
+      </p>
+
+      <h2>10. Free software and honesty about risk</h2>
+      <p>
+        invoiceNow is free software. I provide it in the hope that it is useful. I do not
+        sell a paid privacy “service”, do not host your data, and do not promise perfection.
+        Privacy practices described here describe <strong>how the Software is designed to
+        behave</strong>. Bugs, misuse, malware on your machine, or third-party outages can
+        still cause problems — that risk sits with you under the GPL and the
+        <a href="terms.html">Terms of use</a>.
+      </p>
+
+      <h2>11. This website</h2>
+      <p>
+        Public pages at oisinmcgrath.com (home, this policy, terms) are static. They use
+        <strong>no tracking, no analytics, and no advertising cookies</strong> that I
+        configure. Your browser and host may still produce ordinary server or TLS logs
+        outside my product design; I do not run ad trackers on these pages.
+      </p>
+
+      <h2>12. Changes</h2>
+      <p>
+        If how the Software uses Google user data changes, I will update this policy and
+        the “Last updated” date. Material changes to Google data use should also be
+        reflected in the product and, where required, fresh consent. Continued use after
+        an update means you should re-read this page when you upgrade.
+      </p>
+
+      <h2>13. Contact</h2>
+      <p>
+        Privacy questions about invoiceNow:
+        <a href="mailto:privacy@oisinmcgrath.com">privacy@oisinmcgrath.com</a>
+      </p>
+      <p>
+        Developer: Oisin McGrath ·
+        <a href="https://oisinmcgrath.com">https://oisinmcgrath.com</a>
+      </p>
+      <p class="meta">
+        This policy is provided for transparency and product compliance (including Google
+        OAuth). It is not a guarantee against all legal claims in every jurisdiction.
+      </p>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        <a href="https://oisinmcgrath.com/">Home</a>
+        <a href="index.html">invoiceNow</a> ·
+        <a href="terms.html">Terms of use</a> ·
+        Free software · No tracking on this page.
+      </p>
+    </footer>
+  </div>
+</html>

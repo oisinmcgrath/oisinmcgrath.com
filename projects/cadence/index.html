@@ -27,15 +27,21 @@
 
     <main>
       <div class="demo-wrap">
-        <video class="demo" controls autoplay muted loop playsinline
-               poster="demo-poster.jpg"
-               aria-label="Screen recording: Cadence transcribing speech into a document, an email, and a terminal">
-          <source src="demo.mp4" type="video/mp4">
-          <p>Your browser cannot play this video.
-             <a href="demo.mp4">Download it instead</a> (2 MB).</p>
-        </video>
+        <div class="demo-frame">
+          <video id="demo" class="demo" controls autoplay muted loop playsinline
+                 poster="demo-poster.jpg"
+                 aria-label="Screen recording: Cadence transcribing speech into a document, an email, and a terminal">
+            <source src="demo.mp4" type="video/mp4">
+            <p>Your browser cannot play this video.
+               <a href="demo.mp4">Download it instead</a> (2 MB).</p>
+          </video>
+          <!-- Autoplay is only permitted while muted, so the sound needs a real
+               click to start. This button is that click; it hides once used. -->
+          <button id="unmute" class="demo-unmute" type="button">
+            <span aria-hidden="true">&#128264;</span> Click to unmute
+          </button>
+        </div>
       </div>
-      <p class="demo-note">Starts muted — unmute for the voiceover.</p>
 
       <p class="lead">
         <strong>Cadence</strong> is a small Rust tray app that turns speech into
@@ -102,5 +108,30 @@
       </p>
     </footer>
   </div>
+
+  <script>
+    // The only script on this site: it turns the sound on. No tracking,
+    // no analytics, no network requests.
+    (function () {
+      var video = document.getElementById('demo');
+      var button = document.getElementById('unmute');
+      if (!video || !button) return;
+
+      function reveal() {
+        video.muted = false;
+        video.volume = 1;
+        // Autoplay may have been refused outright; a click permits it now.
+        var played = video.play();
+        if (played && played.catch) played.catch(function () {});
+        button.hidden = true;
+      }
+
+      button.addEventListener('click', reveal);
+      // If the viewer unmutes with the native controls instead, drop the button.
+      video.addEventListener('volumechange', function () {
+        if (!video.muted) button.hidden = true;
+      });
+    })();
+  </script>
 </body>
 </html>

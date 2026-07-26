@@ -10,6 +10,18 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <style>.site-header{position:relative;padding-top:0.75rem;padding-bottom:1.5rem;min-height:160px;display:flex;flex-direction:column;justify-content:center}.avatar{position:absolute;top:50%;transform:translateY(-50%);right:0;width:140px;height:140px;border-radius:50%;object-fit:cover}@media(max-width:600px){.avatar{position:static;display:block;margin:1rem 0}}</style>
   <style>.card-links{margin-top:1.5rem;font-weight:600}</style>
+  <style>
+    .projgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem;margin:1rem 0 2rem}
+    .projcard{display:flex;flex-direction:column;background:#fbfcfd;border:1px solid #e7ebef;
+              border-radius:8px;padding:1.15rem 1.25rem;text-decoration:none;color:inherit;
+              transition:box-shadow .15s,transform .15s,border-color .15s}
+    .projcard:hover{transform:translateY(-2px);border-color:#14507d;
+                    box-shadow:0 3px 10px rgba(20,60,100,.08)}
+    .projcard img{width:2.4rem;height:2.4rem;object-fit:contain;margin-bottom:.65rem}
+    .projcard h3{margin:0 0 .4rem;font-size:1.05rem;color:#15191d}
+    .projcard p{margin:0 0 .9rem;font-size:.92rem;color:#3b424a;flex:1}
+    .projcard .more{font-size:.88rem;font-weight:600;color:#14507d}
+  </style>
 </head>
 <body>
   <div class="wrap">
@@ -36,51 +48,44 @@
         <li><a href="/projects/">Projects</a></li>
       </ul>
 
-      <section class="card" id="invoicenow" aria-labelledby="invoicenow-heading">
-        <h2 id="invoicenow-heading">invoiceNow</h2>
-        <p>
-          <strong>invoiceNow</strong> is a free, open-source desktop invoicing application
-          for Australian sole traders. It helps you create tax invoices, keep contact and
-          job records, export PDF invoices, and prepare figures for GST/BAS (Australian
-          financial year, ABN, and related sole-trader workflows).
-        </p>
-        <p>
-          The app runs entirely on your computer (Windows or Linux). Invoice data lives in a
-          local SQLite database on your machine. There is <strong>no invoiceNow backend
-          server</strong> and no cloud account for the app itself.
-        </p>
 
-        <h3>Email and Gmail</h3>
-        <p>
-          You can email an invoice PDF from the app in one of three ways you choose in
-          Settings:
-        </p>
-        <ul>
-          <li>your desktop mail program (for example Thunderbird), or</li>
-          <li>your own Gmail account (Google OAuth), or</li>
-          <li>your own Outlook / Microsoft account (Microsoft OAuth).</li>
-        </ul>
-        <p>
-          When you connect Gmail, invoiceNow requests only the Google permissions it needs
-          to identify your account and to send messages you have composed and explicitly
-          approved. OAuth tokens stay on your device. Email is never sent automatically —
-          only after you confirm a preview in the app.
-        </p>
-        <p>
-          Google user data is not sold, rented, or shared with third parties. Full details
-          are in the privacy policy.
-        </p>
-        <p>
-          <a href="privacy.html"><strong>Privacy policy</strong></a>
-          ·
-          <a href="terms.html"><strong>Terms of use</strong></a>
-          (free software under GPLv2 — use at your own risk; no warranty).
-        </p>
-      </section>
+
+      <h2>Projects</h2>
+      <div class="projgrid">
+        <a class="projcard" href="/projects/invoicenow/">
+          <img src="/projects/logos/invoicenow.png" alt="">
+          <h3>invoiceNow</h3>
+          <p>Desktop invoicing for Australian sole traders — tax invoices, job records,
+             PDF export, and Gmail sending. Runs entirely on your own machine.</p>
+          <span class="more">Read more &rarr;</span>
+        </a>
+        <a class="projcard" href="/projects/cadence/">
+          <img src="/projects/logos/cadence.png" alt="">
+          <h3>Cadence</h3>
+          <p>Offline speech-to-text dictation for Linux. Hold a key, speak, and it types
+             at your cursor in any application. Nothing leaves your machine.</p>
+          <span class="more">Read more &rarr;</span>
+        </a>
+        <a class="projcard" href="/projects/capsule/">
+          <img src="/projects/logos/capsule.png" alt="">
+          <h3>Capsule</h3>
+          <p>Sandboxed dev containers in one command — DevPod, rootless Podman and
+             VSCodium — for running AI coding agents safely away from your host.</p>
+          <span class="more">Read more &rarr;</span>
+        </a>
+      </div>
+
+      <p>
+        <strong>invoiceNow</strong> users:
+        <a href="privacy.html"><strong>Privacy policy</strong></a>
+        ·
+        <a href="terms.html"><strong>Terms of use</strong></a>
+        (free software under GPLv2 — use at your own risk; no warranty).
+      </p>
 
       <p class="meta">
         This site has no tracking, no analytics, and no advertising cookies.
-        invoiceNow is free software; you use it at your own risk.
+        All projects here are free software; you use them at your own risk.
       </p>
     </main>
 

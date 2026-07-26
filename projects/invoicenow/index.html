@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="invoiceNow — free, open-source desktop invoicing for Australian sole traders. Tax invoices, contacts, job records, PDF export and GST/BAS figures, all on your own machine.">
+  <title>invoiceNow</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-header">
+      <h1>invoiceNow</h1>
+      <p class="tagline">
+        Free, open-source desktop invoicing for Australian sole traders &mdash; tax
+        invoices, contacts, job records, PDF export and GST/BAS figures.
+      </p>
+      <img class="logo" src="logo/logo.png" alt="invoiceNow logo">
+      <nav class="site-nav" aria-label="Primary">
+        <a href="https://oisinmcgrath.com/">Home</a>
+        <a href="https://oisinmcgrath.com/privacy.html">Privacy policy</a>
+        <a href="https://oisinmcgrath.com/terms.html">Terms of use</a>
+      </nav>
+    </header>
+
+    <main>
+      <p class="lead">
+        <strong>invoiceNow</strong> is a desktop invoicing application built for the way
+        Australian sole traders actually work: raise a tax invoice, keep the contact and
+        job against it, export a PDF, and have your GST and BAS figures ready when the
+        quarter closes. It runs on Windows and Linux.
+      </p>
+
+      <section class="card" aria-labelledby="use-heading">
+        <h2 id="use-heading">Use it when</h2>
+        <p>
+          You invoice clients yourself and want something simpler than an accounting
+          suite &mdash; without a monthly subscription, and without your books living on
+          someone else's server.
+        </p>
+        <ul>
+          <li>Australian tax invoices with ABN and GST handled properly</li>
+          <li>Contacts and job records kept alongside each invoice</li>
+          <li>PDF export, and email straight from the app</li>
+          <li>GST and BAS figures prepared per financial-year quarter</li>
+          <li>No subscription, no account, and no cloud service to sign up for</li>
+        </ul>
+      </section>
+
+      <h2>Email and Gmail</h2>
+      <p>
+        You can send an invoice PDF in one of three ways, chosen in Settings: your desktop
+        mail program, your own Gmail account via Google OAuth, or your own Outlook account
+        via Microsoft OAuth.
+      </p>
+      <p>
+        When you connect Gmail, invoiceNow requests only the Google permissions it needs to
+        identify your account and to send messages you have composed and explicitly
+        approved. OAuth tokens stay on your device. Email is never sent automatically &mdash;
+        only after you confirm a preview in the app. Google user data is not sold, rented,
+        or shared with third parties. Full details are in the
+        <a href="https://oisinmcgrath.com/privacy.html">privacy policy</a>.
+      </p>
+
+      <h2>Your data stays on your machine</h2>
+      <p>
+        There is <strong>no invoiceNow backend server</strong>. Every invoice, contact and
+        job record lives in a local <code>SQLite</code> database on your own computer, and
+        nothing is uploaded on the application's own initiative. Backups, and where you
+        keep them, are yours to control.
+      </p>
+
+      <p class="meta">
+        Free software under the GPL, version 2 &mdash; use at your own risk, with no warranty.
+        See the <a href="https://oisinmcgrath.com/terms.html">terms of use</a>.
+      </p>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 Oisin McGrath &middot; <a href="https://oisinmcgrath.com">oisinmcgrath.com</a></p>
+      <p>
+        <a href="https://oisinmcgrath.com/privacy.html">Privacy</a> &middot;
+        <a href="https://oisinmcgrath.com/terms.html">Terms</a> &middot;
+        No tracking on this page.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="N-of-1 — an open source, offline health tracker for Android, Linux and Windows. See what actually drives your energy, mood and focus. No account, no cloud, no subscription.">
+  <title>N-of-1</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Back link to the projects index, sitting above the page header. */
+    .backnav{padding:1rem 0 0 1.25rem}
+    .backnav a{display:inline-flex;align-items:center;gap:.4rem;font-size:.9rem;
+               text-decoration:none;font-weight:500}
+    .backnav a:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <nav class="backnav"><a href="https://oisinmcgrath.com/projects/"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Projects</a></nav>
+  <div class="wrap">
+    <header class="site-header">
+      <h1>N-of-1</h1>
+      <p class="tagline">
+        An open source, offline health tracker for Android, Linux and Windows.
+        See what actually drives your energy, mood and focus. No account, no
+        cloud, no subscription.
+      </p>
+      <img class="logo" src="logo/logo.png" alt="N-of-1 logo">
+      <nav class="site-nav" aria-label="Primary">
+        <a href="https://oisinmcgrath.com/">Home</a>
+        <a href="privacy.html">Privacy policy</a>
+        <a href="terms.html">Terms of use</a>
+        <a href="https://github.com/oisinmcgrath/n-of-1">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="beats">
+        <p class="punch">Your body is a machine, with a life full of signals.</p>
+        <p>Your car knows itself.</p>
+        <p>It reads a thousand signals a second and tunes itself, every second you drive.</p>
+        <p>Cars have done this since the 1980s.</p>
+        <p class="punch">You just need data.</p>
+      </div>
+
+      <p class="lead">
+        Your car tunes for performance — but what does performance mean to you?
+        It might be the time you clocked on your morning run. For someone else
+        it's how much work they got done before 11am, or attacking the job
+        they'd been putting off, because that day they felt up to it. Same
+        question underneath: what made that day different?
+      </p>
+
+      <figure>
+        <div class="shot-wrap">
+          <img class="shot" src="screenshots/1_insights.png"
+               alt="Insights screen ranking what affected energy, sleep and stress over the past two weeks">
+        </div>
+        <figcaption>
+          Findings ranked by how much difference they made, drawn from your own entries.
+        </figcaption>
+      </figure>
+
+      <section class="card" aria-labelledby="why-heading">
+        <h2 id="why-heading">Why it exists</h2>
+        <p>
+          Commercial wellness apps want your data and a subscription, and hand
+          back some unexplained &ldquo;score&rdquo; number. This app is for people who
+          want control and transparency:
+        </p>
+        <ul>
+          <li>Optimise how you feel day to day — more energy, steadier mood, better motivation</li>
+          <li>Hunt patterns behind symptoms — flares, digestive ups and downs, pain, brain fog, sleep crashes, and what preceded them</li>
+          <li>Useful for anyone affected by autoimmune conditions or chronic symptoms — track what your body reacts to</li>
+          <li>Keep sensitive health data off someone else's server — offline-first by design</li>
+        </ul>
+        <p>
+          You can also use it alongside clinical care: a structured, dated
+          record of symptoms, energy, sleep and lifestyle context to bring into
+          appointments. It does not replace professional advice; it helps you
+          show up with patterns and timelines instead of vague recollections.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="log-heading">
+        <h2 id="log-heading">What you can log</h2>
+        <ul>
+          <li><strong>Sleep</strong> — bed/wake times, quality, night wake-ups, naps</li>
+          <li><strong>Exercise</strong> — sessions, duration, intensity, category</li>
+          <li><strong>Food</strong> — meals, snacks, caffeine, alcohol, late eating</li>
+          <li><strong>Medication &amp; supplements</strong> — fully user-defined; no fixed drug list</li>
+          <li><strong>Mood &amp; energy</strong> — energy, mood, productivity, stress across the day</li>
+          <li><strong>Symptoms</strong> — brain fog, upset stomach, whatever's bothering you, with severity</li>
+          <li><strong>Digestion</strong> — including IBS patterns</li>
+          <li><strong>Weather and work</strong> — conditions and work-life balance</li>
+          <li><strong>Notes, gratitude and photos</strong> — the context that numbers miss</li>
+        </ul>
+      </section>
+
+      <figure>
+        <div class="shot-wrap">
+          <img class="shot" src="screenshots/2_homepage.png"
+               alt="Today's Log listing sleep, meals, wellbeing checks, medication, caffeine, exercise and weather in time order">
+        </div>
+        <figcaption>
+          The day as logged, in the order it happened.
+        </figcaption>
+      </figure>
+
+      <section class="card" aria-labelledby="stick-heading">
+        <h2 id="stick-heading">Why it gets used</h2>
+        <p>
+          Capture things when they happen, while it's convenient. You don't need
+          to cram before bed. That is why traditional health journals don't get
+          used, and that convenience is what makes N-of-1 work.
+        </p>
+        <ul>
+          <li><strong>Guided daily review</strong> — asks the questions, so you don't have to</li>
+          <li><strong>History &amp; insights</strong> — surface the relationships behind your sharpest days and your worst ones</li>
+          <li><strong>Reminders</strong> — accountability that keeps you logging consistently (optional)</li>
+          <li><strong>PIN / biometric lock</strong> — nobody opens the app but you (optional)</li>
+          <li><strong>You own the files</strong> — plain JSON on your device. Point it at a sync folder and it works across your devices.</li>
+        </ul>
+      </section>
+
+      <figure>
+        <div class="shot-wrap">
+          <img class="shot" src="screenshots/6_home_page.png"
+               alt="Home dashboard with logging streak, seven-day highlights and today's progress checklist">
+        </div>
+        <figcaption>
+          The dashboard: streak, seven-day highlights, and what is still unlogged today.
+        </figcaption>
+      </figure>
+
+      <section class="card" aria-labelledby="get-heading">
+        <h2 id="get-heading">Getting it</h2>
+        <p>
+          N-of-1 is free software under the GPL, version 2. There is no store
+          listing — you build it yourself from source with one command per
+          platform, and the repository explains how.
+        </p>
+        <p>
+          <a href="https://github.com/oisinmcgrath/n-of-1"><strong>Source &amp; build instructions on GitHub</strong></a>
+        </p>
+      </section>
+
+      <p class="meta">
+        N-of-1 is a personal tracking and pattern-awareness tool. It is not a
+        medical device and does not diagnose, treat, or manage disease, and it
+        does not replace professional care. See the
+        <a href="terms.html">terms of use</a> for warranty and liability terms.
+      </p>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Oisin McGrath · GPL-2.0-only · <a href="https://github.com/oisinmcgrath/n-of-1">github.com/oisinmcgrath/n-of-1</a></p>
+      <p>
+        <a href="privacy.html">Privacy</a> ·
+        <a href="terms.html">Terms</a> ·
+        No tracking on this page.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

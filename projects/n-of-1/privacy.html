@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Privacy notice for N-of-1, the open source offline health tracker — no developer-side collection of health data.">
+  <title>Privacy — N-of-1</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .backnav{padding:1rem 0 0 1.25rem}
+    .backnav a{display:inline-flex;align-items:center;gap:.4rem;font-size:.9rem;
+               text-decoration:none;font-weight:500}
+    .backnav a:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <nav class="backnav"><a href="index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>N-of-1</a></nav>
+  <div class="wrap">
+    <header class="site-header">
+      <h1>Privacy notice</h1>
+      <p class="tagline">N-of-1 — last updated 26 July 2026</p>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html">N-of-1</a>
+        <a href="privacy.html" aria-current="page">Privacy policy</a>
+        <a href="terms.html">Terms of use</a>
+        <a href="https://github.com/oisinmcgrath/n-of-1">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <p>
+        This notice explains how <strong>N-of-1</strong> (&ldquo;the app&rdquo;,
+        &ldquo;the software&rdquo;) handles information when you use the
+        open-source application, and when you visit this project page.
+      </p>
+
+      <section class="card" aria-labelledby="summary-heading">
+        <h2 id="summary-heading">1. Summary</h2>
+        <p>
+          <strong>There is no backend, so there is nothing for the developer to
+          read.</strong> The app is offline-first. Your entries, settings and
+          related files are written only to storage you control — plain JSON in
+          a folder on your device that you choose. Your data is as private as
+          the device it sits on. The developer cannot see, read or recover it
+          unless you choose to send it yourself, for example by emailing a file.
+        </p>
+      </section>
+
+      <h2>2. Data the app stores on your device</h2>
+      <p>Depending on how you use the app, it may store on <strong>your</strong> device:</p>
+      <ul>
+        <li>Health and lifestyle entries (for example sleep, meals, exercise, symptoms, digestion, notes)</li>
+        <li>Optional photos you attach to entries</li>
+        <li>App preferences (for example data folder path, reminder times, rest days, medication-tracking opt-in)</li>
+        <li>Optional lock settings (for example PIN or biometric unlock flags on the device)</li>
+      </ul>
+      <p>
+        That information stays under the path you configure. If you place the
+        folder inside a third-party sync client (for example Syncthing,
+        Nextcloud or Dropbox), that sync is entirely between <strong>you</strong>
+        and that provider under their terms. The app itself does no syncing and
+        has no cloud service.
+      </p>
+
+      <h2>3. Data the developer collects</h2>
+      <p>
+        <strong>None through the app.</strong> The application source is
+        designed without accounts, analytics SDKs, advertising identifiers, or
+        any upload of your entries to the developer. The Android build requests
+        no internet permission at all, and the source is public, so this can be
+        verified rather than taken on trust.
+      </p>
+      <p>
+        If you contact the developer — for example by email for support or
+        contributions — you provide whatever you include in that message. That
+        correspondence is used only to respond, and is not a health data
+        processing service.
+      </p>
+
+      <h2>4. This project page</h2>
+      <p>
+        This page is static HTML and CSS. It loads no third-party scripts,
+        fonts or analytics, and sets no tracking cookies. Your web host or
+        browser may create ordinary technical logs, for example an IP address in
+        server access logs, outside the control of this application's source
+        code.
+      </p>
+
+      <h2>5. Permissions</h2>
+      <p>
+        On some platforms the app may request device permissions, for example
+        notifications, optional biometrics, storage or folder access, and camera
+        or photos for attachments. Those permissions are used only to provide
+        the corresponding local feature. Denying a permission simply disables
+        that feature.
+      </p>
+
+      <h2>6. Children</h2>
+      <p>
+        The app is a general-purpose tool. It is not directed at children. Do
+        not store another person's sensitive health information without a lawful
+        basis and their appropriate consent.
+      </p>
+
+      <h2>7. Your responsibilities</h2>
+      <ul>
+        <li>You are responsible for backups, encryption, and who can access the device and data folder</li>
+        <li>You are responsible for any sync, share or export you configure</li>
+        <li>You should not rely on the app as a medical record system or emergency service</li>
+      </ul>
+
+      <h2>8. Changes</h2>
+      <p>
+        If this notice changes, the updated text will appear in the
+        <a href="https://github.com/oisinmcgrath/n-of-1">project repository</a>.
+        Continued use after an update means you should review the new text.
+      </p>
+
+      <h2>9. Contact</h2>
+      <p>
+        Privacy questions about this open-source project:
+        <a href="mailto:privacy@oisinmcgrath.com">privacy@oisinmcgrath.com</a>
+      </p>
+
+      <p class="meta">
+        See also the <a href="terms.html">terms of use</a>.
+      </p>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Oisin McGrath · GPL-2.0-only · <a href="https://github.com/oisinmcgrath/n-of-1">github.com/oisinmcgrath/n-of-1</a></p>
+      <p>
+        <a href="index.html">N-of-1</a> ·
+        <a href="terms.html">Terms</a> ·
+        No tracking on this page.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

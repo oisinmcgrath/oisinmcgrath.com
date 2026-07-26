@@ -41,9 +41,10 @@
           <strong>There is no backend, so there is nothing for the developer to
           read.</strong> The app is offline-first. Your entries, settings and
           related files are written only to storage you control — plain JSON in
-          a folder on your device that you choose. Your data is as private as
-          the device it sits on. The developer cannot see, read or recover it
-          unless you choose to send it yourself, for example by emailing a file.
+          a folder on your device that you choose. The developer cannot see,
+          read or recover it unless you choose to send it yourself, for example
+          by emailing a file. Note that those files are not encrypted — see
+          <a href="#enc-heading">section 7</a>.
         </p>
       </section>
 
@@ -103,21 +104,41 @@
         basis and their appropriate consent.
       </p>
 
-      <h2>7. Your responsibilities</h2>
+      <section class="card" aria-labelledby="enc-heading">
+        <h2 id="enc-heading">7. The data is not encrypted</h2>
+        <p>
+          Entries are written as plain, readable JSON. The app does not encrypt
+          them, and the optional PIN or biometric lock guards the app, not the
+          files behind it.
+        </p>
+        <p>
+          That means anyone with access to your unlocked device, your file
+          system, or the folder you chose can read your entries — including a
+          third-party sync provider if you place the folder inside one. Offline
+          means the developer never receives your data; it does not mean the
+          data is protected on your own machine.
+        </p>
+        <p>
+          If your threat model calls for it, use full-disk encryption, an
+          encrypted sync tool, or an encrypted container for the data folder.
+        </p>
+      </section>
+
+      <h2>8. Your responsibilities</h2>
       <ul>
         <li>You are responsible for backups, encryption, and who can access the device and data folder</li>
         <li>You are responsible for any sync, share or export you configure</li>
         <li>You should not rely on the app as a medical record system or emergency service</li>
       </ul>
 
-      <h2>8. Changes</h2>
+      <h2>9. Changes</h2>
       <p>
         If this notice changes, the updated text will appear in the
         <a href="https://github.com/oisinmcgrath/n-of-1">project repository</a>.
         Continued use after an update means you should review the new text.
       </p>
 
-      <h2>9. Contact</h2>
+      <h2>10. Contact</h2>
       <p>
         Privacy questions about this open-source project:
         <a href="mailto:privacy@oisinmcgrath.com">privacy@oisinmcgrath.com</a>

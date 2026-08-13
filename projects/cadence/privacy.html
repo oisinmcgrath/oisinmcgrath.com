@@ -30,7 +30,7 @@
     </header>
 
     <main>
-      <p class="meta"><strong>Last updated:</strong> 26 July 2026</p>
+      <p class="meta"><strong>Last updated:</strong> 13 August 2026</p>
 
       <p>
         This privacy policy describes how <strong>Cadence</strong> (“the Software”)
@@ -63,7 +63,8 @@
       <p>
         Cadence is a small desktop application that lives in your system tray. You
         hold a key, speak, and it types what you said into whatever window has focus.
-        It is not a hosted service, has no login, and does not sync anything.
+        You can also have it read clipboard text aloud with a local text-to-speech
+        engine. It is not a hosted service, has no login, and does not sync anything.
       </p>
       <p>
         I <strong>operate no Cadence server</strong>. There is nowhere for your data
@@ -71,12 +72,17 @@
         initiative.
       </p>
 
-      <h2>2. Where speech recognition happens</h2>
+      <h2>2. Where speech recognition and speech synthesis happen</h2>
       <p>
         Transcription is done by a speech-recognition server <strong>running on your
         own computer</strong> — by default <code>whisper.cpp</code> listening on
         <code>127.0.0.1</code>, the loopback address that never leaves the machine.
         Your audio is sent to that local address and nowhere else.
+      </p>
+      <p>
+        Read-aloud uses a separate local server (Kokoro-ONNX by default) on
+        <code>127.0.0.1</code>. Clipboard text is sent only to that loopback
+        address; synthesised audio is played on your machine and is not uploaded.
       </p>
       <p>
         Every network address compiled into Cadence is a <code>127.0.0.1</code>

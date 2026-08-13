@@ -67,7 +67,7 @@ Cloudflare Pages, by direct upload from the repo root:
 
 - **invoiceNow** — desktop invoicing for Australian sole traders, with Gmail send
 - **Capsule** — sandboxed dev containers for running AI coding agents safely
-- **Cadence** — offline hold-to-talk dictation for Linux
+- **Cadence** — offline hold-to-talk dictation and clipboard TTS for Linux
 - **N-of-1** — offline health tracker for Android, Linux and Windows
 - **Epson RR-70W batch scanner** — driver-free batch scanning on Linux
 - **tagdexer** — tag-based code navigation and decision logging for any repo

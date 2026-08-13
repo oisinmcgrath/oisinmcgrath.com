@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Cadence — offline hold-to-talk dictation for Linux. Hold a key, speak, and your words are typed into any app. Runs entirely on your own machine.">
+  <meta name="description" content="Cadence — offline hold-to-talk dictation and clipboard text-to-speech for Linux. Runs entirely on your own machine.">
   <title>Cadence</title>
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="stylesheet" href="style.css">
@@ -21,9 +21,9 @@
     <header class="site-header">
       <h1>Cadence</h1>
       <p class="tagline">
-        Offline hold-to-talk dictation for Linux — hold Right Ctrl, speak, and
-        your words are typed straight into whatever app you're using. Nothing
-        is sent to the cloud.
+        Offline speech for Linux — hold Right Ctrl to dictate into any app, or
+        hold Left Ctrl and tap Right Ctrl to hear the clipboard read aloud.
+        Nothing is sent to the cloud.
       </p>
       <img class="logo" src="logo/logo.png" alt="Cadence logo">
       <nav class="site-nav" aria-label="Primary">
@@ -53,24 +53,26 @@
       </div>
 
       <p class="lead">
-        <strong>Cadence</strong> is a small Rust tray app that turns speech into
-        typed text. Hold the trigger key and it records; as you speak it streams
-        the audio to a speech-recognition server running on your own machine and
-        types the result at your cursor. Release the key and it finishes the last
-        phrase. No account, no subscription, no network.
+        <strong>Cadence</strong> is a small Rust tray app for offline speech.
+        Hold Right Ctrl and it records, streams audio to a local Whisper server,
+        and types at your cursor. Hold Left Ctrl and tap Right Ctrl (or left-click
+        the tray) to read the clipboard aloud with Kokoro on the CPU. No account,
+        no subscription, no network.
       </p>
 
       <section class="card" aria-labelledby="use-heading">
         <h2 id="use-heading">Use it when</h2>
         <p>
-          You want dictation that works in every application — editor, browser,
-          chat, terminal — without handing your voice to a cloud service.
+          You want dictation and read-aloud that work in every application —
+          editor, browser, chat, terminal — without handing speech or text to a
+          cloud service.
         </p>
         <ul>
-          <li>Fully offline: speech recognition runs locally, nothing leaves your machine</li>
+          <li>Fully offline: STT and TTS run locally, nothing leaves your machine</li>
           <li>Types at the cursor in any focused window, Wayland or X11</li>
-          <li>Live streaming — text appears while you are still speaking</li>
-          <li>Hardware accelerated via whisper.cpp on an AMD Radeon iGPU (Vulkan)</li>
+          <li>Live streaming dictation — text appears while you are still speaking</li>
+          <li>Clipboard TTS via Kokoro-ONNX (<code>bm_george</code>) on the CPU</li>
+          <li>Hardware-accelerated STT via whisper.cpp on an AMD Radeon iGPU (Vulkan)</li>
           <li>Free software under the GPL, version 2</li>
         </ul>
         <p>

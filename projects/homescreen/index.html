@@ -34,11 +34,11 @@
 
     <main>
       <p class="lead">
-        The default new tab page shows whatever you happened to visit most last
-        week. It reorders itself without being asked, and there is no way to say
-        <em>these nine things, in this order, permanently</em>. A phone home screen
-        works the other way round: you place things, and they stay placed.
-        <strong>Home Screen</strong> is that, in a browser tab.
+        Home Screen replaces the new tab page in Chromium browsers with a grid of
+        shortcuts you add yourself, over a wallpaper picked at random from a local
+        folder. Around the grid are a clock, a weather block, a countdown to the
+        next sunrise or sunset, and a battery readout. A search bar sits at the top
+        and a bar for asking an AI assistant a question sits at the bottom.
       </p>
 
       <figure>
@@ -51,11 +51,10 @@
       </figure>
 
       <section class="card" aria-labelledby="grid-heading">
-        <h2 id="grid-heading">A grid you arrange yourself</h2>
+        <h2 id="grid-heading">The grid</h2>
         <p>
-          Tiles are added by hand and stay where you put them. Drag one onto
-          another to make a folder; drag into a folder to fill it. Nothing is
-          ranked by visit count and nothing moves on its own.
+          Tiles are added by hand and stay in the order you put them in. Drag one
+          onto another to make a folder; drag into a folder to fill it.
         </p>
         <p>
           Icons come from a chain: the site's own <code>apple-touch-icon</code>
@@ -80,7 +79,7 @@
       </section>
 
       <section class="card" aria-labelledby="widgets-heading">
-        <h2 id="widgets-heading">Weather, sun and battery — optional</h2>
+        <h2 id="widgets-heading">Weather, sun and battery</h2>
         <p>
           A weather block, a countdown to the next sunrise or sunset, and a battery
           readout sit around the grid. Each can be switched off, and a setup wizard
@@ -97,7 +96,7 @@
       </section>
 
       <section class="card" aria-labelledby="ai-heading">
-        <h2 id="ai-heading">A second bar for asking a question</h2>
+        <h2 id="ai-heading">The assistant bar</h2>
         <p>
           The bar along the bottom takes a question and opens it in Claude, ChatGPT,
           Google AI Mode, Grok or Perplexity — or any service you give a URL for.
@@ -105,11 +104,10 @@
           goes.
         </p>
         <p>
-          Your question is placed in the assistant's composer, and you press enter
-          once more to send it. That second keystroke is not an oversight: sites
-          show a warning when a prompt arrives from outside the chat box and
-          require the confirmation, because a link can otherwise submit text you
-          never read.
+          The question is placed in the assistant's composer and you press enter
+          once more to send it. Sites show a warning when a prompt arrives from
+          outside the chat box and require that confirmation, so the extension
+          cannot submit on your behalf.
         </p>
         <figure>
           <img class="shot" src="screenshots/wizard.jpg" width="1400" height="737" loading="lazy"
@@ -136,9 +134,9 @@
       <section class="card" aria-labelledby="privacy-heading">
         <h2 id="privacy-heading">What it talks to</h2>
         <p>
-          There is no account, no telemetry and no server behind this. Everything is
-          stored in the browser. Three parties are contacted, all directly by your
-          own browser and only when there is something to fetch:
+          There is no account, no telemetry and no server. Everything is stored in
+          the browser. Three parties are contacted, all directly by your browser and
+          only when there is something to fetch:
         </p>
         <div class="tablewrap">
           <table>
@@ -160,7 +158,7 @@
       </section>
 
       <section class="card" aria-labelledby="build-heading">
-        <h2 id="build-heading">How it is built</h2>
+        <h2 id="build-heading">Build</h2>
         <p>
           Three files and no dependencies: an MV3 manifest, one HTML file holding
           the markup and all the CSS, and one JavaScript file holding all the logic.
@@ -178,7 +176,7 @@
       <section class="card" aria-labelledby="install-heading">
         <h2 id="install-heading">Installing it</h2>
         <p>
-          It is not on any store — load it unpacked, which takes about a minute:
+          It is not on any store. Load it unpacked:
         </p>
         <ul>
           <li>Clone the repository.</li>

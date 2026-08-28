@@ -34,11 +34,10 @@
 
     <main>
       <p class="lead">
-        The default new tab page is a grid of whatever you happened to visit most
-        last week. It rearranges itself without being asked, shows sites you would
-        rather it didn't, and offers no way to say <em>these nine things, in this
-        order, permanently</em>. A phone home screen has been solving that problem
-        for fifteen years: you put things where you want them, and they stay there.
+        The default new tab page shows whatever you happened to visit most last
+        week. It reorders itself without being asked, and there is no way to say
+        <em>these nine things, in this order, permanently</em>. A phone home screen
+        works the other way round: you place things, and they stay placed.
         <strong>Home Screen</strong> is that, in a browser tab.
       </p>
 
@@ -59,19 +58,16 @@
           ranked by visit count and nothing moves on its own.
         </p>
         <p>
-          Icons are the part that usually goes wrong. Most new tab replacements
-          show a coloured square with a letter in it. This one tries the site's
-          own <code>apple-touch-icon</code> first, falls back to DuckDuckGo's icon
-          service, then the browser's own favicon cache, and only then draws a
-          letter. Whatever it finds is cached locally as a data URL, so the lookup
-          happens once per site and never again.
+          Icons come from a chain: the site's own <code>apple-touch-icon</code>
+          first, then DuckDuckGo's icon service, then the browser's own favicon
+          cache, and only then a letter. Whatever it finds is cached as a data URL,
+          so a site is looked up once.
         </p>
         <p>
-          Custom icons can be uploaded, and are trimmed automatically — transparent
-          margins scanned away with a noise floor, then scaled into a square. That
-          detail exists because several downloaded logos turned out to carry faint
-          opaque speckles across the whole canvas, which defeats every ordinary
-          trim.
+          Uploaded icons are trimmed automatically — transparent margins scanned
+          away with a noise floor, then scaled into a square. The noise floor is
+          there because several downloaded logos carry faint opaque speckles across
+          the whole canvas, which defeats an ordinary trim.
         </p>
         <figure>
           <img class="shot" src="screenshots/edit-mode.jpg" width="1400" height="742" loading="lazy"
@@ -95,8 +91,8 @@
         <p>
           Weather comes from <a href="https://open-meteo.com/">Open-Meteo</a>: no
           key, no signup, cached for thirty minutes. The location is chosen by name
-          from a search box, never by asking the browser where you are — behind a
-          VPN, that answer is wrong, and it is a permission worth not requesting.
+          from a search box rather than by asking the browser where you are, which
+          behind a VPN answers wrongly.
         </p>
       </section>
 
@@ -109,13 +105,11 @@
           goes.
         </p>
         <p>
-          One deliberate limitation is worth stating, because it looks like a bug.
-          The question is placed in the assistant's composer, and you press enter
-          once more to send it. Anthropic's site shows a warning when a prompt
-          arrives from outside the chat box, and requires that confirmation — a
-          link can otherwise put words in your mouth and have an assistant act on
-          them. Defeating that guard would save one keystroke and cost a real
-          protection, so the extension leaves it alone.
+          Your question is placed in the assistant's composer, and you press enter
+          once more to send it. That second keystroke is not an oversight: sites
+          show a warning when a prompt arrives from outside the chat box and
+          require the confirmation, because a link can otherwise submit text you
+          never read.
         </p>
         <figure>
           <img class="shot" src="screenshots/wizard.jpg" width="1400" height="737" loading="lazy"
@@ -159,9 +153,9 @@
           </table>
         </div>
         <p class="meta">
-          DuckDuckGo was chosen over Google's equivalent icon service on privacy
-          grounds, accepting slightly lower-resolution icons in exchange. Both would
-          learn the same hostnames; only one of them is in the advertising business.
+          DuckDuckGo is used rather than Google's equivalent service on privacy
+          grounds, at the cost of slightly lower-resolution icons. Both are cached,
+          so neither lookup repeats.
         </p>
       </section>
 
@@ -170,9 +164,7 @@
         <p>
           Three files and no dependencies: an MV3 manifest, one HTML file holding
           the markup and all the CSS, and one JavaScript file holding all the logic.
-          No framework, no bundler, no package manager, nothing to install before
-          editing it. A new tab is opened dozens of times a day, so it has to paint
-          immediately — which rules out a startup cost of any kind.
+          Nothing to install before editing it, and nothing to run at startup.
         </p>
         <p>
           It runs on Chromium browsers on Linux, macOS and Windows — Brave, Chrome,
@@ -192,7 +184,7 @@
           <li>Clone the repository.</li>
           <li>Open <code>chrome://extensions</code>, or <code>brave://extensions</code> in Brave.</li>
           <li>Turn on developer mode, click <strong>Load unpacked</strong>, and choose the folder.</li>
-          <li>Open a new tab — a setup wizard runs the first time.</li>
+          <li>Open a new tab.</li>
         </ul>
         <p class="meta">
           Loading it from a different folder later changes the extension's ID and

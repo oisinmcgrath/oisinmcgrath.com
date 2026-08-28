@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Privacy policy for Home Screen New Tab, a Chromium new tab extension by Oisin McGrath. No accounts, no telemetry, no server: everything is stored in your own browser.">
+  <title>Privacy policy — Home Screen</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Back link to the projects index, sitting above the page header. */
+    .backnav{padding:1rem 0 0 1.25rem}
+    .backnav a{display:inline-flex;align-items:center;gap:.4rem;font-size:.9rem;
+               text-decoration:none;font-weight:500}
+    .backnav a:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <nav class="backnav"><a href="https://oisinmcgrath.com/projects/"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Projects</a></nav>
+  <div class="wrap">
+    <header class="site-header">
+      <h1>Privacy policy</h1>
+      <p class="tagline">Home Screen New Tab · Oisin McGrath</p>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="https://oisinmcgrath.com/">Home</a>
+        <a href="index.html">Home Screen</a>
+        <a href="privacy.html" aria-current="page">Privacy policy</a>
+      </nav>
+    </header>
+
+    <main>
+      <p class="meta"><strong>Last updated:</strong> 28 August 2026</p>
+
+      <p>
+        This privacy policy describes how <strong>Home Screen New Tab</strong> (“the
+        Extension”) handles information when you use it. The Extension is free software
+        developed by <strong>Oisin McGrath</strong> (“I”, “me”, “the developer”) under
+        the <a href="https://opensource.org/licenses/MIT">MIT License</a>.
+      </p>
+      <p>
+        <strong>Plain summary:</strong> the Extension collects nothing. There is no
+        account, no server of mine, no telemetry and no analytics. Everything you
+        configure stays in your own browser. I never receive any information about you,
+        your tiles, your searches or your browsing.
+      </p>
+      <p>
+        This document is not legal advice. For the “use at your own risk” rules, see the
+        <code>LICENSE</code> file shipped with the Extension.
+      </p>
+
+      <h2>1. What the Extension is</h2>
+      <p>
+        Home Screen New Tab replaces the new tab page in Chromium-based browsers with a
+        grid of shortcuts you add yourself, a clock, an optional weather block, an
+        optional sunrise/sunset countdown, a battery readout, a search bar and a bar for
+        sending a question to an AI assistant. It runs entirely inside your browser. It
+        is not a hosted service and has no login of any kind.
+      </p>
+
+      <h2>2. What is stored, and where it stays</h2>
+      <p>
+        All of the following is written to your browser's own storage on your own
+        machine — <code>localStorage</code> and <code>IndexedDB</code> belonging to the
+        Extension — and is never transmitted anywhere:
+      </p>
+      <ul>
+        <li>Your tiles: their names, addresses, and any icons you upload</li>
+        <li>Cached site icons, stored so they are only ever fetched once</li>
+        <li>Your chosen search engine and AI assistant</li>
+        <li>Which widgets you have switched on</li>
+        <li>Your chosen weather location and the most recent forecast</li>
+        <li>Saved profiles, each holding the above under a name you choose</li>
+      </ul>
+      <p>
+        I have no access to any of it. Exporting a profile writes a JSON file to your own
+        download folder; nothing is uploaded.
+      </p>
+
+      <h2>3. Network activity</h2>
+      <p>
+        The Extension makes exactly three kinds of request, all made directly by your own
+        browser to the party named, and none of them to any server of mine:
+      </p>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Request</th><th scope="col">When</th><th scope="col">What is sent</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>To a site you added a tile for</td>
+              <td>That tile has no icon cached yet</td>
+              <td>An ordinary request for its <code>apple-touch-icon.png</code> or <code>favicon.ico</code></td>
+            </tr>
+            <tr>
+              <td>To <code>icons.duckduckgo.com</code></td>
+              <td>The above failed</td>
+              <td>The hostname of that site, so their icon service can return an icon for it</td>
+            </tr>
+            <tr>
+              <td>To <code>open-meteo.com</code></td>
+              <td>You switched weather or the countdown on</td>
+              <td>The latitude and longitude of the location you picked by name</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        The first two happen only if you grant the optional host permission described in
+        section 4. Results are cached, so a given site's icon is fetched once and the
+        forecast at most every thirty minutes.
+      </p>
+      <p>
+        Beyond that, the Extension only ever navigates your browser: clicking a tile opens
+        that site, the search bar opens your chosen search engine with your query, and the
+        assistant bar opens your chosen assistant with your question. Those are ordinary
+        visits to those sites, subject to their own privacy policies, exactly as if you
+        had typed the address yourself. The Extension does not read, log or transmit them.
+      </p>
+
+      <h2>4. Permissions, and why each is needed</h2>
+      <ul>
+        <li>
+          <strong><code>favicon</code></strong> — reads the icon your browser has already
+          cached for a site, used as a last resort when a tile's icon cannot be found
+          otherwise. It reveals nothing to anyone; the lookup is local.
+        </li>
+        <li>
+          <strong><code>downloads</code></strong> — writes an exported profile to your
+          download folder without the browser asking you to choose one every time. It is
+          used for nothing else, and never reads your downloads.
+        </li>
+        <li>
+          <strong>Access to websites (<code>https://*/*</code>,
+          <code>http://*/*</code>)</strong> — <em>optional, and not granted when you
+          install the Extension.</em> It is requested only if you agree, and is used
+          solely to fetch site icons. It is broad because a tile can point at any address,
+          including a device on your own network served over plain HTTP. If you refuse it,
+          the Extension never touches the network for icons and tiles fall back to your
+          browser's icon cache, then to a letter.
+        </li>
+      </ul>
+
+      <h2>5. No accounts, no cloud storage, no tracking</h2>
+      <p>
+        There is no registration, no sign-in, no synchronisation and no cloud component.
+        The Extension contains no analytics, no telemetry, no advertising identifiers and
+        no third-party tracking code of any kind.
+      </p>
+
+      <h2>6. No sale or transfer of data</h2>
+      <p>
+        I do not collect your data, so there is nothing for me to sell, rent or transfer.
+        The Extension's use of any information is limited to providing the features
+        described here, in line with the Chrome Web Store User Data Policy including its
+        Limited Use requirements. Nothing is used for advertising, for creditworthiness or
+        lending decisions, or for building a profile of you, and no human reads your data,
+        because none of it reaches me.
+      </p>
+
+      <h2>7. Retention and deletion</h2>
+      <p>
+        Everything the Extension stores lives in your browser until you remove it. Clearing
+        the icon cache under Settings, deleting a profile, or uninstalling the Extension
+        removes the corresponding data from your machine. Since nothing is held anywhere
+        else, there is nothing to request the deletion of.
+      </p>
+
+      <h2>8. Children</h2>
+      <p>
+        The Extension is not directed at children and collects no information from anyone,
+        including children.
+      </p>
+
+      <h2>9. Free software and honesty about risk</h2>
+      <p>
+        The Extension is free software provided as-is, without warranty. Its full source is
+        published at
+        <a href="https://github.com/oisinmcgrath/homescreen-newtab">github.com/oisinmcgrath/homescreen-newtab</a>,
+        and every claim on this page can be checked against it. If you install a modified
+        copy from anywhere other than the Chrome Web Store or that repository, this policy
+        does not describe what that copy does.
+      </p>
+
+      <h2>10. This website</h2>
+      <p>
+        oisinmcgrath.com serves static pages from Cloudflare Pages. It sets no cookies and
+        runs no analytics, advertising or tracking scripts. Cloudflare processes standard
+        request logs as part of serving the site.
+      </p>
+
+      <h2>11. Changes</h2>
+      <p>
+        If the Extension's behaviour changes in a way that affects this policy, I will
+        update this page and the “Last updated” date.
+      </p>
+
+      <h2>12. Contact</h2>
+      <p>
+        Privacy questions about Home Screen New Tab:
+        <a href="mailto:privacy@oisinmcgrath.com">privacy@oisinmcgrath.com</a>
+      </p>
+      <p>
+        Developer: Oisin McGrath ·
+        <a href="https://github.com/oisinmcgrath">github.com/oisinmcgrath</a>
+      </p>
+      <p class="meta">
+        This policy is provided for transparency. It is not a guarantee against all legal
+        claims in every jurisdiction.
+      </p>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        <a href="https://oisinmcgrath.com/">Home</a> ·
+        <a href="index.html">Home Screen</a> ·
+        Free software · No tracking on this page.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

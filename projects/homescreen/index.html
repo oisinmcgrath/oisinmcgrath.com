@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Home Screen — a Chromium new tab page laid out like a phone home screen: an app grid with real site icons, search, weather, a sunrise countdown, and a bar that sends a question straight to an AI assistant.">
+  <title>Home Screen</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Back link to the projects index, sitting above the page header. */
+    .backnav{padding:1rem 0 0 1.25rem}
+    .backnav a{display:inline-flex;align-items:center;gap:.4rem;font-size:.9rem;
+               text-decoration:none;font-weight:500}
+    .backnav a:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <nav class="backnav"><a href="https://oisinmcgrath.com/projects/"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Projects</a></nav>
+  <div class="wrap">
+    <header class="site-header">
+      <h1>Home Screen</h1>
+      <p class="tagline">
+        A new tab page laid out like a phone home screen — an app grid with real
+        site icons, a clock, weather, a sunrise countdown, and a bar that sends a
+        question straight to an AI assistant.
+      </p>
+      <img class="logo" src="logo/logo.png" alt="Home Screen logo">
+      <nav class="site-nav" aria-label="Primary">
+        <a href="https://oisinmcgrath.com/">Home</a>
+        <a href="https://github.com/oisinmcgrath/homescreen-newtab">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <p class="lead">
+        The default new tab page is a grid of whatever you happened to visit most
+        last week. It rearranges itself without being asked, shows sites you would
+        rather it didn't, and offers no way to say <em>these nine things, in this
+        order, permanently</em>. A phone home screen has been solving that problem
+        for fifteen years: you put things where you want them, and they stay there.
+        <strong>Home Screen</strong> is that, in a browser tab.
+      </p>
+
+      <section class="card" aria-labelledby="grid-heading">
+        <h2 id="grid-heading">A grid you arrange yourself</h2>
+        <p>
+          Tiles are added by hand and stay where you put them. Drag one onto
+          another to make a folder; drag into a folder to fill it. Nothing is
+          ranked by visit count and nothing moves on its own.
+        </p>
+        <p>
+          Icons are the part that usually goes wrong. Most new tab replacements
+          show a coloured square with a letter in it. This one tries the site's
+          own <code>apple-touch-icon</code> first, falls back to DuckDuckGo's icon
+          service, then the browser's own favicon cache, and only then draws a
+          letter. Whatever it finds is cached locally as a data URL, so the lookup
+          happens once per site and never again.
+        </p>
+        <p>
+          Custom icons can be uploaded, and are trimmed automatically — transparent
+          margins scanned away with a noise floor, then scaled into a square. That
+          detail exists because several downloaded logos turned out to carry faint
+          opaque speckles across the whole canvas, which defeats every ordinary
+          trim.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="widgets-heading">
+        <h2 id="widgets-heading">Weather, sun and battery — optional</h2>
+        <p>
+          A weather block, a countdown to the next sunrise or sunset, and a battery
+          readout sit around the grid. Each can be switched off, and a setup wizard
+          asks which ones you want the first time you open a tab. Turning one off
+          removes it rather than hiding it — the forecast is not fetched at all if
+          nothing needs it.
+        </p>
+        <p>
+          Weather comes from <a href="https://open-meteo.com/">Open-Meteo</a>: no
+          key, no signup, cached for thirty minutes. The location is chosen by name
+          from a search box, never by asking the browser where you are — behind a
+          VPN, that answer is wrong, and it is a permission worth not requesting.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="ai-heading">
+        <h2 id="ai-heading">A second bar for asking a question</h2>
+        <p>
+          The bar along the bottom takes a question and opens it in Claude, ChatGPT,
+          Google AI Mode, Grok or Perplexity — or any service you give a URL for.
+          It works the way the search bar does: click the icon to change where it
+          goes.
+        </p>
+        <p>
+          One deliberate limitation is worth stating, because it looks like a bug.
+          The question is placed in the assistant's composer, and you press enter
+          once more to send it. Anthropic's site shows a warning when a prompt
+          arrives from outside the chat box, and requires that confirmation — a
+          link can otherwise put words in your mouth and have an assistant act on
+          them. Defeating that guard would save one keystroke and cost a real
+          protection, so the extension leaves it alone.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="profiles-heading">
+        <h2 id="profiles-heading">Profiles</h2>
+        <p>
+          A profile is the whole configuration — tiles, icons, search engine,
+          assistant, which widgets are on, and the weather location — saved under a
+          name and switched from a menu. Profiles are kept in the browser, so there
+          is no folder to choose and nothing to configure before the first save.
+          Export writes one out as JSON when you want a backup or a copy on another
+          machine.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="privacy-heading">
+        <h2 id="privacy-heading">What it talks to</h2>
+        <p>
+          There is no account, no telemetry and no server behind this. Everything is
+          stored in the browser. Three parties are contacted, all directly by your
+          own browser and only when there is something to fetch:
+        </p>
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Who</th><th scope="col">When</th><th scope="col">What they receive</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>The site itself</td><td>A tile has no icon cached</td><td>A request for its <code>apple-touch-icon.png</code></td></tr>
+              <tr><td><code>icons.duckduckgo.com</code></td><td>That request failed</td><td>The hostname of that site</td></tr>
+              <tr><td><code>open-meteo.com</code></td><td>Weather is switched on</td><td>The coordinates you chose</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="meta">
+          DuckDuckGo was chosen over Google's equivalent icon service on privacy
+          grounds, accepting slightly lower-resolution icons in exchange. Both would
+          learn the same hostnames; only one of them is in the advertising business.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="build-heading">
+        <h2 id="build-heading">How it is built</h2>
+        <p>
+          Three files and no dependencies: an MV3 manifest, one HTML file holding
+          the markup and all the CSS, and one JavaScript file holding all the logic.
+          No framework, no bundler, no package manager, nothing to install before
+          editing it. A new tab is opened dozens of times a day, so it has to paint
+          immediately — which rules out a startup cost of any kind.
+        </p>
+        <p>
+          It runs on Chromium browsers on Linux, macOS and Windows — Brave, Chrome,
+          Edge, Vivaldi. Firefox and Safari are not supported.
+        </p>
+        <p>
+          <a href="https://github.com/oisinmcgrath/homescreen-newtab"><strong>Source &amp; install instructions on GitHub</strong></a>
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="install-heading">
+        <h2 id="install-heading">Installing it</h2>
+        <p>
+          It is not on any store — load it unpacked, which takes about a minute:
+        </p>
+        <ul>
+          <li>Clone the repository.</li>
+          <li>Open <code>chrome://extensions</code>, or <code>brave://extensions</code> in Brave.</li>
+          <li>Turn on developer mode, click <strong>Load unpacked</strong>, and choose the folder.</li>
+          <li>Open a new tab — a setup wizard runs the first time.</li>
+        </ul>
+        <p class="meta">
+          Loading it from a different folder later changes the extension's ID and
+          clears its storage, so export a profile before moving it. Developed and
+          used daily on Fedora Linux with Brave.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Oisin McGrath · MIT licensed · <a href="https://github.com/oisinmcgrath/homescreen-newtab">github.com/oisinmcgrath/homescreen-newtab</a></p>
+      <p>No tracking on this page.</p>
+    </footer>
+  </div>
+</body>
+</html>

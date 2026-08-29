@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="YT Downloader — a browser toolbar button for yt-dlp. It sends the current tab's URL to a small helper running on your own machine, which saves the audio or video with yt-dlp.">
+  <title>YT Downloader</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Back link to the projects index, sitting above the page header. */
+    .backnav{padding:1rem 0 0 1.25rem}
+    .backnav a{display:inline-flex;align-items:center;gap:.4rem;font-size:.9rem;
+               text-decoration:none;font-weight:500}
+    .backnav a:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <nav class="backnav"><a href="https://oisinmcgrath.com/projects/"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Projects</a></nav>
+  <div class="wrap">
+    <header class="site-header">
+      <h1>YT Downloader</h1>
+      <p class="tagline">
+        A browser toolbar button for yt-dlp. It hands the current tab's URL to a
+        small helper running on your own machine, which saves the audio or video.
+      </p>
+      <img class="logo" src="logo/logo.png" alt="YT Downloader logo">
+      <nav class="site-nav" aria-label="Primary">
+        <a href="https://oisinmcgrath.com/">Home</a>
+        <a href="https://github.com/oisinmcgrath/yt-downloader-extension">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <p class="lead">
+        <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> is a command-line
+        program that turns a streaming video page into an ordinary file on disk.
+        This is a button for it. Click it on the tab you are watching and the
+        page's URL goes to a helper on your own machine, which calls yt-dlp and
+        saves the result as MP3 or MP4. It exists because the alternative is
+        opening a terminal and pasting the URL.
+      </p>
+
+      <figure>
+        <img class="shot" src="screenshots/popup.png" width="794" height="528" loading="lazy"
+             alt="The extension popup in a dark browser: a header reading YT Downloader with a cassette logo and a settings cog, a Format switch with MP3 selected and MP4 unselected, a red Download button, and a small folder button beside it.">
+        <figcaption>
+          The whole interface. Pick a format, press Download.
+        </figcaption>
+      </figure>
+
+      <section class="card" aria-labelledby="parts-heading">
+        <h2 id="parts-heading">Two pieces</h2>
+        <p>
+          The extension never downloads anything itself. It reads the URL of the
+          tab you are on, sends it to <code>127.0.0.1:5005</code>, and shows
+          progress. That address is its only host permission.
+        </p>
+        <p>
+          The helper is about two hundred lines of standard-library Python around
+          yt-dlp. It binds to loopback, so nothing is reachable from outside the
+          machine, and it is what actually writes files.
+        </p>
+        <pre><code>popup  ──POST /download──▶  helper  ──▶  yt-dlp  ──▶  your folder
+  ▲                            │
+  └────────GET /status─────────┘</code></pre>
+      </section>
+
+      <section class="card" aria-labelledby="progress-heading">
+        <h2 id="progress-heading">Progress</h2>
+        <p>
+          Jobs are listed under the button with a bar, the transfer rate and an
+          estimated time. The helper is polled once a second, but a bar bound
+          directly to those readings steps once a second and sits still in
+          between — so the popup measures the rate and animates continuously,
+          easing toward where the next reading is predicted to land.
+        </p>
+        <p>
+          Jobs live in memory and are lost when the helper restarts. They are a
+          progress display, not a history.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="settings-heading">
+        <h2 id="settings-heading">Settings</h2>
+        <p>
+          The cog holds the two things set once rather than per download: where
+          files are saved, and which format is pre-selected when the popup opens.
+        </p>
+        <figure>
+          <img class="shot" src="screenshots/settings.png" width="798" height="982" loading="lazy"
+               alt="The popup with the settings pane open, showing a Save folder section with a Browse button and the current path, a Default format switch, and the Format switch and Download button below it.">
+          <figcaption>
+            Browse opens the desktop's own folder chooser.
+          </figcaption>
+        </figure>
+        <p>
+          The save folder belongs to the helper rather than the extension, which
+          is a consequence of how Browse has to work. A browser popup closes the
+          moment it loses focus, and a folder dialog takes focus — so the dialog
+          outlives the page that asked for it, and there is nothing left to hand
+          the answer back to. The helper opens the dialog, writes the choice
+          down, and the popup reads it back the next time it opens.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="requirements-heading">
+        <h2 id="requirements-heading">What it needs</h2>
+        <ul>
+          <li>A Chromium browser — Brave, Chrome, Edge, Vivaldi. Firefox and Safari are not supported.</li>
+          <li>Python 3 and yt-dlp.</li>
+          <li>ffmpeg, for MP3 — the audio is extracted with it.</li>
+          <li>Linux, in practice. The desktop integration uses <code>kdialog</code> or
+              <code>zenity</code> for the folder chooser, <code>dolphin</code> or
+              <code>xdg-open</code> to show a folder, and <code>notify-send</code> when a
+              download finishes. The download itself does not care.</li>
+        </ul>
+        <p class="meta">
+          Written and used on Fedora Linux with Brave and KDE.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="privacy-heading">
+        <h2 id="privacy-heading">What it talks to</h2>
+        <p>
+          No account, no telemetry, no third-party service. The extension contacts
+          one address, <code>127.0.0.1:5005</code>, which is your own machine. The
+          helper contacts whatever yt-dlp needs to fetch the file you asked for,
+          and nothing else. Settings are a JSON file in your home directory.
+        </p>
+        <p class="meta">
+          The helper passes your browser's cookies to yt-dlp so it sees the same
+          session you do. That is a local read of your own profile; nothing is
+          sent anywhere except to the site the file is being fetched from.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="install-heading">
+        <h2 id="install-heading">Installing it</h2>
+        <p>
+          It is not on the Chrome Web Store and will not be — the store's policies
+          prohibit extensions that download from YouTube, so a submission would be
+          rejected. Load it unpacked:
+        </p>
+        <ul>
+          <li>Clone the repository.</li>
+          <li>Start the helper: <code>python3 server/server.py</code>.</li>
+          <li>Open <code>chrome://extensions</code>, or <code>brave://extensions</code> in Brave.</li>
+          <li>Turn on developer mode, click <strong>Load unpacked</strong>, and choose the
+              <code>extension/</code> folder.</li>
+        </ul>
+        <p>
+          The README covers running the helper as a systemd user service so it
+          starts with your session.
+        </p>
+        <p>
+          <a href="https://github.com/oisinmcgrath/yt-downloader-extension"><strong>Source &amp; install instructions on GitHub</strong></a>
+        </p>
+        <p class="meta">
+          YouTube's terms of service do not permit downloading. That is between you
+          and them; this is a button for a tool you already have.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Oisin McGrath · MIT licensed · <a href="https://github.com/oisinmcgrath/yt-downloader-extension">github.com/oisinmcgrath/yt-downloader-extension</a></p>
+      <p>No tracking on this page.</p>
+    </footer>
+  </div>
+</body>
+</html>

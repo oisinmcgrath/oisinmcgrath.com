@@ -108,15 +108,14 @@
         <h2 id="requirements-heading">What it needs</h2>
         <ul>
           <li>A Chromium browser — Brave, Chrome, Edge, Vivaldi. Firefox and Safari are not supported.</li>
-          <li>Python 3 and yt-dlp.</li>
+          <li>Python 3.8 or newer. The installer fetches yt-dlp itself.</li>
           <li>ffmpeg, for MP3 — the audio is extracted with it.</li>
-          <li>Linux, in practice. The desktop integration uses <code>kdialog</code> or
-              <code>zenity</code> for the folder chooser, <code>dolphin</code> or
-              <code>xdg-open</code> to show a folder, and <code>notify-send</code> when a
-              download finishes. The download itself does not care.</li>
+          <li>Linux, macOS or Windows. The desktop integration — the folder chooser,
+              showing a folder, the finished notification — has a branch for each.</li>
         </ul>
         <p class="meta">
-          Written and used on Fedora Linux with Brave and KDE.
+          Written and used on Fedora Linux with Brave and KDE. The macOS and Windows
+          paths are written from documented behaviour and have not been run.
         </p>
       </section>
 
@@ -140,19 +139,29 @@
         <p>
           It is not on the Chrome Web Store and will not be — the store's policies
           prohibit extensions that download from YouTube, so a submission would be
-          rejected. Load it unpacked:
+          rejected. There is an installer:
+        </p>
+        <pre><code>git clone https://github.com/oisinmcgrath/yt-downloader-extension
+cd yt-downloader-extension
+python3 install.py</code></pre>
+        <p>
+          It creates a virtualenv beside the repository, installs yt-dlp, checks for
+          ffmpeg and offers to install it, works out which browser's cookies to use,
+          and registers the helper to start with your session — a systemd user
+          service on Linux, a LaunchAgent on macOS, a Startup entry on Windows.
+        </p>
+        <p>
+          Loading the extension is then three clicks you do yourself, which the
+          installer opens the page for. No installer can do that part: Chromium
+          removed the <code>--load-extension</code> switch for ordinary profiles, and
+          adding an extension is meant to be visible rather than something a script
+          does quietly.
         </p>
         <ul>
-          <li>Clone the repository.</li>
-          <li>Start the helper: <code>python3 server/server.py</code>.</li>
           <li>Open <code>chrome://extensions</code>, or <code>brave://extensions</code> in Brave.</li>
           <li>Turn on developer mode, click <strong>Load unpacked</strong>, and choose the
               <code>extension/</code> folder.</li>
         </ul>
-        <p>
-          The README covers running the helper as a systemd user service so it
-          starts with your session.
-        </p>
         <p>
           <a href="https://github.com/oisinmcgrath/yt-downloader-extension"><strong>Source &amp; install instructions on GitHub</strong></a>
         </p>

@@ -22,40 +22,67 @@
              border-radius:8px;text-decoration:none;font-weight:500;
              border:1px solid var(--tint);background:var(--fill);color:var(--ink);
              transition:border-color .15s,background .15s,box-shadow .15s}
-    /* A torch passing across brushed metal: one narrow band travels each
-       button in turn — GitHub, LinkedIn, Projects — and then the cycle repeats.
-       It is one animation shared by the three, staggered by `animation-delay`,
-       so they can never drift out of order the way three separate timings
-       would. The band is a raked pseudo-element rather than a moving
-       background, so it composites on its own layer and the text under it is
-       never repainted.
+    /* A torch passing across brushed metal: one narrow band crosses each
+       button in turn — GitHub, LinkedIn, Projects — and hands straight on to
+       the next, continuously.
+
+       The band has to be the same width and travel at the same speed on all
+       three, and the three buttons are different widths because their labels
+       are. So the band is a fixed 1.5rem of background rather than a fraction
+       of the button, and it is moved with `background-position-x`: a
+       percentage there resolves against the button width minus the band width,
+       so `-1.5rem` to `calc(100% + 1.5rem)` always means "fully off the left
+       edge to fully off the right", whatever the button measures. The geometry
+       needs no numbers from us and holds up whatever the visitor's font stack
+       does to the label widths.
+
+       What cannot be derived in CSS is the duration: equal speed over unequal
+       distances means unequal times, and no CSS value can read a width into a
+       `@keyframes` percentage. So each button gets its own end stop, authored
+       from its measured width at 182px per second — the speed the widest
+       button ran at before. Only the timing depends on those measurements; if a font
+       stack shifts the widths a little, the light still crosses each button
+       exactly, just a few per cent off the intended pace.
+
+       All three share one 3.84s cycle, and the delays are spaced by the time
+       the *bright core* takes to cross each button, not by the whole sweep:
+       the gradient's outer thirds are nearly transparent, so a button stops
+       looking lit well before the band has finished leaving it. The faint
+       tails overlap, which is what makes it read as one light moving down the
+       card rather than three separate flashes.
 
        The highlight is not simply white: a specular core with a faintly darker
        flank either side is what reads as a curved metal surface catching the
        light, and the flank has to darken in both themes, so both halves of the
        gradient are `light-dark()` pairs. */
-    .links a::after{content:"";position:absolute;top:0;bottom:0;left:0;width:30%;
-             pointer-events:none;transform:translateX(-110%) skewX(-20deg);
-             background:linear-gradient(90deg,transparent,
+    .links a::after{content:"";position:absolute;inset:0;pointer-events:none;
+             opacity:.5;background-repeat:no-repeat;background-size:1.5rem 100%;
+             background-position-x:-1.5rem;
+             background-image:linear-gradient(104deg,transparent,
                light-dark(rgba(18,38,58,.17),rgba(0,0,0,.42)) 34%,
                light-dark(rgba(255,255,255,1),rgba(255,255,255,.52)) 50%,
                light-dark(rgba(18,38,58,.17),rgba(0,0,0,.42)) 66%,transparent);
-             opacity:.5;animation:linksheen 5.4s linear infinite;will-change:transform}
-    .links .l-li a::after{animation-delay:1.8s}
-    .links .l-pr a::after{animation-delay:3.6s}
-    /* The timing is set by the bright core of the band, not by its full
-       width. The gradient's outer thirds are all but transparent, so a button
-       stops looking lit well before the element has finished crossing it: the
-       core takes 1.8s of the 2.43s crossing. The delays are therefore 1.8s
-       apart and the cycle is exactly three of them, which hands the light
-       straight from one button to the next with nothing dead in between, and
-       brings it round to GitHub on the same beat. The crossings themselves do
-       overlap slightly at the faint tails, which is what makes the handover
-       read as continuous rather than as three separate flashes. */
-    @keyframes linksheen{
-      0%{transform:translateX(-110%) skewX(-20deg)}
-      45%{transform:translateX(340%) skewX(-20deg)}
-      100%{transform:translateX(340%) skewX(-20deg)}
+             animation:sheen-gh 3.84s linear infinite;
+             will-change:background-position}
+    .links .l-li a::after{animation-name:sheen-li;animation-delay:1.802s}
+    .links .l-pr a::after{animation-name:sheen-pr;animation-delay:3.209s}
+    /* One cycle, three end stops: 1.93s, 1.54s and 0.77s of it respectively,
+       which is (button + band) / 182px per second for each — the buttons
+       measure 328, 256 and 116 CSS pixels with the page's own type at its
+       default size. The band is 1.5rem so that it stays narrower than
+       Projects, the shortest of the three; a wider one covers that button
+       entirely and reads as a wash rather than a passing light. */
+    @keyframes sheen-gh{
+      0%{background-position-x:-1.5rem}
+      50.4%,100%{background-position-x:calc(100% + 1.5rem)}
+    }
+    @keyframes sheen-li{
+      0%{background-position-x:-1.5rem}
+      40.1%,100%{background-position-x:calc(100% + 1.5rem)}
+    }
+    @keyframes sheen-pr{
+      0%{background-position-x:-1.5rem}
+      20.0%,100%{background-position-x:calc(100% + 1.5rem)}
     }
     @media(prefers-reduced-motion:reduce){
       .links a::after{animation:none;opacity:0}

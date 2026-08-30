@@ -412,21 +412,34 @@ and pointing them at the OS would undo the per-page palettes recorded above.
 A narrow raked highlight crosses GitHub, then LinkedIn, then Projects, pauses,
 and returns to GitHub — a torch drawn across brushed metal. Still no script.
 
-It is deliberately *one* `@keyframes` shared by the three buttons and offset by
-`animation-delay` rather than three animations of their own: sharing the cycle
-is what guarantees the order can never drift, and the delays (0, 1.8s, 3.6s
-against a 5.4s cycle) are spaced so the light hands straight from one button to
-the next. The cycle is exactly three of those steps, so it never rests:
-Projects hands back to GitHub on the same beat that GitHub hands to LinkedIn.
+The three share one 3.84s cycle and are offset by `animation-delay`, which is
+what guarantees the order can never drift. The delays (0, 1.802s, 3.209s) are
+spaced by the band's bright *core*, not by its full width — that took three
+attempts to get right. The gradient's outer thirds are nearly transparent, so a
+button stops looking lit well before the band has finished leaving it; timing
+the delays off the element's own geometry left a visible three-quarter-second
+lull that the measurements said was two-tenths. The cycle is exactly the three
+core crossings, so it never rests: Projects hands back to GitHub on the same
+beat that GitHub hands to LinkedIn, and the faint tails overlap, which is what
+makes it read as one light moving down the card rather than three flashes.
 
-The spacing is set by the band's bright core, not by its full width — that took
-three attempts to get right. The gradient's outer thirds are nearly
-transparent, so a button stops looking lit well before the element has finished
-crossing it; timing the delays off the element's own geometry left a visible
-three-quarter-second lull that the measurements said was two-tenths. The core
-takes 1.8s of the 2.43s crossing, and 1.8s is the delay. The crossings overlap
-slightly at their faint tails, which is what makes the handover read as one
-light moving down the card rather than three separate flashes.
+**The band is a fixed width and a fixed speed, and that is not free.** The
+three buttons are different widths because their labels are, so a band sized as
+a fraction of the button was both narrower and slower on the short ones. It is
+now 1.5rem of background moved with `background-position-x`: a percentage there
+resolves against the button width minus the band width, so `-1.5rem` to
+`calc(100% + 1.5rem)` always means "fully off the left edge to fully off the
+right" without anyone measuring anything. 1.5rem specifically because a wider
+band covers the Projects button entirely and reads as a wash.
+
+What CSS cannot derive is the duration: equal speed over unequal distances
+means unequal times, and no CSS value reads a width into a `@keyframes`
+percentage. So each button has its own end stop, authored from its measured
+width — 328, 256 and 116 CSS pixels — at 182px per second. Only the timing
+depends on those measurements; the geometry does not, so a font stack that
+shifts the label widths leaves the light still crossing each button exactly,
+just a few per cent off the intended pace. Measured off the rendered pixels
+afterwards: 185, 178 and 181 px/s, and the same breadth on all three.
 
 The band's travel is tuned to the distance it is *visible* for and no further —
 from just off the left edge to just off the right. An earlier version overshot

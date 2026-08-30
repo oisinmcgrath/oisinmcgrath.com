@@ -414,10 +414,19 @@ and returns to GitHub — a torch drawn across brushed metal. Still no script.
 
 It is deliberately *one* `@keyframes` shared by the three buttons and offset by
 `animation-delay` rather than three animations of their own: sharing the cycle
-is what guarantees the order can never drift, and the delays (0, 2.58s, 5.16s
-against a 7.74s cycle) are spaced so one band has left a button before the next
-begins. The cycle is exactly three of those steps, so the light never rests:
+is what guarantees the order can never drift, and the delays (0, 1.8s, 3.6s
+against a 5.4s cycle) are spaced so the light hands straight from one button to
+the next. The cycle is exactly three of those steps, so it never rests:
 Projects hands back to GitHub on the same beat that GitHub hands to LinkedIn.
+
+The spacing is set by the band's bright core, not by its full width — that took
+three attempts to get right. The gradient's outer thirds are nearly
+transparent, so a button stops looking lit well before the element has finished
+crossing it; timing the delays off the element's own geometry left a visible
+three-quarter-second lull that the measurements said was two-tenths. The core
+takes 1.8s of the 2.43s crossing, and 1.8s is the delay. The crossings overlap
+slightly at their faint tails, which is what makes the handover read as one
+light moving down the card rather than three separate flashes.
 
 The band's travel is tuned to the distance it is *visible* for and no further —
 from just off the left edge to just off the right. An earlier version overshot

@@ -40,19 +40,21 @@
                light-dark(rgba(18,38,58,.17),rgba(0,0,0,.42)) 34%,
                light-dark(rgba(255,255,255,1),rgba(255,255,255,.52)) 50%,
                light-dark(rgba(18,38,58,.17),rgba(0,0,0,.42)) 66%,transparent);
-             opacity:.5;animation:linksheen 7.74s linear infinite;will-change:transform}
-    .links .l-li a::after{animation-delay:2.58s}
-    .links .l-pr a::after{animation-delay:5.16s}
-    /* The band travels from just off the left edge to just off the right one
-       and no further, so the whole 31.4% of the cycle it is running — 2.43s —
-       is time it is actually visible on the button. The delays are 2.58s
-       apart, which is that crossing plus a tenth of a second, and the cycle is
-       exactly three of those steps, so the light runs continuously: it leaves
-       one button, arrives at the next, and comes round to GitHub on the same
-       beat, with no rest anywhere and no two ever lit at once. */
+             opacity:.5;animation:linksheen 5.4s linear infinite;will-change:transform}
+    .links .l-li a::after{animation-delay:1.8s}
+    .links .l-pr a::after{animation-delay:3.6s}
+    /* The timing is set by the bright core of the band, not by its full
+       width. The gradient's outer thirds are all but transparent, so a button
+       stops looking lit well before the element has finished crossing it: the
+       core takes 1.8s of the 2.43s crossing. The delays are therefore 1.8s
+       apart and the cycle is exactly three of them, which hands the light
+       straight from one button to the next with nothing dead in between, and
+       brings it round to GitHub on the same beat. The crossings themselves do
+       overlap slightly at the faint tails, which is what makes the handover
+       read as continuous rather than as three separate flashes. */
     @keyframes linksheen{
       0%{transform:translateX(-110%) skewX(-20deg)}
-      31.4%{transform:translateX(340%) skewX(-20deg)}
+      45%{transform:translateX(340%) skewX(-20deg)}
       100%{transform:translateX(340%) skewX(-20deg)}
     }
     @media(prefers-reduced-motion:reduce){

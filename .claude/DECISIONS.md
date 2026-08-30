@@ -369,6 +369,44 @@ as more cards go in — it is a featured-work carousel now, not a category.
 Community moved under a new **What else drives me** heading as an `h3`
 subsection. Music is to join it there; it has not been built.
 
+**2026-08-31 — the homepage switch became three-way, and System is the default.**
+
+Dark, System and Light, as three radio buttons in the nav row, replacing the
+two-state checkbox. System is checked on arrival, so a visitor whose machine is
+in dark mode now lands on a dark page instead of a bright one.
+
+This resolves the awkwardness the checkbox had: a two-state switch that also
+followed the operating system could only mean "invert whatever my system says",
+which makes the sun and moon labels lie half the time. A third position states
+the default outright, so all three labels stay truthful.
+
+The mechanism is `color-scheme` plus `light-dark()`, and it is still script-free.
+`<html>` carries `color-scheme: light dark`, which is what makes System follow
+the OS; `html:has(#t-dark:checked)` and `html:has(#t-light:checked)` pin it the
+other two ways. Every colour on the page is then written once as
+`light-dark(light, dark)` and resolves against whichever scheme is in force.
+That replaced thirty-nine parallel dark overrides with one declaration per
+colour — the alternative was to write all thirty-nine a second time inside a
+`prefers-color-scheme` query and keep the two sets in step by hand.
+
+Two details worth keeping:
+
+- The whole palette sits inside `@supports (color: light-dark(#000,#fff))` and
+  each rule carries a `body` prefix to out-specify `style.css`. On a browser
+  without `light-dark()` the declarations are dropped and the light theme shows
+  through, which is exactly the old behaviour rather than a broken page.
+- The radios carry `autocomplete="off"` for the same reason the video swap does:
+  a browser restores the checked one on reload, which would make the choice look
+  persistent while nothing is stored. It still does not persist — that needs
+  localStorage and a second script.
+
+Fixed in passing: the Home link carries `aria-current="page"`, and
+`nav.site-nav a[aria-current="page"]` hard-codes near-black ink, so in the dark
+theme it had been sitting almost invisible on its own pill.
+
+Homepage only. The project pages each own their stylesheet and their own theme,
+and pointing them at the OS would undo the per-page palettes recorded above.
+
 ---
 
 ## Working notes

@@ -40,19 +40,19 @@
                light-dark(rgba(18,38,58,.17),rgba(0,0,0,.42)) 34%,
                light-dark(rgba(255,255,255,1),rgba(255,255,255,.52)) 50%,
                light-dark(rgba(18,38,58,.17),rgba(0,0,0,.42)) 66%,transparent);
-             opacity:.5;animation:linksheen 19.2s linear infinite;will-change:transform}
+             opacity:.5;animation:linksheen 7.74s linear infinite;will-change:transform}
     .links .l-li a::after{animation-delay:2.58s}
     .links .l-pr a::after{animation-delay:5.16s}
     /* The band travels from just off the left edge to just off the right one
-       and no further, so the whole 12.66% of the cycle it is running — 2.43s —
+       and no further, so the whole 31.4% of the cycle it is running — 2.43s —
        is time it is actually visible on the button. The delays are 2.58s
-       apart, which is that crossing plus a tenth of a second, so the light
-       leaves one button and arrives at the next with no dead pause between
-       them and no two ever lit at once. The remainder of the cycle is the
-       longer rest before it returns to GitHub. */
+       apart, which is that crossing plus a tenth of a second, and the cycle is
+       exactly three of those steps, so the light runs continuously: it leaves
+       one button, arrives at the next, and comes round to GitHub on the same
+       beat, with no rest anywhere and no two ever lit at once. */
     @keyframes linksheen{
       0%{transform:translateX(-110%) skewX(-20deg)}
-      12.66%{transform:translateX(340%) skewX(-20deg)}
+      31.4%{transform:translateX(340%) skewX(-20deg)}
       100%{transform:translateX(340%) skewX(-20deg)}
     }
     @media(prefers-reduced-motion:reduce){

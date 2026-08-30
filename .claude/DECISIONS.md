@@ -415,8 +415,9 @@ and returns to GitHub — a torch drawn across brushed metal. Still no script.
 It is deliberately *one* `@keyframes` shared by the three buttons and offset by
 `animation-delay` rather than three animations of their own: sharing the cycle
 is what guarantees the order can never drift, and the delays (0, 2.58s, 5.16s
-against a 19.2s cycle) are spaced so one band has left a button before the next
-begins.
+against a 7.74s cycle) are spaced so one band has left a button before the next
+begins. The cycle is exactly three of those steps, so the light never rests:
+Projects hands back to GitHub on the same beat that GitHub hands to LinkedIn.
 
 The band's travel is tuned to the distance it is *visible* for and no further —
 from just off the left edge to just off the right. An earlier version overshot

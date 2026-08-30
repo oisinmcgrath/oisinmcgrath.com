@@ -303,6 +303,39 @@ detail to blur. The filled tile is what gives it mass in a tab strip; it also
 makes the icon legible on a light or a dark browser chrome without needing a
 `prefers-color-scheme` block inside the SVG.
 
+**2026-08 — the video swap is a checkbox, not `:target`.**
+
+Clicking the loop used to set a `#watch` fragment. A fragment stays in the
+address bar, so reloading the page came back with the loop already swapped out
+and the walkthrough's poster showing — it looked as though the loop had
+stopped working. It is now a checkbox with `autocomplete="off"`, which the
+browser does not restore either. Every load starts on the loop.
+
+**2026-08 — the carousel keeps moving, and comes back on its own.**
+
+Hovering no longer pauses it: only an arrow click stops it, and then only for
+five seconds, after which the drift picks up again from exactly where that
+photograph sits. There is no timer and no script — the resumed drift is an
+animation with a five-second delay, and during a delay an element keeps its own
+transform. Each slide needs its own `@keyframes` because the resumed drift has
+to begin at that slide's offset.
+
+The consequence, accepted: because it always returns to drifting, the arrows
+are always anchored to a fixed slide rather than to whatever is centred, so a
+click after the drift has moved on will jump. That is the same limitation noted
+above and still needs JavaScript to fix properly.
+
+**2026-08 — the specifications fold away.**
+
+A native `<details>`, closed by default, reading "Van Specifications", moved up
+next to the paragraph about buying the van. Closed it is a button and carries
+the card's brighten-and-rise; open it is the card it always was. The chevron is
+two CSS borders rotated, so one arrow costs no icon file.
+
+**Note on favicons:** browsers cache them harder than anything else on a page,
+and a hard refresh does not always clear them. The `<link>` hrefs carry a `?v=`
+query for that reason — bump it when the icon changes.
+
 ---
 
 ## Working notes

@@ -432,6 +432,10 @@ li {
 /* The horizon, reusable as a section divider. */
 /* The same rule as the section dividers, but drawn in white for the sky it
    sits in rather than in the ground's cream. */
+hr.horizon.sky.under {
+  margin: 0 auto var(--sp-6);
+}
+
 hr.horizon.sky {
   margin: var(--sp-5) auto 0;
   max-width: var(--media);
@@ -493,13 +497,29 @@ hr.horizon {
   display: none;
 }
 
-.stage:target .teaser,
-.stage:target .playover {
+#watch:checked ~ .stage .teaser,
+#watch:checked ~ .stage .playover {
   display: none;
 }
 
-.stage:target .full {
+#watch:checked ~ .stage .full {
   display: block;
+}
+
+.watchtoggle,
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.watchtoggle:focus-visible + .stage .playmark {
+  outline: 3px solid var(--dust-pale);
+  outline-offset: 6px;
+  border-radius: 50%;
 }
 
 .playover {
@@ -574,6 +594,81 @@ figure.plate figcaption {
   color: var(--text-muted);
   font-size: 0.85rem;
   line-height: 1.45;
+}
+
+/* ---- specifications, folded away ----
+   A native <details>. Closed it is a button; open it is the card it used to
+   be. No script, and it keeps the card's own slow brighten-and-rise on the
+   summary so the closed state reads as something to press. */
+
+.specbox {
+  max-width: var(--media);
+  margin: var(--sp-6) auto;
+  border: 1px solid rgba(255, 214, 170, 0.35);
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+  box-shadow: 0 1px 2px rgba(24, 10, 4, 0.3),
+    0 8px 20px -10px rgba(24, 10, 4, 0.45);
+  filter: brightness(1);
+  will-change: transform, filter;
+  transition: transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+    filter 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+    border-color 0.9s ease;
+}
+
+.specbox:hover {
+  transform: translateY(-7px);
+  filter: brightness(1.16);
+  border-color: var(--dust-pale);
+  box-shadow: 0 2px 4px rgba(24, 10, 4, 0.35),
+    0 20px 44px -12px rgba(24, 10, 4, 0.5),
+    0 0 30px rgba(255, 178, 109, 0.24);
+}
+
+.specbox summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-4) var(--sp-5);
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.05rem + 0.4vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
+  color: var(--heading);
+}
+
+.specbox summary::-webkit-details-marker {
+  display: none;
+}
+
+.specbox summary:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: var(--radius-lg);
+}
+
+/* A chevron drawn from two borders, so there is no icon file for one arrow. */
+.chev {
+  width: 0.6rem;
+  height: 0.6rem;
+  flex: none;
+  margin-right: 0.2rem;
+  border-right: 2.5px solid var(--heading);
+  border-bottom: 2.5px solid var(--heading);
+  transform: rotate(45deg) translate(-0.12rem, -0.12rem);
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.specbox[open] .chev {
+  transform: rotate(225deg) translate(-0.12rem, -0.12rem);
+}
+
+.specbody {
+  padding: 0 var(--sp-5) var(--sp-5);
 }
 
 /* ---- specification card ----
@@ -874,20 +969,18 @@ nav.site-nav .ico {
   );
 }
 
-/* Seven and a half viewports of track for ten slides, so each slide is three
-   quarters of the viewport rather than half: fewer visible at once, and the
-   one in the middle much larger. The drift still moves five slots. */
+/* Four and a half viewports of track for six slides — the three photographs
+   twice over — so each slide is three quarters of the viewport: only slivers
+   of the neighbours show and the one in the middle is large. */
 .cartrack {
   display: flex;
-  width: 750%;
-  animation: cardrift 130s linear infinite;
+  width: 450%;
+  animation: cardrift 78s linear infinite;
   will-change: transform;
 }
 
-/* Ten slides — the five photographs twice over — across a track five
-   viewports wide, so each is half a viewport. */
 .carslide {
-  flex: 0 0 10%;
+  flex: 0 0 16.6667%;
   margin: 0;
   padding: 0 0.55rem;
 }
@@ -900,10 +993,10 @@ nav.site-nav .ico {
    each. */
 @keyframes cardrift {
   from {
-    transform: translateX(-8.3333%);
+    transform: translateX(-13.8889%);
   }
   to {
-    transform: translateX(-58.3333%);
+    transform: translateX(-63.8889%);
   }
 }
 
@@ -941,37 +1034,55 @@ nav.site-nav .ico {
 
 /* Manual control. The first radio checked stops the drift for good; from then
    on the arrows move it, one slot at a time. */
-/* Hovering steadies it, so the photograph under the pointer stops moving
-   before it is clicked. */
-.carousel:hover .cartrack {
-  animation-play-state: paused;
-}
-
+/* An arrow click holds its photograph still for five seconds and then lets
+   the drift pick up again from exactly there. There is no timer here and no
+   script: the animation simply has a five-second delay, and during a delay the
+   element keeps its own transform. Each slide needs its own keyframes because
+   the resumed drift has to begin where that slide sits. */
 .carousel:has(.carinput:checked) .cartrack {
-  animation: none;
   transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-/* The first photograph is parked on its duplicate, so that it too has a
-   neighbour on either side. */
 .carousel:has(#car1:checked) .cartrack {
-  transform: translateX(-48.3333%);
+  transform: translateX(-47.2222%);
+  animation: cardrift1 78s linear 5s infinite;
 }
 
 .carousel:has(#car2:checked) .cartrack {
-  transform: translateX(-8.3333%);
+  transform: translateX(-13.8889%);
+  animation: cardrift2 78s linear 5s infinite;
 }
 
 .carousel:has(#car3:checked) .cartrack {
-  transform: translateX(-18.3333%);
+  transform: translateX(-30.5556%);
+  animation: cardrift3 78s linear 5s infinite;
 }
 
-.carousel:has(#car4:checked) .cartrack {
-  transform: translateX(-28.3333%);
+@keyframes cardrift1 {
+  from {
+    transform: translateX(-47.2222%);
+  }
+  to {
+    transform: translateX(-97.2222%);
+  }
 }
 
-.carousel:has(#car5:checked) .cartrack {
-  transform: translateX(-38.3333%);
+@keyframes cardrift2 {
+  from {
+    transform: translateX(-13.8889%);
+  }
+  to {
+    transform: translateX(-63.8889%);
+  }
+}
+
+@keyframes cardrift3 {
+  from {
+    transform: translateX(-30.5556%);
+  }
+  to {
+    transform: translateX(-80.5556%);
+  }
 }
 
 /* Arrows. There is one pair per slide, because in plain CSS a button has to
@@ -1021,9 +1132,7 @@ nav.site-nav .ico {
 
 .carousel:has(#car1:checked) .b1,
 .carousel:has(#car2:checked) .b2,
-.carousel:has(#car3:checked) .b3,
-.carousel:has(#car4:checked) .b4,
-.carousel:has(#car5:checked) .b5 {
+.carousel:has(#car3:checked) .b3 {
   display: flex;
 }
 
@@ -1174,7 +1283,7 @@ nav.site-nav .ico {
 @media (prefers-reduced-motion: reduce) {
   .cartrack {
     animation: none;
-    transform: translateX(-48.3333%);
+    transform: translateX(-47.2222%);
   }
 }
 
@@ -1183,36 +1292,55 @@ nav.site-nav .ico {
      three quarters of the viewport instead of half. The drift still moves
      exactly five slots. */
   .cartrack {
-    width: 920%;
+    width: 540%;
   }
 
   @keyframes cardrift {
     from {
-      transform: translateX(-9.7826%);
+      transform: translateX(-15.7407%);
     }
     to {
-      transform: translateX(-59.7826%);
+      transform: translateX(-65.7407%);
     }
   }
 
   .carousel:has(#car1:checked) .cartrack {
-    transform: translateX(-49.7826%);
+    transform: translateX(-49.0741%);
   }
 
   .carousel:has(#car2:checked) .cartrack {
-    transform: translateX(-9.7826%);
+    transform: translateX(-15.7407%);
   }
 
   .carousel:has(#car3:checked) .cartrack {
-    transform: translateX(-19.7826%);
+    transform: translateX(-32.4074%);
   }
 
-  .carousel:has(#car4:checked) .cartrack {
-    transform: translateX(-29.7826%);
+  @keyframes cardrift1 {
+    from {
+      transform: translateX(-49.0741%);
+    }
+    to {
+      transform: translateX(-99.0741%);
+    }
   }
 
-  .carousel:has(#car5:checked) .cartrack {
-    transform: translateX(-39.7826%);
+  @keyframes cardrift2 {
+    from {
+      transform: translateX(-15.7407%);
+    }
+    to {
+      transform: translateX(-65.7407%);
+    }
+  }
+
+  @keyframes cardrift3 {
+    from {
+      transform: translateX(-32.4074%);
+    }
+    to {
+      transform: translateX(-82.4074%);
+    }
   }
 
   .carbtn {

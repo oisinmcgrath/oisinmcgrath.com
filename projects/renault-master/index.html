@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="A 2016 Renault Master panel van, bought unregistered, converted into a campervan, and tested — 12-volt electrics, plumbing, cabinetry and mechanical work.">
   <title>Renault Master Camper Conversion</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="alternate icon" href="favicon.png" type="image/png">
+  <link rel="icon" href="favicon.svg?v=3" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.png?v=3" type="image/png">
+  <link rel="icon" href="favicon-32.png?v=3" type="image/png" sizes="32x32">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -32,33 +33,22 @@
            through :target, and the back arrow returns to #gallery, which
            un-targets the lightbox and leaves the rotation running. -->
       <section class="carousel" id="gallery" aria-label="The finished van">
-        <input class="carinput" type="radio" name="carousel" id="car1">
-        <input class="carinput" type="radio" name="carousel" id="car2">
-        <input class="carinput" type="radio" name="carousel" id="car3">
-        <input class="carinput" type="radio" name="carousel" id="car4">
-        <input class="carinput" type="radio" name="carousel" id="car5">
+        <input class="carinput" type="radio" name="carousel" id="car1" autocomplete="off">
+        <input class="carinput" type="radio" name="carousel" id="car2" autocomplete="off">
+        <input class="carinput" type="radio" name="carousel" id="car3" autocomplete="off">
 
         <div class="carviewport">
           <div class="cartrack">
             <figure class="carslide">
-              <a href="#shot1" aria-label="Open: Front three-quarter."><img src="photos/ext-03-front-three-quarter.jpg" alt="The finished van from the front and side, parked on grass among trees" width="1600" height="1067"></a>
+              <a href="#shot1" aria-label="Open: Front, side door open."><img src="photos/ext-02-front.jpg" alt="The finished van from the front with the side door open" width="1600" height="1067"></a>
             </figure>
             <figure class="carslide">
-              <a href="#shot2" aria-label="Open: Front, side door open."><img src="photos/ext-02-front.jpg" alt="The finished van from the front with the side door open" width="1600" height="1067"></a>
-            </figure>
-            <figure class="carslide">
-              <a href="#shot3" aria-label="Open: Looking inside through the side door."><img src="photos/hero-gopro.jpg" alt="Inside the finished van looking out through the open side door and its fly screen, showing the bed, seating and sink" width="1600" height="1067"></a>
+              <a href="#shot2" aria-label="Open: Looking inside through the side door."><img src="photos/hero-gopro.jpg" alt="Inside the finished van looking out through the open side door and its fly screen, showing the bed, seating and sink" width="1600" height="1067"></a>
               <figcaption>Looking inside through the side door.</figcaption>
             </figure>
             <figure class="carslide">
-              <a href="#shot4" aria-label="Open: Trial by Northern Territory"><img src="photos/trip-02-boab.jpg" alt="The van parked on a dirt road beside a large boab tree under a cloudy sky in the north of Australia" width="1600" height="1067"></a>
+              <a href="#shot3" aria-label="Open: Trial by Northern Territory"><img src="photos/trip-02-boab.jpg" alt="The van parked on a dirt road beside a large boab tree under a cloudy sky in the north of Australia" width="1600" height="1067"></a>
               <figcaption>Trial by Northern Territory</figcaption>
-            </figure>
-            <figure class="carslide">
-              <a href="#shot5" aria-label="Open: The van on a northern highway below red ranges"><img src="photos/trip-03-ranges.jpg" alt="The van pulled over on a highway shoulder with red ranges and open country behind it" width="1600" height="1067"></a>
-            </figure>
-            <figure class="carslide" aria-hidden="true">
-              <span class="frame"><img src="photos/ext-03-front-three-quarter.jpg" alt="" width="1600" height="1067"></span>
             </figure>
             <figure class="carslide" aria-hidden="true">
               <span class="frame"><img src="photos/ext-02-front.jpg" alt="" width="1600" height="1067"></span>
@@ -71,100 +61,64 @@
               <span class="frame"><img src="photos/trip-02-boab.jpg" alt="" width="1600" height="1067"></span>
               <figcaption>Trial by Northern Territory</figcaption>
             </figure>
-            <figure class="carslide" aria-hidden="true">
-              <span class="frame"><img src="photos/trip-03-ranges.jpg" alt="" width="1600" height="1067"></span>
-            </figure>
           </div>
         </div>
 
-        <label class="carbtn prev b1" for="car5" title="Previous"><span aria-hidden="true">&#8249;</span></label>
+        <label class="carbtn prev b1" for="car3" title="Previous"><span aria-hidden="true">&#8249;</span></label>
         <label class="carbtn next b1" for="car2" title="Next"><span aria-hidden="true">&#8250;</span></label>
         <label class="carbtn prev b2" for="car1" title="Previous"><span aria-hidden="true">&#8249;</span></label>
         <label class="carbtn next b2" for="car3" title="Next"><span aria-hidden="true">&#8250;</span></label>
         <label class="carbtn prev b3" for="car2" title="Previous"><span aria-hidden="true">&#8249;</span></label>
-        <label class="carbtn next b3" for="car4" title="Next"><span aria-hidden="true">&#8250;</span></label>
-        <label class="carbtn prev b4" for="car3" title="Previous"><span aria-hidden="true">&#8249;</span></label>
-        <label class="carbtn next b4" for="car5" title="Next"><span aria-hidden="true">&#8250;</span></label>
-        <label class="carbtn prev b5" for="car4" title="Previous"><span aria-hidden="true">&#8249;</span></label>
-        <label class="carbtn next b5" for="car1" title="Next"><span aria-hidden="true">&#8250;</span></label>
+        <label class="carbtn next b3" for="car1" title="Next"><span aria-hidden="true">&#8250;</span></label>
       </section>
 
-      <div class="lightbox" id="shot1" role="dialog" aria-label="Front three-quarter.">
+      <hr class="horizon sky under">
+
+      <div class="lightbox" id="shot1" role="dialog" aria-label="Front, side door open.">
         <a class="lb-back" href="#gallery"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Back</a>
-        <a class="lb-arrow prev" href="#shot5" title="Previous"><span aria-hidden="true">&#8249;</span></a>
+        <a class="lb-arrow prev" href="#shot3" title="Previous"><span aria-hidden="true">&#8249;</span></a>
         <a class="lb-arrow next" href="#shot2" title="Next"><span aria-hidden="true">&#8250;</span></a>
-        <img class="lb-shot" src="photos/ext-03-front-three-quarter.jpg" alt="The finished van from the front and side, parked on grass among trees">
-        <p class="lb-cap">Front three-quarter.</p>
-        <nav class="lb-strip" aria-label="All photographs">
-          <a href="#shot1" class="here" aria-label="Front three-quarter."><img src="photos/ext-03-front-three-quarter.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-          <a href="#shot2" aria-label="Front, side door open."><img src="photos/ext-02-front.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-          <a href="#shot3" aria-label="Looking inside through the side door."><img src="photos/hero-gopro.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-          <a href="#shot4" aria-label="Trial by Northern Territory"><img src="photos/trip-02-boab.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-          <a href="#shot5" aria-label="The van on a northern highway below red ranges"><img src="photos/trip-03-ranges.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-        </nav>
-      </div>
-      <div class="lightbox" id="shot2" role="dialog" aria-label="Front, side door open.">
-        <a class="lb-back" href="#gallery"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Back</a>
-        <a class="lb-arrow prev" href="#shot1" title="Previous"><span aria-hidden="true">&#8249;</span></a>
-        <a class="lb-arrow next" href="#shot3" title="Next"><span aria-hidden="true">&#8250;</span></a>
         <img class="lb-shot" src="photos/ext-02-front.jpg" alt="The finished van from the front with the side door open">
         <p class="lb-cap">Front, side door open.</p>
         <nav class="lb-strip" aria-label="All photographs">
-          <a href="#shot1" aria-label="Front three-quarter."><img src="photos/ext-03-front-three-quarter.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-          <a href="#shot2" class="here" aria-label="Front, side door open."><img src="photos/ext-02-front.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-          <a href="#shot3" aria-label="Looking inside through the side door."><img src="photos/hero-gopro.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-          <a href="#shot4" aria-label="Trial by Northern Territory"><img src="photos/trip-02-boab.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-          <a href="#shot5" aria-label="The van on a northern highway below red ranges"><img src="photos/trip-03-ranges.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
+          <a href="#shot1" class="here" aria-label="Front, side door open."><img src="photos/ext-02-front.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
+          <a href="#shot2" aria-label="Looking inside through the side door."><img src="photos/hero-gopro.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
+          <a href="#shot3" aria-label="Trial by Northern Territory"><img src="photos/trip-02-boab.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
         </nav>
       </div>
-      <div class="lightbox" id="shot3" role="dialog" aria-label="Looking inside through the side door.">
+      <div class="lightbox" id="shot2" role="dialog" aria-label="Looking inside through the side door.">
         <a class="lb-back" href="#gallery"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Back</a>
-        <a class="lb-arrow prev" href="#shot2" title="Previous"><span aria-hidden="true">&#8249;</span></a>
-        <a class="lb-arrow next" href="#shot4" title="Next"><span aria-hidden="true">&#8250;</span></a>
+        <a class="lb-arrow prev" href="#shot1" title="Previous"><span aria-hidden="true">&#8249;</span></a>
+        <a class="lb-arrow next" href="#shot3" title="Next"><span aria-hidden="true">&#8250;</span></a>
         <img class="lb-shot" src="photos/hero-gopro.jpg" alt="Inside the finished van looking out through the open side door and its fly screen, showing the bed, seating and sink">
         <p class="lb-cap">Looking inside through the side door.</p>
         <nav class="lb-strip" aria-label="All photographs">
-          <a href="#shot1" aria-label="Front three-quarter."><img src="photos/ext-03-front-three-quarter.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-          <a href="#shot2" aria-label="Front, side door open."><img src="photos/ext-02-front.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-          <a href="#shot3" class="here" aria-label="Looking inside through the side door."><img src="photos/hero-gopro.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-          <a href="#shot4" aria-label="Trial by Northern Territory"><img src="photos/trip-02-boab.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-          <a href="#shot5" aria-label="The van on a northern highway below red ranges"><img src="photos/trip-03-ranges.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
+          <a href="#shot1" aria-label="Front, side door open."><img src="photos/ext-02-front.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
+          <a href="#shot2" class="here" aria-label="Looking inside through the side door."><img src="photos/hero-gopro.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
+          <a href="#shot3" aria-label="Trial by Northern Territory"><img src="photos/trip-02-boab.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
         </nav>
       </div>
-      <div class="lightbox" id="shot4" role="dialog" aria-label="Trial by Northern Territory">
+      <div class="lightbox" id="shot3" role="dialog" aria-label="Trial by Northern Territory">
         <a class="lb-back" href="#gallery"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Back</a>
-        <a class="lb-arrow prev" href="#shot3" title="Previous"><span aria-hidden="true">&#8249;</span></a>
-        <a class="lb-arrow next" href="#shot5" title="Next"><span aria-hidden="true">&#8250;</span></a>
+        <a class="lb-arrow prev" href="#shot2" title="Previous"><span aria-hidden="true">&#8249;</span></a>
+        <a class="lb-arrow next" href="#shot1" title="Next"><span aria-hidden="true">&#8250;</span></a>
         <img class="lb-shot" src="photos/trip-02-boab.jpg" alt="The van parked on a dirt road beside a large boab tree under a cloudy sky in the north of Australia">
         <p class="lb-cap">Trial by Northern Territory</p>
         <nav class="lb-strip" aria-label="All photographs">
-          <a href="#shot1" aria-label="Front three-quarter."><img src="photos/ext-03-front-three-quarter.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-          <a href="#shot2" aria-label="Front, side door open."><img src="photos/ext-02-front.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-          <a href="#shot3" aria-label="Looking inside through the side door."><img src="photos/hero-gopro.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-          <a href="#shot4" class="here" aria-label="Trial by Northern Territory"><img src="photos/trip-02-boab.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-          <a href="#shot5" aria-label="The van on a northern highway below red ranges"><img src="photos/trip-03-ranges.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-        </nav>
-      </div>
-      <div class="lightbox" id="shot5" role="dialog" aria-label="The van on a northern highway below red ranges">
-        <a class="lb-back" href="#gallery"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Back</a>
-        <a class="lb-arrow prev" href="#shot4" title="Previous"><span aria-hidden="true">&#8249;</span></a>
-        <a class="lb-arrow next" href="#shot1" title="Next"><span aria-hidden="true">&#8250;</span></a>
-        <img class="lb-shot" src="photos/trip-03-ranges.jpg" alt="The van pulled over on a highway shoulder with red ranges and open country behind it">
-        <p class="lb-cap">The van on a northern highway below red ranges</p>
-        <nav class="lb-strip" aria-label="All photographs">
-          <a href="#shot1" aria-label="Front three-quarter."><img src="photos/ext-03-front-three-quarter.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-          <a href="#shot2" aria-label="Front, side door open."><img src="photos/ext-02-front.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-          <a href="#shot3" aria-label="Looking inside through the side door."><img src="photos/hero-gopro.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-          <a href="#shot4" aria-label="Trial by Northern Territory"><img src="photos/trip-02-boab.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
-          <a href="#shot5" class="here" aria-label="The van on a northern highway below red ranges"><img src="photos/trip-03-ranges.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
+          <a href="#shot1" aria-label="Front, side door open."><img src="photos/ext-02-front.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
+          <a href="#shot2" aria-label="Looking inside through the side door."><img src="photos/hero-gopro.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
+          <a href="#shot3" class="here" aria-label="Trial by Northern Territory"><img src="photos/trip-02-boab.jpg" alt="" loading="lazy" width="1600" height="1067"></a>
         </nav>
       </div>
 
       <h2>Walkthrough</h2>
       <!-- Two videos in one frame. The teaser is a short silent loop that runs
            on its own, so the block reads as film rather than as a still.
-           Clicking it targets #watch, which swaps in the walkthrough itself,
-           poster and controls ready to be pressed.
+           Clicking it ticks #watch, which swaps in the walkthrough itself,
+           poster and controls ready to be pressed. A checkbox rather than a
+           :target: a fragment stays in the address bar, so a reload used to
+           come back with the loop already swapped out. `autocomplete="off"`
+           stops the browser restoring the tick for the same reason.
 
            The walkthrough must NOT carry `autoplay`. It did briefly, on the
            reasoning that an unmuted autoplay needs a user gesture and so could
@@ -173,12 +127,13 @@
            walkthrough began playing aloud the moment the page opened. One
            press of play is the price of never doing that to anyone. No script
            is involved in any of it. -->
-      <div class="stage" id="watch">
+      <input class="watchtoggle" type="checkbox" id="watch" autocomplete="off">
+      <div class="stage">
         <video class="teaser" autoplay muted loop playsinline preload="auto"
                poster="video/poster.jpg" width="1152" height="864" aria-hidden="true">
           <source src="video/teaser.mp4" type="video/mp4">
         </video>
-        <a class="playover" href="#watch" aria-label="Play the walkthrough, with sound">
+        <label class="playover" for="watch" title="Play the walkthrough, with sound">
           <span class="playmark" aria-hidden="true">
             <svg viewBox="0 0 100 100" width="88" height="88" aria-hidden="true">
               <circle cx="50" cy="50" r="44" fill="rgba(0,0,0,0.22)"/>
@@ -186,7 +141,8 @@
               <path d="M40 30 L40 70 L72 50 Z" fill="rgba(255,255,255,0.88)"/>
             </svg>
           </span>
-        </a>
+          <span class="visually-hidden">Play the walkthrough, with sound</span>
+        </label>
         <video class="full" controls preload="none"
                poster="video/poster.jpg" width="1152" height="864">
           <source src="video/walkthrough.mp4" type="video/mp4">
@@ -229,6 +185,20 @@
         like a boy again, ready to take on my first independent project of this
         scale.
       </p>
+
+      <details class="specbox">
+        <summary><span class="sumtext">Van Specifications</span><span class="chev" aria-hidden="true"></span></summary>
+        <div class="specbody">
+          <table class="specs">
+          <tr><th scope="row">Vehicle</th><td>2016 Renault Master, medium wheelbase, high roof (L2H2) panel van</td></tr>
+          <tr><th scope="row">Engine</th><td>2.3&nbsp;litre twin-turbo diesel</td></tr>
+          <tr><th scope="row">Transmission</th><td>Six speed automatic</td></tr>
+          <tr><th scope="row">Weight</th><td>3,510&nbsp;kg gross — drivable on a normal car licence</td></tr>
+          <tr><th scope="row">Standing height</th><td>1.85&nbsp;m inside</td></tr>
+          <tr><th scope="row">Distance</th><td>About 220,000&nbsp;km at the point of sale</td></tr>
+        </table>
+        </div>
+      </details>
 
       <hr class="horizon">
 
@@ -310,17 +280,6 @@
         I wasn't aware of voided that time-expensive plan.
       </p>
 
-      <section class="card" aria-labelledby="van-heading">
-        <h2 id="van-heading">The Van</h2>
-        <table class="specs">
-          <tr><th scope="row">Vehicle</th><td>2016 Renault Master, medium wheelbase, high roof (L2H2) panel van</td></tr>
-          <tr><th scope="row">Engine</th><td>2.3&nbsp;litre twin-turbo diesel</td></tr>
-          <tr><th scope="row">Transmission</th><td>Six speed automatic</td></tr>
-          <tr><th scope="row">Weight</th><td>3,510&nbsp;kg gross — drivable on a normal car licence</td></tr>
-          <tr><th scope="row">Standing height</th><td>1.85&nbsp;m inside</td></tr>
-          <tr><th scope="row">Distance</th><td>About 220,000&nbsp;km at the point of sale</td></tr>
-        </table>
-      </section>
 
       <h2>Fit-out</h2>
       <ul class="gallery">

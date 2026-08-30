@@ -163,6 +163,30 @@ costs more effort than the script would have. It is worth it, because the point
 of the site is partly that it is hand-built, and a reader who opens the source
 should find that claim holds.
 
+**2026-08 — the text column is wider than the media it contains.**
+
+Three widths on the Renault page, all centred on one axis, and the order is
+deliberate: prose and headings take `--measure`, everything visual takes the
+narrower `--media`. A heading's first character therefore always sits further
+left than the left edge of any photograph or the video, and the media reads as
+inset within the reading column rather than bursting out of it. The video was
+briefly narrowed to sit *inside* the prose instead; that was reverted — it
+made the heading look like a label stuck to something smaller than itself.
+The longer line got a slightly larger type size to stay comfortable.
+
+Narrative photographs carry a faint warm glow rather than a drop shadow. On
+ground this saturated a shadow reads as weight; the glow separates the
+photograph as though it were lit from behind by the earth it sits on.
+
+**2026-08 — the specification table is a card, and it moves slowly.**
+
+The one block of hard numbers on the page, so it is lifted onto its own card
+with an outline and a slightly deeper ground. On hover it brightens and rises
+six pixels over 0.55 seconds. The duration is the point: fast enough to feel
+responsive, slow enough to read as a considered movement rather than a flinch.
+Nothing else on the page animates on hover at that length, and it should stay
+that way — one moving element is an accent, several are noise.
+
 ---
 
 ## Working notes

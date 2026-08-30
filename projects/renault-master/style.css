@@ -48,7 +48,8 @@
      taken out of it, so it stays unmistakably that red earth but can carry a
      page of reading. Everything on it is set in cream rather than ink. */
   --floor: #96513a;
-  --floor-deep: #7f4430;
+  --floor-deep: #874733;
+  --floor-lift: #a45c41;
   --bg: var(--floor);
   --bg-alt: #8a4a34;
   --surface: #a35c43;
@@ -139,14 +140,16 @@
      the header, the video, the prose and the galleries all share a median.
      Nothing is positioned off the viewport edge, so the layout holds at any
      width. */
-  --col: 48rem;
+  --col: 54rem;
 
-  /* Prose, headings and the photographs set into the narrative all take this
-     one width and are all centred in the column, so they share a left edge
-     and a median. The carousel, the video and the galleries are allowed the
-     full column, but they are centred on the same axis, so nothing on the
-     page disagrees about where the middle is at any screen width. */
-  --measure: 38rem;
+  /* Three widths, all centred on the one axis, and the order matters: the
+     text is the widest, so a heading's first character always sits further
+     left than the left edge of any photograph or the video, and the media
+     reads as inset within the reading column rather than bursting out of it.
+     Nothing is positioned against the viewport, so this holds at any screen
+     width. */
+  --measure: 52rem; /* prose and headings */
+  --media: 46rem; /* video, narrative photographs, galleries, the spec card */
 
   /* How far the descent runs before the page settles on sand. The video sits
      inside it, on the red earth, which is where a van belongs. */
@@ -162,7 +165,8 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --floor: #2a1a12; /* night desert */
-    --floor-deep: #1f130d;
+    --floor-deep: #22150e;
+    --floor-lift: #35231a;
     --bg: var(--floor);
     --bg-alt: #241a13;
     --surface: #3a271b;
@@ -370,16 +374,24 @@ main h3 {
 main > p,
 main > h2,
 main > h3,
-main > ul:not(.gallery),
-main > .specs,
-main > hr,
-figure.plate {
+main > ul:not(.gallery) {
   max-width: var(--measure);
+  margin-inline: auto;
+}
+
+.carousel,
+.stage,
+figure.plate,
+main > .gallery,
+main > .card,
+main > hr {
+  max-width: var(--media);
   margin-inline: auto;
 }
 
 main p {
   margin-block: 0 var(--sp-4);
+  font-size: 1.04rem;
 }
 
 .lead {
@@ -433,11 +445,7 @@ hr.horizon {
 
 /* ---- video ---- */
 
-/* Narrower than the prose, so the heading above it reads as a preface rather
-   than as a label stuck to something wider than itself. Still centred on the
-   page's one median. */
 .stage {
-  max-width: 32rem;
   margin: 0 auto var(--sp-4);
   background: var(--charcoal);
   /* A real edge: three pixels of near-black plus a hairline ring, because a
@@ -461,7 +469,7 @@ hr.horizon {
    centrepiece rather than as one tile of a grid. */
 
 figure.plate {
-  margin: var(--sp-5) auto var(--sp-6);
+  margin-block: var(--sp-6);
   text-align: center;
 }
 
@@ -471,11 +479,12 @@ figure.plate img {
   height: auto;
   border: 1px solid var(--edge);
   border-radius: var(--radius-sm);
-  /* Three stacked shadows: a tight contact edge, a mid lift and a long low
-     one, so the photograph sits above the desert floor rather than on it. */
-  box-shadow: 0 2px 5px rgba(70, 28, 12, 0.24),
-    0 12px 28px -8px rgba(70, 28, 12, 0.4),
-    0 30px 62px -26px rgba(70, 28, 12, 0.52);
+  /* A faint glow rather than a shadow: the photograph is lit from behind by
+     the ground it sits on, which separates it without the weight a drop
+     shadow puts on a page this warm. */
+  box-shadow: 0 0 0 1px rgba(255, 220, 184, 0.22),
+    0 0 18px 2px rgba(255, 198, 135, 0.28),
+    0 0 46px 10px rgba(255, 170, 105, 0.16);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -491,13 +500,43 @@ figure.plate figcaption {
   line-height: 1.45;
 }
 
-/* ---- specification table ---- */
+/* ---- specification card ----
+   The one block of hard numbers on the page, so it is lifted off the ground
+   into a card of its own rather than left as a bare table. Its ground is the
+   floor a shade deeper; on hover it brightens and rises, over half a second,
+   so it reads as a considered movement rather than a flinch. */
+
+.card {
+  margin-block: var(--sp-6);
+  padding: var(--sp-5) var(--sp-5) var(--sp-4);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--floor-deep);
+  box-shadow: 0 1px 2px rgba(24, 10, 4, 0.35),
+    0 8px 20px -10px rgba(24, 10, 4, 0.45);
+  transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+    background-color 0.55s ease, border-color 0.55s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  background: var(--floor-lift);
+  border-color: var(--dust-pale);
+  box-shadow: 0 2px 4px rgba(24, 10, 4, 0.35),
+    0 18px 40px -12px rgba(24, 10, 4, 0.5),
+    0 0 26px rgba(255, 178, 109, 0.22);
+}
+
+.card > h2 {
+  margin-top: 0;
+}
 
 .specs {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.95rem;
-  margin: 0 0 var(--sp-4);
+  margin: 0;
 }
 
 .specs th,
@@ -740,29 +779,31 @@ nav.site-nav .ico {
 
 .cartrack {
   display: flex;
-  width: 300%;
-  animation: cardrift 78s linear infinite;
+  width: 500%;
+  animation: cardrift 130s linear infinite;
   will-change: transform;
 }
 
-/* Six slides across a track three viewports wide: each is half a viewport. */
+/* Ten slides — the five photographs twice over — across a track five
+   viewports wide, so each is half a viewport. */
 .carslide {
-  flex: 0 0 16.6667%;
+  flex: 0 0 10%;
   margin: 0;
   padding: 0 0.55rem;
 }
 
-/* -8.3333% centres the second slide, which leaves the first covering the
-   whole left gutter and the third the right — the viewport is never short of
-   a slide. Running on to -58.3333% moves the track exactly three slots, which
-   is where the duplicates begin, so the loop closes on itself with nothing to
-   see happen. */
+/* -5% centres the second slide, which leaves the first covering the whole
+   left gutter and the third the right — the viewport is never short of a
+   slide. Running on to -55% moves the track exactly five slots, which is
+   where the duplicates begin, so the loop closes on itself with nothing to
+   see happen. The rate per slide is unchanged from three slides: 26 seconds
+   each. */
 @keyframes cardrift {
   from {
-    transform: translateX(-8.3333%);
+    transform: translateX(-5%);
   }
   to {
-    transform: translateX(-58.3333%);
+    transform: translateX(-55%);
   }
 }
 
@@ -805,16 +846,26 @@ nav.site-nav .ico {
   transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
+/* The first photograph is parked on its duplicate, so that it too has a
+   neighbour on either side. */
 .carousel:has(#car1:checked) .cartrack {
-  transform: translateX(-41.6667%);
+  transform: translateX(-45%);
 }
 
 .carousel:has(#car2:checked) .cartrack {
-  transform: translateX(-8.3333%);
+  transform: translateX(-5%);
 }
 
 .carousel:has(#car3:checked) .cartrack {
+  transform: translateX(-15%);
+}
+
+.carousel:has(#car4:checked) .cartrack {
   transform: translateX(-25%);
+}
+
+.carousel:has(#car5:checked) .cartrack {
+  transform: translateX(-35%);
 }
 
 /* Arrows. There is one pair per slide, because in plain CSS a button has to
@@ -858,15 +909,15 @@ nav.site-nav .ico {
   display: flex;
 }
 
-.carousel:has(.carinput:checked) .b1,
-.carousel:has(.carinput:checked) .b2,
-.carousel:has(.carinput:checked) .b3 {
+.carousel:has(.carinput:checked) .carbtn {
   display: none;
 }
 
 .carousel:has(#car1:checked) .b1,
 .carousel:has(#car2:checked) .b2,
-.carousel:has(#car3:checked) .b3 {
+.carousel:has(#car3:checked) .b3,
+.carousel:has(#car4:checked) .b4,
+.carousel:has(#car5:checked) .b5 {
   display: flex;
 }
 
@@ -933,37 +984,45 @@ nav.site-nav .ico {
 @media (prefers-reduced-motion: reduce) {
   .cartrack {
     animation: none;
-    transform: translateX(-41.6667%);
+    transform: translateX(-45%);
   }
 }
 
 @media (max-width: 640px) {
-  /* Bigger slides on a phone: the same six across a wider track, so each is
+  /* Bigger slides on a phone: the same ten across a wider track, so each is
      three quarters of the viewport instead of half. The drift still moves
-     exactly three slots. */
+     exactly five slots. */
   .cartrack {
-    width: 450%;
+    width: 750%;
   }
 
   @keyframes cardrift {
     from {
-      transform: translateX(-13.8889%);
+      transform: translateX(-8.3333%);
     }
     to {
-      transform: translateX(-63.8889%);
+      transform: translateX(-58.3333%);
     }
   }
 
   .carousel:has(#car1:checked) .cartrack {
-    transform: translateX(-47.2222%);
+    transform: translateX(-48.3333%);
   }
 
   .carousel:has(#car2:checked) .cartrack {
-    transform: translateX(-13.8889%);
+    transform: translateX(-8.3333%);
   }
 
   .carousel:has(#car3:checked) .cartrack {
-    transform: translateX(-30.5556%);
+    transform: translateX(-18.3333%);
+  }
+
+  .carousel:has(#car4:checked) .cartrack {
+    transform: translateX(-28.3333%);
+  }
+
+  .carousel:has(#car5:checked) .cartrack {
+    transform: translateX(-38.3333%);
   }
 
   .carbtn {

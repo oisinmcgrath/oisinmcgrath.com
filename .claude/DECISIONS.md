@@ -14,9 +14,10 @@ Newest sections last. Dates are when the decision was made.
 
 **2026-08 — the site is a portfolio that has to argue for its owner.**
 
-Oisin enrolled at UWA in 2021 at seventeen and withdrew on mental health
-grounds. He is applying again. The application is being prepared with a
-separate agent, and this site is one of the things that application points at.
+Oisin is applying to UWA. The application is being prepared with a separate
+agent, and this site is one of the things that application points at. (The
+personal circumstances behind the application are not recorded here — they are
+not needed to do the work, and this repository is deployed.)
 
 That sets the standard for everything here. The site is not a business card and
 it is not a design exercise. It has to **actively and accurately advocate for

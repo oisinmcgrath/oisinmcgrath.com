@@ -1,0 +1,7 @@
+# Deploying uploads the whole repo root, dot-directories included, so the
+# notes that are for whoever is working on the site — not for the public —
+# are turned away here.
+/CLAUDE.md      /   302
+/DECISIONS.md   /   302
+/.claude/*      /   302
+/README.md      /   302

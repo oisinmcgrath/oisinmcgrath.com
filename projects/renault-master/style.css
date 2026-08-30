@@ -430,6 +430,21 @@ li {
 }
 
 /* The horizon, reusable as a section divider. */
+/* The same rule as the section dividers, but drawn in white for the sky it
+   sits in rather than in the ground's cream. */
+hr.horizon.sky {
+  margin: var(--sp-5) auto 0;
+  max-width: var(--media);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25) 12%,
+    rgba(255, 255, 255, 0.9) 50%,
+    rgba(255, 255, 255, 0.25) 88%,
+    transparent
+  );
+}
+
 hr.horizon {
   height: 2px;
   border: 0;
@@ -859,9 +874,12 @@ nav.site-nav .ico {
   );
 }
 
+/* Seven and a half viewports of track for ten slides, so each slide is three
+   quarters of the viewport rather than half: fewer visible at once, and the
+   one in the middle much larger. The drift still moves five slots. */
 .cartrack {
   display: flex;
-  width: 500%;
+  width: 750%;
   animation: cardrift 130s linear infinite;
   will-change: transform;
 }
@@ -882,10 +900,10 @@ nav.site-nav .ico {
    each. */
 @keyframes cardrift {
   from {
-    transform: translateX(-5%);
+    transform: translateX(-8.3333%);
   }
   to {
-    transform: translateX(-55%);
+    transform: translateX(-58.3333%);
   }
 }
 
@@ -937,23 +955,23 @@ nav.site-nav .ico {
 /* The first photograph is parked on its duplicate, so that it too has a
    neighbour on either side. */
 .carousel:has(#car1:checked) .cartrack {
-  transform: translateX(-45%);
+  transform: translateX(-48.3333%);
 }
 
 .carousel:has(#car2:checked) .cartrack {
-  transform: translateX(-5%);
+  transform: translateX(-8.3333%);
 }
 
 .carousel:has(#car3:checked) .cartrack {
-  transform: translateX(-15%);
+  transform: translateX(-18.3333%);
 }
 
 .carousel:has(#car4:checked) .cartrack {
-  transform: translateX(-25%);
+  transform: translateX(-28.3333%);
 }
 
 .carousel:has(#car5:checked) .cartrack {
-  transform: translateX(-35%);
+  transform: translateX(-38.3333%);
 }
 
 /* Arrows. There is one pair per slide, because in plain CSS a button has to
@@ -1156,7 +1174,7 @@ nav.site-nav .ico {
 @media (prefers-reduced-motion: reduce) {
   .cartrack {
     animation: none;
-    transform: translateX(-45%);
+    transform: translateX(-48.3333%);
   }
 }
 
@@ -1165,36 +1183,36 @@ nav.site-nav .ico {
      three quarters of the viewport instead of half. The drift still moves
      exactly five slots. */
   .cartrack {
-    width: 750%;
+    width: 920%;
   }
 
   @keyframes cardrift {
     from {
-      transform: translateX(-8.3333%);
+      transform: translateX(-9.7826%);
     }
     to {
-      transform: translateX(-58.3333%);
+      transform: translateX(-59.7826%);
     }
   }
 
   .carousel:has(#car1:checked) .cartrack {
-    transform: translateX(-48.3333%);
+    transform: translateX(-49.7826%);
   }
 
   .carousel:has(#car2:checked) .cartrack {
-    transform: translateX(-8.3333%);
+    transform: translateX(-9.7826%);
   }
 
   .carousel:has(#car3:checked) .cartrack {
-    transform: translateX(-18.3333%);
+    transform: translateX(-19.7826%);
   }
 
   .carousel:has(#car4:checked) .cartrack {
-    transform: translateX(-28.3333%);
+    transform: translateX(-29.7826%);
   }
 
   .carousel:has(#car5:checked) .cartrack {
-    transform: translateX(-38.3333%);
+    transform: translateX(-39.7826%);
   }
 
   .carbtn {

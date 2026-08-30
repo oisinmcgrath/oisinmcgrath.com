@@ -21,6 +21,7 @@
         <a href="https://oisinmcgrath.com/"><svg class="ico" viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0L0 6V8H1V15H4V10H7V15H15V8H16V6L14 4.5V1H11V2.25L8 0ZM9 10H12V13H9V10Z"/></svg>Home</a>
         <a href="https://oisinmcgrath.com/projects/"><svg class="ico" viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M2 13.122a1 1 0 00.741.966l7 1.876A1 1 0 0011 14.998V14h2a1 1 0 001-1V3a1 1 0 00-1-1h-2v-.994A1 1 0 009.741.04l-7 1.876A1 1 0 002 2.882v10.24zM9 2.31v11.384l-5-1.34V3.65l5-1.34zM11 12V4h1v8h-1z"/></svg>Projects</a>
       </nav>
+      <hr class="horizon sky">
     </header>
 
     <main>
@@ -160,13 +161,17 @@
       </div>
 
       <h2>Walkthrough</h2>
-      <!-- Two videos in one frame. The teaser is a two-second silent loop that
-           runs on its own, so the block reads as film rather than as a still.
-           Clicking it targets #watch, which swaps in the walkthrough itself.
-           That video carries `autoplay` but no `muted`, so the browser will not
-           start it on page load — an unmuted autoplay needs a user gesture —
-           and will start it once the click has provided one. If a browser
-           refuses, its poster and controls are sitting right there. No script
+      <!-- Two videos in one frame. The teaser is a short silent loop that runs
+           on its own, so the block reads as film rather than as a still.
+           Clicking it targets #watch, which swaps in the walkthrough itself,
+           poster and controls ready to be pressed.
+
+           The walkthrough must NOT carry `autoplay`. It did briefly, on the
+           reasoning that an unmuted autoplay needs a user gesture and so could
+           not fire on load — but Chrome's media engagement score grants exactly
+           that permission on a site the visitor has used before, and the
+           walkthrough began playing aloud the moment the page opened. One
+           press of play is the price of never doing that to anyone. No script
            is involved in any of it. -->
       <div class="stage" id="watch">
         <video class="teaser" autoplay muted loop playsinline preload="auto"
@@ -182,7 +187,7 @@
             </svg>
           </span>
         </a>
-        <video class="full" controls autoplay preload="none"
+        <video class="full" controls preload="none"
                poster="video/poster.jpg" width="1152" height="864">
           <source src="video/walkthrough.mp4" type="video/mp4">
           <p>Your browser cannot play this video.

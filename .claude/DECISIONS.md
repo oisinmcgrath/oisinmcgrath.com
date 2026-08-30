@@ -278,6 +278,31 @@ Default is light because that is what the page has always been; the toggle
 means "give me the dark one", not "invert whatever the OS says", which keeps
 the sun and moon labels truthful.
 
+**2026-08 — `autoplay` came off the walkthrough, and must stay off.**
+
+The video briefly carried `autoplay` without `muted`, on the reasoning that an
+unmuted autoplay needs a user gesture and therefore could not fire on page
+load. That reasoning was wrong in practice: Chrome's media engagement score
+grants exactly that permission on a site the visitor has used before, and the
+walkthrough started playing aloud the moment the page opened for anyone who
+had been to the site.
+
+So the teaser hands over to a video that is simply sitting there with its
+poster and controls, and the visitor presses play. That is one extra click,
+and it is the right price. **Do not put `autoplay` back on that element**, and
+do not "fix" the extra click by adding `muted` either — that starts it playing
+silently behind the loop.
+
+**2026-08 — the favicon is a side profile on a filled tile.**
+
+The front-view van was measured at 16 px and found to collapse into noise: a
+front view is mostly fine horizontal lines, and those die first. A side profile
+drawn as one solid silhouette survives, because the proportions do the
+identifying — tall box, short nose, two wheels — and there is no interior
+detail to blur. The filled tile is what gives it mass in a tab strip; it also
+makes the icon legible on a light or a dark browser chrome without needing a
+`prefers-color-scheme` block inside the SVG.
+
 ---
 
 ## Working notes

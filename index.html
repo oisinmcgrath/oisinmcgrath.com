@@ -35,22 +35,25 @@
        light, and the flank has to darken in both themes, so both halves of the
        gradient are `light-dark()` pairs. */
     .links a::after{content:"";position:absolute;top:0;bottom:0;left:0;width:30%;
-             pointer-events:none;transform:translateX(-240%) skewX(-20deg);
+             pointer-events:none;transform:translateX(-110%) skewX(-20deg);
              background:linear-gradient(90deg,transparent,
                light-dark(rgba(18,38,58,.17),rgba(0,0,0,.42)) 34%,
                light-dark(rgba(255,255,255,1),rgba(255,255,255,.52)) 50%,
                light-dark(rgba(18,38,58,.17),rgba(0,0,0,.42)) 66%,transparent);
-             opacity:.68;animation:linksheen 19.2s linear infinite;will-change:transform}
-    .links .l-li a::after{animation-delay:3.6s}
-    .links .l-pr a::after{animation-delay:7.2s}
-    /* The sweep occupies the first 18% of the cycle — 3.46s — and the delays
-       are 3.6s apart, so one band has left a button before the next begins and
-       the three never overlap. The remainder of the cycle is the pause before
-       it returns to GitHub. */
+             opacity:.5;animation:linksheen 19.2s linear infinite;will-change:transform}
+    .links .l-li a::after{animation-delay:2.58s}
+    .links .l-pr a::after{animation-delay:5.16s}
+    /* The band travels from just off the left edge to just off the right one
+       and no further, so the whole 12.66% of the cycle it is running — 2.43s —
+       is time it is actually visible on the button. The delays are 2.58s
+       apart, which is that crossing plus a tenth of a second, so the light
+       leaves one button and arrives at the next with no dead pause between
+       them and no two ever lit at once. The remainder of the cycle is the
+       longer rest before it returns to GitHub. */
     @keyframes linksheen{
-      0%{transform:translateX(-240%) skewX(-20deg)}
-      18%{transform:translateX(400%) skewX(-20deg)}
-      100%{transform:translateX(400%) skewX(-20deg)}
+      0%{transform:translateX(-110%) skewX(-20deg)}
+      12.66%{transform:translateX(340%) skewX(-20deg)}
+      100%{transform:translateX(340%) skewX(-20deg)}
     }
     @media(prefers-reduced-motion:reduce){
       .links a::after{animation:none;opacity:0}

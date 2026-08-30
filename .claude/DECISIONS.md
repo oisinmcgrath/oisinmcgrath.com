@@ -293,7 +293,7 @@ and it is the right price. **Do not put `autoplay` back on that element**, and
 do not "fix" the extra click by adding `muted` either — that starts it playing
 silently behind the loop.
 
-**2026-08 — the favicon is a side profile on a filled tile.**
+**2026-08 (superseded below) — the favicon is a side profile on a filled tile.**
 
 The front-view van was measured at 16 px and found to collapse into noise: a
 front view is mostly fine horizontal lines, and those die first. A side profile
@@ -335,6 +335,33 @@ two CSS borders rotated, so one arrow costs no icon file.
 **Note on favicons:** browsers cache them harder than anything else on a page,
 and a hard refresh does not always clear them. The `<link>` hrefs carry a `?v=`
 query for that reason — bump it when the icon changes.
+
+**2026-08 — the favicon lost its tile.**
+
+Supersedes the tile decision above. The van is now drawn in saturated
+`#fb6231` on transparency, with the viewBox cropped to the artwork's measured
+bounding box. It is more legible than the tile version because the drawing
+itself is bigger and nothing competes with it, and the saturated orange reads
+on light and on dark browser chrome without a backdrop.
+
+The trade, and it is a real one: the van is roughly 2:1, so cropped tight it
+can only ever fill about half a square favicon box — 16 px wide by about 8 tall.
+The tile filled the whole square but made the drawing smaller. If the full
+square is ever wanted back, the answer is not a tile but a squarer crop of the
+van — the cab and front wheel — rather than the whole vehicle.
+
+**2026-08 — the homepage feature card became a carousel.**
+
+Same construction as the Renault page's: a track carrying the cards twice over,
+one constant rate, focus by mask, five-second hold on a radio then the drift
+resumes. It holds the Renault build and Home Screen for now.
+
+Note the mismatch this creates: the carousel sits under the **Technical
+projects** heading but Home Screen is software. That heading wants rethinking
+as more cards go in — it is a featured-work carousel now, not a category.
+
+Community moved under a new **What else drives me** heading as an `h3`
+subsection. Music is to join it there; it has not been built.
 
 ---
 

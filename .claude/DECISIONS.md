@@ -187,6 +187,47 @@ responsive, slow enough to read as a considered movement rather than a flinch.
 Nothing else on the page animates on hover at that length, and it should stay
 that way — one moving element is an accent, several are noise.
 
+**2026-08 — the sky is the four sampled tones and nothing else.**
+
+`--sky-zenith` `#0f64d0`, `--sky-mid` `#49a0ff`, `--sky-haze` `#acdcff`,
+`--horizon` `#b8dbfe`, in that order down the descent. Intermediate blues had
+been invented to smooth the ramp; they made the sky paler and less like the
+photograph. The gradient interpolates between the four on its own. Don't add
+stops between them.
+
+**2026-08 — glows outward, and no black frames.**
+
+Every photograph and the video carry a warm glow instead of an outline, and
+every layer of it has a positive spread, so the light starts at the frame and
+falls away into the ground rather than the blur creeping back over the picture.
+Black borders were tried on both and read as heavy cut-outs against ground this
+saturated.
+
+**2026-08 — the lightbox is a viewer, not a still.**
+
+Opening a carousel photograph now gives arrows either side, the caption, and
+the whole set as a strip along the bottom — darkened until hovered, when each
+lifts and lights, with the one being viewed left lit. All of it is `:target`
+and ordinary links; still no script. The strip shows all five with the current
+one marked rather than hiding it, so the row does not reflow as you move
+through the set.
+
+**2026-08 — hover animation is done with `filter`, not `background-color`.**
+
+The Van card stalled on first hover and then snapped. Swapping the background
+colour forces a repaint the browser cannot start until it has one; `filter:
+brightness()` composites on its own, and `will-change` promotes the layer up
+front. With both, the movement starts the moment the pointer arrives. It runs
+0.9s in each direction.
+
+**Known limitation — the carousel's first arrow click jumps.** The drift is a
+CSS animation and CSS cannot read its phase, so the arrows are positioned
+relative to a fixed slide, not to whatever happens to be centred. The first
+click therefore lands somewhere other than "one along"; every click after it is
+correct in both directions. Hovering pauses the drift, which takes the edge off
+it. Fixing it properly needs JavaScript, and that trade has been declined —
+see the carousel note above.
+
 ---
 
 ## Working notes

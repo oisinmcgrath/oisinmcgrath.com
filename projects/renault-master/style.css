@@ -14,13 +14,12 @@
    with a mono for eyebrow labels. */
 
 :root {
-  /* sky, top to horizon */
-  --sky-zenith: #0f64d0;
-  --sky-deep: #0b5cc4;
-  --sky-mid: #49a0ff;
-  --sky-pale: #8fc9fb;
-  --sky-haze: #acdcff;
-  --horizon: #b8dbfe;
+  /* Sky, top to horizon. These are the four tones sampled off the photograph
+     and nothing between them is invented — the gradient interpolates. */
+  --sky-zenith: #0f64d0; /* the deep blue overhead */
+  --sky-mid: #49a0ff; /* where the sky begins to give way */
+  --sky-haze: #acdcff; /* the coming of the horizon */
+  --horizon: #b8dbfe; /* the horizon, before it meets the ground */
 
   /* the ground: sun-gold, brush, spinifex, dust */
   --sun-gold: #d8c9a0;
@@ -79,10 +78,9 @@
      page background, so there is no seam where it ends. */
   --grad-descent: linear-gradient(
     180deg,
-    var(--sky-deep) 0%,
-    var(--sky-zenith) 9%,
-    var(--sky-mid) 20%,
-    var(--sky-pale) 30%,
+    var(--sky-zenith) 0%,
+    var(--sky-zenith) 10%,
+    var(--sky-mid) 24%,
     var(--sky-haze) 37%,
     var(--horizon) 42%,
     #c6cdbc 45%,
@@ -187,10 +185,10 @@
        orange band has no contrast at all. */
     --grad-descent: linear-gradient(
       180deg,
-      #071e3d 0%,
-      #0b2c56 12%,
-      #123a6b 26%,
-      #1b4372 36%,
+      #062248 0%,
+      #0a3a7c 14%,
+      #14548f 28%,
+      #1b5f96 36%,
       #2a3a30 40%,
       #3a2a17 46%,
       #5a2f12 54%,
@@ -338,7 +336,7 @@ main h2 {
   margin: var(--sp-7) 0 var(--sp-4);
   position: relative;
   font-family: var(--font-display);
-  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.6rem);
+  font-size: clamp(1.66rem, 1.46rem + 0.8vw, 2.13rem);
   font-weight: 700;
   letter-spacing: var(--tracking-display);
   line-height: 1.12;
@@ -366,7 +364,7 @@ main > h2:first-of-type {
 main h3 {
   margin: var(--sp-6) 0 var(--sp-2);
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--heading);
 }
@@ -448,14 +446,16 @@ hr.horizon {
 .stage {
   margin: 0 auto var(--sp-4);
   background: var(--charcoal);
-  /* A real edge: three pixels of near-black plus a hairline ring, because a
-     single hairline vanishes against ground this saturated. */
-  border: 3px solid var(--edge);
+  border: 0;
   border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.55), 0 4px 10px rgba(24, 10, 4, 0.45),
-    0 18px 40px -10px rgba(24, 10, 4, 0.55),
-    0 44px 84px -30px rgba(24, 10, 4, 0.6);
+  /* The same glow the photographs carry, a little stronger: it all sits
+     outside the frame, spreading away from the edge rather than lying over
+     the picture. */
+  box-shadow: 0 0 0 2px rgba(255, 214, 170, 0.3),
+    0 0 12px 4px rgba(255, 198, 135, 0.34),
+    0 0 34px 14px rgba(255, 178, 109, 0.24),
+    0 0 78px 30px rgba(255, 150, 85, 0.14);
 }
 
 .stage video {
@@ -477,14 +477,16 @@ figure.plate img {
   display: block;
   width: 100%;
   height: auto;
-  border: 1px solid var(--edge);
+  border: 0;
   border-radius: var(--radius-sm);
-  /* A faint glow rather than a shadow: the photograph is lit from behind by
-     the ground it sits on, which separates it without the weight a drop
-     shadow puts on a page this warm. */
-  box-shadow: 0 0 0 1px rgba(255, 220, 184, 0.22),
-    0 0 18px 2px rgba(255, 198, 135, 0.28),
-    0 0 46px 10px rgba(255, 170, 105, 0.16);
+  /* A glow rather than a shadow, and every layer of it spreads outward from
+     the edge: each has a positive spread so the light starts at the frame and
+     falls away into the ground, instead of the blur creeping back in over the
+     picture. */
+  box-shadow: 0 0 0 2px rgba(255, 214, 170, 0.28),
+    0 0 10px 3px rgba(255, 198, 135, 0.32),
+    0 0 30px 12px rgba(255, 178, 109, 0.22),
+    0 0 70px 26px rgba(255, 150, 85, 0.12);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -514,18 +516,26 @@ figure.plate figcaption {
   background: var(--floor-deep);
   box-shadow: 0 1px 2px rgba(24, 10, 4, 0.35),
     0 8px 20px -10px rgba(24, 10, 4, 0.45);
-  transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
-    box-shadow 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
-    background-color 0.55s ease, border-color 0.55s ease;
+  /* Brightness is done with a filter rather than by swapping the background
+     colour: the browser can composite it on its own, so the movement starts
+     the instant the pointer arrives instead of waiting on a repaint. The
+     layer is promoted up front for the same reason. Nine tenths of a second,
+     both ways — long enough to read as a considered movement. */
+  filter: brightness(1);
+  will-change: transform, filter;
+  transition: transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+    filter 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+    border-color 0.9s ease;
 }
 
 .card:hover {
-  transform: translateY(-6px);
-  background: var(--floor-lift);
+  transform: translateY(-7px);
+  filter: brightness(1.16);
   border-color: var(--dust-pale);
   box-shadow: 0 2px 4px rgba(24, 10, 4, 0.35),
-    0 18px 40px -12px rgba(24, 10, 4, 0.5),
-    0 0 26px rgba(255, 178, 109, 0.22);
+    0 20px 44px -12px rgba(24, 10, 4, 0.5),
+    0 0 30px rgba(255, 178, 109, 0.24);
 }
 
 .card > h2 {
@@ -841,6 +851,12 @@ nav.site-nav .ico {
 
 /* Manual control. The first radio checked stops the drift for good; from then
    on the arrows move it, one slot at a time. */
+/* Hovering steadies it, so the photograph under the pointer stops moving
+   before it is clicked. */
+.carousel:hover .cartrack {
+  animation-play-state: paused;
+}
+
 .carousel:has(.carinput:checked) .cartrack {
   animation: none;
   transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1);
@@ -937,16 +953,100 @@ nav.site-nav .ico {
   align-items: center;
   justify-content: center;
   gap: var(--sp-4);
-  padding: var(--sp-7) var(--sp-5) var(--sp-5);
+  padding: var(--sp-7) var(--sp-6) var(--sp-5);
   background: rgba(24, 15, 10, 0.975);
 }
 
-.lightbox img {
-  max-width: min(100%, 68rem);
-  max-height: 76vh;
+.lightbox .lb-shot {
+  max-width: min(100%, 62rem);
+  max-height: 62vh;
   object-fit: contain;
   border-radius: var(--radius);
-  box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 0 1px rgba(255, 214, 170, 0.22),
+    0 0 30px 8px rgba(255, 178, 109, 0.16),
+    0 24px 60px -20px rgba(0, 0, 0, 0.8);
+}
+
+/* Step through the set without leaving the overlay. Each arrow is an ordinary
+   link to the next :target, which is why this needs no script. */
+.lb-arrow {
+  position: absolute;
+  top: 46%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  line-height: 1;
+  text-decoration: none;
+  color: var(--text-invert);
+  background: rgba(253, 246, 239, 0.1);
+  border: 1px solid rgba(253, 246, 239, 0.42);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.lb-arrow:hover {
+  color: var(--text-invert);
+  background: rgba(253, 246, 239, 0.24);
+  transform: scale(1.07);
+}
+
+.lb-arrow.prev {
+  left: var(--sp-4);
+}
+
+.lb-arrow.next {
+  right: var(--sp-4);
+}
+
+/* The whole set along the bottom, dark until you go near them. The one you
+   are looking at stays lit. */
+.lb-strip {
+  display: flex;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: min(100%, 62rem);
+}
+
+.lb-strip a {
+  display: block;
+  width: 8.5rem;
+  max-width: 18vw;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  line-height: 0;
+  border: 1px solid rgba(253, 246, 239, 0.28);
+  opacity: 0.42;
+  filter: brightness(0.6);
+  transition: opacity 0.35s ease, filter 0.35s ease, transform 0.35s ease,
+    border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.lb-strip a:hover {
+  opacity: 1;
+  filter: brightness(1.06);
+  transform: translateY(-5px);
+  border-color: rgba(255, 214, 170, 0.85);
+  box-shadow: 0 8px 22px -6px rgba(0, 0, 0, 0.7),
+    0 0 18px rgba(255, 178, 109, 0.3);
+}
+
+.lb-strip a.here {
+  opacity: 1;
+  filter: none;
+  border-color: var(--dust-pale);
+}
+
+.lb-strip img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
 }
 
 .lb-back {
@@ -975,7 +1075,7 @@ nav.site-nav .ico {
 }
 
 .lb-cap {
-  margin: 0;
+  margin: 0 0 var(--sp-2);
   color: #e8d6c6;
   font-size: 0.9rem;
   text-align: center;
@@ -1029,5 +1129,21 @@ nav.site-nav .ico {
     width: 2.2rem;
     height: 2.2rem;
     font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .lb-arrow {
+    width: 2.4rem;
+    height: 2.4rem;
+    font-size: 1.4rem;
+  }
+
+  .lb-strip a {
+    width: 4.5rem;
+  }
+
+  .lightbox .lb-shot {
+    max-height: 50vh;
   }
 }

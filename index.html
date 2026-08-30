@@ -33,6 +33,73 @@
     /* Suffix mark on the Technical projects heading. */
     .hicon{margin-left:.4rem;vertical-align:-.15em;color:#14507d}
   </style>
+  <style>
+    /* Light and dark, from a checkbox — no script, in keeping with the rest of
+       the site. Unchecked is light and the knob sits over the sun; checked is
+       dark and it slides to the moon. Every override below is scoped to
+       `body:has(#theme:checked)`, so the other pages that share this
+       stylesheet are untouched by it. */
+    .themebar{display:flex;justify-content:flex-end;margin:0 0 -0.5rem}
+    #theme,.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;
+           clip:rect(0 0 0 0);white-space:nowrap}
+    .themetoggle{position:relative;display:inline-flex;align-items:center;gap:.6rem;
+                 padding:.3rem .6rem;border-radius:999px;cursor:pointer;
+                 border:1px solid #c3ced9;background:#f1f4f7;
+                 transition:background .3s ease,border-color .3s ease}
+    .themetoggle:hover{border-color:#14507d}
+    #theme:focus-visible + .themetoggle{outline:2px solid #14507d;outline-offset:2px}
+    .themetoggle svg{position:relative;z-index:1;width:16px;height:16px;flex:none;
+                     transition:color .3s ease}
+    .t-sun{color:#b8860b}
+    .t-moon{color:#8a94a0}
+    /* The knob rides over whichever symbol is active. */
+    .knob{position:absolute;top:.25rem;left:.28rem;width:1.55rem;height:1.55rem;
+          border-radius:50%;background:#fff;
+          box-shadow:0 1px 3px rgba(20,60,100,.28);
+          transition:transform .32s cubic-bezier(.22,.61,.36,1),background .3s ease}
+    #theme:checked + .themetoggle .knob{transform:translateX(1.75rem)}
+
+    body:has(#theme:checked){background:#14171b;color:#e8ecf1}
+    body:has(#theme:checked) a{color:#7fb3e8}
+    body:has(#theme:checked) a:hover{color:#a6cdf3}
+    body:has(#theme:checked) a:focus-visible{outline-color:#7fb3e8}
+    body:has(#theme:checked) header.site-header{border-bottom-color:#2a3038}
+    body:has(#theme:checked) header.site-header .tagline,
+    body:has(#theme:checked) .meta{color:#99a3ae}
+    body:has(#theme:checked) .lead{color:#c6cdd6}
+    body:has(#theme:checked) footer.site-footer{border-top-color:#2a3038;color:#99a3ae}
+    body:has(#theme:checked) footer.site-footer a{color:#7fb3e8}
+    body:has(#theme:checked) .themetoggle{background:#20262d;border-color:#39424d}
+    body:has(#theme:checked) .themetoggle:hover{border-color:#7fb3e8}
+    body:has(#theme:checked) .knob{background:#e8ecf1}
+    body:has(#theme:checked) .t-sun{color:#6c757f}
+    body:has(#theme:checked) .t-moon{color:#e2c979}
+    body:has(#theme:checked) .hicon{color:#7fb3e8}
+    body:has(#theme:checked) .projcard{background:#1b2026;border-color:#2c333c}
+    body:has(#theme:checked) .projcard:hover{border-color:#7fb3e8;
+      box-shadow:0 3px 10px rgba(0,0,0,.5)}
+    body:has(#theme:checked) .projcard h3{color:#e8ecf1}
+    body:has(#theme:checked) .projcard p{color:#aab3be}
+    body:has(#theme:checked) .projcard .more,
+    body:has(#theme:checked) .featcard .more{color:#7fb3e8}
+    body:has(#theme:checked) .featcard{background:#1b2026;border-color:#39424d;
+      box-shadow:0 2px 10px rgba(0,0,0,.45)}
+    body:has(#theme:checked) .featcard:hover{border-color:#7fb3e8;
+      box-shadow:0 6px 20px rgba(0,0,0,.6)}
+    body:has(#theme:checked) .featcard img{border-bottom-color:#39424d}
+    body:has(#theme:checked) .featcard h3{color:#e8ecf1}
+    body:has(#theme:checked) .featcard p{color:#aab3be}
+    body:has(#theme:checked) .commshot{border-color:#39424d;
+      box-shadow:0 2px 10px rgba(0,0,0,.45)}
+    body:has(#theme:checked) .commshot:hover{border-color:#7fb3e8;
+      box-shadow:0 6px 20px rgba(0,0,0,.6)}
+    body:has(#theme:checked) .links .l-gh{--ink:#e6e9ed;--tint:#39424d;--fill:#1d2229;
+      --fill-hover:#262d35;--shadow:rgba(0,0,0,.5)}
+    body:has(#theme:checked) .links .l-li{--ink:#7fb3e8;--tint:#31404f;--fill:#1a222b;
+      --fill-hover:#212c37;--shadow:rgba(0,0,0,.5)}
+    body:has(#theme:checked) .links .l-pr{--ink:#7fb3e8;--tint:#2e3b47;--fill:#1a2028;
+      --fill-hover:#212832;--shadow:rgba(0,0,0,.5)}
+  </style>
   <style>.card-links{margin-top:1.5rem;font-weight:600}</style>
   <style>
     .projgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem;margin:1rem 0 2rem}
@@ -69,6 +136,15 @@
 </head>
 <body>
   <div class="wrap">
+    <div class="themebar">
+      <input type="checkbox" id="theme">
+      <label class="themetoggle" for="theme" title="Switch between the light and dark theme">
+        <span class="knob" aria-hidden="true"></span>
+        <svg class="t-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor" stroke="none"/><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+        <svg class="t-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.7 14.6A8.6 8.6 0 0 1 9.4 3.3a8.7 8.7 0 1 0 11.3 11.3z"/></svg>
+        <span class="visually-hidden">Dark theme</span>
+      </label>
+    </div>
     <header class="site-header">
       <img class="avatar" src="/profile.jpg" alt="Oisin McGrath">
       <h1>Oisin McGrath</h1>

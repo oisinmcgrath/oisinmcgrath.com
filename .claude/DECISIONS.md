@@ -261,6 +261,23 @@ narrative is coming for it. Note the Fit-out heading now sits above photographs
 that run well past the fit-out (the heater, the alarms, the cab, the service
 book); it should be renamed or re-split when that copy arrives.
 
+**2026-08 — the homepage theme switch is a checkbox.**
+
+Light and dark on `index.html`, from an `<input type="checkbox">` and
+`body:has(#theme:checked)`. No script, in keeping with the rest of the site.
+Every override is scoped to that `:has()` so the other pages sharing the root
+stylesheet — community, privacy, terms — are untouched.
+
+**The trade this makes: the choice does not persist.** A reload returns to
+light, and it does not carry to the project pages. Making it stick needs
+`localStorage` and therefore JavaScript, which would be the site's second
+script. That has been raised and left as is for now; if it is ever wanted, note
+that the honest version also reads `prefers-color-scheme` for its default.
+
+Default is light because that is what the page has always been; the toggle
+means "give me the dark one", not "invert whatever the OS says", which keeps
+the sun and moon labels truthful.
+
 ---
 
 ## Working notes

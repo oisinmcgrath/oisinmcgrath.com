@@ -414,9 +414,11 @@ and returns to GitHub — a torch drawn across brushed metal. Still no script.
 
 It is deliberately *one* `@keyframes` shared by the three buttons and offset by
 `animation-delay` rather than three animations of their own: sharing the cycle
-is what guarantees the order can never drift, and the delays (0, 0.9s, 1.8s
-against a 4.8s cycle, with the sweep occupying 0.86s of it) are spaced so one
-band has left a button before the next begins.
+is what guarantees the order can never drift, and the delays (0, 3.6s, 7.2s
+against a 19.2s cycle, with the sweep occupying 3.46s of it) are spaced so one
+band has left a button before the next begins. It was built four times faster
+and slowed to this on 2026-08-31; the band was softened to `opacity:.68` at the
+same time, so it passes over the label without washing it out.
 
 The highlight is not a plain white band. On the light theme the buttons are
 already near-white, so a white core alone is invisible; what reads as a curved

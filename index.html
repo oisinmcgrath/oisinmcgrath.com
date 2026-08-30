@@ -17,10 +17,44 @@
     .links{display:flex;flex-direction:column;align-items:center;gap:.55rem;
            margin:1.25rem 0 1.75rem}
     .links li{margin:0}
-    .links a{display:inline-flex;align-items:center;gap:.55rem;padding:.5rem .9rem;
+    .links a{position:relative;overflow:hidden;
+             display:inline-flex;align-items:center;gap:.55rem;padding:.5rem .9rem;
              border-radius:8px;text-decoration:none;font-weight:500;
              border:1px solid var(--tint);background:var(--fill);color:var(--ink);
              transition:border-color .15s,background .15s,box-shadow .15s}
+    /* A torch passing across brushed metal: one narrow band travels each
+       button in turn — GitHub, LinkedIn, Projects — and then the cycle repeats.
+       It is one animation shared by the three, staggered by `animation-delay`,
+       so they can never drift out of order the way three separate timings
+       would. The band is a raked pseudo-element rather than a moving
+       background, so it composites on its own layer and the text under it is
+       never repainted.
+
+       The highlight is not simply white: a specular core with a faintly darker
+       flank either side is what reads as a curved metal surface catching the
+       light, and the flank has to darken in both themes, so both halves of the
+       gradient are `light-dark()` pairs. */
+    .links a::after{content:"";position:absolute;top:0;bottom:0;left:0;width:30%;
+             pointer-events:none;transform:translateX(-240%) skewX(-20deg);
+             background:linear-gradient(90deg,transparent,
+               light-dark(rgba(18,38,58,.17),rgba(0,0,0,.42)) 34%,
+               light-dark(rgba(255,255,255,1),rgba(255,255,255,.52)) 50%,
+               light-dark(rgba(18,38,58,.17),rgba(0,0,0,.42)) 66%,transparent);
+             animation:linksheen 4.8s linear infinite;will-change:transform}
+    .links .l-li a::after{animation-delay:.9s}
+    .links .l-pr a::after{animation-delay:1.8s}
+    /* The sweep occupies the first 18% of the cycle — 0.86s — and the delays
+       are 0.9s apart, so one band has left a button before the next begins and
+       the three never overlap. The remainder of the cycle is the pause before
+       it returns to GitHub. */
+    @keyframes linksheen{
+      0%{transform:translateX(-240%) skewX(-20deg)}
+      18%{transform:translateX(400%) skewX(-20deg)}
+      100%{transform:translateX(400%) skewX(-20deg)}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .links a::after{animation:none;opacity:0}
+    }
     .links a:hover{border-color:var(--ink);background:var(--fill-hover);
                    box-shadow:0 2px 8px var(--shadow)}
     .links .ico{flex:none;color:var(--ink)}

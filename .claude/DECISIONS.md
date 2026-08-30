@@ -407,6 +407,27 @@ theme it had been sitting almost invisible on its own pill.
 Homepage only. The project pages each own their stylesheet and their own theme,
 and pointing them at the OS would undo the per-page palettes recorded above.
 
+**2026-08-31 — the three homepage link buttons shimmer, in sequence.**
+
+A narrow raked highlight crosses GitHub, then LinkedIn, then Projects, pauses,
+and returns to GitHub — a torch drawn across brushed metal. Still no script.
+
+It is deliberately *one* `@keyframes` shared by the three buttons and offset by
+`animation-delay` rather than three animations of their own: sharing the cycle
+is what guarantees the order can never drift, and the delays (0, 0.9s, 1.8s
+against a 4.8s cycle, with the sweep occupying 0.86s of it) are spaced so one
+band has left a button before the next begins.
+
+The highlight is not a plain white band. On the light theme the buttons are
+already near-white, so a white core alone is invisible; what reads as a curved
+metal surface is the specular core with a slightly *darker* flank either side,
+and that flank has to darken in both themes — so both halves of the gradient
+are `light-dark()` pairs, like the rest of the page.
+
+It moves a pseudo-element with `transform` rather than sliding a background
+position, so it composites on its own layer and the text underneath is never
+repainted. Suppressed under `prefers-reduced-motion`, as the carousels are.
+
 ---
 
 ## Working notes

@@ -160,8 +160,30 @@
       </div>
 
       <h2>Walkthrough</h2>
-      <div class="stage">
-        <video controls preload="metadata" poster="video/poster.jpg" width="1152" height="864">
+      <!-- Two videos in one frame. The teaser is a two-second silent loop that
+           runs on its own, so the block reads as film rather than as a still.
+           Clicking it targets #watch, which swaps in the walkthrough itself.
+           That video carries `autoplay` but no `muted`, so the browser will not
+           start it on page load — an unmuted autoplay needs a user gesture —
+           and will start it once the click has provided one. If a browser
+           refuses, its poster and controls are sitting right there. No script
+           is involved in any of it. -->
+      <div class="stage" id="watch">
+        <video class="teaser" autoplay muted loop playsinline preload="auto"
+               poster="video/poster.jpg" width="1152" height="864" aria-hidden="true">
+          <source src="video/teaser.mp4" type="video/mp4">
+        </video>
+        <a class="playover" href="#watch" aria-label="Play the walkthrough, with sound">
+          <span class="playmark" aria-hidden="true">
+            <svg viewBox="0 0 100 100" width="88" height="88" aria-hidden="true">
+              <circle cx="50" cy="50" r="44" fill="rgba(0,0,0,0.22)"/>
+              <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(255,255,255,0.88)" stroke-width="5"/>
+              <path d="M40 30 L40 70 L72 50 Z" fill="rgba(255,255,255,0.88)"/>
+            </svg>
+          </span>
+        </a>
+        <video class="full" controls autoplay preload="none"
+               poster="video/poster.jpg" width="1152" height="864">
           <source src="video/walkthrough.mp4" type="video/mp4">
           <p>Your browser cannot play this video.
             <a href="video/walkthrough.mp4">Download the walkthrough (MP4, 8&nbsp;MB)</a>.</p>
@@ -172,15 +194,17 @@
         walkthrough video!
       </p>
 
+      <hr class="horizon">
+
       <h2>Where it started</h2>
       <p class="lead">
         On June 21st 2025, bright as a new penny, I embarked on what became both a
         fascinating and a multilayered project.
       </p>
       <p class="lead">
-        Once a post van, 'Big Red' as I soon affectionately named it was en route
-        for a new life on the vast stretches of remote Australian highway. Now the
-        real work begins.
+        Once a post van, 'Big Red' as I affectionately named it, was en route for a
+        new life on the vast stretches of remote Australian highway. All it needed
+        was building.
       </p>
 
       <figure class="plate">
@@ -200,6 +224,8 @@
         like a boy again, ready to take on my first independent project of this
         scale.
       </p>
+
+      <hr class="horizon">
 
       <h2>Getting started</h2>
       <p>
@@ -292,11 +318,6 @@
       </section>
 
       <h2>Fit-out</h2>
-      <p>
-        Painted plywood cabinetry, European beech benchtops, and a
-        tongue-and-groove timber ceiling. A door was fitted between the cab and
-        the living area.
-      </p>
       <ul class="gallery">
         <li>
           <figure class="shot">
@@ -328,16 +349,6 @@
             <figcaption>Door through to the cab.</figcaption>
           </figure>
         </li>
-      </ul>
-
-      <h2>Sleeping and seating</h2>
-      <p>
-        A fixed double bed on a frame across the back, with a sprung mattress, so
-        it needs no setting up. The whole space under it is open storage reachable
-        from the rear doors, and there is a second storage area over the cab. The
-        seating below the bed has a table that pulls out and stows.
-      </p>
-      <ul class="gallery">
         <li>
           <figure class="shot">
             <a href="photos/int-05-bed.jpg"><img src="photos/int-05-bed.jpg" alt="The fixed double bed with a sprung mattress across the rear of the van" loading="lazy" width="1600" height="1200"></a>
@@ -362,16 +373,6 @@
             <figcaption>Storage over the cab.</figcaption>
           </figure>
         </li>
-      </ul>
-
-      <h2>Kitchen and water</h2>
-      <p>
-        A stainless sink plumbed to a 40&nbsp;litre fresh water tank, with a
-        pull-out sprayer tap that reaches out the side door to wash at. A
-        60&nbsp;litre compressor fridge, and a chemical toilet with its own
-        10&nbsp;litre fresh and 15&nbsp;litre waste tanks.
-      </p>
-      <ul class="gallery">
         <li>
           <figure class="shot">
             <a href="photos/int-03-sink.jpg"><img src="photos/int-03-sink.jpg" alt="The round stainless steel sink set into the beech benchtop, with the mixer tap" loading="lazy" width="1600" height="1200"></a>
@@ -396,38 +397,12 @@
             <figcaption>Toilet, stowed in its own cabinet.</figcaption>
           </figure>
         </li>
-      </ul>
-
-      <h2>Power</h2>
-      <p>
-        A 100&nbsp;amp-hour battery in the back, charged off the engine's
-        alternator through a voltage-sensitive relay so it only draws once the
-        starter battery is full. A 300&nbsp;watt inverter on an Anderson plug for
-        mains sockets, and USB outlets through the living area. I ran
-        8&nbsp;gauge UV-rated cable to the roof through sealed glands so panels
-        could be added later without opening anything up again.
-      </p>
-      <ul class="gallery">
         <li>
           <figure class="shot">
             <a href="photos/sys-06-power.jpg"><img src="photos/sys-06-power.jpg" alt="A laptop charging on the pull-out table from the van's outlets" loading="lazy" width="1600" height="1200"></a>
             <figcaption>Inverter and USB outlets in use.</figcaption>
           </figure>
         </li>
-      </ul>
-
-      <h2>Heating and ventilation</h2>
-      <p>
-        A 5&nbsp;kilowatt diesel heater plumbed off the van's own fuel, and a
-        ten-speed roof fan with a thermostat and remote that can pull air in or
-        push it out.
-      </p>
-      <p>
-        In testing, the heater proved more than adequate for the space. The fan
-        became essential travelling the north of the country — it really earned
-        its stripes up there.
-      </p>
-      <ul class="gallery">
         <li>
           <figure class="shot">
             <a href="photos/sys-01-heater.jpg"><img src="photos/sys-01-heater.jpg" alt="The diesel heater's control panel mounted on the cabinetry" loading="lazy" width="1600" height="1200"></a>
@@ -440,30 +415,12 @@
             <figcaption>Roof fan and remote.</figcaption>
           </figure>
         </li>
-      </ul>
-
-      <h2>Safety</h2>
-      <p>
-        Smoke and carbon monoxide alarms, and a fire extinguisher mounted by the
-        door.
-      </p>
-      <ul class="gallery">
         <li>
           <figure class="shot">
             <a href="photos/sys-08-alarms.jpg"><img src="photos/sys-08-alarms.jpg" alt="A fire extinguisher and combined smoke and carbon monoxide alarm mounted on the wall" loading="lazy" width="1600" height="1200"></a>
             <figcaption>Extinguisher and alarms.</figcaption>
           </figure>
         </li>
-      </ul>
-
-      <h2>Making it road legal</h2>
-      <p>
-        The van came with a single seat. I fitted a passenger seat and belt, had
-        the fitment inspected, and it was licensed as a two-seater under a Western
-        Australian Department of Transport modification approval permit, which
-        passes to the next owner with the vehicle.
-      </p>
-      <ul class="gallery">
         <li>
           <figure class="shot">
             <a href="photos/cab-02-cockpit.jpg"><img src="photos/cab-02-cockpit.jpg" alt="The van's cab, showing the dashboard, steering wheel and gear selector" loading="lazy" width="1600" height="1200"></a>
@@ -527,7 +484,7 @@
 
     <footer class="site-footer">
       <p>Oisin McGrath — Bunbury, Western Australia.</p>
-      <p><a href="/">oisinmcgrath.com</a> · <a href="/projects/">Projects</a></p>
+      <p><a href="/"><svg class="fmark" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0L0 6V8H1V15H4V10H7V15H15V8H16V6L14 4.5V1H11V2.25L8 0ZM9 10H12V13H9V10Z"/></svg>oisinmcgrath.com</a> · <a href="/projects/"><svg class="fmark" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M2 13.122a1 1 0 00.741.966l7 1.876A1 1 0 0011 14.998V14h2a1 1 0 001-1V3a1 1 0 00-1-1h-2v-.994A1 1 0 009.741.04l-7 1.876A1 1 0 002 2.882v10.24zM9 2.31v11.384l-5-1.34V3.65l5-1.34zM11 12V4h1v8h-1z"/></svg>Projects</a></p>
     </footer>
   </div>
 </body>

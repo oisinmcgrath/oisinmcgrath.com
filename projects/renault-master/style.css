@@ -48,7 +48,10 @@
      page of reading. Everything on it is set in cream rather than ink. */
   --floor: #96513a;
   --floor-deep: #874733;
-  --floor-lift: #a45c41;
+  /* The spec card sits lighter than the page, not darker — a sunlit face of
+     the same earth rather than a hole in it. */
+  --card-bg: #ab6a4c;
+  --card-lift: #bd7a59;
   --bg: var(--floor);
   --bg-alt: #8a4a34;
   --surface: #a35c43;
@@ -164,7 +167,8 @@
   :root {
     --floor: #2a1a12; /* night desert */
     --floor-deep: #22150e;
-    --floor-lift: #35231a;
+    --card-bg: #3a271b;
+    --card-lift: #4a3324;
     --bg: var(--floor);
     --bg-alt: #241a13;
     --surface: #3a271b;
@@ -458,10 +462,65 @@ hr.horizon {
     0 0 78px 30px rgba(255, 150, 85, 0.14);
 }
 
+.stage {
+  position: relative;
+  line-height: 0;
+}
+
 .stage video {
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* The loop, and the sheet over it that hands off to the real video. */
+.stage .full {
+  display: none;
+}
+
+.stage:target .teaser,
+.stage:target .playover {
+  display: none;
+}
+
+.stage:target .full {
+  display: block;
+}
+
+.playover {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.playmark {
+  display: block;
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+    filter 0.35s ease;
+  filter: drop-shadow(0 3px 12px rgba(0, 0, 0, 0.45));
+}
+
+.playover:hover .playmark {
+  transform: scale(1.08);
+  filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.55));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage .teaser {
+    display: none;
+  }
+
+  .stage .full {
+    display: block;
+  }
+
+  .playover {
+    display: none;
+  }
 }
 
 /* ---- plate: a single photograph carrying its own passage ----
@@ -511,10 +570,10 @@ figure.plate figcaption {
 .card {
   margin-block: var(--sp-6);
   padding: var(--sp-5) var(--sp-5) var(--sp-4);
-  border: 1px solid var(--border-strong);
+  border: 1px solid rgba(255, 214, 170, 0.35);
   border-radius: var(--radius-lg);
-  background: var(--floor-deep);
-  box-shadow: 0 1px 2px rgba(24, 10, 4, 0.35),
+  background: var(--card-bg);
+  box-shadow: 0 1px 2px rgba(24, 10, 4, 0.3),
     0 8px 20px -10px rgba(24, 10, 4, 0.45);
   /* Brightness is done with a filter rather than by swapping the background
      colour: the browser can composite it on its own, so the movement starts
@@ -650,6 +709,19 @@ footer.site-footer {
 
 footer.site-footer p {
   margin: 0 0 var(--sp-2);
+}
+
+footer.site-footer a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+footer.site-footer .fmark {
+  width: 0.95em;
+  height: 0.95em;
+  flex: none;
+  transform: translateY(0.12em);
 }
 
 @media (max-width: 480px) {

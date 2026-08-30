@@ -228,6 +228,39 @@ correct in both directions. Hovering pauses the drift, which takes the edge off
 it. Fixing it properly needs JavaScript, and that trade has been declined —
 see the carousel note above.
 
+**2026-08 — the walkthrough previews itself, still without a script.**
+
+`video/teaser.mp4` is a two-second silent loop cut from the walkthrough
+(frames 136–156, forward, held, reversed, held), 205 kB. It autoplays muted so
+the block reads as film rather than as a still. A link over it targets the
+stage, which swaps the loop out for the walkthrough proper.
+
+The handover works because of an autoplay rule rather than in spite of one: the
+real video carries `autoplay` but **no** `muted`, so the browser refuses to
+start it on page load — an unmuted autoplay needs a user gesture — and permits
+it once the click has supplied one. If a browser declines anyway, its poster
+and controls are already on screen. **Never add `muted` to that element**: it
+would start playing silently behind the loop the moment the page opened.
+
+A GIF was asked about and argued against: three seconds at this size is 5–15 MB
+and 256 colours, against ~200 kB for the same clip as H.264.
+
+**2026-08 — the favicon has a ground.**
+
+Asked to crop empty space out of the van mark to make it larger in the tab.
+There was none — the artwork already reached all four edges. What it lacked was
+mass: a thin outline drawing on transparency disappears at 16 px. It now sits
+on a filled sand tile, which is what actually made it read bigger.
+
+**2026-08 — the fit-out sections were stripped back to photographs.**
+
+Everything between the Fit-out heading and Testing it — six section headings and
+their descriptive copy — was removed and the galleries merged into one grid,
+keeping only the captions. This is a cleared deck, not a finished state: new
+narrative is coming for it. Note the Fit-out heading now sits above photographs
+that run well past the fit-out (the heater, the alarms, the cab, the service
+book); it should be renamed or re-split when that copy arrives.
+
 ---
 
 ## Working notes

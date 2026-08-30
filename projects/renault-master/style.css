@@ -1,0 +1,974 @@
+/* Renault Master camper — plain CSS, no external fonts or CDNs.
+
+   Pilbara / Goldfields theme, drawn from one photograph of the red centre:
+   deep blue overhead, softening through haze at the horizon, then gold sun,
+   green brush, yellow spinifex and finally the bright orange dust that the
+   rest of the page rests on. Scrolling the page is meant to feel like
+   travelling down that photograph, so nothing anywhere is a hard edge — the
+   sky dissolves into the ground over about a thousand pixels and settles on
+   warm sand by the time the reading starts.
+
+   Note on type: the theme calls for Bitter / Inter / IBM Plex Mono, but this
+   site loads no external fonts, so each is a locally-available stack in the
+   same spirit — a slab-ish serif for display against a neutral grotesk body,
+   with a mono for eyebrow labels. */
+
+:root {
+  /* sky, top to horizon */
+  --sky-zenith: #0f64d0;
+  --sky-deep: #0b5cc4;
+  --sky-mid: #49a0ff;
+  --sky-pale: #8fc9fb;
+  --sky-haze: #acdcff;
+  --horizon: #b8dbfe;
+
+  /* the ground: sun-gold, brush, spinifex, dust */
+  --sun-gold: #d8c9a0;
+  --spinifex: #9f9556;
+  --spinifex-gold: #b29a53;
+  --brush: #7b6b4b;
+  --brush-dark: #443d2d;
+  --scrub-dark: #3e2217;
+  --grass-gold: #955d02;
+  --grass-amber: #c28128;
+  --dust-deep: #b36d2d;
+  --dust: #ff6a39;
+  --dust-vivid: #fb6231;
+  --dust-warm: #e1744f;
+  --dust-pale: #ffb26d;
+  --dust-blush: #ffc687;
+  --branch: #886657;
+  --branch-dark: #381a13;
+  --ember: #640a04;
+  --charcoal: #2e241d;
+
+  /* semantic */
+  /* The page does not return to paper. Below the descent it settles onto the
+     desert floor itself: the vivid dust with the saturation and the light
+     taken out of it, so it stays unmistakably that red earth but can carry a
+     page of reading. Everything on it is set in cream rather than ink. */
+  --floor: #96513a;
+  --floor-deep: #7f4430;
+  --bg: var(--floor);
+  --bg-alt: #8a4a34;
+  --surface: #a35c43;
+  --surface-sunk: #8a4a34;
+  --border: #6d3a28;
+  --border-strong: #5c2f20;
+  /* Every embedded photograph takes the same near-black edge, which is what
+     gives it definition against ground this warm. */
+  --edge: #17100b;
+
+  --text: #fbeadd;
+  --text-muted: #f0d5c2;
+  --text-invert: #fdf6ef;
+  --heading: #ffd9b0;
+
+  --accent: var(--dust);
+  --accent-hover: #a3480f;
+  --accent-soft: #fbe0cb;
+  /* Links take the earth, not the sky — the ground is what this landscape
+     is about, and blue on a warm page reads as a foreign element. On the clay
+     that means a light sand rather than a dark rust. */
+  --link: #ffdcb8;
+
+  /* The whole descent, sky to ground, as one gradient. Painted on the body
+     over a fixed height so the top of the document is the top of the sky and
+     the reading below it sits on settled sand. The final stop is exactly the
+     page background, so there is no seam where it ends. */
+  --grad-descent: linear-gradient(
+    180deg,
+    var(--sky-deep) 0%,
+    var(--sky-zenith) 9%,
+    var(--sky-mid) 20%,
+    var(--sky-pale) 30%,
+    var(--sky-haze) 37%,
+    var(--horizon) 42%,
+    #c6cdbc 45%,
+    #a89a6e 47%,
+    var(--brush) 49%,
+    var(--grass-gold) 51.5%,
+    var(--grass-amber) 54.5%,
+    #d78f4f 58%,
+    var(--dust-warm) 62%,
+    #ff7649 66%,
+    var(--dust-vivid) 71%,
+    var(--dust-vivid) 78%,
+    #e75e33 84%,
+    #cc5836 89%,
+    #ad5337 94%,
+    var(--floor) 100%
+  );
+
+  /* The desert floor, drawn rather than tiled out of gradients. desert.svg
+     is a 1200px tile of spinifex hummocks — a burst of fine spikes each, in
+     six golds and olives — with darker shrubs and dead grass among them, all
+     placed by dart-throwing with a minimum separation so the scatter is loose
+     and uneven. Everything is drawn nine times on a 3x3 lattice and clipped
+     to the tile, so shapes crossing an edge return on the far side and it
+     repeats without a seam. */
+
+  /* Fine noise, laid over the descent at a few per cent. A gradient this long
+     and this saturated bands into visible steps on an 8-bit display; a little
+     dither across it is what breaks the steps up. */
+  --dither: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  /* type */
+  --font-display: "Bitter", "Roboto Slab", "Noto Serif", Georgia, serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu,
+    Cantarell, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", Menlo, Consolas,
+    monospace;
+  --tracking-display: -0.02em;
+  --tracking-eyebrow: 0.14em;
+
+  /* space / shape */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 5rem;
+  --radius-sm: 3px;
+  --radius: 6px;
+  --radius-lg: 14px;
+
+  /* Everything on the page is centred on one axis and this is its width, so
+     the header, the video, the prose and the galleries all share a median.
+     Nothing is positioned off the viewport edge, so the layout holds at any
+     width. */
+  --col: 48rem;
+
+  /* Prose, headings and the photographs set into the narrative all take this
+     one width and are all centred in the column, so they share a left edge
+     and a median. The carousel, the video and the galleries are allowed the
+     full column, but they are centred on the same axis, so nothing on the
+     page disagrees about where the middle is at any screen width. */
+  --measure: 38rem;
+
+  /* How far the descent runs before the page settles on sand. The video sits
+     inside it, on the red earth, which is where a van belongs. */
+  --descent: 1340px;
+
+  /* elevation — low sun, long warm shadows, never neutral grey */
+  --shadow-1: 0 1px 2px rgba(46, 36, 29, 0.1);
+  --shadow-2: 0 4px 14px -4px rgba(120, 52, 24, 0.22);
+  --shadow-3: 0 18px 40px -18px rgba(120, 52, 24, 0.38);
+  --ring: 0 0 0 3px rgba(212, 98, 46, 0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --floor: #2a1a12; /* night desert */
+    --floor-deep: #1f130d;
+    --bg: var(--floor);
+    --bg-alt: #241a13;
+    --surface: #3a271b;
+    --surface-sunk: #241811;
+    --border: #4c3524;
+    --border-strong: #6b4a31;
+    --text: #f2e4d6;
+    --text-muted: #c9ab95;
+    --heading: #f0a875;
+    --accent: #e8743b;
+    --accent-hover: #f79161;
+    --accent-soft: #402016;
+    --link: #f0a875;
+
+    /* The same descent after dark: the sky goes to night, the earth holds its
+       ember rather than its glare, and it settles into the night background.
+       The light-mode ramp cannot be reused — near-white body text on a bright
+       orange band has no contrast at all. */
+    --grad-descent: linear-gradient(
+      180deg,
+      #071e3d 0%,
+      #0b2c56 12%,
+      #123a6b 26%,
+      #1b4372 36%,
+      #2a3a30 40%,
+      #3a2a17 46%,
+      #5a2f12 54%,
+      #6b3312 64%,
+      #43210e 76%,
+      #3a2013 88%,
+      var(--floor) 100%
+    );
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+
+  /* Two things, in this order: the descent on top, painted once at the top of
+     the document and ending on exactly --floor; and under it the desert,
+     tiled the whole height of the page. Where the descent stops there is
+     nothing to see happen — the colour is already the floor's, and the ground
+     simply keeps going. */
+  background-color: var(--floor);
+  background-image: var(--grad-descent), url("desert.svg");
+  background-repeat: no-repeat, repeat;
+  background-size: 100% var(--descent), 760px 760px;
+  background-position: 0 0, 0 0;
+}
+
+/* The dither. It sits over the descent only — the floor below has the desert
+   tile on it and needs no help — and is masked away at the bottom so it does
+   not end on a line of its own. */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--descent);
+  background-image: var(--dither);
+  opacity: 0.055;
+  mix-blend-mode: overlay;
+  -webkit-mask-image: linear-gradient(180deg, #000 88%, transparent);
+  mask-image: linear-gradient(180deg, #000 88%, transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+a:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: var(--radius-sm);
+}
+
+/* ---- layout ---------------------------------------------------------
+   One centred column. Text is left-aligned inside it, but the column
+   itself is centred, so left-aligned content shares its median with the
+   centred header and video rather than drifting with the viewport. */
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: var(--col);
+  margin-inline: auto;
+  padding: 0 var(--sp-5) var(--sp-7);
+}
+
+main {
+  max-width: var(--col);
+  margin-inline: auto;
+}
+
+/* ---- header ----
+   The header paints no background of its own. It sits in the top of the
+   body's descent, which is the sky, so the only thing it needs is light text
+   and enough shadow to hold that text against the blue. */
+
+header.site-header {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 var(--sp-6);
+  padding: var(--sp-6) var(--sp-5) var(--sp-5);
+  text-align: center;
+  color: var(--text-invert);
+}
+
+header.site-header h1 {
+  margin: 0 0 var(--sp-2);
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 1.3rem + 1.8vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.08;
+  text-shadow: 0 2px 24px rgba(70, 28, 12, 0.45);
+}
+
+header.site-header .tagline {
+  margin: 0 auto;
+  max-width: 36rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: #f2e6da;
+}
+
+nav.site-nav {
+  margin-top: var(--sp-5);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+/* ---- text ---- */
+
+main h2 {
+  margin: var(--sp-7) 0 var(--sp-4);
+  position: relative;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.12;
+  color: var(--heading);
+  text-shadow: 0 1px 12px rgba(46, 20, 10, 0.45);
+}
+
+/* The first heading falls in the haze band, where the sky behind it is still
+   pale. There it needs the dark ink and a light halo instead. */
+/* The first heading lands in the scrub band, where the sky has gone and the
+   ground has not fully arrived. It takes the mulga green of that band, dropped
+   far enough in brightness to hold against it. */
+main > h2:first-of-type {
+  color: #2f3a17;
+  text-shadow: 0 1px 12px rgba(226, 226, 190, 0.55);
+}
+
+@media (prefers-color-scheme: dark) {
+  main > h2:first-of-type {
+    color: #f0c79a;
+    text-shadow: 0 1px 12px rgba(10, 20, 40, 0.7);
+  }
+}
+
+main h3 {
+  margin: var(--sp-6) 0 var(--sp-2);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--heading);
+}
+
+main > p,
+main > h2,
+main > h3,
+main > ul:not(.gallery),
+main > .specs,
+main > hr,
+figure.plate {
+  max-width: var(--measure);
+  margin-inline: auto;
+}
+
+main p {
+  margin-block: 0 var(--sp-4);
+}
+
+.lead {
+  font-size: 1.08rem;
+}
+
+.meta {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* The walkthrough caption lands on the dust, where the muted brown has no
+   contrast left. It takes the inverted ink instead. */
+/* This caption lands on the dust, at its brightest. A halo only washed it
+   out; what it needs is the darkest ink on the page and nothing behind it. */
+main > .stage + .meta {
+  color: #351405;
+  text-shadow: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  main > .stage + .meta {
+    color: var(--text-muted);
+    text-shadow: none;
+  }
+}
+
+ul {
+  padding-left: 1.15rem;
+}
+
+li {
+  margin-bottom: var(--sp-1);
+}
+
+/* The horizon, reusable as a section divider. */
+hr.horizon {
+  height: 2px;
+  border: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 214, 170, 0.15) 12%,
+    rgba(255, 214, 170, 0.65) 50%,
+    rgba(255, 214, 170, 0.15) 88%,
+    transparent
+  );
+  opacity: 1;
+  margin: var(--sp-7) auto;
+}
+
+/* ---- video ---- */
+
+/* Narrower than the prose, so the heading above it reads as a preface rather
+   than as a label stuck to something wider than itself. Still centred on the
+   page's one median. */
+.stage {
+  max-width: 32rem;
+  margin: 0 auto var(--sp-4);
+  background: var(--charcoal);
+  /* A real edge: three pixels of near-black plus a hairline ring, because a
+     single hairline vanishes against ground this saturated. */
+  border: 3px solid var(--edge);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.55), 0 4px 10px rgba(24, 10, 4, 0.45),
+    0 18px 40px -10px rgba(24, 10, 4, 0.55),
+    0 44px 84px -30px rgba(24, 10, 4, 0.6);
+}
+
+.stage video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---- plate: a single photograph carrying its own passage ----
+   Centred in the column with a thin dark outline, so it reads as a
+   centrepiece rather than as one tile of a grid. */
+
+figure.plate {
+  margin: var(--sp-5) auto var(--sp-6);
+  text-align: center;
+}
+
+figure.plate img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-sm);
+  /* Three stacked shadows: a tight contact edge, a mid lift and a long low
+     one, so the photograph sits above the desert floor rather than on it. */
+  box-shadow: 0 2px 5px rgba(70, 28, 12, 0.24),
+    0 12px 28px -8px rgba(70, 28, 12, 0.4),
+    0 30px 62px -26px rgba(70, 28, 12, 0.52);
+}
+
+@media (prefers-color-scheme: dark) {
+  figure.plate img {
+    border-color: var(--border-strong);
+  }
+}
+
+figure.plate figcaption {
+  margin-top: var(--sp-3);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+/* ---- specification table ---- */
+
+.specs {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 0 0 var(--sp-4);
+}
+
+.specs th,
+.specs td {
+  text-align: left;
+  vertical-align: top;
+  padding: var(--sp-2) var(--sp-3) var(--sp-2) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.specs th {
+  width: 12rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--heading);
+  white-space: nowrap;
+}
+
+/* ---- photographs ---- */
+
+/* Two even columns on wide screens so groups of two and four land square,
+   one column on narrow. Fixed tracks rather than auto-fit: the groups vary
+   in size and auto-fit was stranding a single tile on its own row. */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-4);
+  margin: var(--sp-5) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Three-up for the finished exterior shots. */
+.gallery.wide {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 640px) {
+  .gallery,
+  .gallery.wide {
+    grid-template-columns: 1fr;
+  }
+}
+
+figure.shot {
+  margin: 0;
+}
+
+figure.shot a {
+  display: block;
+  border: 1px solid var(--edge);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface-sunk);
+  line-height: 0;
+  box-shadow: 0 2px 5px rgba(70, 28, 12, 0.22),
+    0 10px 24px -8px rgba(70, 28, 12, 0.34),
+    0 24px 48px -22px rgba(70, 28, 12, 0.42);
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+figure.shot a:hover {
+  border-color: #000;
+  transform: translateY(-3px);
+  box-shadow: 0 3px 7px rgba(70, 28, 12, 0.26),
+    0 16px 34px -8px rgba(70, 28, 12, 0.44),
+    0 36px 68px -26px rgba(70, 28, 12, 0.5);
+}
+
+/* 3:2 matches the camera the photographs came off, so the tile frame crops
+   almost nothing. A 4:3 frame sliced captions that are burnt into some of
+   the originals, cutting them mid-word. */
+figure.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+figure.shot figcaption {
+  margin-top: var(--sp-2);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+/* ---- footer ---- */
+
+footer.site-footer {
+  margin-top: var(--sp-7);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+footer.site-footer p {
+  margin: 0 0 var(--sp-2);
+}
+
+@media (max-width: 480px) {
+  .wrap {
+    padding: 0 var(--sp-4) var(--sp-6);
+  }
+
+  header.site-header {
+    padding: var(--sp-6) var(--sp-4) var(--sp-5);
+  }
+
+  .specs th {
+    width: 7.5rem;
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Header nav links are pill buttons, each prefixed with its own mark. The
+   colours are all derived from currentColor, so this same block sits in every
+   project stylesheet unchanged and picks up whatever palette the page has —
+   here that is the sky band's near-white text. */
+nav.site-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  line-height: 1.35;
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--text-invert);
+  border: 1px solid color-mix(in srgb, currentColor 45%, transparent);
+  background: color-mix(in srgb, currentColor 12%, transparent);
+}
+
+nav.site-nav a:hover {
+  color: var(--text-invert);
+  text-decoration: none;
+  border-color: currentColor;
+  background: color-mix(in srgb, currentColor 22%, transparent);
+}
+
+/* Marks keep their own size when the label wraps. */
+nav.site-nav .ico {
+  flex: none;
+}
+
+/* The back link is the first thing on the page, so it sits in the deepest
+   part of the sky and takes the sky's text colour, not the ground's. */
+.backnav {
+  position: relative;
+  z-index: 1;
+  max-width: var(--col);
+  margin-inline: auto;
+  padding: var(--sp-4) var(--sp-5) var(--sp-3);
+}
+
+.backnav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-invert);
+}
+
+.backnav a:hover {
+  color: var(--text-invert);
+  text-decoration: underline;
+}
+
+/* ---- carousel -------------------------------------------------------
+   Three photographs of the finished van, built entirely from radio inputs,
+   :has() and :target. There is no script on this page, and the site's rule
+   is that there should not be one.
+
+   Left alone it drifts at one constant rate and never stops or jumps: the
+   track holds the three photographs twice over and slides exactly three
+   slots per cycle on linear timing, so the moment it reaches the end it is
+   showing precisely what it showed at the start. Focus is done by position
+   rather than by timing — a horizontal mask over the viewport, opaque in the
+   middle and down to 18% at the edges — so whatever is passing the centre is
+   the thing in focus, and nothing ever disappears entirely. Checking a radio
+   stops the drift for good and the arrows take over. */
+
+.carousel {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto var(--sp-6);
+  padding: var(--sp-2) 0 var(--sp-5);
+}
+
+.carinput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.carviewport {
+  overflow: hidden;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.18) 0%,
+    rgba(0, 0, 0, 0.5) 12%,
+    #000 23%,
+    #000 77%,
+    rgba(0, 0, 0, 0.5) 88%,
+    rgba(0, 0, 0, 0.18) 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.18) 0%,
+    rgba(0, 0, 0, 0.5) 12%,
+    #000 23%,
+    #000 77%,
+    rgba(0, 0, 0, 0.5) 88%,
+    rgba(0, 0, 0, 0.18) 100%
+  );
+}
+
+.cartrack {
+  display: flex;
+  width: 300%;
+  animation: cardrift 78s linear infinite;
+  will-change: transform;
+}
+
+/* Six slides across a track three viewports wide: each is half a viewport. */
+.carslide {
+  flex: 0 0 16.6667%;
+  margin: 0;
+  padding: 0 0.55rem;
+}
+
+/* -8.3333% centres the second slide, which leaves the first covering the
+   whole left gutter and the third the right — the viewport is never short of
+   a slide. Running on to -58.3333% moves the track exactly three slots, which
+   is where the duplicates begin, so the loop closes on itself with nothing to
+   see happen. */
+@keyframes cardrift {
+  from {
+    transform: translateX(-8.3333%);
+  }
+  to {
+    transform: translateX(-58.3333%);
+  }
+}
+
+.carslide a,
+.carslide .frame {
+  display: block;
+  border-radius: var(--radius);
+  overflow: hidden;
+  line-height: 0;
+  border: 1px solid var(--edge);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 3px 8px rgba(30, 12, 5, 0.4),
+    0 16px 36px -10px rgba(30, 12, 5, 0.5);
+}
+
+.carslide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.carslide figcaption {
+  margin: var(--sp-2) auto 0;
+  width: fit-content;
+  max-width: 100%;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  text-align: center;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text-invert);
+  background: rgba(23, 16, 11, 0.55);
+}
+
+/* Manual control. The first radio checked stops the drift for good; from then
+   on the arrows move it, one slot at a time. */
+.carousel:has(.carinput:checked) .cartrack {
+  animation: none;
+  transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.carousel:has(#car1:checked) .cartrack {
+  transform: translateX(-41.6667%);
+}
+
+.carousel:has(#car2:checked) .cartrack {
+  transform: translateX(-8.3333%);
+}
+
+.carousel:has(#car3:checked) .cartrack {
+  transform: translateX(-25%);
+}
+
+/* Arrows. There is one pair per slide, because in plain CSS a button has to
+   know at author time which slide it moves to; only the pair belonging to the
+   current slide is shown. Before anything is checked, the first pair stands
+   in. */
+.carbtn {
+  position: absolute;
+  top: calc(50% - var(--sp-5));
+  z-index: 4;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--text-invert);
+  background: rgba(23, 16, 11, 0.45);
+  border: 1px solid rgba(253, 246, 239, 0.5);
+  backdrop-filter: blur(2px);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.carbtn:hover {
+  background: rgba(23, 16, 11, 0.72);
+  transform: scale(1.06);
+}
+
+.carbtn.prev {
+  left: 2%;
+}
+
+.carbtn.next {
+  right: 2%;
+}
+
+.carousel .b1 {
+  display: flex;
+}
+
+.carousel:has(.carinput:checked) .b1,
+.carousel:has(.carinput:checked) .b2,
+.carousel:has(.carinput:checked) .b3 {
+  display: none;
+}
+
+.carousel:has(#car1:checked) .b1,
+.carousel:has(#car2:checked) .b2,
+.carousel:has(#car3:checked) .b3 {
+  display: flex;
+}
+
+/* Clicking a photograph opens it. :target does the showing; the back arrow
+   points at #gallery, which un-targets this and leaves the rotation running
+   exactly as it was. */
+.lightbox {
+  display: none;
+}
+
+.lightbox:target {
+  display: flex;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-4);
+  padding: var(--sp-7) var(--sp-5) var(--sp-5);
+  background: rgba(24, 15, 10, 0.975);
+}
+
+.lightbox img {
+  max-width: min(100%, 68rem);
+  max-height: 76vh;
+  object-fit: contain;
+  border-radius: var(--radius);
+  box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.8);
+}
+
+.lb-back {
+  position: absolute;
+  top: var(--sp-4);
+  left: var(--sp-4);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-invert);
+  background: rgba(253, 246, 239, 0.12);
+  border: 1px solid rgba(253, 246, 239, 0.45);
+}
+
+.lb-back:hover {
+  color: var(--text-invert);
+  background: rgba(253, 246, 239, 0.22);
+}
+
+.lb-cap {
+  margin: 0;
+  color: #e8d6c6;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cartrack {
+    animation: none;
+    transform: translateX(-41.6667%);
+  }
+}
+
+@media (max-width: 640px) {
+  /* Bigger slides on a phone: the same six across a wider track, so each is
+     three quarters of the viewport instead of half. The drift still moves
+     exactly three slots. */
+  .cartrack {
+    width: 450%;
+  }
+
+  @keyframes cardrift {
+    from {
+      transform: translateX(-13.8889%);
+    }
+    to {
+      transform: translateX(-63.8889%);
+    }
+  }
+
+  .carousel:has(#car1:checked) .cartrack {
+    transform: translateX(-47.2222%);
+  }
+
+  .carousel:has(#car2:checked) .cartrack {
+    transform: translateX(-13.8889%);
+  }
+
+  .carousel:has(#car3:checked) .cartrack {
+    transform: translateX(-30.5556%);
+  }
+
+  .carbtn {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1.3rem;
+  }
+}

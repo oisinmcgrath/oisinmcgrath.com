@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A 2016 Renault Master panel van, bought unregistered, converted into a campervan, and tested — 12-volt electrics, plumbing, cabinetry and mechanical work.">
+  <title>Renault Master Camper Conversion</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="backnav"><a href="https://oisinmcgrath.com/projects/"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Projects</a></nav>
+  <div class="wrap">
+    <header class="site-header">
+      <h1>Renault Master Camper Conversion</h1>
+      <p class="tagline">
+        From post van to mobile home.
+      </p>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="https://oisinmcgrath.com/"><svg class="ico" viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0L0 6V8H1V15H4V10H7V15H15V8H16V6L14 4.5V1H11V2.25L8 0ZM9 10H12V13H9V10Z"/></svg>Home</a>
+        <a href="https://oisinmcgrath.com/projects/"><svg class="ico" viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M2 13.122a1 1 0 00.741.966l7 1.876A1 1 0 0011 14.998V14h2a1 1 0 001-1V3a1 1 0 00-1-1h-2v-.994A1 1 0 009.741.04l-7 1.876A1 1 0 002 2.882v10.24zM9 2.31v11.384l-5-1.34V3.65l5-1.34zM11 12V4h1v8h-1z"/></svg>Projects</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- The finished van, before any of the story. Three photographs on a
+           slow rotation: CSS only, no script. The radios below drive manual
+           navigation, and checking any one of them stops the animation — the
+           `:has()` rules further down do that. Clicking a photograph opens it
+           through :target, and the back arrow returns to #gallery, which
+           un-targets the lightbox and leaves the rotation running. -->
+      <section class="carousel" id="gallery" aria-label="The finished van">
+        <input class="carinput" type="radio" name="carousel" id="car1">
+        <input class="carinput" type="radio" name="carousel" id="car2">
+        <input class="carinput" type="radio" name="carousel" id="car3">
+
+        <div class="carviewport">
+          <div class="cartrack">
+            <figure class="carslide">
+              <a href="#shot1" aria-label="Open: Front three-quarter."><img src="photos/ext-03-front-three-quarter.jpg" alt="The finished van from the front and side, parked on grass among trees" width="1600" height="1067"></a>
+            </figure>
+            <figure class="carslide">
+              <a href="#shot2" aria-label="Open: Front, side door open."><img src="photos/ext-02-front.jpg" alt="The finished van from the front with the side door open" width="1600" height="1067"></a>
+            </figure>
+            <figure class="carslide">
+              <a href="#shot3" aria-label="Open: Looking inside through the side door."><img src="photos/hero-gopro.jpg" alt="Inside the finished van looking out through the open side door and its fly screen, showing the bed, seating and sink" width="1600" height="1067"></a>
+              <figcaption>Looking inside through the side door.</figcaption>
+            </figure>
+            <figure class="carslide" aria-hidden="true">
+              <span class="frame"><img src="photos/ext-03-front-three-quarter.jpg" alt="" width="1600" height="1067"></span>
+            </figure>
+            <figure class="carslide" aria-hidden="true">
+              <span class="frame"><img src="photos/ext-02-front.jpg" alt="" width="1600" height="1067"></span>
+            </figure>
+            <figure class="carslide" aria-hidden="true">
+              <span class="frame"><img src="photos/hero-gopro.jpg" alt="" width="1600" height="1067"></span>
+              <figcaption>Looking inside through the side door.</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <label class="carbtn prev b1" for="car3" title="Previous"><span aria-hidden="true">&#8249;</span></label>
+        <label class="carbtn next b1" for="car2" title="Next"><span aria-hidden="true">&#8250;</span></label>
+        <label class="carbtn prev b2" for="car1" title="Previous"><span aria-hidden="true">&#8249;</span></label>
+        <label class="carbtn next b2" for="car3" title="Next"><span aria-hidden="true">&#8250;</span></label>
+        <label class="carbtn prev b3" for="car2" title="Previous"><span aria-hidden="true">&#8249;</span></label>
+        <label class="carbtn next b3" for="car1" title="Next"><span aria-hidden="true">&#8250;</span></label>
+      </section>
+
+      <div class="lightbox" id="shot1" role="dialog" aria-label="Front three-quarter.">
+        <a class="lb-back" href="#gallery"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Back</a>
+        <img src="photos/ext-03-front-three-quarter.jpg" alt="The finished van from the front and side, parked on grass among trees">
+        <p class="lb-cap">Front three-quarter.</p>
+      </div>
+      <div class="lightbox" id="shot2" role="dialog" aria-label="Front, side door open.">
+        <a class="lb-back" href="#gallery"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Back</a>
+        <img src="photos/ext-02-front.jpg" alt="The finished van from the front with the side door open">
+        <p class="lb-cap">Front, side door open.</p>
+      </div>
+      <div class="lightbox" id="shot3" role="dialog" aria-label="Looking inside through the side door.">
+        <a class="lb-back" href="#gallery"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Back</a>
+        <img src="photos/hero-gopro.jpg" alt="Inside the finished van looking out through the open side door and its fly screen, showing the bed, seating and sink">
+        <p class="lb-cap">Looking inside through the side door.</p>
+      </div>
+
+      <h2>Walkthrough</h2>
+      <div class="stage">
+        <video controls preload="metadata" poster="video/poster.jpg" width="1152" height="864">
+          <source src="video/walkthrough.mp4" type="video/mp4">
+          <p>Your browser cannot play this video.
+            <a href="video/walkthrough.mp4">Download the walkthrough (MP4, 8&nbsp;MB)</a>.</p>
+        </video>
+      </div>
+      <p class="meta">
+        Allow me to showcase some of the build's features, join me on this short
+        walkthrough video!
+      </p>
+
+      <h2>Where it started</h2>
+      <p class="lead">
+        On June 21st 2025, bright as a new penny, I embarked on what became both a
+        fascinating and a multilayered project.
+      </p>
+      <p class="lead">
+        Once a post van, 'Big Red' as I soon affectionately named it was en route
+        for a new life on the vast stretches of remote Australian highway. Now the
+        real work begins.
+      </p>
+
+      <figure class="plate">
+        <img src="photos/before-01-as-bought.jpg" alt="The van in its original delivery livery on the day it was bought, with me in the driver's seat" loading="lazy" width="1600" height="720">
+        <figcaption>So the journey begins.</figcaption>
+      </figure>
+
+      <p>
+        After weeks of tempering my frustration and disappointment participating
+        in the auctions, endurance satiated my ambition when I became the proud
+        owner of a 2016 ex Australia Post Renault Master, having just clocked over
+        200,000&nbsp;kms.
+      </p>
+      <p>
+        I captured this proud moment, of my first time driving the newly acquired
+        post van, turning from its old life onto a new frontier. I was grinning
+        like a boy again, ready to take on my first independent project of this
+        scale.
+      </p>
+
+      <h2>Getting started</h2>
+      <p>
+        Until I started, I didn't realise that every design decision unavoidably
+        affects every other part of the build as it progresses. Every system I
+        intended to implement was essential — and so was everything each of them
+        demanded — and all of it had to work around the rest inside a few cubic
+        metres.
+      </p>
+      <p>
+        There was wiring to consider, the order of operations — that was a big one
+        — what should be done first, and what should be done last?
+      </p>
+      <p>
+        Since I was going to be driving this van throughout the project, I decided
+        that dealing with the road noise would be a gratifying and low-stakes
+        opportunity to get the ball rolling. It was at this stage that ChatGPT and
+        later Claude found their place in the toolkit, after proving their worth
+        researching products, materials and methods.
+      </p>
+
+      <figure class="plate">
+        <img src="photos/before-02-bare-shell.jpg" alt="Bare interior of the van showing ribbed steel walls and an empty floor" loading="lazy" width="1600" height="1200">
+        <figcaption>Early provisions for road noise underway!</figcaption>
+      </figure>
+
+      <p>
+        The first fascinating product I discovered was butyl sound-deadening mats.
+        Like a dense sticky sheet of chewing gum, you apply these adhesive squares
+        to the centre of any of the noisy steel panels inside the vehicle which
+        reverberate while driving, which means the driving experience goes from a
+        noisy rattle to smooth and elegant.
+      </p>
+      <p>
+        I got to work applying the mats, rationing the supply I had purchased.
+        Knowing the rear wheels were a major source of noise, I prioritised
+        scribing the mats to the shape of the rear wheel arches, managing to cover
+        about 85% of the arches. For the same reason I built plywood boxes over
+        the arches, acting as an auditory buffer and giving me a container for
+        more insulation, Earthwool batts.
+      </p>
+
+      <hr class="horizon">
+
+      <p>
+        Ready to begin my work experience as a courier, I set out in my now quiet
+        van to begin the scavenge for the build materials.
+      </p>
+      <p>
+        An electrical system is one of those items that requires forethought: I
+        knew the installation of a house battery, separate from the vehicle's own
+        battery, would be core to this build, so I didn't hesitate to pick up the
+        necessary components.
+      </p>
+
+      <figure class="plate">
+        <img src="photos/before-03-parts.jpg" alt="Interior of the empty van with boxes of electrical and camping components on the floor" loading="lazy" width="1600" height="1200">
+        <figcaption>The task of collecting components begins.</figcaption>
+      </figure>
+
+      <p>
+        This project taught me the importance of planning, and as such I regret
+        none of the decisions I made during the build.
+      </p>
+      <p>
+        My strategy throughout the build was to pick the most reversible next
+        step, and then stand back to visualise the next direction. Given the
+        project was a complex undertaking, I wanted to avoid inertia; I knew the
+        right design would reveal itself during the process.
+      </p>
+      <p>
+        Building first with pencil and paper is fine, if you know the necessary
+        considerations of the project. This being my first build, I felt it was my
+        only available method. It wasn't that I didn't plan, but rather I found
+        that planning at the required granularity proved futile: one consideration
+        I wasn't aware of voided that time-expensive plan.
+      </p>
+
+      <h2>The van</h2>
+      <table class="specs">
+        <tr><th scope="row">Vehicle</th><td>2016 Renault Master, medium wheelbase, high roof (L2H2) panel van</td></tr>
+        <tr><th scope="row">Engine</th><td>2.3&nbsp;litre twin-turbo diesel</td></tr>
+        <tr><th scope="row">Transmission</th><td>Six speed automatic</td></tr>
+        <tr><th scope="row">Weight</th><td>3,510&nbsp;kg gross — drivable on a normal car licence</td></tr>
+        <tr><th scope="row">Standing height</th><td>1.85&nbsp;m inside</td></tr>
+        <tr><th scope="row">Distance</th><td>About 220,000&nbsp;km at the point of sale</td></tr>
+      </table>
+
+      <h2>Fit-out</h2>
+      <p>
+        Painted plywood cabinetry, European beech benchtops, and a
+        tongue-and-groove timber ceiling. A door was fitted between the cab and
+        the living area.
+      </p>
+      <ul class="gallery">
+        <li>
+          <figure class="shot">
+            <a href="photos/before-04-cabinetry.jpg"><img src="photos/before-04-cabinetry.jpg" alt="Part-finished interior with painted plywood cabinetry and the fridge in place" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>Cabinetry going in.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="shot">
+            <a href="photos/int-01-kitchen.jpg"><img src="photos/int-01-kitchen.jpg" alt="Finished interior seen through the open side door, showing the kitchen bench and sink" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>Kitchen bench from the side door.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="shot">
+            <a href="photos/int-04-benchtop.jpg"><img src="photos/int-04-benchtop.jpg" alt="Close view of the European beech benchtop timber" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>Beech benchtop.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="shot">
+            <a href="photos/int-08-standing-height.jpg"><img src="photos/int-08-standing-height.jpg" alt="A tape measure held against the timber ceiling showing the internal standing height" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>Measured standing height under the lined ceiling.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="shot">
+            <a href="photos/cab-01-door.jpg"><img src="photos/cab-01-door.jpg" alt="The fitted door between the living area and the driver's cab, standing open" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>Door through to the cab.</figcaption>
+          </figure>
+        </li>
+      </ul>
+
+      <h2>Sleeping and seating</h2>
+      <p>
+        A fixed double bed on a frame across the back, with a sprung mattress, so
+        it needs no setting up. The whole space under it is open storage reachable
+        from the rear doors, and there is a second storage area over the cab. The
+        seating below the bed has a table that pulls out and stows.
+      </p>
+      <ul class="gallery">
+        <li>
+          <figure class="shot">
+            <a href="photos/int-05-bed.jpg"><img src="photos/int-05-bed.jpg" alt="The fixed double bed with a sprung mattress across the rear of the van" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>Fixed bed.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="shot">
+            <a href="photos/int-02-dinette.jpg"><img src="photos/int-02-dinette.jpg" alt="Interior looking forward from the rear doors, showing the seating, table and bed" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>Seating and pull-out table.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="shot">
+            <a href="photos/int-06-garage.jpg"><img src="photos/int-06-garage.jpg" alt="Open rear doors showing the storage area beneath the bed with a guitar and gear inside" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>Storage under the bed, from the rear doors.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="shot">
+            <a href="photos/int-07-over-cab.jpg"><img src="photos/int-07-over-cab.jpg" alt="The timber-lined storage space above the driver's cab" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>Storage over the cab.</figcaption>
+          </figure>
+        </li>
+      </ul>
+
+      <h2>Kitchen and water</h2>
+      <p>
+        A stainless sink plumbed to a 40&nbsp;litre fresh water tank, with a
+        pull-out sprayer tap that reaches out the side door to wash at. A
+        60&nbsp;litre compressor fridge, and a chemical toilet with its own
+        10&nbsp;litre fresh and 15&nbsp;litre waste tanks.
+      </p>
+      <ul class="gallery">
+        <li>
+          <figure class="shot">
+            <a href="photos/int-03-sink.jpg"><img src="photos/int-03-sink.jpg" alt="The round stainless steel sink set into the beech benchtop, with the mixer tap" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>Sink and tap.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="shot">
+            <a href="photos/sys-04-sprayer.jpg"><img src="photos/sys-04-sprayer.jpg" alt="The tap's pull-out sprayer held outside the van, running water onto the grass" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>The sprayer reaches outside.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="shot">
+            <a href="photos/sys-03-fridge.jpg"><img src="photos/sys-03-fridge.jpg" alt="The open 60 litre fridge built into the cabinetry" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>Fridge.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="shot">
+            <a href="photos/sys-07-toilet.jpg"><img src="photos/sys-07-toilet.jpg" alt="The chemical toilet stowed in its cabinet beside the bench" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>Toilet, stowed in its own cabinet.</figcaption>
+          </figure>
+        </li>
+      </ul>
+
+      <h2>Power</h2>
+      <p>
+        A 100&nbsp;amp-hour battery in the back, charged off the engine's
+        alternator through a voltage-sensitive relay so it only draws once the
+        starter battery is full. A 300&nbsp;watt inverter on an Anderson plug for
+        mains sockets, and USB outlets through the living area. I ran
+        8&nbsp;gauge UV-rated cable to the roof through sealed glands so panels
+        could be added later without opening anything up again.
+      </p>
+      <ul class="gallery">
+        <li>
+          <figure class="shot">
+            <a href="photos/sys-06-power.jpg"><img src="photos/sys-06-power.jpg" alt="A laptop charging on the pull-out table from the van's outlets" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>Inverter and USB outlets in use.</figcaption>
+          </figure>
+        </li>
+      </ul>
+
+      <h2>Heating and ventilation</h2>
+      <p>
+        A 5&nbsp;kilowatt diesel heater plumbed off the van's own fuel, and a
+        ten-speed roof fan with a thermostat and remote that can pull air in or
+        push it out.
+      </p>
+      <p>
+        In testing, the heater proved more than adequate for the space. The fan
+        became essential travelling the north of the country — it really earned
+        its stripes up there.
+      </p>
+      <ul class="gallery">
+        <li>
+          <figure class="shot">
+            <a href="photos/sys-01-heater.jpg"><img src="photos/sys-01-heater.jpg" alt="The diesel heater's control panel mounted on the cabinetry" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>Heater controller.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="shot">
+            <a href="photos/sys-02-fan.jpg"><img src="photos/sys-02-fan.jpg" alt="The roof fan seen from inside, with its remote control held below" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>Roof fan and remote.</figcaption>
+          </figure>
+        </li>
+      </ul>
+
+      <h2>Safety</h2>
+      <p>
+        Smoke and carbon monoxide alarms, and a fire extinguisher mounted by the
+        door.
+      </p>
+      <ul class="gallery">
+        <li>
+          <figure class="shot">
+            <a href="photos/sys-08-alarms.jpg"><img src="photos/sys-08-alarms.jpg" alt="A fire extinguisher and combined smoke and carbon monoxide alarm mounted on the wall" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>Extinguisher and alarms.</figcaption>
+          </figure>
+        </li>
+      </ul>
+
+      <h2>Making it road legal</h2>
+      <p>
+        The van came with a single seat. I fitted a passenger seat and belt, had
+        the fitment inspected, and it was licensed as a two-seater under a Western
+        Australian Department of Transport modification approval permit, which
+        passes to the next owner with the vehicle.
+      </p>
+      <ul class="gallery">
+        <li>
+          <figure class="shot">
+            <a href="photos/cab-02-cockpit.jpg"><img src="photos/cab-02-cockpit.jpg" alt="The van's cab, showing the dashboard, steering wheel and gear selector" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>The cab.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="shot">
+            <a href="photos/doc-01-service-book.jpg"><img src="photos/doc-01-service-book.jpg" alt="The Renault service book open, showing stamped service history entries" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>Service book, kept up.</figcaption>
+          </figure>
+        </li>
+      </ul>
+
+      <h2>Testing it</h2>
+      <p>
+        I ran three long-distance trips in it, the longest a 4,000&nbsp;kilometre
+        return drive to Darwin. Testing the van for reliability was a big reason
+        for going that far.
+      </p>
+      <p>
+        That trip found a fault. The clutch runs off a concentric slave cylinder
+        inside the bellhousing, so reaching it means dropping the gearbox out —
+        not a roadside job, and the reason the part is a known weak point on these
+        vans. I had it done in Katherine, in the Northern Territory, with the parts
+        freighted up to Darwin: gearbox out, slave cylinder replaced, clutch bled,
+        fault codes cleared, and a test drive afterwards, in November 2025.
+      </p>
+      <ul class="gallery">
+        <li>
+          <figure class="shot">
+            <a href="photos/trip-01-nt-border.jpg"><img src="photos/trip-01-nt-border.jpg" alt="The van parked at the Northern Territory border sign on a red dirt roadside" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>Northern Territory border, on the way to Darwin.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="shot">
+            <a href="photos/mech-01-underside.jpg"><img src="photos/mech-01-underside.jpg" alt="The underside of the van photographed on a hoist" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>Underside, on a hoist.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="shot">
+            <a href="photos/mech-02-tyre.jpg"><img src="photos/mech-02-tyre.jpg" alt="Close view of a tyre showing remaining tread depth" loading="lazy" width="1600" height="1200"></a>
+            <figcaption>Tread, before sale.</figcaption>
+          </figure>
+        </li>
+      </ul>
+
+      <h2>Afterwards</h2>
+      <p>
+        It sold, and I hope the new owner is getting good use out of it. I'll
+        never forget what I learned building it, and I hope you enjoyed me
+        sharing it here.
+      </p>
+      <p class="meta">
+        Some of the photographs above carry captions burnt in from the sale
+        listing, and a camera date stamp. They are the originals, unedited.
+      </p>
+    </main>
+
+    <footer class="site-footer">
+      <p>Oisin McGrath — Bunbury, Western Australia.</p>
+      <p><a href="/">oisinmcgrath.com</a> · <a href="/projects/">Projects</a></p>
+    </footer>
+  </div>
+</body>
+</html>

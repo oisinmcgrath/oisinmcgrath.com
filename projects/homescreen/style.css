@@ -47,3 +47,45 @@ footer.site-footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid #2b30
 footer.site-footer p{margin:0 0 .4rem;color:inherit}
 footer.site-footer a{color:#6fb3f2}
 @media (max-width:480px){.wrap{padding:1.15rem 1rem 2.5rem}header.site-header h1{font-size:1.4rem}}
+
+/* Header nav links are pill buttons, each prefixed with its own mark. The
+   colours are all derived from currentColor, so this same block sits in every
+   project stylesheet unchanged and picks up whatever palette the page has. */
+nav.site-nav {
+  gap: 0.5rem;
+}
+
+nav.site-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  line-height: 1.35;
+  text-decoration: none;
+  font-weight: 500;
+  border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+  background: color-mix(in srgb, currentColor 7%, transparent);
+}
+
+nav.site-nav a:hover {
+  text-decoration: none;
+  border-color: color-mix(in srgb, currentColor 58%, transparent);
+  background: color-mix(in srgb, currentColor 14%, transparent);
+}
+
+nav.site-nav a[aria-current="page"] {
+  border-color: color-mix(in srgb, currentColor 45%, transparent);
+  background: color-mix(in srgb, currentColor 12%, transparent);
+}
+
+/* Marks keep their own size when the label wraps. GitHub's is the one icon
+   that does not take the link colour: its mark is black on light backgrounds
+   and near-white on dark ones, which is how GitHub asks for it to be shown. */
+nav.site-nav .ico {
+  flex: none;
+}
+
+nav.site-nav .ico-gh {
+  color: #eef1f5;
+}

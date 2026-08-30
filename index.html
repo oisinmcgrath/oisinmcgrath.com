@@ -3,12 +3,36 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Oisin McGrath — software developer in Western Australia. Creator of invoiceNow, a desktop invoicing app for Australian sole traders.">
+  <meta name="description" content="Oisin McGrath — software development in Western Australia. Creator of invoiceNow, a desktop invoicing app for Australian sole traders.">
   <title>Oisin McGrath</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <style>.site-header{position:relative;padding-top:0.75rem;padding-bottom:1.5rem;min-height:160px;display:flex;flex-direction:column;justify-content:center}.avatar{position:absolute;top:50%;transform:translateY(-50%);right:0;width:140px;height:140px;border-radius:50%;object-fit:cover}@media(max-width:600px){.avatar{position:static;display:block;margin:1rem 0}}</style>
+  <style>
+    /* The three links under the bio are buttons, each carrying the mark of
+       where it goes. GitHub keeps its own black; LinkedIn keeps its own blue. */
+    /* Stacked and centred, each tinted towards the service it points at:
+       GitHub's ink-grey, LinkedIn's blue, the site's own blue for Projects. */
+    .links{display:flex;flex-direction:column;align-items:center;gap:.55rem;
+           margin:1.25rem 0 1.75rem}
+    .links li{margin:0}
+    .links a{display:inline-flex;align-items:center;gap:.55rem;padding:.5rem .9rem;
+             border-radius:8px;text-decoration:none;font-weight:500;
+             border:1px solid var(--tint);background:var(--fill);color:var(--ink);
+             transition:border-color .15s,background .15s,box-shadow .15s}
+    .links a:hover{border-color:var(--ink);background:var(--fill-hover);
+                   box-shadow:0 2px 8px var(--shadow)}
+    .links .ico{flex:none;color:var(--ink)}
+    .links .l-gh{--ink:#24292f;--tint:#c8cdd3;--fill:#f4f5f7;--fill-hover:#e9ebee;
+                 --shadow:rgba(36,41,47,.16)}
+    .links .l-li{--ink:#2b65ab;--tint:#b3c8e2;--fill:#eff4fa;--fill-hover:#e2ecf7;
+                 --shadow:rgba(43,101,171,.18)}
+    .links .l-pr{--ink:#14507d;--tint:#aec4d8;--fill:#eef3f8;--fill-hover:#e1ebf4;
+                 --shadow:rgba(20,80,125,.18)}
+    /* Suffix mark on the Technical projects heading. */
+    .hicon{margin-left:.4rem;vertical-align:-.15em;color:#14507d}
+  </style>
   <style>.card-links{margin-top:1.5rem;font-weight:600}</style>
   <style>
     .projgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem;margin:1rem 0 2rem}
@@ -21,6 +45,26 @@
     .projcard h3{margin:0 0 .4rem;font-size:1.05rem;color:#15191d}
     .projcard p{margin:0 0 .9rem;font-size:.92rem;color:#3b424a;flex:1}
     .projcard .more{font-size:.88rem;font-weight:600;color:#14507d}
+    /* Feature card: a large 16:9 thumbnail, the way a video listing shows one. */
+    .featcard{display:block;max-width:44rem;margin:1rem 0 2rem;padding:0;text-decoration:none;
+              color:inherit;border:2px solid #aab8c6;border-radius:12px;overflow:hidden;
+              background:#fbfcfd;box-shadow:0 2px 10px rgba(20,60,100,.10);
+              transition:box-shadow .15s,transform .15s,border-color .15s}
+    .featcard:hover{transform:translateY(-2px);border-color:#14507d;
+                    box-shadow:0 6px 20px rgba(20,60,100,.18)}
+    .featcard img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;
+                  border-bottom:2px solid #aab8c6}
+    .featcard .body{padding:1.1rem 1.25rem}
+    .featcard h3{margin:0 0 .4rem;font-size:1.15rem;color:#15191d}
+    .featcard p{margin:0 0 .9rem;font-size:.95rem;color:#3b424a}
+    .featcard .more{font-size:.9rem;font-weight:600;color:#14507d}
+    .commshot{display:block;max-width:30rem;margin:1rem 0 0;border:2px solid #aab8c6;
+              border-radius:10px;overflow:hidden;line-height:0;
+              box-shadow:0 2px 10px rgba(20,60,100,.10);
+              transition:box-shadow .15s,transform .15s,border-color .15s}
+    .commshot:hover{transform:translateY(-2px);border-color:#14507d;
+                    box-shadow:0 6px 20px rgba(20,60,100,.18)}
+    .commshot img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
   </style>
 </head>
 <body>
@@ -28,30 +72,57 @@
     <header class="site-header">
       <img class="avatar" src="/profile.jpg" alt="Oisin McGrath">
       <h1>Oisin McGrath</h1>
-      <p class="tagline">Software developer · Perth, Western Australia</p>
+      <p class="tagline">Software development · Bunbury, Western Australia</p>
       <nav class="site-nav" aria-label="Primary">
-        <a href="index.html" aria-current="page">Home</a>
+        <a href="index.html" aria-current="page"><svg class="ico" viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0L0 6V8H1V15H4V10H7V15H15V8H16V6L14 4.5V1H11V2.25L8 0ZM9 10H12V13H9V10Z"/></svg>Home</a>
       </nav>
     </header>
 
     <main>
       <p class="lead">
-        I build practical desktop tools with Python — local databases, PDF generation,
+        I build practical desktop tools, primarily with Python — local databases, PDF generation,
         and workflows that stay on your machine. My work focuses on software that
         sole traders and small operators can actually use day to day.
       </p>
 
       <h2>Links</h2>
       <ul class="links">
-        <li><a href="https://github.com/oisinmcgrath">GitHub — github.com/oisinmcgrath</a></li>
-        <li><a href="https://www.linkedin.com/in/oisinmcgrathdev/">LinkedIn — Oisin McGrath</a></li>
-        <li><a href="/projects/">Projects</a></li>
+        <li class="l-gh"><a href="https://github.com/oisinmcgrath"><svg class="ico ico-gh" viewBox="0 0 20 20" width="15" height="15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M10,0 C15.523,0 20,4.59 20,10.253 C20,14.782 17.138,18.624 13.167,19.981 C12.66,20.082 12.48,19.762 12.48,19.489 C12.48,19.151 12.492,18.047 12.492,16.675 C12.492,15.719 12.172,15.095 11.813,14.777 C14.04,14.523 16.38,13.656 16.38,9.718 C16.38,8.598 15.992,7.684 15.35,6.966 C15.454,6.707 15.797,5.664 15.252,4.252 C15.252,4.252 14.414,3.977 12.505,5.303 C11.706,5.076 10.85,4.962 10,4.958 C9.15,4.962 8.295,5.076 7.497,5.303 C5.586,3.977 4.746,4.252 4.746,4.252 C4.203,5.664 4.546,6.707 4.649,6.966 C4.01,7.684 3.619,8.598 3.619,9.718 C3.619,13.646 5.954,14.526 8.175,14.785 C7.889,15.041 7.63,15.493 7.54,16.156 C6.97,16.418 5.522,16.871 4.63,15.304 C4.63,15.304 4.101,14.319 3.097,14.247 C3.097,14.247 2.122,14.234 3.029,14.87 C3.029,14.87 3.684,15.185 4.139,16.37 C4.139,16.37 4.726,18.2 7.508,17.58 C7.513,18.437 7.522,19.245 7.522,19.489 C7.522,19.76 7.338,20.077 6.839,19.982 C2.865,18.627 0,14.783 0,10.253 C0,4.59 4.478,0 10,0"/></svg><span>GitHub — github.com/oisinmcgrath</span></a></li>
+        <li class="l-li"><a href="https://www.linkedin.com/in/oisinmcgrathdev/"><svg class="ico ico-li" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8" cy="7.5" r="1.25" fill="currentColor" stroke="none"/><path d="M8 11v6"/><path d="M12 17v-6"/><path d="M12 13.6c.6-2 1.6-2.6 2.5-2.6 1.4 0 2.5 1.1 2.5 2.57V17"/></svg><span>LinkedIn — Oisin McGrath</span></a></li>
+        <li class="l-pr"><a href="/projects/"><svg class="ico" viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M2 13.122a1 1 0 00.741.966l7 1.876A1 1 0 0011 14.998V14h2a1 1 0 001-1V3a1 1 0 00-1-1h-2v-.994A1 1 0 009.741.04l-7 1.876A1 1 0 002 2.882v10.24zM9 2.31v11.384l-5-1.34V3.65l5-1.34zM11 12V4h1v8h-1z"/></svg><span>Projects</span></a></li>
       </ul>
 
 
 
-      <h2>Projects</h2>
+      <h2>Technical projects <svg class="hicon" viewBox="0 0 512 512" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M476.007,209.804c25.297-25.281,37.25-58.859,35.891-91.984l-16.484-16.484l-57.453,57.453l-66.844-17.906l-17.906-66.828l57.453-57.453l-16.484-16.5c-33.125-1.359-66.703,10.594-91.984,35.891c-31.734,31.734-42.484,76.5-32.25,117.063L78.663,344.335c-19.703,1.234-39.031,9.359-54.078,24.406c-32.781,32.781-32.781,85.906,0,118.688c32.766,32.766,85.906,32.766,118.672,0c15.047-15.047,23.172-34.391,24.406-54.078l191.281-191.281C399.506,252.288,444.272,241.538,476.007,209.804z M264.256,219.819c7.703-7.719,20.219-7.719,27.922,0c7.719,7.703,7.719,20.219,0,27.938l-100,100c-7.719,7.719-20.219,7.719-27.938,0c-7.703-7.719-7.703-20.219,0-27.938L264.256,219.819z M92.756,468.179l-38.594-10.344l-10.344-38.594l28.25-28.25l38.609,10.328l10.344,38.609L92.756,468.179z"/></svg></h2>
+      <a class="featcard" href="/projects/renault-master/">
+        <img src="/projects/renault-master/thumb.jpg"
+             alt="The finished red Renault Master campervan parked on grass with its side door open">
+        <div class="body">
+          <h3>Renault Master Camper Conversion</h3>
+          <p>Perhaps my most ambitious and educational undertaking: in 2025 I converted an
+             Australia Post van into a fully fitted-out campervan, and put it to the test by
+             taking it 4,400&nbsp;km to the top of Australia.</p>
+          <span class="more">See the build &rarr;</span>
+        </div>
+      </a>
+
+      <h2>Software projects <svg class="hicon" viewBox="-6 -6 443.908 443.908" width="21" height="21" fill="currentColor" stroke="currentColor" stroke-width="10" aria-hidden="true"><path d="M423.908,152.051c4.418,0,8-3.582,8-8s-3.582-8-8-8h-24.006v-31.936h24.006c4.418,0,8-3.582,8-8s-3.582-8-8-8h-24.006 V71.996c0-22.056-17.944-40-40-40h-16.109V8c0-4.418-3.582-8-8-8s-8,3.582-8,8v23.996h-31.937V8c0-4.418-3.582-8-8-8s-8,3.582-8,8 v23.996H247.92V8c0-4.418-3.582-8-8-8s-8,3.582-8,8v23.996h-31.935V8c0-4.418-3.582-8-8-8s-8,3.582-8,8v23.996h-31.936V8 c0-4.418-3.582-8-8-8s-8,3.582-8,8v23.996h-31.936V8c0-4.418-3.582-8-8-8s-8,3.582-8,8v23.996H71.985c-22.056,0-40,17.944-40,40 v16.119H8c-4.418,0-8,3.582-8,8s3.582,8,8,8h23.985v31.936H8c-4.418,0-8,3.582-8,8s3.582,8,8,8h23.985v31.936H8 c-4.418,0-8,3.582-8,8s3.582,8,8,8h23.985v31.935H8c-4.418,0-8,3.582-8,8s3.582,8,8,8h23.985v31.936H8c-4.418,0-8,3.582-8,8 s3.582,8,8,8h23.985v31.936H8c-4.418,0-8,3.582-8,8s3.582,8,8,8h23.985v16.119c0,22.056,17.944,40,40,40h16.128v23.995 c0,4.418,3.582,8,8,8s8-3.582,8-8v-23.995h31.936v23.995c0,4.418,3.582,8,8,8s8-3.582,8-8v-23.995h31.936v23.995 c0,4.418,3.582,8,8,8s8-3.582,8-8v-23.995h31.935v23.995c0,4.418,3.582,8,8,8s8-3.582,8-8v-23.995h31.936v23.995 c0,4.418,3.582,8,8,8s8-3.582,8-8v-23.995h31.937v23.995c0,4.418,3.582,8,8,8s8-3.582,8-8v-23.995h16.109c22.056,0,40-17.944,40-40 v-16.119h24.006c4.418,0,8-3.582,8-8s-3.582-8-8-8h-24.006v-31.936h24.006c4.418,0,8-3.582,8-8s-3.582-8-8-8h-24.006v-31.936 h24.006c4.418,0,8-3.582,8-8s-3.582-8-8-8h-24.006v-31.935h24.006c4.418,0,8-3.582,8-8s-3.582-8-8-8h-24.006v-31.936H423.908z M383.902,359.912c0,13.233-10.767,24-24,24H71.985c-13.233,0-24-10.767-24-24V71.996c0-13.234,10.767-24,24-24h287.917 c13.233,0,24,10.766,24,24V359.912z"/><path d="M343.777,72.121H88.11c-8.822,0-16,7.177-16,16v255.667c0,8.822,7.178,16,16,16h255.667c8.822,0,16-7.178,16-16V88.121 C359.777,79.298,352.599,72.121,343.777,72.121z M88.11,343.787V88.121h255.667l0.002,255.667H88.11z"/></svg></h2>
       <div class="projgrid">
+        <a class="projcard" href="/projects/homescreen/">
+          <img src="/projects/logos/homescreen.png" alt="">
+          <h3>Home Screen</h3>
+          <p>A browser new tab page laid out like a phone home screen — an app grid
+             you arrange yourself, with weather, sun times and an assistant bar.</p>
+          <span class="more">Read more &rarr;</span>
+        </a>
+        <a class="projcard" href="/projects/epson-rr70w-autofeed/">
+          <img src="/projects/logos/epson-rr70w-autofeed.png" alt="">
+          <h3>Epson RR-70W batch scanner</h3>
+          <p>Driver-free batch scanning for the Epson RR-70W on Linux. Feed page after
+             page straight to PNG or PDF — no OEM software, no cloud account.</p>
+          <span class="more">Read more &rarr;</span>
+        </a>
         <a class="projcard" href="/projects/invoicenow/">
           <img src="/projects/logos/invoicenow.png" alt="">
           <h3>invoiceNow</h3>
@@ -80,13 +151,6 @@
              drives your energy, mood and focus. No account, no cloud, no subscription.</p>
           <span class="more">Read more &rarr;</span>
         </a>
-        <a class="projcard" href="/projects/epson-rr70w-autofeed/">
-          <img src="/projects/logos/epson-rr70w-autofeed.png" alt="">
-          <h3>Epson RR-70W batch scanner</h3>
-          <p>Driver-free batch scanning for the Epson RR-70W on Linux. Feed page after
-             page straight to PNG or PDF — no OEM software, no cloud account.</p>
-          <span class="more">Read more &rarr;</span>
-        </a>
         <a class="projcard" href="/projects/tagdexer/">
           <img src="/projects/logos/tagdexer.png" alt="">
           <h3>tagdexer</h3>
@@ -101,13 +165,6 @@
              replacement for Windows-only NitroSense.</p>
           <span class="more">Read more &rarr;</span>
         </a>
-        <a class="projcard" href="/projects/homescreen/">
-          <img src="/projects/logos/homescreen.png" alt="">
-          <h3>Home Screen</h3>
-          <p>A browser new tab page laid out like a phone home screen — an app grid
-             you arrange yourself, with weather, sun times and an assistant bar.</p>
-          <span class="more">Read more &rarr;</span>
-        </a>
         <a class="projcard" href="/projects/yt-downloader/">
           <img src="/projects/logos/yt-downloader.png" alt="">
           <h3>YT Downloader</h3>
@@ -117,6 +174,17 @@
           <span class="more">Read more &rarr;</span>
         </a>
       </div>
+
+      <h2>Community</h2>
+      <p>
+        We had a blast volunteering for the St Patrick's Festival with the South West
+        Irish Community Group for both 2024 and 2025 —
+        <a href="/community.html">see more about that here</a>.
+      </p>
+      <a class="commshot" href="/community.html">
+        <img src="/community/day-families.jpg"
+             alt="Families and children in green out on the grass at the St Patrick's Day festival">
+      </a>
 
       <p class="meta">
         This site has no tracking, no analytics, and no advertising cookies.

@@ -51,10 +51,8 @@
   /* The spec card sits lighter than the page, not darker — a sunlit face of
      the same earth rather than a hole in it. */
   --card-bg: #ab6a4c;
-  --card-lift: #bd7a59;
   --bg: var(--floor);
   --bg-alt: #8a4a34;
-  --surface: #a35c43;
   --surface-sunk: #8a4a34;
   --border: #6d3a28;
   --border-strong: #5c2f20;
@@ -67,7 +65,6 @@
   --text-invert: #fdf6ef;
   --heading: #ffd9b0;
 
-  --accent: var(--dust);
   --accent-hover: #a3480f;
   --accent-soft: #fbe0cb;
   /* Links take the earth, not the sky — the ground is what this landscape
@@ -157,9 +154,6 @@
   --descent: 1340px;
 
   /* elevation — low sun, long warm shadows, never neutral grey */
-  --shadow-1: 0 1px 2px rgba(46, 36, 29, 0.1);
-  --shadow-2: 0 4px 14px -4px rgba(120, 52, 24, 0.22);
-  --shadow-3: 0 18px 40px -18px rgba(120, 52, 24, 0.38);
   --ring: 0 0 0 3px rgba(212, 98, 46, 0.4);
 }
 
@@ -168,17 +162,14 @@
     --floor: #2a1a12; /* night desert */
     --floor-deep: #22150e;
     --card-bg: #3a271b;
-    --card-lift: #4a3324;
     --bg: var(--floor);
     --bg-alt: #241a13;
-    --surface: #3a271b;
     --surface-sunk: #241811;
     --border: #4c3524;
     --border-strong: #6b4a31;
     --text: #f2e4d6;
     --text-muted: #c9ab95;
     --heading: #f0a875;
-    --accent: #e8743b;
     --accent-hover: #f79161;
     --accent-soft: #402016;
     --link: #f0a875;
@@ -671,45 +662,7 @@ figure.plate figcaption {
   padding: 0 var(--sp-5) var(--sp-5);
 }
 
-/* ---- specification card ----
-   The one block of hard numbers on the page, so it is lifted off the ground
-   into a card of its own rather than left as a bare table. Its ground is the
-   floor a shade deeper; on hover it brightens and rises, over half a second,
-   so it reads as a considered movement rather than a flinch. */
-
-.card {
-  margin-block: var(--sp-6);
-  padding: var(--sp-5) var(--sp-5) var(--sp-4);
-  border: 1px solid rgba(255, 214, 170, 0.35);
-  border-radius: var(--radius-lg);
-  background: var(--card-bg);
-  box-shadow: 0 1px 2px rgba(24, 10, 4, 0.3),
-    0 8px 20px -10px rgba(24, 10, 4, 0.45);
-  /* Brightness is done with a filter rather than by swapping the background
-     colour: the browser can composite it on its own, so the movement starts
-     the instant the pointer arrives instead of waiting on a repaint. The
-     layer is promoted up front for the same reason. Nine tenths of a second,
-     both ways — long enough to read as a considered movement. */
-  filter: brightness(1);
-  will-change: transform, filter;
-  transition: transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
-    filter 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
-    box-shadow 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
-    border-color 0.9s ease;
-}
-
-.card:hover {
-  transform: translateY(-7px);
-  filter: brightness(1.16);
-  border-color: var(--dust-pale);
-  box-shadow: 0 2px 4px rgba(24, 10, 4, 0.35),
-    0 20px 44px -12px rgba(24, 10, 4, 0.5),
-    0 0 30px rgba(255, 178, 109, 0.24);
-}
-
-.card > h2 {
-  margin-top: 0;
-}
+/* ---- specification table ---- */
 
 .specs {
   width: 100%;

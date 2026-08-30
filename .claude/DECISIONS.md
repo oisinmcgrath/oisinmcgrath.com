@@ -189,6 +189,10 @@ that way — one moving element is an accent, several are noise.
 
 **2026-08 — the sky is the four sampled tones and nothing else.**
 
+The full set of colours sampled from the photograph is recorded as custom
+properties at the top of the stylesheet. Not all of them are referenced by a
+rule; they are kept as the record of what was sampled.
+
 `--sky-zenith` `#0f64d0`, `--sky-mid` `#49a0ff`, `--sky-haze` `#acdcff`,
 `--horizon` `#b8dbfe`, in that order down the descent. Intermediate blues had
 been invented to smooth the ramp; they made the sky paler and less like the
@@ -208,9 +212,9 @@ saturated.
 Opening a carousel photograph now gives arrows either side, the caption, and
 the whole set as a strip along the bottom — darkened until hovered, when each
 lifts and lights, with the one being viewed left lit. All of it is `:target`
-and ordinary links; still no script. The strip shows all five with the current
-one marked rather than hiding it, so the row does not reflow as you move
-through the set.
+and ordinary links; still no script. The strip shows every photograph with the
+current one marked rather than hiding it, so the row does not reflow as you
+move through the set.
 
 **2026-08 — hover animation is done with `filter`, not `background-color`.**
 
@@ -220,13 +224,12 @@ brightness()` composites on its own, and `will-change` promotes the layer up
 front. With both, the movement starts the moment the pointer arrives. It runs
 0.9s in each direction.
 
-**Known limitation — the carousel's first arrow click jumps.** The drift is a
-CSS animation and CSS cannot read its phase, so the arrows are positioned
-relative to a fixed slide, not to whatever happens to be centred. The first
-click therefore lands somewhere other than "one along"; every click after it is
-correct in both directions. Hovering pauses the drift, which takes the edge off
-it. Fixing it properly needs JavaScript, and that trade has been declined —
-see the carousel note above.
+**Known limitation — arrow clicks jump.** The drift is a CSS animation and CSS
+cannot read its phase, so the arrows are anchored to fixed slides rather than
+to whatever is centred. A click made after the drift has moved on lands
+somewhere other than "one along". This applies to both carousels. Fixing it
+properly needs JavaScript, and that trade has been declined — see the carousel
+note above.
 
 **2026-08 — the walkthrough previews itself, still without a script.**
 
@@ -312,6 +315,9 @@ stopped working. It is now a checkbox with `autocomplete="off"`, which the
 browser does not restore either. Every load starts on the loop.
 
 **2026-08 — the carousel keeps moving, and comes back on its own.**
+
+(The Renault carousel held five photographs when this was written; it holds
+three now, and the geometry in the stylesheet is sized for three.)
 
 Hovering no longer pauses it: only an arrow click stops it, and then only for
 five seconds, after which the drift picks up again from exactly where that

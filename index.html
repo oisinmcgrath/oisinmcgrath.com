@@ -198,7 +198,8 @@
       box-shadow:0 2px 10px light-dark(rgba(20,60,100,.10),rgba(0,0,0,.45))}
     body .featcard:hover{border-color:light-dark(#14507d,#7fb3e8);
       box-shadow:0 6px 20px light-dark(rgba(20,60,100,.18),rgba(0,0,0,.6))}
-    body .featcard img{border-bottom-color:light-dark(#aab8c6,#39424d)}
+    body .featcard > img,
+    body .featcard > video{border-bottom-color:light-dark(#aab8c6,#39424d)}
     body .featcard h3{color:light-dark(#15191d,#e8ecf1)}
     body .featcard p{color:light-dark(#3b424a,#aab3be)}
     body .commshot{border-color:light-dark(#aab8c6,#39424d);
@@ -255,20 +256,37 @@
       mask-image:linear-gradient(90deg,rgba(0,0,0,.16) 0%,rgba(0,0,0,.5) 11%,#000 24%,#000 76%,rgba(0,0,0,.5) 89%,rgba(0,0,0,.16) 100%);
       -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
       -webkit-mask-size:100% 100%;mask-size:100% 100%}
-    .feattrack{display:flex;align-items:flex-start;width:288%;
-               animation:featdrift 52s linear infinite;will-change:transform}
-    @keyframes featdrift{from{transform:translateX(-20.1389%)}
-                         to{transform:translateX(-70.1389%)}}
+    /* Nine slots for three cards — the set three times over — on six and
+       three quarter viewports of track, so each slot is three quarters of the
+       viewport and the neighbours show at either side. Three copies rather
+       than two: the drift runs three slots, and after an arrow click it has
+       to be able to run three slots from *any* of the three anchors without
+       reaching the end of the track. With two copies the third anchor runs
+       off the end and the right-hand side empties, which is the gap that used
+       to appear here.
+
+       -9.2593% of the track is 62.5% of a viewport, which centres the second
+       slot and leaves the first covering the left gutter. Running on to
+       -42.5926% moves the track exactly three slots — one full set — so the
+       loop closes on itself with nothing to see. 26 seconds a slot. */
+    .feattrack{display:flex;align-items:flex-start;width:675%;
+               animation:featdrift 78s linear infinite;will-change:transform}
+    @keyframes featdrift{from{transform:translateX(-9.2593%)}
+                         to{transform:translateX(-42.5926%)}}
     .feat:has(.featinput:checked) .feattrack{
       transition:transform .55s cubic-bezier(.65,0,.35,1)}
-    .feat:has(#feat1:checked) .feattrack{transform:translateX(-45.1389%);
-      animation:featdrift1 52s linear 5s infinite}
-    .feat:has(#feat2:checked) .feattrack{transform:translateX(-20.1389%);
-      animation:featdrift2 52s linear 5s infinite}
-    @keyframes featdrift1{from{transform:translateX(-45.1389%)}
-                          to{transform:translateX(-95.1389%)}}
-    @keyframes featdrift2{from{transform:translateX(-20.1389%)}
-                          to{transform:translateX(-70.1389%)}}
+    .feat:has(#feat1:checked) .feattrack{transform:translateX(-9.2593%);
+      animation:featdrift1 78s linear 5s infinite}
+    .feat:has(#feat2:checked) .feattrack{transform:translateX(-20.3704%);
+      animation:featdrift2 78s linear 5s infinite}
+    .feat:has(#feat3:checked) .feattrack{transform:translateX(-31.4815%);
+      animation:featdrift3 78s linear 5s infinite}
+    @keyframes featdrift1{from{transform:translateX(-9.2593%)}
+                          to{transform:translateX(-42.5926%)}}
+    @keyframes featdrift2{from{transform:translateX(-20.3704%)}
+                          to{transform:translateX(-53.7037%)}}
+    @keyframes featdrift3{from{transform:translateX(-31.4815%)}
+                          to{transform:translateX(-64.8148%)}}
     .featbtn{position:absolute;top:calc(50% - 1.3rem);z-index:4;display:none;
              align-items:center;justify-content:center;width:2.6rem;height:2.6rem;
              border-radius:50%;cursor:pointer;font-size:1.6rem;line-height:1;
@@ -280,18 +298,24 @@
     .featbtn.next{right:1.5%}
     .feat .f1{display:flex}
     .feat:has(.featinput:checked) .featbtn{display:none}
-    .feat:has(#feat1:checked) .f1,.feat:has(#feat2:checked) .f2{display:flex}
+    .feat:has(#feat1:checked) .f1,.feat:has(#feat2:checked) .f2,
+    .feat:has(#feat3:checked) .f3{display:flex}
     @media(prefers-reduced-motion:reduce){
-      .feattrack{animation:none;transform:translateX(-45.1389%)}}
+      .feattrack{animation:none;transform:translateX(-9.2593%)}}
 
-    .featcard{flex:0 0 25%;display:block;margin:0 .6rem;padding:0;text-decoration:none;
+    .featslide{flex:0 0 11.1111%;padding:0 .6rem}
+    .featcard{display:block;width:100%;margin:0;padding:0;text-decoration:none;
               color:inherit;border:2px solid #aab8c6;border-radius:12px;overflow:hidden;
               background:#fbfcfd;box-shadow:0 2px 10px rgba(20,60,100,.10);
               transition:box-shadow .15s,transform .15s,border-color .15s}
     .featcard:hover{transform:translateY(-2px);border-color:#14507d;
                     box-shadow:0 6px 20px rgba(20,60,100,.18)}
-    .featcard img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;
+    .featcard > img,.featcard > video{display:block;width:100%;height:auto;
+                  aspect-ratio:16/9;object-fit:cover;
                   border-bottom:2px solid #aab8c6}
+    /* The mark of the project, set into its title. */
+    .cardicon{width:1.25em;height:1.25em;object-fit:contain;
+              vertical-align:-.28em;margin-right:.45rem}
     .featcard .body{padding:1.1rem 1.25rem}
     .featcard h3{margin:0 0 .4rem;font-size:1.15rem;color:#15191d}
     .featcard p{margin:0 0 .9rem;font-size:.95rem;color:#3b424a}
@@ -366,54 +390,136 @@
       <section class="feat" aria-label="Featured projects">
         <input class="featinput" type="radio" name="featured" id="feat1" autocomplete="off">
         <input class="featinput" type="radio" name="featured" id="feat2" autocomplete="off">
+        <input class="featinput" type="radio" name="featured" id="feat3" autocomplete="off">
 
         <div class="featviewport">
           <div class="feattrack">
-          <a class="featcard" href="/projects/renault-master/">
-            <img src="/projects/renault-master/thumb.jpg" alt="The finished red Renault Master campervan parked on grass with its side door open">
-            <div class="body">
-              <h3>Renault Master Camper Conversion</h3>
-              <p>Perhaps my most ambitious and educational undertaking: in 2025 I converted an
+          <div class="featslide">
+            <a class="featcard" href="/projects/renault-master/">
+              <img src="/projects/renault-master/thumb.jpg" alt="The finished red Renault Master campervan parked on grass with its side door open">
+              <div class="body">
+                <h3>Renault Master Camper Conversion</h3>
+                <p>Perhaps my most ambitious and educational undertaking: in 2025 I converted an
                  Australia Post van into a fully fitted-out campervan, and put it to the test by
                  taking it 4,400&nbsp;km to the top of Australia.</p>
-              <span class="more">See more &rarr;</span>
-            </div>
-          </a>
-          <a class="featcard" href="/projects/homescreen/">
-            <img src="/projects/homescreen/screenshots/home-screen.jpg" alt="The Home Screen new tab page: a grid of app tiles over a lake wallpaper, with a search bar, clock, weather and an Ask Claude bar">
-            <div class="body">
-              <h3>Home Screen</h3>
-              <p>A browser new tab page laid out like a phone home screen — an app grid you
+                <span class="more">See more &rarr;</span>
+              </div>
+            </a>
+          </div>
+          <div class="featslide">
+            <a class="featcard" href="/projects/homescreen/">
+              <img src="/projects/homescreen/screenshots/home-screen.jpg" alt="The Home Screen new tab page: a grid of app tiles over a lake wallpaper, with a search bar, clock, weather and an Ask Claude bar">
+              <div class="body">
+                <h3><img class="cardicon" src="/projects/homescreen/logo/logo.png" alt="">Home Screen</h3>
+                <p>A browser new tab page laid out like a phone home screen — an app grid you
                  arrange yourself, with weather, sun times and an assistant bar.</p>
-              <span class="more">See more &rarr;</span>
-            </div>
-          </a>
-          <a class="featcard" href="/projects/renault-master/" aria-hidden="true" tabindex="-1">
-            <img src="/projects/renault-master/thumb.jpg" alt="">
-            <div class="body">
-              <h3>Renault Master Camper Conversion</h3>
-              <p>Perhaps my most ambitious and educational undertaking: in 2025 I converted an
+                <span class="more">See more &rarr;</span>
+              </div>
+            </a>
+          </div>
+          <div class="featslide">
+            <a class="featcard" href="/projects/cadence/">
+              <video autoplay muted loop playsinline preload="auto"
+                   poster="/projects/cadence/demo-poster.jpg"
+                   width="1280" height="720" aria-hidden="true">
+              <source src="/projects/cadence/demo.mp4" type="video/mp4">
+            </video>
+              <div class="body">
+                <h3><img class="cardicon" src="/projects/cadence/logo/logo.png" alt="">Cadence</h3>
+                <p>Offline dictation and clipboard text-to-speech for Linux. Speak into any app,
+                 or hear selected text read aloud. The card plays the demo — silently, on
+                 a loop.</p>
+                <span class="more">See more &rarr;</span>
+              </div>
+            </a>
+          </div>
+          <div class="featslide">
+            <a class="featcard" href="/projects/renault-master/" aria-hidden="true" tabindex="-1">
+              <img src="/projects/renault-master/thumb.jpg" alt="">
+              <div class="body">
+                <h3>Renault Master Camper Conversion</h3>
+                <p>Perhaps my most ambitious and educational undertaking: in 2025 I converted an
                  Australia Post van into a fully fitted-out campervan, and put it to the test by
                  taking it 4,400&nbsp;km to the top of Australia.</p>
-              <span class="more">See more &rarr;</span>
-            </div>
-          </a>
-          <a class="featcard" href="/projects/homescreen/" aria-hidden="true" tabindex="-1">
-            <img src="/projects/homescreen/screenshots/home-screen.jpg" alt="">
-            <div class="body">
-              <h3>Home Screen</h3>
-              <p>A browser new tab page laid out like a phone home screen — an app grid you
+                <span class="more">See more &rarr;</span>
+              </div>
+            </a>
+          </div>
+          <div class="featslide">
+            <a class="featcard" href="/projects/homescreen/" aria-hidden="true" tabindex="-1">
+              <img src="/projects/homescreen/screenshots/home-screen.jpg" alt="">
+              <div class="body">
+                <h3><img class="cardicon" src="/projects/homescreen/logo/logo.png" alt="">Home Screen</h3>
+                <p>A browser new tab page laid out like a phone home screen — an app grid you
                  arrange yourself, with weather, sun times and an assistant bar.</p>
-              <span class="more">See more &rarr;</span>
-            </div>
-          </a>
+                <span class="more">See more &rarr;</span>
+              </div>
+            </a>
+          </div>
+          <div class="featslide">
+            <a class="featcard" href="/projects/cadence/" aria-hidden="true" tabindex="-1">
+              <video autoplay muted loop playsinline preload="auto"
+                   poster="/projects/cadence/demo-poster.jpg"
+                   width="1280" height="720" aria-hidden="true">
+              <source src="/projects/cadence/demo.mp4" type="video/mp4">
+            </video>
+              <div class="body">
+                <h3><img class="cardicon" src="/projects/cadence/logo/logo.png" alt="">Cadence</h3>
+                <p>Offline dictation and clipboard text-to-speech for Linux. Speak into any app,
+                 or hear selected text read aloud. The card plays the demo — silently, on
+                 a loop.</p>
+                <span class="more">See more &rarr;</span>
+              </div>
+            </a>
+          </div>
+          <div class="featslide">
+            <a class="featcard" href="/projects/renault-master/" aria-hidden="true" tabindex="-1">
+              <img src="/projects/renault-master/thumb.jpg" alt="">
+              <div class="body">
+                <h3>Renault Master Camper Conversion</h3>
+                <p>Perhaps my most ambitious and educational undertaking: in 2025 I converted an
+                 Australia Post van into a fully fitted-out campervan, and put it to the test by
+                 taking it 4,400&nbsp;km to the top of Australia.</p>
+                <span class="more">See more &rarr;</span>
+              </div>
+            </a>
+          </div>
+          <div class="featslide">
+            <a class="featcard" href="/projects/homescreen/" aria-hidden="true" tabindex="-1">
+              <img src="/projects/homescreen/screenshots/home-screen.jpg" alt="">
+              <div class="body">
+                <h3><img class="cardicon" src="/projects/homescreen/logo/logo.png" alt="">Home Screen</h3>
+                <p>A browser new tab page laid out like a phone home screen — an app grid you
+                 arrange yourself, with weather, sun times and an assistant bar.</p>
+                <span class="more">See more &rarr;</span>
+              </div>
+            </a>
+          </div>
+          <div class="featslide">
+            <a class="featcard" href="/projects/cadence/" aria-hidden="true" tabindex="-1">
+              <video autoplay muted loop playsinline preload="auto"
+                   poster="/projects/cadence/demo-poster.jpg"
+                   width="1280" height="720" aria-hidden="true">
+              <source src="/projects/cadence/demo.mp4" type="video/mp4">
+            </video>
+              <div class="body">
+                <h3><img class="cardicon" src="/projects/cadence/logo/logo.png" alt="">Cadence</h3>
+                <p>Offline dictation and clipboard text-to-speech for Linux. Speak into any app,
+                 or hear selected text read aloud. The card plays the demo — silently, on
+                 a loop.</p>
+                <span class="more">See more &rarr;</span>
+              </div>
+            </a>
+          </div>
           </div>
         </div>
 
-        <label class="featbtn prev f1" for="feat2" title="Previous"><span aria-hidden="true">&#8249;</span></label>
+        <label class="featbtn prev f1" for="feat3" title="Previous"><span aria-hidden="true">&#8249;</span></label>
         <label class="featbtn next f1" for="feat2" title="Next"><span aria-hidden="true">&#8250;</span></label>
         <label class="featbtn prev f2" for="feat1" title="Previous"><span aria-hidden="true">&#8249;</span></label>
-        <label class="featbtn next f2" for="feat1" title="Next"><span aria-hidden="true">&#8250;</span></label>
+        <label class="featbtn next f2" for="feat3" title="Next"><span aria-hidden="true">&#8250;</span></label>
+        <label class="featbtn prev f3" for="feat2" title="Previous"><span aria-hidden="true">&#8249;</span></label>
+        <label class="featbtn next f3" for="feat1" title="Next"><span aria-hidden="true">&#8250;</span></label>
       </section>
 
       <hr class="rule accent">
@@ -501,10 +607,6 @@
              alt="Families and children in green out on the grass at the St Patrick's Day festival">
       </a>
 
-      <p class="meta">
-        This site has no tracking, no analytics, and no advertising cookies.
-        All projects here are free software; you use them at your own risk.
-      </p>
     </main>
 
     <footer class="site-footer">
@@ -513,6 +615,10 @@
         Each project has its own <a href="/projects/">privacy policy and terms</a> ·
         Contact:
         <a href="mailto:privacy@oisinmcgrath.com">privacy@oisinmcgrath.com</a>
+      </p>
+      <p>
+        This site has no tracking, no analytics, and no advertising cookies.
+        All projects here are free software; you use them at your own risk.
       </p>
     </footer>
   </div>

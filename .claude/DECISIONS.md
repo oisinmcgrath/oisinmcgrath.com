@@ -461,6 +461,40 @@ It moves a pseudo-element with `transform` rather than sliding a background
 position, so it composites on its own layer and the text underneath is never
 repainted. Suppressed under `prefers-reduced-motion`, as the carousels are.
 
+**2026-08-31 — the homepage carousel holds three cards, and the set is carried
+three times.**
+
+Cadence joined the campervan and Home Screen. Its card plays
+`projects/cadence/demo.mp4` in place of a still — muted, looping, no controls,
+no script — because the page already had the recording and a moving card is a
+better argument for a dictation tool than a screenshot of one.
+
+The carousel had a visible fault: a card would slide off to the left with
+nothing following it, and a moment later the track would snap back. The cause
+was arithmetic, not timing. Four slots of 72% of a viewport is 288% of track,
+but the drift ran 144% — two slots — from a start of 58%, and 58 + 144 + 100
+is 302 against a track only 288 wide. The last 14% of every cycle had nothing
+in the right-hand side of the viewport.
+
+The set is now carried **three** times, not twice: nine slots, 675% of track,
+each slot three quarters of a viewport, drifting exactly three slots per cycle.
+Two copies is enough for the drift alone, but not for the arrows — after a
+click the drift resumes from that card's anchor and has to run three more slots
+without reaching the end, and from the third anchor it cannot. The Renault
+page's carousel still has that fault for the same reason; it shows only after
+an arrow click, which is why it has not been noticed.
+
+Each slot is now a `.featslide` whose padding provides the gutter. The gutter
+used to be a margin on the card, which does not count inside the slot's
+percentage width, so the slots did not quite tile the track — the drift was
+approximate even when the arithmetic was right.
+
+Two smaller things: the media rules had to be scoped to direct children
+(`.featcard > img`), because the card titles now carry the project's own mark
+and an unscoped `.featcard img` sized it to the full width of the card. And the
+site-wide note about tracking and free software moved below the footer rule,
+where the rest of the small print already sits.
+
 ---
 
 ## Working notes

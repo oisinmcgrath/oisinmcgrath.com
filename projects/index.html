@@ -63,17 +63,40 @@
          --btn-edge:light-dark(#aec4d8,#2e3b47);
          --btn-fill:light-dark(#eef3f8,#1a2028);
          --btn-fill-hover:light-dark(#e1ebf4,#212832);
-         --btn-shadow:light-dark(rgba(20,80,125,.18),rgba(0,0,0,.5))}
+         --btn-shadow:light-dark(rgba(20,80,125,.18),rgba(0,0,0,.5));
+         --rule:light-dark(#dfe4e8,#2a3038)}
     body a{color:light-dark(#14507d,#7fb3e8)}
     body a:hover{color:light-dark(#0d3a5c,#a6cdf3)}
     body a:focus-visible{outline-color:light-dark(#14507d,#7fb3e8)}
     body h2{color:light-dark(#5b6570,#99a3ae)}
+    body .hicon{color:light-dark(#14507d,#7fb3e8)}
+    body nav.site-nav .ico-gh{color:light-dark(#24292f,#eef1f5)}
+    body header.site-header{border-bottom:0}
+    body .tagline{color:light-dark(#68717b,#99a3ae)}
     body .desc{color:light-dark(#282d33,#c6cdd6)}
 
-    /* The theme switch, same three radios as the homepage. */
-    .topnav{display:flex;align-items:center;justify-content:space-between;
-      gap:1rem;padding:1rem 2rem}
-    .topnav a{display:inline-flex;align-items:center;gap:.4rem}
+    /* The back button and the theme switch share the top row. The button is
+       a real link to the homepage; the one script on top of it takes you to
+       wherever you actually came from, and if it never loads the link still
+       works. */
+    .backnav{display:flex;align-items:center;justify-content:space-between;
+      gap:1rem;padding:1rem 2rem 0}
+    .backbtn{display:inline-flex;align-items:center;gap:.45rem;
+      padding:.34rem .8rem;border-radius:999px;text-decoration:none;
+      font-size:.9rem;font-weight:600;
+      border:1px solid var(--btn-edge);background:var(--btn-fill);
+      color:var(--btn-ink);
+      transition:border-color .15s,background .15s,box-shadow .15s}
+    .backbtn:hover{border-color:var(--btn-ink);background:var(--btn-fill-hover);
+      box-shadow:0 2px 8px var(--btn-shadow)}
+    /* The page's own header, in the shape the project pages use: the title,
+       one line saying what the page is, the nav pills, and a rule. */
+    header.site-header{margin-bottom:1.5rem;padding-bottom:0}
+    header.site-header h1{font-size:2rem}
+    .tagline{margin:0}
+    hr.rule{height:0;margin:1.5rem 0 0;border:0;border-top:1px solid var(--rule)}
+    /* The marks on the two headings, the same pair the homepage uses. */
+    .hicon{margin-left:.4rem;vertical-align:-.18em}
     .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;
       clip:rect(0 0 0 0);white-space:nowrap}
     .themeswitch{position:relative;display:inline-grid;flex:none;
@@ -108,8 +131,8 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 <body>
-  <nav class="topnav" aria-label="Primary">
-    <a href="../"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Home</a>
+  <nav class="backnav" aria-label="Back">
+    <a class="backbtn" href="/" data-back><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Back</a>
     <div class="themeswitch" role="radiogroup" aria-label="Colour theme">
       <input type="radio" name="theme" id="t-dark" autocomplete="off">
       <label for="t-dark" title="Dark theme"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.7 14.6A8.6 8.6 0 0 1 9.4 3.3a8.7 8.7 0 1 0 11.3 11.3z"/></svg><span class="visually-hidden">Dark</span></label>
@@ -121,8 +144,16 @@
     </div>
   </nav>
   <main>
-    <h1>Projects</h1>
-    <h2>Software projects</h2>
+    <header class="site-header">
+      <h1>Projects</h1>
+      <p class="tagline">Everything I have built — software, and one van.</p>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/"><svg class="ico" viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0L0 6V8H1V15H4V10H7V15H15V8H16V6L14 4.5V1H11V2.25L8 0ZM9 10H12V13H9V10Z"/></svg>Home</a>
+        <a href="https://github.com/oisinmcgrath"><svg class="ico ico-gh" viewBox="0 0 20 20" width="15" height="15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M10,0 C15.523,0 20,4.59 20,10.253 C20,14.782 17.138,18.624 13.167,19.981 C12.66,20.082 12.48,19.762 12.48,19.489 C12.48,19.151 12.492,18.047 12.492,16.675 C12.492,15.719 12.172,15.095 11.813,14.777 C14.04,14.523 16.38,13.656 16.38,9.718 C16.38,8.598 15.992,7.684 15.35,6.966 C15.454,6.707 15.797,5.664 15.252,4.252 C15.252,4.252 14.414,3.977 12.505,5.303 C11.706,5.076 10.85,4.962 10,4.958 C9.15,4.962 8.295,5.076 7.497,5.303 C5.586,3.977 4.746,4.252 4.746,4.252 C4.203,5.664 4.546,6.707 4.649,6.966 C4.01,7.684 3.619,8.598 3.619,9.718 C3.619,13.646 5.954,14.526 8.175,14.785 C7.889,15.041 7.63,15.493 7.54,16.156 C6.97,16.418 5.522,16.871 4.63,15.304 C4.63,15.304 4.101,14.319 3.097,14.247 C3.097,14.247 2.122,14.234 3.029,14.87 C3.029,14.87 3.684,15.185 4.139,16.37 C4.139,16.37 4.726,18.2 7.508,17.58 C7.513,18.437 7.522,19.245 7.522,19.489 C7.522,19.76 7.338,20.077 6.839,19.982 C2.865,18.627 0,14.783 0,10.253 C0,4.59 4.478,0 10,0"/></svg>GitHub</a>
+      </nav>
+      <hr class="rule">
+    </header>
+    <h2>Software projects <svg class="hicon" viewBox="-6 -6 443.908 443.908" width="21" height="21" fill="currentColor" stroke="currentColor" stroke-width="10" aria-hidden="true"><path d="M423.908,152.051c4.418,0,8-3.582,8-8s-3.582-8-8-8h-24.006v-31.936h24.006c4.418,0,8-3.582,8-8s-3.582-8-8-8h-24.006 V71.996c0-22.056-17.944-40-40-40h-16.109V8c0-4.418-3.582-8-8-8s-8,3.582-8,8v23.996h-31.937V8c0-4.418-3.582-8-8-8s-8,3.582-8,8 v23.996H247.92V8c0-4.418-3.582-8-8-8s-8,3.582-8,8v23.996h-31.935V8c0-4.418-3.582-8-8-8s-8,3.582-8,8v23.996h-31.936V8 c0-4.418-3.582-8-8-8s-8,3.582-8,8v23.996h-31.936V8c0-4.418-3.582-8-8-8s-8,3.582-8,8v23.996H71.985c-22.056,0-40,17.944-40,40 v16.119H8c-4.418,0-8,3.582-8,8s3.582,8,8,8h23.985v31.936H8c-4.418,0-8,3.582-8,8s3.582,8,8,8h23.985v31.936H8 c-4.418,0-8,3.582-8,8s3.582,8,8,8h23.985v31.935H8c-4.418,0-8,3.582-8,8s3.582,8,8,8h23.985v31.936H8c-4.418,0-8,3.582-8,8 s3.582,8,8,8h23.985v31.936H8c-4.418,0-8,3.582-8,8s3.582,8,8,8h23.985v16.119c0,22.056,17.944,40,40,40h16.128v23.995 c0,4.418,3.582,8,8,8s8-3.582,8-8v-23.995h31.936v23.995c0,4.418,3.582,8,8,8s8-3.582,8-8v-23.995h31.936v23.995 c0,4.418,3.582,8,8,8s8-3.582,8-8v-23.995h31.935v23.995c0,4.418,3.582,8,8,8s8-3.582,8-8v-23.995h31.936v23.995 c0,4.418,3.582,8,8,8s8-3.582,8-8v-23.995h31.937v23.995c0,4.418,3.582,8,8,8s8-3.582,8-8v-23.995h16.109c22.056,0,40-17.944,40-40 v-16.119h24.006c4.418,0,8-3.582,8-8s-3.582-8-8-8h-24.006v-31.936h24.006c4.418,0,8-3.582,8-8s-3.582-8-8-8h-24.006v-31.936 h24.006c4.418,0,8-3.582,8-8s-3.582-8-8-8h-24.006v-31.935h24.006c4.418,0,8-3.582,8-8s-3.582-8-8-8h-24.006v-31.936H423.908z M383.902,359.912c0,13.233-10.767,24-24,24H71.985c-13.233,0-24-10.767-24-24V71.996c0-13.234,10.767-24,24-24h287.917 c13.233,0,24,10.766,24,24V359.912z"/><path d="M343.777,72.121H88.11c-8.822,0-16,7.177-16,16v255.667c0,8.822,7.178,16,16,16h255.667c8.822,0,16-7.178,16-16V88.121 C359.777,79.298,352.599,72.121,343.777,72.121z M88.11,343.787V88.121h255.667l0.002,255.667H88.11z"/></svg></h2>
     <ul>
       <li>
         <a class="projbtn" href="invoicenow/"><img class="mark" src="logos/invoicenow.png" alt="">invoiceNow</a>
@@ -165,13 +196,14 @@
         <span class="desc">a browser toolbar button for yt-dlp.</span>
       </li>
     </ul>
-    <h2>Technical projects</h2>
+    <h2>Technical projects <svg class="hicon" viewBox="0 0 512 512" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M476.007,209.804c25.297-25.281,37.25-58.859,35.891-91.984l-16.484-16.484l-57.453,57.453l-66.844-17.906l-17.906-66.828l57.453-57.453l-16.484-16.5c-33.125-1.359-66.703,10.594-91.984,35.891c-31.734,31.734-42.484,76.5-32.25,117.063L78.663,344.335c-19.703,1.234-39.031,9.359-54.078,24.406c-32.781,32.781-32.781,85.906,0,118.688c32.766,32.766,85.906,32.766,118.672,0c15.047-15.047,23.172-34.391,24.406-54.078l191.281-191.281C399.506,252.288,444.272,241.538,476.007,209.804z M264.256,219.819c7.703-7.719,20.219-7.719,27.922,0c7.719,7.703,7.719,20.219,0,27.938l-100,100c-7.719,7.719-20.219,7.719-27.938,0c-7.703-7.719-7.703-20.219,0-27.938L264.256,219.819z M92.756,468.179l-38.594-10.344l-10.344-38.594l28.25-28.25l38.609,10.328l10.344,38.609L92.756,468.179z"/></svg></h2>
     <ul>
       <li>
-        <a class="projbtn" href="renault-master/"><img class="mark" src="renault-master/favicon.svg" alt="">Renault Master camper</a>
+        <a class="projbtn" href="renault-master/"><img class="mark" src="renault-master/favicon.svg" alt="">Renault Master Camper</a>
         <span class="desc">van conversion: build, licensing and testing.</span>
       </li>
     </ul>
   </main>
+  <script src="/back.js" defer></script>
 </body>
 </html>

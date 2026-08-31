@@ -520,6 +520,66 @@ Note this page does **not** use `.wrap`: it has always been laid out wide with
 the list indented from the headings, and that was kept. The indent drops away
 under 640px.
 
+**2026-08-31 — the site has a second script, and it is the back button.**
+
+Every page but the homepage now carries a Back button in the top left, and
+"back" means the page you actually came from: the campervan page is reachable
+from the homepage and from the projects index, and a fixed link up one level
+gets that wrong half the time. There is no HTML or CSS equivalent of
+`history.back()`, so this was put to Oisin as a trade and he took it.
+
+The shape of it matters. The button's `href` is a real link one level up, so
+with the script blocked, broken or absent it still does something sensible —
+the script is an upgrade, not the mechanism. It only intercepts when the
+referrer is same-origin, so arriving from a search engine leaves the link doing
+what it says rather than bouncing the visitor off the site. No storage, no
+network, no third party.
+
+That makes the site's rule **two** scripts, not one, and the claim on the
+homepage and in the policies had to be updated to match rather than quietly
+left standing. Everything else still holds: both carousels, both lightboxes,
+the theme switches and the button shimmer are CSS.
+
+**2026-08-31 — a privacy policy for the website itself.**
+
+The footer used to carry "no tracking, no analytics, no advertising cookies" as
+a sentence, which is a policy's job done in a footer's space. `/site-privacy.html`
+now covers the site as a visitor experiences it — nothing collected, nothing
+third-party loaded, what the two scripts do, what Cloudflare necessarily
+processes as the host, and what happens if you email — and the footer links to
+it. It could not reuse `/privacy.html`: that URL is invoiceNow's, and it is
+registered with Google for OAuth verification.
+
+It states plainly that the theme switch does not remember your choice *because*
+remembering it would mean storing something. That is worth keeping: it is the
+one place where the site's no-storage claim and a visible product decision meet.
+
+**2026-08-31 — the campervan's mark is a handsaw.**
+
+The van in profile was always going to lose at 16px — a thin outline drawing
+with no interior mass. It is now a handsaw in cream on the van's own red,
+`#d7212b`, sampled from the photograph on the page, on the same rounded-square
+tile the app marks use. One file, `renault-master/favicon.svg`, does three
+jobs: the page's favicon, the row's mark on the projects index, and the card's
+title mark in the homepage carousel. The old `projects/logos/renault-master.png`
+was deleted rather than left orphaned.
+
+**2026-08-31 — the carousel arrows come round in both directions.**
+
+Three cards need three anchors, but "the card after Cadence" is Renault *to the
+right*, while Renault's own anchor is two slots to the left — so a plain
+three-state switch pans backwards across everything, which is exactly what it
+did. The fix uses the third copy of the set: stepping off either end lands on
+the neighbouring copy of that card, and a zero-length animation with a 0.6s
+delay — after the pan has finished — moves the track to that card's canonical
+slot. Both positions show the identical three cards, so there is nothing to
+see, and every later click starts from the middle copy again. Five radios, no
+script.
+
+Taking manual control now stops the drift for good, as it does on the Renault
+page. Resuming after five seconds was what allowed the resumed run to reach the
+end of the track from the later anchors.
+
 ---
 
 ## Working notes

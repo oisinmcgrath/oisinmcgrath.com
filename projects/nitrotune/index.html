@@ -16,7 +16,7 @@
   </style>
 </head>
 <body>
-  <nav class="backnav"><a href="https://oisinmcgrath.com/projects/"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Projects</a></nav>
+  <nav class="backnav" aria-label="Back"><a class="backbtn" href="https://oisinmcgrath.com/projects/" data-back><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Back</a></nav>
   <div class="wrap">
     <header class="site-header">
       <h1>NitroTune</h1>
@@ -130,6 +130,19 @@
           <a href="https://github.com/oisinmcgrath/nitrotune"><strong>Source &amp; full docs on GitHub</strong></a>
         </p>
       </section>
+      <section class="card" aria-labelledby="get-heading">
+        <h2 id="get-heading">Getting it</h2>
+        <p>
+          NitroTune is free software. The source is on GitHub, and the repository
+          is the whole distribution — there is no installer, no store listing
+          and no account.
+        </p>
+        <pre><code>git clone https://github.com/oisinmcgrath/nitrotune.git</code></pre>
+        <p>
+          <a href="https://github.com/oisinmcgrath/nitrotune">github.com/oisinmcgrath/nitrotune</a>
+        </p>
+      </section>
+
     </main>
 
     <footer class="site-footer">
@@ -137,5 +150,6 @@
       <p>No tracking on this page.</p>
     </footer>
   </div>
+  <script src="/back.js" defer></script>
 </body>
 </html>

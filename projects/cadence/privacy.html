@@ -16,7 +16,7 @@
   </style>
 </head>
 <body>
-  <nav class="backnav"><a href="https://oisinmcgrath.com/projects/"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Projects</a></nav>
+  <nav class="backnav" aria-label="Back"><a class="backbtn" href="https://oisinmcgrath.com/projects/" data-back><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Back</a></nav>
   <div class="wrap">
     <header class="site-header">
       <h1>Privacy policy</h1>
@@ -58,6 +58,35 @@
         the <a href="terms.html">Terms of use</a> and the <code>LICENSE</code> file
         shipped with the Software.
       </p>
+
+      <section class="card" aria-labelledby="needs-heading">
+        <h2 id="needs-heading">What it needs, and why</h2>
+        <p>
+          Dictation needs two permissions that sound alarming in the abstract,
+          so they are worth stating plainly up front. Both are set out in full
+          in sections 4 and 5 below, and the code that uses them is short and
+          readable.
+        </p>
+        <ul>
+          <li>
+            <strong>Reading the keyboard</strong> — to notice the moment you press
+            and release the trigger key. Linux cannot grant access to one single
+            key, so the app joins the <code>input</code> group and reads the
+            keyboard device. It matches only the trigger key and discards every
+            other event.
+          </li>
+          <li>
+            <strong>Typing into other windows</strong> — to put the transcribed
+            text where your cursor is. This uses a virtual input device, run by a
+            helper the app starts itself and the kernel shuts down the instant the
+            app exits.
+          </li>
+        </ul>
+        <p>
+          Neither capability sends anything anywhere. There is no Cadence server
+          to send it to.
+        </p>
+      </section>
 
       <h2>1. What Cadence is</h2>
       <p>
@@ -292,5 +321,6 @@
       </p>
     </footer>
   </div>
+  <script src="/back.js" defer></script>
 </body>
 </html>

@@ -84,3 +84,35 @@ nav.site-nav .ico {
 nav.site-nav .ico-gh {
   color: #eef1f5;
 }
+
+/* The back button, top left of every page but the homepage. Like the nav
+   pills above, its colours come from currentColor, so this same block works
+   on every theme on the site. */
+nav.backnav {
+  padding: 1rem 0 0 1.25rem;
+}
+
+.backbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.34rem 0.8rem;
+  border-radius: 999px;
+  line-height: 1.35;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+  background: color-mix(in srgb, currentColor 7%, transparent);
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.backbtn:hover {
+  text-decoration: none;
+  border-color: color-mix(in srgb, currentColor 58%, transparent);
+  background: color-mix(in srgb, currentColor 14%, transparent);
+}
+
+.backbtn svg {
+  flex: none;
+}

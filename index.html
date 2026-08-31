@@ -96,6 +96,15 @@
                  --shadow:rgba(43,101,171,.18)}
     .links .l-pr{--ink:#14507d;--tint:#aec4d8;--fill:#eef3f8;--fill-hover:#e1ebf4;
                  --shadow:rgba(20,80,125,.18)}
+    /* A faint glow around each button, in the button's own ink, so they sit
+       just off the page rather than flat on it. */
+    .links a{box-shadow:0 0 14px -4px var(--glow)}
+    .links a:hover{box-shadow:0 2px 8px var(--shadow),0 0 18px -3px var(--glow)}
+    .links .l-gh{--glow:rgba(36,41,47,.35)}
+    .links .l-li{--glow:rgba(43,101,171,.38)}
+    .links .l-pr{--glow:rgba(20,80,125,.38)}
+    /* Centred subheading under "What else drives me". */
+    .centred{text-align:center}
     /* Suffix mark on the Technical projects heading. */
     .hicon{margin-left:.4rem;vertical-align:-.15em;color:#14507d}
   </style>
@@ -183,6 +192,8 @@
     body main li{color:light-dark(#282d33,#e8ecf1)}
     body footer.site-footer{border-top-color:light-dark(#dfe4e8,#2a3038);
       color:light-dark(#68717b,#99a3ae)}
+    body .footrule{height:0;margin:1rem 0;border:0;
+      border-top:1px solid light-dark(#dfe4e8,#2a3038)}
     body footer.site-footer a{color:light-dark(#14507d,#7fb3e8)}
     body .hicon{color:light-dark(#14507d,#7fb3e8)}
     body .projcard{background:light-dark(#fbfcfd,#1b2026);
@@ -215,15 +226,18 @@
       light-dark(rgba(20,80,125,.85),rgba(127,179,232,.7)) 50%,
       light-dark(rgba(20,80,125,.25),rgba(127,179,232,.2)) 88%,transparent)}
     /* The link buttons keep the ink of the service they point at. */
-    body .links .l-gh{--ink:light-dark(#24292f,#e6e9ed);
+    body .links .l-gh{--glow:light-dark(rgba(36,41,47,.35),rgba(230,233,237,.20));
+      --ink:light-dark(#24292f,#e6e9ed);
       --tint:light-dark(#c8cdd3,#39424d);--fill:light-dark(#f4f5f7,#1d2229);
       --fill-hover:light-dark(#e9ebee,#262d35);
       --shadow:light-dark(rgba(36,41,47,.16),rgba(0,0,0,.5))}
-    body .links .l-li{--ink:light-dark(#2b65ab,#7fb3e8);
+    body .links .l-li{--glow:light-dark(rgba(43,101,171,.38),rgba(127,179,232,.26));
+      --ink:light-dark(#2b65ab,#7fb3e8);
       --tint:light-dark(#b3c8e2,#31404f);--fill:light-dark(#eff4fa,#1a222b);
       --fill-hover:light-dark(#e2ecf7,#212c37);
       --shadow:light-dark(rgba(43,101,171,.18),rgba(0,0,0,.5))}
-    body .links .l-pr{--ink:light-dark(#14507d,#7fb3e8);
+    body .links .l-pr{--glow:light-dark(rgba(20,80,125,.38),rgba(127,179,232,.26));
+      --ink:light-dark(#14507d,#7fb3e8);
       --tint:light-dark(#aec4d8,#2e3b47);--fill:light-dark(#eef3f8,#1a2028);
       --fill-hover:light-dark(#e1ebf4,#212832);
       --shadow:light-dark(rgba(20,80,125,.18),rgba(0,0,0,.5))}
@@ -258,35 +272,46 @@
       -webkit-mask-size:100% 100%;mask-size:100% 100%}
     /* Nine slots for three cards — the set three times over — on six and
        three quarter viewports of track, so each slot is three quarters of the
-       viewport and the neighbours show at either side. Three copies rather
-       than two: the drift runs three slots, and after an arrow click it has
-       to be able to run three slots from *any* of the three anchors without
-       reaching the end of the track. With two copies the third anchor runs
-       off the end and the right-hand side empties, which is the gap that used
-       to appear here.
+       viewport and the neighbours show at either side.
 
-       -9.2593% of the track is 62.5% of a viewport, which centres the second
-       slot and leaves the first covering the left gutter. Running on to
-       -42.5926% moves the track exactly three slots — one full set — so the
-       loop closes on itself with nothing to see. 26 seconds a slot. */
-    .feattrack{display:flex;align-items:flex-start;width:675%;
+       Left alone it drifts: -9.2593% of the track is 62.5% of a viewport,
+       which centres the second slot, and running on to -42.5926% moves it
+       exactly three slots — one full set — so the loop closes on itself with
+       nothing to see. 26 seconds a slot.
+
+       The arrows go both ways and come round, which is the part that needs
+       explaining. Three cards need three anchors, but "the card after
+       Cadence" is Renault *to the right*, and Renault's own anchor is two
+       slots to the left — so a plain three-state switch pans backwards across
+       everything, which is exactly what it used to do. The fix uses the third
+       copy: stepping off either end lands on the *neighbouring* copy of that
+       card (slot 2 or slot 6), and a zero-length animation with a 0.6s delay
+       — after the pan has finished — silently moves the track to the same
+       card's canonical slot. Both positions show the identical three cards,
+       so there is nothing to see; every subsequent click then starts from the
+       middle copy again. Five radios, no script.
+
+       Taking manual control stops the drift for good, as it does on the
+       Renault page. It used to resume after five seconds, which meant the
+       resumed run could reach the end of the track from the later anchors. */
+    .feattrack{display:flex;align-items:stretch;width:675%;
                animation:featdrift 78s linear infinite;will-change:transform}
     @keyframes featdrift{from{transform:translateX(-9.2593%)}
                          to{transform:translateX(-42.5926%)}}
-    .feat:has(.featinput:checked) .feattrack{
+    .feat:has(.featinput:checked) .feattrack{animation:none;
       transition:transform .55s cubic-bezier(.65,0,.35,1)}
-    .feat:has(#feat1:checked) .feattrack{transform:translateX(-9.2593%);
-      animation:featdrift1 78s linear 5s infinite}
-    .feat:has(#feat2:checked) .feattrack{transform:translateX(-20.3704%);
-      animation:featdrift2 78s linear 5s infinite}
-    .feat:has(#feat3:checked) .feattrack{transform:translateX(-31.4815%);
-      animation:featdrift3 78s linear 5s infinite}
-    @keyframes featdrift1{from{transform:translateX(-9.2593%)}
-                          to{transform:translateX(-42.5926%)}}
-    @keyframes featdrift2{from{transform:translateX(-20.3704%)}
-                          to{transform:translateX(-53.7037%)}}
-    @keyframes featdrift3{from{transform:translateX(-31.4815%)}
-                          to{transform:translateX(-64.8148%)}}
+    /* The three canonical anchors — the middle copy of each card. */
+    .feat:has(#feat-ren:checked) .feattrack{transform:translateX(-31.4815%)}
+    .feat:has(#feat-hs:checked)  .feattrack{transform:translateX(-42.5926%)}
+    .feat:has(#feat-cad:checked) .feattrack{transform:translateX(-53.7037%)}
+    /* Stepping off an end: pan one slot onto the neighbouring copy, then move
+       silently to that card's canonical slot once the pan has finished. */
+    .feat:has(#feat-cad-w:checked) .feattrack{transform:translateX(-20.3704%);
+      animation:featwrapcad 0s linear .6s forwards}
+    .feat:has(#feat-ren-w:checked) .feattrack{transform:translateX(-64.8148%);
+      animation:featwrapren 0s linear .6s forwards}
+    @keyframes featwrapcad{to{transform:translateX(-53.7037%)}}
+    @keyframes featwrapren{to{transform:translateX(-31.4815%)}}
     .featbtn{position:absolute;top:calc(50% - 1.3rem);z-index:4;display:none;
              align-items:center;justify-content:center;width:2.6rem;height:2.6rem;
              border-radius:50%;cursor:pointer;font-size:1.6rem;line-height:1;
@@ -296,15 +321,25 @@
     .featbtn:hover{background:rgba(21,32,45,.75);transform:scale(1.06)}
     .featbtn.prev{left:1.5%}
     .featbtn.next{right:1.5%}
-    .feat .f1{display:flex}
+        /* One pair of arrows per state, because plain CSS cannot compute "the
+       next card"; only the pair belonging to the current one is shown. The
+       two wrap states borrow the pair of the card they land on. */
+    .feat .fdefault{display:flex}
     .feat:has(.featinput:checked) .featbtn{display:none}
-    .feat:has(#feat1:checked) .f1,.feat:has(#feat2:checked) .f2,
-    .feat:has(#feat3:checked) .f3{display:flex}
+    .feat:has(#feat-ren:checked) .fren,
+    .feat:has(#feat-ren-w:checked) .fren,
+    .feat:has(#feat-hs:checked) .fhs,
+    .feat:has(#feat-cad:checked) .fcad,
+    .feat:has(#feat-cad-w:checked) .fcad{display:flex}
     @media(prefers-reduced-motion:reduce){
-      .feattrack{animation:none;transform:translateX(-9.2593%)}}
+      .feattrack{animation:none;transform:translateX(-42.5926%)}}
 
-    .featslide{flex:0 0 11.1111%;padding:0 .6rem}
-    .featcard{display:block;width:100%;margin:0;padding:0;text-decoration:none;
+    .featslide{flex:0 0 11.1111%;padding:0 .6rem;display:flex}
+    /* Every card the same width and the same height: the slide stretches to
+       the tallest of them and the card fills it, so the media sits at one
+       height across the row and "See more" is pinned to the foot. */
+    .featcard{display:flex;flex-direction:column;width:100%;margin:0;padding:0;
+              text-decoration:none;
               color:inherit;border:2px solid #aab8c6;border-radius:12px;overflow:hidden;
               background:#fbfcfd;box-shadow:0 2px 10px rgba(20,60,100,.10);
               transition:box-shadow .15s,transform .15s,border-color .15s}
@@ -316,10 +351,43 @@
     /* The mark of the project, set into its title. */
     .cardicon{width:1.25em;height:1.25em;object-fit:contain;
               vertical-align:-.28em;margin-right:.45rem}
-    .featcard .body{padding:1.1rem 1.25rem}
+    .featcard .body{padding:1.1rem 1.25rem;flex:1;display:flex;
+                    flex-direction:column}
+    .featcard .more{margin-top:auto}
     .featcard h3{margin:0 0 .4rem;font-size:1.15rem;color:#15191d}
     .featcard p{margin:0 0 .9rem;font-size:.95rem;color:#3b424a}
     .featcard .more{font-size:.9rem;font-weight:600;color:#14507d}
+    /* A themed page's card wears that page's own colours, so the carousel
+       previews the theme as well as the work. The `body` prefix is there to
+       out-specify the light-dark palette further up the file. */
+    body .featcard.t-ren{background:#96513a;border-color:#6d3a28;
+      box-shadow:0 2px 10px rgba(45,18,10,.45)}
+    body .featcard.t-ren:hover{border-color:#ffb26d;
+      box-shadow:0 6px 20px rgba(45,18,10,.6)}
+    body .featcard.t-ren > img,body .featcard.t-ren > video{
+      border-bottom-color:#6d3a28}
+    body .featcard.t-ren h3{color:#ffd9b0}
+    body .featcard.t-ren p{color:#fbeadd}
+    body .featcard.t-ren .more{color:#ffdcb8}
+    body .featcard.t-hs{background:#1c1f25;border-color:#2b3038;
+      box-shadow:0 2px 10px rgba(0,0,0,.45)}
+    body .featcard.t-hs:hover{border-color:#6fb3f2;
+      box-shadow:0 6px 20px rgba(0,0,0,.6)}
+    body .featcard.t-hs > img,body .featcard.t-hs > video{
+      border-bottom-color:#2b3038}
+    body .featcard.t-hs h3{color:#f0f3f7}
+    body .featcard.t-hs p{color:#c3cbd6}
+    body .featcard.t-hs .more{color:#6fb3f2}
+    body .featcard.t-cad{background:#151a2c;border-color:#242c46;
+      box-shadow:0 2px 10px rgba(0,0,0,.5)}
+    body .featcard.t-cad:hover{border-color:#4ad4d4;
+      box-shadow:0 6px 20px rgba(0,0,0,.65)}
+    body .featcard.t-cad > img,body .featcard.t-cad > video{
+      border-bottom-color:#242c46}
+    body .featcard.t-cad h3{color:#7fe6e6}
+    body .featcard.t-cad p{color:#ccd3e0}
+    body .featcard.t-cad .more{color:#4ad4d4}
+
     .commshot{display:block;max-width:30rem;margin:1rem 0 0;border:2px solid #aab8c6;
               border-radius:10px;overflow:hidden;line-height:0;
               box-shadow:0 2px 10px rgba(20,60,100,.10);
@@ -349,7 +417,6 @@
       <h1>Oisin McGrath</h1>
       <p class="tagline">Software development · Bunbury, Western Australia</p>
       <nav class="site-nav" aria-label="Primary">
-        <a href="index.html" aria-current="page"><svg class="ico" viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0L0 6V8H1V15H4V10H7V15H15V8H16V6L14 4.5V1H11V2.25L8 0ZM9 10H12V13H9V10Z"/></svg>Home</a>
         <div class="themeswitch" role="radiogroup" aria-label="Colour theme">
           <input type="radio" name="theme" id="t-dark" autocomplete="off">
           <label for="t-dark" title="Dark theme"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.7 14.6A8.6 8.6 0 0 1 9.4 3.3a8.7 8.7 0 1 0 11.3 11.3z"/></svg><span class="visually-hidden">Dark</span></label>
@@ -388,17 +455,19 @@
            rather than by timing. Radios stop it for five seconds and then it
            picks up again. No script. -->
       <section class="feat" aria-label="Featured projects">
-        <input class="featinput" type="radio" name="featured" id="feat1" autocomplete="off">
-        <input class="featinput" type="radio" name="featured" id="feat2" autocomplete="off">
-        <input class="featinput" type="radio" name="featured" id="feat3" autocomplete="off">
+        <input class="featinput" type="radio" name="featured" id="feat-ren" autocomplete="off">
+        <input class="featinput" type="radio" name="featured" id="feat-hs" autocomplete="off">
+        <input class="featinput" type="radio" name="featured" id="feat-cad" autocomplete="off">
+        <input class="featinput" type="radio" name="featured" id="feat-cad-w" autocomplete="off">
+        <input class="featinput" type="radio" name="featured" id="feat-ren-w" autocomplete="off">
 
         <div class="featviewport">
           <div class="feattrack">
           <div class="featslide">
-            <a class="featcard" href="/projects/renault-master/">
+            <a class="featcard t-ren" href="/projects/renault-master/">
               <img src="/projects/renault-master/thumb.jpg" alt="The finished red Renault Master campervan parked on grass with its side door open">
               <div class="body">
-                <h3>Renault Master Camper Conversion</h3>
+                <h3><img class="cardicon" src="/projects/renault-master/favicon.svg" alt="">Renault Master Camper Conversion</h3>
                 <p>Perhaps my most ambitious and educational undertaking: in 2025 I converted an
                  Australia Post van into a fully fitted-out campervan, and put it to the test by
                  taking it 4,400&nbsp;km to the top of Australia.</p>
@@ -407,7 +476,7 @@
             </a>
           </div>
           <div class="featslide">
-            <a class="featcard" href="/projects/homescreen/">
+            <a class="featcard t-hs" href="/projects/homescreen/">
               <img src="/projects/homescreen/screenshots/home-screen.jpg" alt="The Home Screen new tab page: a grid of app tiles over a lake wallpaper, with a search bar, clock, weather and an Ask Claude bar">
               <div class="body">
                 <h3><img class="cardicon" src="/projects/homescreen/logo/logo.png" alt="">Home Screen</h3>
@@ -418,26 +487,24 @@
             </a>
           </div>
           <div class="featslide">
-            <a class="featcard" href="/projects/cadence/">
+            <a class="featcard t-cad" href="/projects/cadence/">
               <video autoplay muted loop playsinline preload="auto"
-                   poster="/projects/cadence/demo-poster.jpg"
+                   poster="/projects/cadence/card-poster.jpg"
                    width="1280" height="720" aria-hidden="true">
-              <source src="/projects/cadence/demo.mp4" type="video/mp4">
+              <source src="/projects/cadence/cadence-teaser-thumbnail-loop.mp4" type="video/mp4">
             </video>
               <div class="body">
                 <h3><img class="cardicon" src="/projects/cadence/logo/logo.png" alt="">Cadence</h3>
-                <p>Offline dictation and clipboard text-to-speech for Linux. Speak into any app,
-                 or hear selected text read aloud. The card plays the demo — silently, on
-                 a loop.</p>
+                <p>Speak instead of typing, and have your computer read your emails back to you.</p>
                 <span class="more">See more &rarr;</span>
               </div>
             </a>
           </div>
           <div class="featslide">
-            <a class="featcard" href="/projects/renault-master/" aria-hidden="true" tabindex="-1">
+            <a class="featcard t-ren" href="/projects/renault-master/" aria-hidden="true" tabindex="-1">
               <img src="/projects/renault-master/thumb.jpg" alt="">
               <div class="body">
-                <h3>Renault Master Camper Conversion</h3>
+                <h3><img class="cardicon" src="/projects/renault-master/favicon.svg" alt="">Renault Master Camper Conversion</h3>
                 <p>Perhaps my most ambitious and educational undertaking: in 2025 I converted an
                  Australia Post van into a fully fitted-out campervan, and put it to the test by
                  taking it 4,400&nbsp;km to the top of Australia.</p>
@@ -446,7 +513,7 @@
             </a>
           </div>
           <div class="featslide">
-            <a class="featcard" href="/projects/homescreen/" aria-hidden="true" tabindex="-1">
+            <a class="featcard t-hs" href="/projects/homescreen/" aria-hidden="true" tabindex="-1">
               <img src="/projects/homescreen/screenshots/home-screen.jpg" alt="">
               <div class="body">
                 <h3><img class="cardicon" src="/projects/homescreen/logo/logo.png" alt="">Home Screen</h3>
@@ -457,26 +524,24 @@
             </a>
           </div>
           <div class="featslide">
-            <a class="featcard" href="/projects/cadence/" aria-hidden="true" tabindex="-1">
+            <a class="featcard t-cad" href="/projects/cadence/" aria-hidden="true" tabindex="-1">
               <video autoplay muted loop playsinline preload="auto"
-                   poster="/projects/cadence/demo-poster.jpg"
+                   poster="/projects/cadence/card-poster.jpg"
                    width="1280" height="720" aria-hidden="true">
-              <source src="/projects/cadence/demo.mp4" type="video/mp4">
+              <source src="/projects/cadence/cadence-teaser-thumbnail-loop.mp4" type="video/mp4">
             </video>
               <div class="body">
                 <h3><img class="cardicon" src="/projects/cadence/logo/logo.png" alt="">Cadence</h3>
-                <p>Offline dictation and clipboard text-to-speech for Linux. Speak into any app,
-                 or hear selected text read aloud. The card plays the demo — silently, on
-                 a loop.</p>
+                <p>Speak instead of typing, and have your computer read your emails back to you.</p>
                 <span class="more">See more &rarr;</span>
               </div>
             </a>
           </div>
           <div class="featslide">
-            <a class="featcard" href="/projects/renault-master/" aria-hidden="true" tabindex="-1">
+            <a class="featcard t-ren" href="/projects/renault-master/" aria-hidden="true" tabindex="-1">
               <img src="/projects/renault-master/thumb.jpg" alt="">
               <div class="body">
-                <h3>Renault Master Camper Conversion</h3>
+                <h3><img class="cardicon" src="/projects/renault-master/favicon.svg" alt="">Renault Master Camper Conversion</h3>
                 <p>Perhaps my most ambitious and educational undertaking: in 2025 I converted an
                  Australia Post van into a fully fitted-out campervan, and put it to the test by
                  taking it 4,400&nbsp;km to the top of Australia.</p>
@@ -485,7 +550,7 @@
             </a>
           </div>
           <div class="featslide">
-            <a class="featcard" href="/projects/homescreen/" aria-hidden="true" tabindex="-1">
+            <a class="featcard t-hs" href="/projects/homescreen/" aria-hidden="true" tabindex="-1">
               <img src="/projects/homescreen/screenshots/home-screen.jpg" alt="">
               <div class="body">
                 <h3><img class="cardicon" src="/projects/homescreen/logo/logo.png" alt="">Home Screen</h3>
@@ -496,17 +561,15 @@
             </a>
           </div>
           <div class="featslide">
-            <a class="featcard" href="/projects/cadence/" aria-hidden="true" tabindex="-1">
+            <a class="featcard t-cad" href="/projects/cadence/" aria-hidden="true" tabindex="-1">
               <video autoplay muted loop playsinline preload="auto"
-                   poster="/projects/cadence/demo-poster.jpg"
+                   poster="/projects/cadence/card-poster.jpg"
                    width="1280" height="720" aria-hidden="true">
-              <source src="/projects/cadence/demo.mp4" type="video/mp4">
+              <source src="/projects/cadence/cadence-teaser-thumbnail-loop.mp4" type="video/mp4">
             </video>
               <div class="body">
                 <h3><img class="cardicon" src="/projects/cadence/logo/logo.png" alt="">Cadence</h3>
-                <p>Offline dictation and clipboard text-to-speech for Linux. Speak into any app,
-                 or hear selected text read aloud. The card plays the demo — silently, on
-                 a loop.</p>
+                <p>Speak instead of typing, and have your computer read your emails back to you.</p>
                 <span class="more">See more &rarr;</span>
               </div>
             </a>
@@ -514,12 +577,14 @@
           </div>
         </div>
 
-        <label class="featbtn prev f1" for="feat3" title="Previous"><span aria-hidden="true">&#8249;</span></label>
-        <label class="featbtn next f1" for="feat2" title="Next"><span aria-hidden="true">&#8250;</span></label>
-        <label class="featbtn prev f2" for="feat1" title="Previous"><span aria-hidden="true">&#8249;</span></label>
-        <label class="featbtn next f2" for="feat3" title="Next"><span aria-hidden="true">&#8250;</span></label>
-        <label class="featbtn prev f3" for="feat2" title="Previous"><span aria-hidden="true">&#8249;</span></label>
-        <label class="featbtn next f3" for="feat1" title="Next"><span aria-hidden="true">&#8250;</span></label>
+        <label class="featbtn prev fdefault" for="feat-ren" title="Previous"><span aria-hidden="true">&#8249;</span></label>
+        <label class="featbtn next fdefault" for="feat-cad" title="Next"><span aria-hidden="true">&#8250;</span></label>
+        <label class="featbtn prev fren" for="feat-cad-w" title="Previous"><span aria-hidden="true">&#8249;</span></label>
+        <label class="featbtn next fren" for="feat-hs" title="Next"><span aria-hidden="true">&#8250;</span></label>
+        <label class="featbtn prev fhs" for="feat-ren" title="Previous"><span aria-hidden="true">&#8249;</span></label>
+        <label class="featbtn next fhs" for="feat-cad" title="Next"><span aria-hidden="true">&#8250;</span></label>
+        <label class="featbtn prev fcad" for="feat-hs" title="Previous"><span aria-hidden="true">&#8249;</span></label>
+        <label class="featbtn next fcad" for="feat-ren-w" title="Next"><span aria-hidden="true">&#8250;</span></label>
       </section>
 
       <hr class="rule accent">
@@ -594,7 +659,7 @@
 
       <hr class="rule">
 
-      <h2>What else drives me</h2>
+      <h2 class="centred">What else drives me</h2>
 
       <h3>Community</h3>
       <p>
@@ -603,8 +668,8 @@
         <a href="/community.html">see more about that here</a>.
       </p>
       <a class="commshot" href="/community.html">
-        <img src="/community/day-families.jpg"
-             alt="Families and children in green out on the grass at the St Patrick's Day festival">
+        <img src="/community/setup-2024-b.jpg"
+             alt="Volunteers sitting together under trees during the 2024 festival setup">
       </a>
 
     </main>
@@ -616,6 +681,7 @@
         Contact:
         <a href="mailto:privacy@oisinmcgrath.com">privacy@oisinmcgrath.com</a>
       </p>
+      <hr class="footrule">
       <p>
         This site has no tracking, no analytics, and no advertising cookies.
         All projects here are free software; you use them at your own risk.

@@ -5,36 +5,172 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Projects — Oisin McGrath</title>
   <link rel="stylesheet" href="../style.css">
-  <style>main{margin:0;padding:0 4rem}h1{margin-left:0}ul{padding-left:6rem;list-style:none}li{margin-bottom:1.1rem;white-space:nowrap}.topnav{padding:1rem 2rem}.topnav a{display:inline-flex;align-items:center;gap:.4rem}
-  /* Project mark before each name; all normalised to one box so the
-     row reads evenly despite differing source aspect ratios. */
-  li .mark{width:1.6em;height:1.6em;object-fit:contain;vertical-align:-0.45em;margin-right:.5rem}
-  /* Two kinds of work on one page: things I wrote, and things I built. */
-  h2{margin:2.25rem 0 .75rem;padding-left:6rem;font-size:1rem;font-weight:600;
-     letter-spacing:.06em;text-transform:uppercase;color:#5b6570}
-  h2:first-of-type{margin-top:1.5rem}</style>
+  <style>
+    /* Layout. The list is indented from the heading rather than boxed, which
+       is how this page has always read; the indent drops away on a phone. */
+    main{margin:0;padding:0 4rem 3rem}
+    h1{margin-left:0}
+    ul{padding-left:6rem;list-style:none;margin:0}
+    li{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem .7rem;
+       margin-bottom:1.1rem}
+    .desc{font-size:.95rem}
+    /* Two kinds of work on one page: things I wrote, and things I built. */
+    h2{margin:2.25rem 0 .75rem;padding-left:6rem;font-size:1rem;font-weight:600;
+       letter-spacing:.06em;text-transform:uppercase}
+    h2:first-of-type{margin-top:1.5rem}
+    @media(max-width:640px){
+      main{padding:0 1.25rem 2.5rem}
+      ul,h2{padding-left:0}
+    }
+
+    /* Every link on this page is a button: the project itself is a full pill
+       carrying its own mark, and its policies are smaller pills beside it. The
+       colours are the page's own, so the block works on either theme. */
+    .projbtn{display:inline-flex;align-items:center;gap:.55rem;
+      padding:.42rem .85rem;border-radius:8px;text-decoration:none;
+      font-weight:600;line-height:1.25;
+      border:1px solid var(--btn-edge);background:var(--btn-fill);
+      color:var(--btn-ink);
+      transition:border-color .15s,background .15s,box-shadow .15s}
+    .projbtn:hover{border-color:var(--btn-ink);background:var(--btn-fill-hover);
+      box-shadow:0 2px 8px var(--btn-shadow)}
+    /* The mark of each project, normalised to one box so the rows read evenly
+       despite differing source aspect ratios. */
+    .mark{width:1.5em;height:1.5em;object-fit:contain;flex:none}
+    .pt{display:inline-flex;gap:.4rem}
+    .ptbtn{display:inline-flex;align-items:center;padding:.2rem .6rem;
+      border-radius:999px;text-decoration:none;font-size:.8rem;font-weight:600;
+      border:1px solid var(--btn-edge);background:var(--btn-fill);
+      color:var(--btn-ink);
+      transition:border-color .15s,background .15s}
+    .ptbtn:hover{border-color:var(--btn-ink);background:var(--btn-fill-hover)}
+
+    /* Dark, System or Light, exactly as the homepage does it: `color-scheme`
+       on <html> is `light dark` for System, and every colour below is written
+       once as `light-dark(light, dark)`. No script. The choice does not
+       persist — that needs localStorage. Scoped to this page's own markup, so
+       the other pages sharing style.css are untouched, and dropped whole on a
+       browser without `light-dark()`, which leaves the light theme showing. */
+    html{color-scheme:light}
+    @supports (color:light-dark(#000,#fff)){
+      html{color-scheme:light dark}
+      html:has(#t-light:checked){color-scheme:light}
+      html:has(#t-dark:checked){color-scheme:dark}
+    }
+    body{background:light-dark(#f7f9fa,#14171b);
+         color:light-dark(#15191d,#e8ecf1);
+         --btn-ink:light-dark(#14507d,#7fb3e8);
+         --btn-edge:light-dark(#aec4d8,#2e3b47);
+         --btn-fill:light-dark(#eef3f8,#1a2028);
+         --btn-fill-hover:light-dark(#e1ebf4,#212832);
+         --btn-shadow:light-dark(rgba(20,80,125,.18),rgba(0,0,0,.5))}
+    body a{color:light-dark(#14507d,#7fb3e8)}
+    body a:hover{color:light-dark(#0d3a5c,#a6cdf3)}
+    body a:focus-visible{outline-color:light-dark(#14507d,#7fb3e8)}
+    body h2{color:light-dark(#5b6570,#99a3ae)}
+    body .desc{color:light-dark(#282d33,#c6cdd6)}
+
+    /* The theme switch, same three radios as the homepage. */
+    .topnav{display:flex;align-items:center;justify-content:space-between;
+      gap:1rem;padding:1rem 2rem}
+    .topnav a{display:inline-flex;align-items:center;gap:.4rem}
+    .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;
+      clip:rect(0 0 0 0);white-space:nowrap}
+    .themeswitch{position:relative;display:inline-grid;flex:none;
+      grid-template-columns:repeat(3,1fr);width:max-content;align-items:center;
+      padding:3px;border-radius:999px;overflow:hidden;
+      border:1px solid light-dark(#c3ced9,#39424d);
+      background:light-dark(#eef2f6,#20262d);
+      transition:background .3s ease,border-color .3s ease}
+    .themeswitch:hover{border-color:light-dark(#14507d,#7fb3e8)}
+    .themeswitch input{position:absolute;width:1px;height:1px;overflow:hidden;
+      clip:rect(0 0 0 0);white-space:nowrap}
+    .themeswitch label{position:relative;z-index:1;display:flex;
+      align-items:center;justify-content:center;
+      padding:.3rem .62rem;border-radius:999px;cursor:pointer}
+    .themeswitch svg{width:19px;height:19px;flex:none;
+      color:light-dark(#98a1ac,#6c757f);transition:color .3s ease}
+    .themeswitch input:focus-visible + label{
+      outline:2px solid light-dark(#14507d,#7fb3e8);outline-offset:-2px}
+    #t-dark:checked + label svg{color:#e2c979}
+    #t-sys:checked + label svg{color:light-dark(#14507d,#7fb3e8)}
+    #t-light:checked + label svg{color:#a8730a}
+    .knob{position:absolute;z-index:0;top:3px;bottom:3px;left:3px;
+      width:calc((100% - 6px)/3);border-radius:999px;
+      background:light-dark(#ffffff,#323b46);
+      box-shadow:0 1px 3px light-dark(rgba(20,60,100,.3),rgba(0,0,0,.5));
+      transition:transform .34s cubic-bezier(.22,.61,.36,1),background .3s ease}
+    #t-dark:checked ~ .knob{transform:translateX(0)}
+    #t-sys:checked ~ .knob{transform:translateX(100%)}
+    #t-light:checked ~ .knob{transform:translateX(200%)}
+  </style>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 <body>
-  <nav class="topnav"><a href="../"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Home</a></nav>
+  <nav class="topnav" aria-label="Primary">
+    <a href="../"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Home</a>
+    <div class="themeswitch" role="radiogroup" aria-label="Colour theme">
+      <input type="radio" name="theme" id="t-dark" autocomplete="off">
+      <label for="t-dark" title="Dark theme"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.7 14.6A8.6 8.6 0 0 1 9.4 3.3a8.7 8.7 0 1 0 11.3 11.3z"/></svg><span class="visually-hidden">Dark</span></label>
+      <input type="radio" name="theme" id="t-sys" autocomplete="off" checked>
+      <label for="t-sys" title="Match my system"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.6" y="4" width="18.8" height="12.4" rx="2"/><path d="M9 20.5h6M12 16.4v4.1"/></svg><span class="visually-hidden">Match my system</span></label>
+      <input type="radio" name="theme" id="t-light" autocomplete="off">
+      <label for="t-light" title="Light theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor" stroke="none"/><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg><span class="visually-hidden">Light</span></label>
+      <span class="knob" aria-hidden="true"></span>
+    </div>
+  </nav>
   <main>
     <h1>Projects</h1>
     <h2>Software projects</h2>
     <ul>
-      <li><img class="mark" src="logos/invoicenow.png" alt=""><a href="invoicenow/">invoiceNow</a> — desktop invoicing, Gmail send integration. <span class="pt"><a href="invoicenow/privacy.html">Privacy</a> · <a href="invoicenow/terms.html">Terms</a></span></li>
-      <li><img class="mark" src="logos/capsule.png" alt=""><a href="capsule/">Capsule</a> — isolated dev containers for autonomous AI agents. <span class="pt"><a href="capsule/privacy.html">Privacy</a> · <a href="capsule/terms.html">Terms</a></span></li>
-      <li><img class="mark" src="logos/cadence.png" alt=""><a href="cadence/">Cadence</a> — offline dictation and text-to-speech for Linux. <span class="pt"><a href="cadence/privacy.html">Privacy</a> · <a href="cadence/terms.html">Terms</a></span></li>
-      <li><img class="mark" src="logos/n-of-1.png" alt=""><a href="n-of-1/">N-of-1</a> — offline health tracker for Android, Linux and Windows. <span class="pt"><a href="n-of-1/privacy.html">Privacy</a> · <a href="n-of-1/terms.html">Terms</a></span></li>
-      <li><img class="mark" src="logos/epson-rr70w-autofeed.png" alt=""><a href="epson-rr70w-autofeed/">Epson RR-70W batch scanner</a> — driver-free batch scanning on Linux.</li>
-      <li><img class="mark" src="logos/tagdexer.png" alt=""><a href="tagdexer/">tagdexer</a> — tag-based code navigation and decision logging.</li>
-      <li><img class="mark" src="logos/nitrotune.png" alt=""><a href="nitrotune/">NitroTune</a> — fan and thermal control for the Acer Nitro on Linux.</li>
-      <li><img class="mark" src="logos/homescreen.png" alt=""><a href="homescreen/">Home Screen</a> — a browser new tab page laid out like a phone home screen.</li>
-      <li><img class="mark" src="logos/yt-downloader.png" alt=""><a href="yt-downloader/">YT Downloader</a> — a browser toolbar button for yt-dlp.</li>
+      <li>
+        <a class="projbtn" href="invoicenow/"><img class="mark" src="logos/invoicenow.png" alt="">invoiceNow</a>
+        <span class="desc">desktop invoicing, Gmail send integration.</span>
+        <span class="pt"><a class="ptbtn" href="invoicenow/privacy.html">Privacy</a><a class="ptbtn" href="invoicenow/terms.html">Terms</a></span>
+      </li>
+      <li>
+        <a class="projbtn" href="capsule/"><img class="mark" src="logos/capsule.png" alt="">Capsule</a>
+        <span class="desc">isolated dev containers for autonomous AI agents.</span>
+        <span class="pt"><a class="ptbtn" href="capsule/privacy.html">Privacy</a><a class="ptbtn" href="capsule/terms.html">Terms</a></span>
+      </li>
+      <li>
+        <a class="projbtn" href="cadence/"><img class="mark" src="logos/cadence.png" alt="">Cadence</a>
+        <span class="desc">offline dictation and text-to-speech for Linux.</span>
+        <span class="pt"><a class="ptbtn" href="cadence/privacy.html">Privacy</a><a class="ptbtn" href="cadence/terms.html">Terms</a></span>
+      </li>
+      <li>
+        <a class="projbtn" href="n-of-1/"><img class="mark" src="logos/n-of-1.png" alt="">N-of-1</a>
+        <span class="desc">offline health tracker for Android, Linux and Windows.</span>
+        <span class="pt"><a class="ptbtn" href="n-of-1/privacy.html">Privacy</a><a class="ptbtn" href="n-of-1/terms.html">Terms</a></span>
+      </li>
+      <li>
+        <a class="projbtn" href="epson-rr70w-autofeed/"><img class="mark" src="logos/epson-rr70w-autofeed.png" alt="">Epson RR-70W batch scanner</a>
+        <span class="desc">driver-free batch scanning on Linux.</span>
+      </li>
+      <li>
+        <a class="projbtn" href="tagdexer/"><img class="mark" src="logos/tagdexer.png" alt="">tagdexer</a>
+        <span class="desc">tag-based code navigation and decision logging.</span>
+      </li>
+      <li>
+        <a class="projbtn" href="nitrotune/"><img class="mark" src="logos/nitrotune.png" alt="">NitroTune</a>
+        <span class="desc">fan and thermal control for the Acer Nitro on Linux.</span>
+      </li>
+      <li>
+        <a class="projbtn" href="homescreen/"><img class="mark" src="logos/homescreen.png" alt="">Home Screen</a>
+        <span class="desc">a browser new tab page laid out like a phone home screen.</span>
+      </li>
+      <li>
+        <a class="projbtn" href="yt-downloader/"><img class="mark" src="logos/yt-downloader.png" alt="">YT Downloader</a>
+        <span class="desc">a browser toolbar button for yt-dlp.</span>
+      </li>
     </ul>
     <h2>Technical projects</h2>
     <ul>
-      <li><img class="mark" src="logos/renault-master.png" alt=""><a href="renault-master/">Renault Master camper</a> — van conversion: build, licensing and testing.</li>
+      <li>
+        <a class="projbtn" href="renault-master/"><img class="mark" src="renault-master/favicon.svg" alt="">Renault Master camper</a>
+        <span class="desc">van conversion: build, licensing and testing.</span>
+      </li>
     </ul>
   </main>
 </body>

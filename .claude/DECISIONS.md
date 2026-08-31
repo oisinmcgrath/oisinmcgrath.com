@@ -495,6 +495,31 @@ and an unscoped `.featcard img` sized it to the full width of the card. And the
 site-wide note about tracking and free software moved below the footer rule,
 where the rest of the small print already sits.
 
+**2026-08-31 — the projects index answers to the OS theme, and everything on it
+is a button.**
+
+It was the last page a reader is likely to see early that could only be light,
+and it is the page the homepage's Projects button leads to — arriving on white
+from a dark homepage was the jolt. It now carries the same three-way switch as
+the homepage and the same mechanism behind it, so there is one way this is done
+on the site rather than two.
+
+The rows became buttons for the same reason the homepage links did: a page of
+bare underlined links reads as an index, and this page is meant to read as a
+way in to ten pieces of work. Each project is a pill carrying its own mark; the
+four apps that publish policy URLs carry smaller Privacy and Terms pills beside
+the description, which also makes it obvious at a glance which projects have
+them and which do not.
+
+The campervan row now uses the Renault page's own `favicon.svg` — the van in
+profile in saturated orange — rather than the mark in `projects/logos/`. It is
+the same drawing the page itself uses in the tab, so the row and the page it
+leads to agree.
+
+Note this page does **not** use `.wrap`: it has always been laid out wide with
+the list indented from the headings, and that was kept. The indent drops away
+under 640px.
+
 ---
 
 ## Working notes

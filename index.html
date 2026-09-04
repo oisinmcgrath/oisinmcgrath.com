@@ -363,7 +363,14 @@
        sand on the van's red, teal on Cadence's navy — is a tint of the card
        behind it and reads as low contrast at that size. The `body` prefix is there to
        out-specify the light-dark palette further up the file. */
-    body .featcard.t-ren{background:#653619;border-color:#6d3a28;
+    body .featcard.t-ren{border-color:#6d3a28;
+      /* The van's card carries the page's own descent — the dark ramp from
+         its stylesheet, sky through ember to night, sized to the whole card.
+         The photograph covers the sky, so what shows below it is the ground
+         half, which is the part of that page a reader spends their time on. */
+      background:linear-gradient(180deg,#062248 0%,#0a3a7c 14%,#14548f 28%,
+        #1b5f96 36%,#2a3a30 40%,#3a2a17 46%,#5a2f12 54%,#6b3312 64%,
+        #43210e 76%,#3a2013 88%,#2a1a12 100%);
       box-shadow:0 2px 10px rgba(45,18,10,.45)}
     body .featcard.t-ren:hover{border-color:#ffb26d;
       box-shadow:0 6px 20px rgba(45,18,10,.6)}

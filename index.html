@@ -403,10 +403,14 @@
     /* The bio sets a little tighter than body text — three lines of it read
        as a block rather than as a paragraph with air between the lines. */
     .lead{line-height:1.35}
-    .linkcard{margin:1.5rem 0 2rem;padding:.6rem 1.35rem .7rem;
+    .linkcard{margin:1.5rem 0;padding:.6rem 1.35rem .7rem;
               border:1px solid #dbe2e9;border-radius:12px;background:#fbfcfd;
               box-shadow:0 1px 3px rgba(20,60,100,.06)}
     .linkcard h2{margin-top:0;margin-bottom:.3rem}
+    /* The heading below the card carries its own 1.75rem top margin, and
+       adjacent margins collapse to the larger of the two — so both have to
+       come to 1.5rem for the gap under the card to match the two above it. */
+    .linkcard + h2{margin-top:1.5rem}
     .linkcard .links{margin:.45rem 0 .05rem}
     /* Same rule the header draws under itself. */
     hr.rule{height:0;margin:2.5rem 0 0;border:0;border-top:1px solid #dfe4e8}

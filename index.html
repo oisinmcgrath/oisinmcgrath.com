@@ -358,7 +358,10 @@
     .featcard p{margin:0 0 .9rem;font-size:.95rem;color:#3b424a}
     .featcard .more{font-size:.9rem;font-weight:600;color:#14507d}
     /* A themed page's card wears that page's own colours, so the carousel
-       previews the theme as well as the work. The `body` prefix is there to
+       previews the theme as well as the work. The titles are the exception:
+       they are white on all three, because each theme's own heading colour —
+       sand on the van's red, teal on Cadence's navy — is a tint of the card
+       behind it and reads as low contrast at that size. The `body` prefix is there to
        out-specify the light-dark palette further up the file. */
     body .featcard.t-ren{background:#96513a;border-color:#6d3a28;
       box-shadow:0 2px 10px rgba(45,18,10,.45)}
@@ -366,7 +369,7 @@
       box-shadow:0 6px 20px rgba(45,18,10,.6)}
     body .featcard.t-ren > img,body .featcard.t-ren > video{
       border-bottom-color:#6d3a28}
-    body .featcard.t-ren h3{color:#ffd9b0}
+    body .featcard.t-ren h3{color:#ffffff}
     body .featcard.t-ren p{color:#fbeadd}
     body .featcard.t-ren .more{color:#ffdcb8}
     body .featcard.t-hs{background:#1c1f25;border-color:#2b3038;
@@ -375,7 +378,7 @@
       box-shadow:0 6px 20px rgba(0,0,0,.6)}
     body .featcard.t-hs > img,body .featcard.t-hs > video{
       border-bottom-color:#2b3038}
-    body .featcard.t-hs h3{color:#f0f3f7}
+    body .featcard.t-hs h3{color:#ffffff}
     body .featcard.t-hs p{color:#c3cbd6}
     body .featcard.t-hs .more{color:#6fb3f2}
     body .featcard.t-cad{background:#151a2c;border-color:#242c46;
@@ -384,7 +387,7 @@
       box-shadow:0 6px 20px rgba(0,0,0,.65)}
     body .featcard.t-cad > img,body .featcard.t-cad > video{
       border-bottom-color:#242c46}
-    body .featcard.t-cad h3{color:#7fe6e6}
+    body .featcard.t-cad h3{color:#ffffff}
     body .featcard.t-cad p{color:#ccd3e0}
     body .featcard.t-cad .more{color:#4ad4d4}
 

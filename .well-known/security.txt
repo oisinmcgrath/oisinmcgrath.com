@@ -1,0 +1,13 @@
+# Security contact for oisinmcgrath.com
+#
+# This site is hand-written static HTML and CSS with no backend, no database
+# and no accounts, so there is little here to report against — but if you find
+# something, this is where to send it.
+#
+# The applications listed under /projects/ are separate software; report
+# anything found in one of those on its own GitHub repository.
+
+Contact: mailto:enquiries@oisinmcgrath.com
+Expires: 2027-09-01T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://oisinmcgrath.com/.well-known/security.txt

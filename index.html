@@ -262,7 +262,7 @@
        in focus. Checking a radio holds it for five seconds and then the drift
        picks up again from exactly there, which is an animation-delay, not a
        timer. No script. */
-    .feat{position:relative;margin:1.5rem 0}
+    .feat{position:relative;margin:.75rem 0 1.25rem}
     .featinput{position:absolute;width:1px;height:1px;overflow:hidden;
                clip:rect(0 0 0 0);white-space:nowrap}
     .featviewport{overflow:hidden;padding:.5rem 0 1rem;
@@ -400,6 +400,9 @@
        the links card: the header's own bottom margin is 2rem, the card's top
        margin 1.5rem, so the header is brought back to match. */
     header.site-header{margin-bottom:1.5rem}
+    /* The bio sets a little tighter than body text — three lines of it read
+       as a block rather than as a paragraph with air between the lines. */
+    .lead{line-height:1.35}
     .linkcard{margin:1.5rem 0 2rem;padding:.6rem 1.35rem .7rem;
               border:1px solid #dbe2e9;border-radius:12px;background:#fbfcfd;
               box-shadow:0 1px 3px rgba(20,60,100,.06)}
@@ -409,7 +412,7 @@
     hr.rule{height:0;margin:2.5rem 0 0;border:0;border-top:1px solid #dfe4e8}
     /* Bracketing the carousel: the same shape as the Renault page's dividers,
        drawn in the site's own blue. */
-    hr.rule.accent{height:2px;margin:2rem 0;border:0;opacity:.75;
+    hr.rule.accent{height:2px;margin:.85rem 0;border:0;opacity:.75;
       background:linear-gradient(90deg,transparent,rgba(20,80,125,.25) 12%,
         rgba(20,80,125,.85) 50%,rgba(20,80,125,.25) 88%,transparent)}
   </style>

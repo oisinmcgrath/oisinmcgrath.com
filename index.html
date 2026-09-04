@@ -396,16 +396,19 @@
                     box-shadow:0 6px 20px rgba(20,60,100,.18)}
     .commshot img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
     /* The links, gathered onto a card of their own. */
-    .linkcard{margin:.6rem 0 .6rem;padding:.85rem 1.35rem 1rem;
+    .linkcard{margin:.3rem 0 .3rem;padding:.6rem 1.35rem .7rem;
               border:1px solid #dbe2e9;border-radius:12px;background:#fbfcfd;
               box-shadow:0 1px 3px rgba(20,60,100,.06)}
-    .linkcard h2{margin-top:.1rem;margin-bottom:.45rem}
-    .linkcard .links{margin:.7rem 0 .15rem}
+    .linkcard h2{margin-top:0;margin-bottom:.3rem}
+    .linkcard .links{margin:.45rem 0 .05rem}
     /* The heading after the card brings its own 1.75rem top margin, and
        adjacent margins collapse to the larger of the two — so trimming the
        card's bottom margin alone changes nothing visible. This is the rule
        that actually closes the gap under it. */
-    .linkcard + h2{margin-top:.9rem}
+    .linkcard + h2{margin-top:.5rem}
+    /* The gap above the card is the lead paragraph's own bottom margin, which
+       is larger than the card's top margin and therefore the one that shows. */
+    .lead{margin-bottom:.3rem}
     /* Same rule the header draws under itself. */
     hr.rule{height:0;margin:2.5rem 0 0;border:0;border-top:1px solid #dfe4e8}
     /* Bracketing the carousel: the same shape as the Renault page's dividers,

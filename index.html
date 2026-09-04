@@ -405,6 +405,11 @@
     .commshot:hover{transform:translateY(-2px);border-color:#14507d;
                     box-shadow:0 6px 20px rgba(20,60,100,.18)}
     .commshot img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+    /* The channel page is a screenshot, not a photograph: cropping it to 16:9
+       cuts the banner off the top and the videos off the bottom, so this one
+       keeps its own proportions and is centred under the heading. */
+    .commshot.whole{margin-inline:auto}
+    .commshot.whole img{aspect-ratio:auto;object-fit:contain}
     /* The links, gathered onto a card of their own. */
     /* The lead sits the same distance below the header rule as it does above
        the links card: the header's own bottom margin is 2rem, the card's top
@@ -695,7 +700,7 @@
       <h2 class="centred">What else drives me</h2>
 
       <h3>Music</h3>
-      <a class="commshot" href="/music.html">
+      <a class="commshot whole" href="/music.html">
         <img src="/music/channel.jpg" alt="The Oisín Mac Craith YouTube channel">
       </a>
 

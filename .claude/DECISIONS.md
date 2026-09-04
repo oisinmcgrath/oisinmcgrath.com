@@ -481,8 +481,11 @@ each slot three quarters of a viewport, drifting exactly three slots per cycle.
 Two copies is enough for the drift alone, but not for the arrows — after a
 click the drift resumes from that card's anchor and has to run three more slots
 without reaching the end, and from the third anchor it cannot. The Renault
-page's carousel still has that fault for the same reason; it shows only after
-an arrow click, which is why it has not been noticed.
+page's carousel had that fault for the same reason; it showed only after an
+arrow click, which is why it went unnoticed. It was given the same treatment on
+2026-09-04 — nine slides, 675% of track on desktop and 810% on a phone, with
+every percentage rescaled at both breakpoints. Nothing about it looks or
+behaves differently; there is simply always track left to run.
 
 Each slot is now a `.featslide` whose padding provides the gutter. The gutter
 used to be a margin on the card, which does not count inside the slot's

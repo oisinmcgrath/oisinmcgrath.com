@@ -922,34 +922,40 @@ nav.site-nav .ico {
   );
 }
 
-/* Four and a half viewports of track for six slides — the three photographs
-   twice over — so each slide is three quarters of the viewport: only slivers
-   of the neighbours show and the one in the middle is large. */
+/* Six and three quarter viewports of track for nine slides — the three
+   photographs three times over — so each slide is three quarters of the
+   viewport: only slivers of the neighbours show and the one in the middle is
+   large.
+
+   Three copies rather than two. Two is enough for the drift alone, but not
+   for the arrows: after a click the drift resumes from that photograph's
+   anchor and has to run three more slots without reaching the end of the
+   track, and from the later anchors it could not — the right-hand side of the
+   viewport emptied for the last stretch of every cycle. */
 .cartrack {
   display: flex;
-  width: 450%;
+  width: 675%;
   animation: cardrift 78s linear infinite;
   will-change: transform;
 }
 
 .carslide {
-  flex: 0 0 16.6667%;
+  flex: 0 0 11.1111%;
   margin: 0;
   padding: 0 0.55rem;
 }
 
-/* -5% centres the second slide, which leaves the first covering the whole
-   left gutter and the third the right — the viewport is never short of a
-   slide. Running on to -55% moves the track exactly five slots, which is
-   where the duplicates begin, so the loop closes on itself with nothing to
-   see happen. The rate per slide is unchanged from three slides: 26 seconds
-   each. */
+/* -9.2593% of the track is 62.5% of a viewport, which centres the second
+   slide and leaves the first covering the whole left gutter and the third the
+   right — the viewport is never short of a slide. Running on to -42.5926%
+   moves the track exactly three slots, one full set, so the loop closes on
+   itself with nothing to see happen. 26 seconds a slide. */
 @keyframes cardrift {
   from {
-    transform: translateX(-13.8889%);
+    transform: translateX(-9.2593%);
   }
   to {
-    transform: translateX(-63.8889%);
+    transform: translateX(-42.5926%);
   }
 }
 
@@ -997,44 +1003,44 @@ nav.site-nav .ico {
 }
 
 .carousel:has(#car1:checked) .cartrack {
-  transform: translateX(-47.2222%);
+  transform: translateX(-31.4815%);
   animation: cardrift1 78s linear 5s infinite;
 }
 
 .carousel:has(#car2:checked) .cartrack {
-  transform: translateX(-13.8889%);
+  transform: translateX(-9.2593%);
   animation: cardrift2 78s linear 5s infinite;
 }
 
 .carousel:has(#car3:checked) .cartrack {
-  transform: translateX(-30.5556%);
+  transform: translateX(-20.3704%);
   animation: cardrift3 78s linear 5s infinite;
 }
 
 @keyframes cardrift1 {
   from {
-    transform: translateX(-47.2222%);
+    transform: translateX(-31.4815%);
   }
   to {
-    transform: translateX(-97.2222%);
+    transform: translateX(-64.8148%);
   }
 }
 
 @keyframes cardrift2 {
   from {
-    transform: translateX(-13.8889%);
+    transform: translateX(-9.2593%);
   }
   to {
-    transform: translateX(-63.8889%);
+    transform: translateX(-42.5926%);
   }
 }
 
 @keyframes cardrift3 {
   from {
-    transform: translateX(-30.5556%);
+    transform: translateX(-20.3704%);
   }
   to {
-    transform: translateX(-80.5556%);
+    transform: translateX(-53.7037%);
   }
 }
 
@@ -1236,63 +1242,63 @@ nav.site-nav .ico {
 @media (prefers-reduced-motion: reduce) {
   .cartrack {
     animation: none;
-    transform: translateX(-47.2222%);
+    transform: translateX(-9.2593%);
   }
 }
 
 @media (max-width: 640px) {
-  /* Bigger slides on a phone: the same ten across a wider track, so each is
-     three quarters of the viewport instead of half. The drift still moves
-     exactly five slots. */
+  /* Bigger slides on a phone: the same nine across a wider track, so each is
+     nine tenths of the viewport rather than three quarters. The drift still
+     moves exactly three slots. */
   .cartrack {
-    width: 540%;
+    width: 810%;
   }
 
   @keyframes cardrift {
     from {
-      transform: translateX(-15.7407%);
+      transform: translateX(-10.4938%);
     }
     to {
-      transform: translateX(-65.7407%);
+      transform: translateX(-43.8271%);
     }
   }
 
   .carousel:has(#car1:checked) .cartrack {
-    transform: translateX(-49.0741%);
+    transform: translateX(-32.7160%);
   }
 
   .carousel:has(#car2:checked) .cartrack {
-    transform: translateX(-15.7407%);
+    transform: translateX(-10.4938%);
   }
 
   .carousel:has(#car3:checked) .cartrack {
-    transform: translateX(-32.4074%);
+    transform: translateX(-21.6049%);
   }
 
   @keyframes cardrift1 {
     from {
-      transform: translateX(-49.0741%);
+      transform: translateX(-32.7160%);
     }
     to {
-      transform: translateX(-99.0741%);
+      transform: translateX(-66.0493%);
     }
   }
 
   @keyframes cardrift2 {
     from {
-      transform: translateX(-15.7407%);
+      transform: translateX(-10.4938%);
     }
     to {
-      transform: translateX(-65.7407%);
+      transform: translateX(-43.8271%);
     }
   }
 
   @keyframes cardrift3 {
     from {
-      transform: translateX(-32.4074%);
+      transform: translateX(-21.6049%);
     }
     to {
-      transform: translateX(-82.4074%);
+      transform: translateX(-54.9382%);
     }
   }
 

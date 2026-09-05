@@ -1,44 +1,46 @@
-/* tagdexer — plain CSS, no external fonts or CDNs.
-   Light slate palette with an amber accent, echoing the tag markers. */
+/* Tagdexer — plain CSS, no external fonts or CDNs.
+   Deep navy page with the logo's own cyan (#16b9ca, sampled from the tag in
+   logo.png) lifted a little for links and headings, so the mark and the text
+   read as one thing. The screenshots are dark terminal and editor captures, so
+   they sit on the page rather than punching light holes in it. */
 *,*::before,*::after{box-sizing:border-box}
 html{font-size:16px;-webkit-text-size-adjust:100%}
 body{margin:0;min-height:100vh;line-height:1.6;
   font-family:system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Cantarell,"Noto Sans",Arial,sans-serif;
-  color:#1b2027;background:#f4f6f8}
-a{color:#9a5b00;text-decoration:underline;text-underline-offset:2px}
-a:hover{color:#7a4700}
-a:focus-visible{outline:2px solid #9a5b00;outline-offset:2px}
+  color:#dbe3f0;background:#0e1626}
+a{color:#2ecad9;text-decoration:underline;text-underline-offset:2px}
+a:hover{color:#78e0ea}
+a:focus-visible{outline:2px solid #2ecad9;outline-offset:2px}
 .wrap{max-width:42rem;margin:0 auto;padding:1.5rem 1.25rem 3rem}
-header.site-header{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid #dde2e8;text-align:center}
+header.site-header{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid #26324c;text-align:center}
 header.site-header h1{margin:0 0 .35rem;font-size:1.65rem;font-weight:700;letter-spacing:-.02em;line-height:1.25}
 header.site-header img.logo{width:130px;height:auto;margin-top:1.25rem;margin-bottom:.75rem}
-header.site-header .tagline{margin:0 auto;max-width:34rem;color:#5a6472;font-size:.95rem}
 nav.site-nav{margin-top:.85rem;display:flex;justify-content:center;flex-wrap:wrap;gap:.35rem 1rem;font-size:.95rem}
 nav.site-nav a{text-decoration:none;font-weight:500}
 nav.site-nav a:hover{text-decoration:underline}
-main h2{margin:1.75rem 0 .65rem;font-size:1.25rem;font-weight:700;letter-spacing:-.01em;line-height:1.3;color:#9a5b00}
-main p,main li{color:#2b333d}
+main h2{margin:1.75rem 0 .65rem;font-size:1.25rem;font-weight:700;letter-spacing:-.01em;line-height:1.3;color:#45d3e0}
+main p,main li{color:#cfd9e8}
 main p{margin:0 0 .85rem}
 main ul{margin:0 0 1rem;padding-left:1.35rem}
 main li{margin-bottom:.4rem}
-.lead{font-size:1.05rem;color:#38414c}
-.card{background:#fff;border:1px solid #dde2e8;border-radius:8px;padding:1.15rem 1.25rem;margin:1rem 0 1.5rem}
+.lead{font-size:1.05rem;color:#e4ebf6}
+.card{background:#16203a;border:1px solid #26324c;border-radius:8px;padding:1.15rem 1.25rem;margin:1rem 0 1.5rem}
 .card h2{margin-top:0}
 code,.mono{font-family:ui-monospace,"Cascadia Code","Source Code Pro",Menlo,Consolas,monospace;
-  font-size:.88em;background:#e8ecf1;padding:.1em .35em;border-radius:3px;word-break:break-word}
-pre{background:#e8ecf1;border:1px solid #dde2e8;border-radius:6px;padding:.85rem 1rem;overflow-x:auto;margin:0 0 1rem}
+  font-size:.88em;background:#1b2740;padding:.1em .35em;border-radius:3px;word-break:break-word}
+pre{background:#111c31;border:1px solid #26324c;border-radius:6px;padding:.85rem 1rem;overflow-x:auto;margin:0 0 1rem}
 pre code{background:none;padding:0}
-.meta{color:#5a6472;font-size:.92em}
+.meta{color:#98a5bd;font-size:.92em}
 /* Screenshots. Every capture is wider than the text column, so max-width takes
    them to the full column width; the height cap only ever bites on a tall one. */
 figure{margin:1.5rem 0 1.75rem}
 .shot{display:block;margin:0 auto;width:auto;height:auto;max-width:100%;max-height:42rem;
-  border:1px solid #cfd6de;border-radius:8px}
-figcaption{margin-top:.7rem;text-align:center;font-size:.88rem;color:#5a6472;
+  border:1px solid #2c3a58;border-radius:8px}
+figcaption{margin-top:.7rem;text-align:center;font-size:.88rem;color:#98a5bd;
   max-width:32rem;margin-left:auto;margin-right:auto}
-footer.site-footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid #dde2e8;font-size:.88rem;color:#5a6472;text-align:center}
+footer.site-footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid #26324c;font-size:.88rem;color:#98a5bd;text-align:center}
 footer.site-footer p{margin:0 0 .4rem;color:inherit}
-footer.site-footer a{color:#9a5b00}
+footer.site-footer a{color:#2ecad9}
 @media (max-width:480px){.wrap{padding:1.15rem 1rem 2.5rem}header.site-header h1{font-size:1.4rem}}
 
 /* Header nav links are pill buttons, each prefixed with its own mark. The
@@ -80,7 +82,7 @@ nav.site-nav .ico {
 }
 
 nav.site-nav .ico-gh {
-  color: #24292f;
+  color: #eef1f5;
 }
 
 /* The back button, top left of every page but the homepage. Like the nav

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="tagdexer — two CLI tools that share one vocabulary: a tag index that finds files by what they do, and an append-only decision log that records why they are the way they are.">
-  <title>tagdexer</title>
+  <meta name="description" content="Tagdexer organises files with tags rather than folders, and keeps a permanent, append-only record of the design decisions made during a project.">
+  <title>Tagdexer</title>
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="stylesheet" href="style.css">
   <style>
@@ -19,13 +19,12 @@
   <nav class="backnav" aria-label="Back"><a class="backbtn" href="https://oisinmcgrath.com/projects/" data-back><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Back</a></nav>
   <div class="wrap">
     <header class="site-header">
-      <h1>tagdexer</h1>
+      <h1>Tagdexer</h1>
       <p class="tagline">
-        Find files by what they do, not where they live — and keep the reasoning
-        that produced them. A tag index and an append-only decision log, sharing
-        one vocabulary, for any repo.
+        Files organised by tags rather than folders, and a permanent record of
+        the decisions made along the way.
       </p>
-      <img class="logo" src="logo/logo.png" alt="tagdexer logo">
+      <img class="logo" src="logo/logo.png" alt="Tagdexer logo">
       <nav class="site-nav" aria-label="Primary">
         <a href="https://oisinmcgrath.com/"><svg class="ico" viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0L0 6V8H1V15H4V10H7V15H15V8H16V6L14 4.5V1H11V2.25L8 0ZM9 10H12V13H9V10Z"/></svg>Home</a>
         <a href="https://github.com/oisinmcgrath/tagdexer"><svg class="ico ico-gh" viewBox="0 0 20 20" width="15" height="15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M10,0 C15.523,0 20,4.59 20,10.253 C20,14.782 17.138,18.624 13.167,19.981 C12.66,20.082 12.48,19.762 12.48,19.489 C12.48,19.151 12.492,18.047 12.492,16.675 C12.492,15.719 12.172,15.095 11.813,14.777 C14.04,14.523 16.38,13.656 16.38,9.718 C16.38,8.598 15.992,7.684 15.35,6.966 C15.454,6.707 15.797,5.664 15.252,4.252 C15.252,4.252 14.414,3.977 12.505,5.303 C11.706,5.076 10.85,4.962 10,4.958 C9.15,4.962 8.295,5.076 7.497,5.303 C5.586,3.977 4.746,4.252 4.746,4.252 C4.203,5.664 4.546,6.707 4.649,6.966 C4.01,7.684 3.619,8.598 3.619,9.718 C3.619,13.646 5.954,14.526 8.175,14.785 C7.889,15.041 7.63,15.493 7.54,16.156 C6.97,16.418 5.522,16.871 4.63,15.304 C4.63,15.304 4.101,14.319 3.097,14.247 C3.097,14.247 2.122,14.234 3.029,14.87 C3.029,14.87 3.684,15.185 4.139,16.37 C4.139,16.37 4.726,18.2 7.508,17.58 C7.513,18.437 7.522,19.245 7.522,19.489 C7.522,19.76 7.338,20.077 6.839,19.982 C2.865,18.627 0,14.783 0,10.253 C0,4.59 4.478,0 10,0"/></svg>GitHub</a>
@@ -34,117 +33,118 @@
 
     <main>
       <p class="lead">
-        Two questions cost more time than almost anything else in an unfamiliar
-        codebase: <em>where is the code that does this?</em> and <em>why on earth
-        was it built this way?</em> Neither is answered by the file tree, and
-        neither survives in anyone's head for long. <strong>tagdexer</strong> is
-        two small command-line tools that answer one each — and, because they
-        share a vocabulary, answer them together.
+        Tagdexer solves the problem of one file needing to be in several places
+        at once by organising files with tags rather than folders. It also keeps
+        a permanent record of design decisions made during a project, along with
+        the circumstances and reasoning behind them at the time. It is built for
+        software developers, though the filing problem it solves is a general
+        one.
       </p>
 
-      <section class="card" aria-labelledby="index-heading">
-        <h2 id="index-heading">The tag index — finding the code</h2>
-        <p>
-          Directory structure encodes one way of slicing a project, chosen early
-          and rarely revisited. But the thing you actually want is usually a role:
-          everything that writes to the database, everything still live, everything
-          touching the network. Those files are scattered across folders, and
-          grepping for them means guessing the words their authors happened to use.
-        </p>
-        <p>
-          tagdexer labels files by <strong>what they do</strong>. A tag goes in a
-          header comment, or — for JSON, images and folders that can't carry
-          comments — in a companion <code>.tags</code> file:
-        </p>
-        <pre><code># @tagdex: recorder, online, active</code></pre>
-        <p>
-          The indexer scans the repo, resolves aliases so <code>db</code>,
-          <code>.db</code> and <code>sqlite</code> all collapse to the canonical
-          <code>database</code>, and writes one <code>.tagindex.json</code> at the
-          root. Searches then take include and exclude terms together:
-        </p>
-        <pre><code>node tagdexer/indexer.js --search "database,active,-deprecated"</code></pre>
-        <p>
-          That asks a question the directory tree can't: everything that touches
-          the database and is still in service, minus what's already on its way
-          out. No file has to move for its tags to change, so the index tracks how
-          you actually think about the code rather than how it was once filed.
-        </p>
-      </section>
+      <p>
+        Tags let related files cross-reference concepts held in different
+        locations, which folders cannot. Say you scan your passport. You might
+        have a folder called holiday paperwork, another called identification
+        documents, and a third called immigration. With folders, that one
+        passport file can only live in one of the three, excluded from the other
+        two. With tags it belongs to all three at once, so you can retrieve it by
+        searching any of those concepts.
+      </p>
 
-      <section class="card" aria-labelledby="log-heading">
-        <h2 id="log-heading">The decision log — keeping the reasoning</h2>
-        <p>
-          Finding the code is only half the problem. The expensive knowledge is the
-          part that never makes it into the repo: the approach that was tried and
-          abandoned, the constraint that isn't obvious from any single file, the
-          reason a sensible-looking refactor will break something three modules
-          away. Commit messages record what changed. They rarely record what was
-          rejected, or why.
-        </p>
-        <p>
-          <code>tracker.js</code> is an append-only decision log for exactly that.
-          Entries are schema-validated, so they can't be vague — a decision needs
-          an <strong>intent</strong> (why it matters), a <strong>context</strong>
-          (how it was reached), tags, and the files it affects. Entries can record
-          alternatives rejected, constraints discovered, and consequences, and can
-          supersede earlier entries without deleting them.
-        </p>
-        <pre><code>node tagdexer/tracker.js --add --type finding \
-  --decision "Vendor VIN does not encode drivetrain" \
-  --intent "Determine if VIN can backfill missing drivetrain" \
-  --context "Checked against the NHTSA vPIC schema" \
-  --tags "vin,drivetrain"</code></pre>
-        <p>
-          The test for whether something is worth logging is simple: <em>if you
-          walked away right now, would the next person have to rediscover what you
-          already know?</em> Routine refactors and dependency bumps fail that test.
-          A dead end you spent two days in passes it easily — and a dead end is
-          precisely the kind of thing that never gets written down anywhere else.
-        </p>
-      </section>
+      <p>
+        Otherwise the file is missing from the other places you might look for it
+        later, or you keep a copy in each. If it is something you update, like a
+        spreadsheet, you soon lose track of which copy is current.
+      </p>
 
-      <section class="card" aria-labelledby="compose-heading">
-        <h2 id="compose-heading">Why they belong together</h2>
-        <p>
-          The two halves share one vocabulary. Decision entries are tagged with the
-          same canonical tags as files, resolved through the same aliases — so a
-          tag is not just a label on a file, it is a thread running through the
-          repo's history.
-        </p>
-        <pre><code># what runs
-node tagdexer/indexer.js --search "database,active"
+      <p>
+        Tagdexer works best alongside whichever AI agent you already use, which
+        can use the Tagdexer CLI to tag files for you, or find files by tag at
+        your request, far faster than doing it by hand. For anyone already
+        working with agents, this is the recommended method.
+      </p>
 
-# why it runs that way
-node tagdexer/tracker.js --search --tag database</code></pre>
-        <p>
-          Ask the first question and you get the code as it stands. Ask the second
-          and you get the arguments that produced it, including the options that
-          were considered and dropped. Kept separately, an index goes stale and a
-          decision log goes unread; sharing a vocabulary, each one gives you a way
-          into the other.
-        </p>
-        <p>
-          Both are plain CLI tools, so this works the same whether the reader is a
-          new engineer, you in six months, or an AI coding agent that has no memory
-          of the last session at all. The optional VSCodium sidebar puts the same
-          search, tag editing and decision browsing in a panel for people who
-          prefer to click.
-        </p>
-        <figure>
-          <img class="shot" src="screenshots/sidebar.png"
-               alt="The tagdexer sidebar in VSCodium: a tag search panel with include, exclude and filename filters; a list of tagged files grouped by tag with counts; and a decisions panel with one entry expanded to show its tags, intent and context.">
-          <figcaption>
-            The sidebar, showing both halves at once — tag search and the files
-            each tag covers above, the decision log below. The expanded entry
-            carries the same canonical tags as the files, which is what lets one
-            lead to the other.
-          </figcaption>
-        </figure>
-        <p>
-          <a href="https://github.com/oisinmcgrath/tagdexer"><strong>Source &amp; full docs on GitHub</strong></a>
-        </p>
-      </section>
+      <figure>
+        <img class="shot" src="screenshots/tag-file.png" width="2026" height="360" loading="lazy"
+             alt="Adding a tag to a file by typing one line.">
+        <figcaption>Adding a tag to a file by typing one line.</figcaption>
+      </figure>
+
+      <figure>
+        <img class="shot" src="screenshots/search-tag.png" width="2390" height="592" loading="lazy"
+             alt="Asking for every file that carries a particular tag.">
+        <figcaption>Asking for every file that carries a particular tag.</figcaption>
+      </figure>
+
+      <p>
+        Tagdexer is not just a file tagging system. It also records architectural
+        decisions.
+      </p>
+
+      <h2>What is an architectural decision, and why record it?</h2>
+
+      <p>
+        Assume you are building something complex, like renovating your home.
+        Your carpenter recommends a taller skirting because the walls behind it
+        are damaged, and you agree because it looks fine either way.
+      </p>
+
+      <p>
+        Six months later an electrician explains lower skirting would save him a
+        day chasing new cable through the walls, because he can reach the old
+        power points. You can't remember any reason for the tall boards, so you
+        agree that it will be cheaper to change the skirting and he pulls it off.
+      </p>
+
+      <p>
+        You call the carpenter back to fit the shorter boards. He arrives and
+        reminds you the tall skirting was hiding damage that shorter boards won't
+        cover, so the tall boards have to go back on. They can't, because the new
+        power points are now sitting in the way. So the electrician returns to
+        remove the points, the carpenter returns to refit the original tall
+        skirting, and the electrician returns a third time to run the new wiring
+        he avoided in the first place. You pay both trades three times for work
+        that could have been completed once. Roughly $2,000 in avoidable callouts
+        and rework, plus a month's delay, for a decision nobody wrote down.
+      </p>
+
+      <p>
+        When a friend asks about your renovation, you easily recall what has
+        changed, but what about why decisions were made? The problem of the
+        damaged wall was important to you at the time, but as the skirting covers
+        it over, so too is it forgotten. With nothing to remind you it once
+        existed, you assume the height of the skirting was only ever a
+        preference.
+      </p>
+
+      <p>
+        The height of the skirting board was not purely aesthetic, but an
+        architectural decision, because it set the conditions for decisions made
+        later. It solved a problem that, as a result, was invisible until the
+        previous work was altered.
+      </p>
+
+      <p>
+        Tagdexer's decision logging lets developers record and search a decision
+        log which, by default, is append-only, so the record cannot be altered
+        after the fact. Each part of a decision is separately queryable: what was
+        decided, what the intent was, what the context was, and which files were
+        affected. In one request you can find every decision that ever touched a
+        given file.
+      </p>
+
+      <p>
+        It is optimised for autonomous AI agent workflows, where agents need to
+        know the intent behind an architecture before they change it, and where
+        they log their own decisions for the next developer or agent. The result
+        is that no part of a project is left ambiguous later.
+      </p>
+
+      <figure>
+        <img class="shot" src="screenshots/editor.png" width="2066" height="1870" loading="lazy"
+             alt="The same thing inside a code editor: searching by tag above, the record of decisions below.">
+        <figcaption>The same thing inside a code editor: searching by tag above, the record of decisions below.</figcaption>
+      </figure>
 
       <section class="card" aria-labelledby="req-heading">
         <h2 id="req-heading">Requirements</h2>
@@ -158,10 +158,11 @@ node tagdexer/tracker.js --search --tag database</code></pre>
           Fedora Linux.
         </p>
       </section>
+
       <section class="card" aria-labelledby="get-heading">
         <h2 id="get-heading">Getting it</h2>
         <p>
-          tagdexer is free software. The source is on GitHub, and the repository
+          Tagdexer is free software. The source is on GitHub, and the repository
           is the whole distribution — there is no installer, no store listing
           and no account.
         </p>

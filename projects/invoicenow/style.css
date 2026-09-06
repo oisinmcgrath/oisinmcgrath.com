@@ -39,6 +39,8 @@ figure{margin:1.5rem 0 1.75rem}
   border:1px solid #33363d;border-radius:8px}
 figcaption{margin-top:.7rem;text-align:center;font-size:.88rem;color:#9aa0a8;
   max-width:32rem;margin-left:auto;margin-right:auto}
+/* A quiet divider, the same grey as every other border on the page. */
+hr.rule{border:0;border-top:1px solid #33363d;margin:2rem auto;max-width:32rem}
 footer.site-footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid #33363d;font-size:.88rem;color:#9aa0a8;text-align:center}
 footer.site-footer p{margin:0 0 .4rem;color:inherit}
 footer.site-footer a{color:#4eb3c7}

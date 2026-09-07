@@ -35,6 +35,22 @@ pre code{background:none;padding:0}
 .modes code{background:#e5ebf1}
 .table-wrap{overflow-x:auto}
 .meta{color:#56636f;font-size:.92em}
+/* Screenshots. Every capture is wider than the text column, so max-width takes
+   them to the full column width; the height cap only bites on a tall one. */
+figure{margin:1.5rem 0 1.75rem}
+.shot{display:block;margin:0 auto;width:auto;height:auto;max-width:100%;max-height:42rem;
+  border:1px solid #d7dfe7;border-radius:8px}
+figcaption{margin-top:.7rem;text-align:center;font-size:.88rem;color:#56636f;
+  max-width:32rem;margin-left:auto;margin-right:auto}
+/* Two terminal captures that belong together — choosing the mode, then the
+   batch running. Side by side they read as one sequence; the captions sit
+   under their own shot. Below 640px there is not enough width, so they stack.
+   The figures share a baseline at the top rather than stretching, because the
+   two captures are different heights. */
+.pair{display:flex;gap:1rem;align-items:flex-start;margin:1.5rem 0 1.75rem}
+.pair figure{flex:1 1 0;min-width:0;margin:0}
+.pair figcaption{max-width:none}
+@media (max-width:640px){.pair{flex-direction:column}.pair figure{width:100%}}
 footer.site-footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid #d7dfe7;font-size:.88rem;color:#56636f;text-align:center}
 footer.site-footer p{margin:0 0 .4rem;color:inherit}
 footer.site-footer a{color:#14507d}

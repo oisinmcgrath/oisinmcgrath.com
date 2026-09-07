@@ -596,3 +596,70 @@ end of the track from the later anchors.
   keep the voice. Do not smooth it into something more conventional.
 - Deploying uploads the whole repo root, so nothing that should stay private
   can live in the working tree.
+
+---
+
+## The homepage is triaged
+
+**2026-09-08 — two feature blocks, then ten equal cards, and no headings.**
+
+The homepage used to present ten projects as ten identical tiles under
+*Software projects* and *Technical projects*, with a rotating carousel of three
+above them. That gave every project the same visual weight, which is not true:
+Cross Market Intelligence and the Renault Master conversion are substantially
+larger pieces of work than a browser toolbar button.
+
+So the two lead as full-width blocks — heading, paragraph, one screenshot at
+the full column, a link through — each on its own tinted ground in its own
+project's accents, and the remaining ten follow as cards in one grid with no
+headings over it. invoiceNow and Receipt Manager sit adjacent because they are
+two halves of one problem.
+
+`projects/index.html` still keeps its headings and its own order. The two pages
+disagreeing is deliberate and predates this; see the section above.
+
+The carousel is not deleted, only unpublished: it is in
+`_archive/homepage-carousel/`, which `_redirects` turns away. It was a genuinely
+interesting piece of script-free CSS and is worth not losing.
+
+---
+
+## The site uses the whole screen
+
+**2026-09-08 — the column follows the window, but a line of prose does not.**
+
+Every page was pinned to a 42rem column at every resolution, so a 27-inch
+monitor got the same narrow ribbon as a laptop and the screenshots were too
+small to read. Every stylesheet now ends with a wide-screen block: the root
+font size steps 17/18/19px at 1280/1800/2400 CSS pixels and the column becomes
+`min(92vw, 68/76/84rem)`.
+
+Prose deliberately does **not** grow with it. Paragraphs, lists and cards hold a
+44rem measure and centre; the extra width goes to screenshots, figures and the
+project grid. Past about ninety characters a line is harder to read, not easier.
+This is the same split the Renault page has always used (`--measure` versus
+`--col`), applied to the rest of the site.
+
+If someone asks why the text does not fill the screen, that is the answer — it
+is a decision, not an oversight.
+
+---
+
+## The prose is Oisin's, not the agent's
+
+**2026-09-08 — pages are rebuilt from supplied copy, verbatim.**
+
+The project pages are being rewritten one at a time from markdown files Oisin
+writes himself, each with square-bracketed markers where images go. That prose
+is final. It gets reproduced exactly — heading levels, title case, wording —
+and diffed back against the source before shipping.
+
+This matters because the temptation is constant: the copy is deliberately
+plainer and more direct than a technical writer would make it, and it reads
+like something that could be "improved". It should not be. If something in it
+is wrong, say so; do not fix it silently.
+
+What may be added alongside it, and has been: a repository block, a
+requirements list, and any limitation the page previously disclosed. Dropping a
+limitation while replacing a page is the one thing to be careful of — that is
+the honesty rule above, and NitroTune's page lost and regained one already.

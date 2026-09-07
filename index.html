@@ -405,6 +405,12 @@
     .commshot:hover{transform:translateY(-2px);border-color:#14507d;
                     box-shadow:0 6px 20px rgba(20,60,100,.18)}
     .commshot img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+    /* The music photograph is portrait. Cropping it to the 16:9 frame the other
+       shots use takes the fiddle player's head off, so this one keeps its own
+       proportions and the frame narrows to suit — the height then lands close
+       to what a 30rem-wide 16:9 shot occupies rather than towering over it. */
+    .commshot.tall{max-width:18rem}
+    .commshot.tall img{aspect-ratio:auto}
     /* The channel image is a deliberate 16:9 crop of the screenshot — banner,
        name, handle and the first row of videos — rather than the automatic
        one, which cut the banner off the top. Padding it to 16:9 instead was
@@ -713,8 +719,8 @@
       <h2 class="centred">What else drives me</h2>
 
       <h3>Music</h3>
-      <a class="commshot" href="/music.html">
-        <img src="/music/channel-16x9.jpg" alt="The Oisín Mac Craith YouTube channel">
+      <a class="commshot tall" href="/music.html">
+        <img src="/music/performing-paddys-day.jpg" alt="Playing guitar and fiddle outdoors under a tree at the St Patrick&rsquo;s Festival">
       </a>
 
       <h3>Community</h3>

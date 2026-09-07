@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="NitroTune — fan and thermal-profile control plus a read-only sensor monitor for the Acer Nitro AN515-55 on Linux. A native replacement for Windows-only NitroSense.">
+  <meta name="description" content="NitroTune — fan control for the Acer Nitro AN515-55 on Linux. Stop the fans lurching, keep the laptop cooler at idle, and see the temperatures and speeds Linux never showed you.">
   <title>NitroTune</title>
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="stylesheet" href="style.css">
@@ -20,11 +20,6 @@
   <div class="wrap">
     <header class="site-header">
       <h1>NitroTune</h1>
-      <p class="tagline">
-        Fan and thermal-profile control, plus a read-only sensor monitor, for the
-        Acer Nitro AN515-55 on Linux — a native replacement for Windows-only
-        NitroSense and DAMX.
-      </p>
       <img class="logo" src="logo/logo.png" alt="NitroTune logo">
       <nav class="site-nav" aria-label="Primary">
         <a href="https://oisinmcgrath.com/"><svg class="ico" viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0L0 6V8H1V15H4V10H7V15H15V8H16V6L14 4.5V1H11V2.25L8 0ZM9 10H12V13H9V10Z"/></svg>Home</a>
@@ -34,77 +29,41 @@
 
     <main>
       <p class="lead">
-        <strong>NitroTune</strong> is three independent pieces for one laptop: a
-        read-only GTK tray monitor that shows temperatures, fan RPM and the active
-        thermal profile; a WMI thermal-profile switcher that asks the BIOS to change
-        modes; and a custom fan-curve daemon that writes speeds straight to the
-        embedded controller. You can run the monitor on its own, or pair it with
-        whichever control method your firmware actually honours.
+        Get the fans on your Acer laptop to work like they were meant to. Your
+        laptop is quiet, then it sounds like a hairdryer, all while you're on a
+        zoom call for work. Fix it for good with NitroTune.
       </p>
 
-      <section class="card" aria-labelledby="monitor-heading">
-        <h2 id="monitor-heading">The monitor — always safe</h2>
-        <p>
-          <code>nitrotune.py</code> is a GTK system-tray readout: live CPU and GPU
-          temperature, fan RPM, RAM, battery, and the current thermal profile. It
-          has no buttons and no settings, and it never writes anything — there is
-          no write path in the code at all. Useful whichever control option you
-          pick, or none of them.
-        </p>
-        <pre><code>sudo bash install-nitrotune.sh</code></pre>
-      </section>
+      <p>
+        Stop noticing the noise, while your laptop maintains a cooler idle.
+      </p>
 
-      <section class="card" aria-labelledby="control-heading">
-        <h2 id="control-heading">Two ways to control the fans</h2>
-        <p>
-          These are alternatives, not layers — only one should be driving the fans
-          at a time. The installer for the profile switcher stops the fan-curve
-          daemon automatically when you switch across.
-        </p>
-        <p>
-          <strong>WMI thermal profiles</strong> use the kernel's standard
-          <code>platform_profile</code> interface, exposed by <code>acer_wmi</code>
-          when loaded with <code>predator_v4=1</code>. In principle the BIOS then
-          manages the curve for whichever mode you select. In practice, on the BIOS
-          this was tested against (V2.06, 08/19/2021), only <code>balanced</code>
-          does anything — the other modes are accepted, the sysfs value changes,
-          and the firmware quietly ignores them. Run <code>acer-profile status</code>
-          to see what yours honours before relying on it.
-        </p>
-        <p>
-          <strong>A custom EC fan curve</strong> bypasses the BIOS entirely, writing
-          fan speed to the embedded controller through nbfc-linux's
-          <code>ec_probe</code>. That gives genuine manual control: a smoothly
-          interpolated curve with ramp limiting, so a brief Turbo Boost spike
-          doesn't make the fans lurch, and independent CPU and GPU handling. It
-          restores automatic EC control on stop or crash, so it never leaves the
-          fans pinned at a fixed speed.
-        </p>
-      </section>
+      <figure>
+        <img class="shot" src="screenshots/fan-monitor.png" width="1140" height="1064" loading="lazy"
+             alt="The fan monitor, showing CPU and GPU temperature and fan speed live, with the last few minutes plotted underneath.">
+        <figcaption>The fan monitor, showing CPU and GPU temperature and fan speed live, with the last few minutes plotted underneath.</figcaption>
+      </figure>
 
-      <section class="card" aria-labelledby="regs-heading">
-        <h2 id="regs-heading">EC registers, confirmed on the AN515-55</h2>
-        <div class="table-wrap">
-          <table class="regs">
-            <caption class="meta">Embedded-controller registers used by the fan-curve daemon.</caption>
-            <thead>
-              <tr><th scope="col">Register</th><th scope="col">Purpose</th><th scope="col">Values</th></tr>
-            </thead>
-            <tbody>
-              <tr><td><code>0x22</code></td><td>CPU fan mode</td><td>4 = auto, 12 = manual</td></tr>
-              <tr><td><code>0x21</code></td><td>GPU fan mode</td><td>16 = auto, 48 = manual</td></tr>
-              <tr><td><code>0x37</code></td><td>CPU fan speed</td><td>0–100% (manual only)</td></tr>
-              <tr><td><code>0x3A</code></td><td>GPU fan speed</td><td>0–100% (manual only)</td></tr>
-              <tr><td><code>0xB0</code></td><td>CPU temperature</td><td>°C</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p>
-          GPU temperature comes from <code>nvidia-smi</code>. These addresses are
-          specific to this model, though the underlying mechanism applies to many
-          Acer Nitro and Predator laptops — the values will differ.
-        </p>
-      </section>
+      <h2>See What It Is Doing</h2>
+
+      <p>
+        Temperature, fan speed, memory and battery are now all trackable on screen
+        — readings Linux never showed you.
+      </p>
+
+      <figure>
+        <img class="shot" src="screenshots/tray-monitor.png" width="1004" height="720" loading="lazy"
+             alt="The tray readout, with temperature, fan speed, memory and battery on one small window.">
+        <figcaption>The tray readout, with temperature, fan speed, memory and battery on one small window.</figcaption>
+      </figure>
+
+      <h2>If Something Goes Wrong</h2>
+
+      <p>
+        If NitroTune stops, the laptop takes back control of its own fans. If it
+        cannot read the temperature, the fans go up rather than down. Nothing is
+        left to chance.
+      </p>
 
       <div class="notice">
         <p>
@@ -126,10 +85,14 @@
           <li><code>acer_wmi</code> loaded with <code>predator_v4=1</code>, for thermal profiles</li>
           <li><code>python3-gi</code> and <code>gir1.2-gtk-3.0</code>, for the tray monitor</li>
         </ul>
-        <p>
-          <a href="https://github.com/oisinmcgrath/nitrotune"><strong>Source &amp; full docs on GitHub</strong></a>
+        <p class="meta">
+          On the BIOS this was tested against (V2.06, 08/19/2021), only the
+          balanced thermal profile does anything — the other modes are accepted and
+          then quietly ignored by the firmware. Run <code>acer-profile status</code>
+          to see what yours honours before relying on it.
         </p>
       </section>
+
       <section class="card" aria-labelledby="get-heading">
         <h2 id="get-heading">Getting it</h2>
         <p>
@@ -146,7 +109,7 @@
     </main>
 
     <footer class="site-footer">
-      <p>© 2026 Oisin McGrath · GPL-2.0-only · <a href="https://github.com/oisinmcgrath/nitrotune">github.com/oisinmcgrath/nitrotune</a></p>
+      <p>&copy; 2026 Oisin McGrath &middot; GPL-2.0-only &middot; <a href="https://github.com/oisinmcgrath/nitrotune">github.com/oisinmcgrath/nitrotune</a></p>
       <p>No tracking on this page.</p>
     </footer>
   </div>

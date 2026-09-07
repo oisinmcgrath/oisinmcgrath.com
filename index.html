@@ -218,6 +218,14 @@
     body .linkcard{background:light-dark(#fbfcfd,#1b2026);
       border-color:light-dark(#dbe2e9,#2c333c);
       box-shadow:0 1px 3px light-dark(rgba(20,60,100,.06),rgba(0,0,0,.4))}
+    body .musiccard{background:light-dark(#fdf6ef,#241c15);
+      border-color:light-dark(#e1b890,#6b4a30)}
+    body .musiccard h2{color:light-dark(#8a5433,#e1b890)}
+    body .commcard{background:light-dark(#eef6ee,#161f19);
+      border-color:light-dark(#c9ddcd,#2f4536)}
+    body .commcard h2{color:light-dark(#14512b,#8fce9f)}
+    body .commcard a:not(.commshot){color:light-dark(#1f6b3a,#7fc793)}
+    body .commcard a:not(.commshot):hover{color:light-dark(#14512b,#a5dab4)}
     body hr.rule{border-top-color:light-dark(#dfe4e8,#2a3038)}
     body hr.rule.accent{background:linear-gradient(90deg,transparent,
       light-dark(rgba(20,80,125,.25),rgba(127,179,232,.2)) 12%,
@@ -408,6 +416,24 @@
        proportions and the full 30rem width — legible at that size, and its
        edges line up with the community shot below. */
     .commshot.natural img{aspect-ratio:auto}
+    /* Music and Community each sit on a card of their own, tinted to the thing
+       it is about: warm tan for the music, the club's green for the community,
+       matching community.html's palette. Same geometry as .linkcard above, so
+       the three cards on the page read as one family. The soft rule between
+       them is the standard hr.rule at half strength — enough to separate the
+       two cards without cutting the run of them in half. */
+    .topiccard{margin:1.5rem 0;padding:.75rem 1.35rem 1.1rem;
+               border:1px solid;border-radius:12px}
+    .topiccard h2{margin-top:.35rem}
+    .musiccard{border-color:#e1b890;background:#fdf6ef}
+    .musiccard h2{color:#8a5433}
+    .commcard{border-color:#c9ddcd;background:#eef6ee}
+    .commcard h2{color:#14512b}
+    .commcard a:not(.commshot){color:#1f6b3a}
+    .commcard a:not(.commshot):hover{color:#14512b}
+    .hicon.micon{color:currentColor}
+    .shamrock{vertical-align:-.2em}
+    hr.rule.soft{margin:1.5rem auto;width:70%;opacity:.55}
     /* The channel image is a deliberate 16:9 crop of the screenshot — banner,
        name, handle and the first row of videos — rather than the automatic
        one, which cut the banner off the top. Padding it to 16:9 instead was
@@ -713,21 +739,27 @@
 
       <hr class="rule">
 
-      <h2>Music</h2>
-      <a class="commshot natural" href="/music.html">
-        <img src="/music/performing-paddys-day.jpg" alt="Playing guitar and fiddle outdoors under a tree at the St Patrick&rsquo;s Festival">
-      </a>
+      <section class="topiccard musiccard" aria-labelledby="music-heading">
+        <h2 id="music-heading">Music <svg class="hicon micon" viewBox="-5.5 0 32 32" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M5.688 9.656v10.906c-0.469-0.125-0.969-0.219-1.406-0.219-1 0-2.031 0.344-2.875 0.906s-1.406 1.469-1.406 2.531c0 1.125 0.563 1.969 1.406 2.531s1.875 0.875 2.875 0.875c0.938 0 2-0.313 2.844-0.875s1.375-1.406 1.375-2.531v-11.438l9.531-2.719v7.531c-0.438-0.125-0.969-0.188-1.438-0.188-0.969 0-2.031 0.281-2.875 0.844s-1.375 1.469-1.375 2.531c0 1.125 0.531 2 1.375 2.531 0.844 0.563 1.906 0.906 2.875 0.906 0.938 0 2.031-0.344 2.875-0.906 0.875-0.531 1.406-1.406 1.406-2.531v-14.406c0-0.688-0.469-1.156-1.156-1.156-0.063 0-0.438 0.125-1.031 0.281-1.25 0.344-3.125 0.875-5.25 1.5-1.094 0.281-2.063 0.594-3.031 0.844-0.938 0.281-1.75 0.563-2.469 0.75-0.75 0.219-1.219 0.344-1.406 0.406-0.5 0.156-0.844 0.594-0.844 1.094z"/></svg></h2>
+        <a class="commshot natural" href="/music.html">
+          <img src="/music/performing-paddys-day.jpg" alt="Playing guitar and fiddle outdoors under a tree at the St Patrick&rsquo;s Festival">
+        </a>
+      </section>
 
-      <h2>Community</h2>
-      <p>
-        We had a blast volunteering for the St Patrick's Festival with the South West
-        Irish Community Group for both 2024 and 2025 —
-        <a href="/community.html">see more about that here</a>.
-      </p>
-      <a class="commshot" href="/community.html">
-        <img src="/community/day-jerseys.jpg"
-             alt="Three of us in Irish county jerseys at the festival, under the trees">
-      </a>
+      <hr class="rule soft">
+
+      <section class="topiccard commcard" aria-labelledby="community-heading">
+        <h2 id="community-heading">Community <img class="hicon shamrock" src="/community/shamrock.svg" alt="" width="19" height="19"></h2>
+        <p>
+          We had a blast volunteering for the St Patrick's Festival with the South West
+          Irish Community Group for both 2024 and 2025 —
+          <a href="/community.html">see more about that here</a>.
+        </p>
+        <a class="commshot" href="/community.html">
+          <img src="/community/day-jerseys.jpg"
+               alt="Three of us in Irish county jerseys at the festival, under the trees">
+        </a>
+      </section>
 
     </main>
 

@@ -142,6 +142,22 @@ code,
   word-break: break-word;
 }
 
+/* The clone command sits in a <pre>, which keeps its line unbroken by
+   default and was pushing the whole page sideways on a phone. The box
+   scrolls instead; the page never does. */
+pre {
+  background: #d5e8dd;
+  border-radius: 6px;
+  padding: 0.85rem 1rem;
+  overflow-x: auto;
+  margin: 0 0 1rem;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
 /* Screenshots. Every capture is wider than it is tall relative to the text
    column, so max-width takes them to the full column width; the height cap
    only bites on the tallest. */
@@ -255,6 +271,13 @@ nav.backnav {
 .backbtn svg {
   flex: none;
 }
+
+/* Each screenshot links to its own full-size file: the captures are denser
+   than any column can show them, so the image itself is the way in, and the
+   browser's Back returns to the page. Same pattern as the Renault galleries. */
+.shotlink{display:block;width:fit-content;margin-inline:auto;cursor:zoom-in;
+  border-radius:8px}
+.shotlink:hover .shot{border-color:currentColor}
 
 /* ── Wide screens ────────────────────────────────────────────────────────────
    Everything on the page is sized in rem, so raising the root size scales the

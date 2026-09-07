@@ -146,6 +146,22 @@ code,
   word-break: break-word;
 }
 
+/* The clone command sits in a <pre>, which keeps its line unbroken by
+   default and was pushing the whole page sideways on a phone. The box
+   scrolls instead; the page never does. */
+pre {
+  background: #1c2236;
+  border-radius: 6px;
+  padding: 0.85rem 1rem;
+  overflow-x: auto;
+  margin: 0 0 1rem;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
 footer.site-footer {
   margin-top: 2.5rem;
   padding-top: 1rem;
@@ -186,9 +202,16 @@ footer.site-footer a {
    viewport width so the video centres on the page rather than the column,
    while max-width keeps the page from ever scrolling sideways. */
 .demo-wrap {
-  width: 100vw;
-  margin-left: 50%;
-  transform: translateX(-50%);
+  /* Full-bleed via symmetric negative margins rather than `width:100vw`:
+     100vw includes the scrollbar, so the old version overflowed by half a
+     scrollbar each side and every page had a sideways scroll. The negative
+     margins resolve against the centred column, so this also centres on the
+     visible area rather than on viewport-plus-scrollbar. The +8px backs the
+     bleed off by about a scrollbar's width — there is no CSS unit for
+     "viewport minus scrollbar", and the wrapper's edges are invisible
+     (its own padding is wider), so the trim cannot be seen. */
+  margin-left: calc(50% - 50vw + 8px);
+  margin-right: calc(50% - 50vw + 8px);
   margin-bottom: 0.6rem;
   padding: 0 1.25rem;
   display: flex;

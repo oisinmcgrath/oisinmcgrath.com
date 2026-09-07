@@ -44,10 +44,11 @@ will give this site a few minutes. Everything below follows from that:
   the source before you ship. Do not improve it, reorder it, or merge in
   sentences from the page you are replacing. If something in it looks wrong,
   say so rather than fixing it.
-- **The homepage is triaged, not a catalogue.** Two full-width feature blocks
-  lead — Cross Market Intelligence, then the Renault Master — because they are
-  the biggest pieces of work. The other ten are equal-weight cards. Do not
-  flatten the features back into the grid.
+- **The homepage is triaged, not a catalogue.** Five feature blocks lead —
+  Cross Market Intelligence and the Renault Master full-width because they are
+  the biggest pieces of work, then invoiceNow and Receipt Manager side by side
+  as one row, then Home Screen — and the remaining seven projects are
+  equal-weight cards. Do not flatten the features back into the grid.
 - **Recent direction has been toward hooks over specifications.** The card
   blurbs and page openings are being rewritten as questions and consequences
   ("Could you prove you bought your vacuum cleaner?") rather than feature
@@ -308,26 +309,38 @@ overrides need matching specificity — `footer.site-footer a`, not
   `projects/logos/`. It carries the same three-way theme switch as the
   homepage, built the same way (`color-scheme` plus `light-dark()` under an
   `@supports` guard), and defaults to System.
-- The homepage lists the same eleven software projects as `.projcard` tiles,
-  leading with Home Screen and the Epson scanner. The differing order is
-  deliberate, not drift.
-- **The homepage is triaged, not a uniform grid.** Two full-width `.feature`
-  blocks come first — Cross Market Intelligence, then the Renault Master — each
-  with a heading, a paragraph, one full-width screenshot with a caption, and a
-  link through. They sit on their own tinted ground in their project's accents
-  (CMI's blue and orange, the van's red) so a reader can see they are not one
-  of ten equal things. Note `.feature figure img`, scoped on purpose: unscoped,
-  it also matches the mark in the heading and blows it up to the full width of
-  the block.
-- The ten remaining projects are `.projcard` tiles in one grid with **no
+- **The homepage is triaged, not a uniform grid.** Five `.feature` blocks come
+  first — Cross Market Intelligence and the Renault Master full-width, then
+  invoiceNow and Receipt Manager sharing one `.featpair` row (they are two
+  halves of one problem, which is why they sit together; the pair stacks below
+  900px), then Home Screen full-width. Each has a heading carrying the
+  project's own mark, a paragraph, one screenshot with a caption, and a pill
+  CTA; the screenshot itself links through to the page and lifts on hover.
+  They sit on their own tinted ground in their project's accents (CMI's blue
+  and orange, the van's red, invoiceNow's teal, Receipt Manager's blue, Home
+  Screen's steel blue) so a reader can see they are not one of the equal
+  things below. Note `.feature figure img`, scoped on purpose: unscoped, it
+  also matches the mark in the heading and blows it up to the full width of
+  the block. The Renault feature carries the boab-tree trip photograph with
+  the page's own caption and the 8,800 km figure from the page's tagline —
+  its blurb is the tagline's first two sentences verbatim.
+- The seven remaining projects are `.projcard` tiles in one grid with **no
   headings above it** — the Software/Technical split is gone from this page.
-  The order is deliberate: invoiceNow, Receipt Manager, Tagdexer, Cadence,
-  Capsule, Epson RR-70W, NitroTune, Home Screen, N-of-1, YT Downloader.
-  **invoiceNow and Receipt Manager are two halves of one problem and must stay
-  adjacent.** `projects/index.html` still carries its own headings and its own
-  order; the difference is deliberate.
+  The order is deliberate: Tagdexer, Cadence, Capsule, Epson RR-70W,
+  NitroTune, N-of-1, YT Downloader. `projects/index.html` still carries its
+  own headings and its own order; the difference is deliberate.
 - The bio shows two bullets and folds the other five into a `<details>` labelled
-  "See 5 more" — no script, like the specifications box on the Renault page.
+  "See 5 more aims" — no script, like the specifications box on the Renault
+  page. On wide screens the chip takes the same 44rem measure as the list it
+  extends, so the two share a left edge.
+- **Screenshots open at full size.** On every project page, each `img.shot` is
+  wrapped in an `a.shotlink` pointing at its own file — the captures are
+  denser than any column can show them, so the image is the way in and the
+  browser's Back returns to the page. `.shotlink` sits near the foot of each
+  project stylesheet (zoom-in cursor, accent border on hover). The Renault
+  galleries already worked this way. CMI's two phone captures are capped at
+  24rem each so a wide monitor cannot blow them up past the capture's own
+  resolution and blur them.
 - The Links card sits at the **foot** of the page, after Community.
 - The featured-project carousel that used to sit under a Technical projects
   heading is gone from the live page. Its markup and CSS are kept in

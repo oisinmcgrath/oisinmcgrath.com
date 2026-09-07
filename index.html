@@ -217,6 +217,29 @@
     body .feature.f-ren figcaption{color:light-dark(#6d5648,#c2a795)}
     body .feature.f-ren figure img{border-color:light-dark(#e8c3ae,#5c3423)}
     body .feature.f-ren .featmore a{color:light-dark(#a8431a,#ffb26d)}
+    /* invoiceNow holds its app's teal, Receipt Manager its app's blue, and
+       Home Screen the cool blue of its tile glass. */
+    body .feature.f-inv{background:light-dark(#e9f6f8,#131c1f);
+      border-color:light-dark(#b9dde6,#28414a)}
+    body .feature.f-inv h2{color:light-dark(#0d6b7e,#5fc4d6)}
+    body .feature.f-inv p{color:light-dark(#26343a,#c4d2d8)}
+    body .feature.f-inv figcaption{color:light-dark(#537077,#8fa9b1)}
+    body .feature.f-inv figure img{border-color:light-dark(#b9dde6,#28414a)}
+    body .feature.f-inv .featmore a{color:light-dark(#0d6b7e,#5fc4d6)}
+    body .feature.f-rec{background:light-dark(#ecf3fd,#131a26);
+      border-color:light-dark(#c0d6f2,#2a3b55)}
+    body .feature.f-rec h2{color:light-dark(#1558b0,#7fb0f5)}
+    body .feature.f-rec p{color:light-dark(#28313e,#c6d0dd)}
+    body .feature.f-rec figcaption{color:light-dark(#58687e,#93a3ba)}
+    body .feature.f-rec figure img{border-color:light-dark(#c0d6f2,#2a3b55)}
+    body .feature.f-rec .featmore a{color:light-dark(#1558b0,#7fb0f5)}
+    body .feature.f-hs{background:light-dark(#eef3f9,#151a21);
+      border-color:light-dark(#c6d6e8,#2c3a4b)}
+    body .feature.f-hs h2{color:light-dark(#2a6cb3,#6fb3f2)}
+    body .feature.f-hs p{color:light-dark(#2b3542,#c6d0dd)}
+    body .feature.f-hs figcaption{color:light-dark(#5a6a7c,#92a2b6)}
+    body .feature.f-hs figure img{border-color:light-dark(#c6d6e8,#2c3a4b)}
+    body .feature.f-hs .featmore a{color:light-dark(#2a6cb3,#6fb3f2)}
     body .moreaims summary{color:light-dark(#14507d,#7fb3e8)}
     body .commshot{border-color:light-dark(#aab8c6,#39424d);
       box-shadow:0 2px 10px light-dark(rgba(20,60,100,.10),rgba(0,0,0,.45))}
@@ -257,27 +280,53 @@
   </style>
   <style>.card-links{margin-top:1.5rem;font-weight:600}</style>
   <style>
-    /* The two feature blocks. These are not cards in the grid: they take the
+    /* The feature blocks. These are not cards in the grid: they take the
        full column, carry a real screenshot at full width, and sit on their own
        tinted ground so a reader can see at a glance that they are not one of
-       ten equal things. Each takes its own project's accents — CMI's blue and
-       orange, the van's red — the same way the Music and Community blocks take
-       theirs. */
-    .feature{margin:1.75rem 0 2rem;padding:1.4rem 1.5rem 1.1rem;
-             border:1px solid;border-radius:14px}
-    .feature h2{margin:.2rem 0 .7rem;display:flex;align-items:center;gap:.5rem}
-    .feature figure{margin:1.1rem 0 .9rem}
-    /* Scoped to the figure on purpose. Unscoped, `.feature img` also matches
-       the mark in the heading and blows it up to the full width of the block —
-       the same trap the old feature cards had. */
-    .feature figure img{display:block;width:100%;height:auto;border-radius:8px;
+       the equal things below. Each takes its own project's accents — CMI's
+       blue and orange, the van's red, invoiceNow's teal, Receipt Manager's
+       blue, Home Screen's steel blue — the same way the Music and Community
+       blocks take theirs. */
+    .feature{margin:1.75rem 0 2rem;padding:1.5rem 1.6rem 1.2rem;
+             border:1px solid;border-radius:16px}
+    .feature h2{margin:.2rem 0 .7rem;display:flex;align-items:center;gap:.55rem;
+                font-size:1.35rem;letter-spacing:-.015em}
+    .feature figure{margin:1.15rem 0 .9rem}
+    /* The screenshot is the biggest thing in the block, so it is also the
+       biggest click target: the whole figure links through to the page, and
+       lifts under the pointer the way the cards below do. Scoped to the
+       figure on purpose. Unscoped, `.feature img` also matches the mark in
+       the heading and blows it up to the full width of the block — the same
+       trap the old feature cards had. */
+    .feature figure a{display:block;border-radius:10px;
+                      transition:transform .18s ease,box-shadow .18s ease}
+    .feature figure a:hover{transform:translateY(-3px);
+                      box-shadow:0 12px 28px -12px rgba(0,0,0,.5)}
+    .feature figure img{display:block;width:100%;height:auto;border-radius:10px;
                         border:1px solid}
-    .feature figcaption{margin-top:.6rem;text-align:center;font-size:.88rem;
+    .feature figcaption{margin-top:.65rem;text-align:center;font-size:.88rem;
                         max-width:34rem;margin-inline:auto}
-    .feature .featmore{margin:0}
-    .feature .featmore a{font-weight:600;text-decoration:none}
-    .feature .featmore a:hover{text-decoration:underline}
-    .feature .cardicon{width:1.1em;height:1.1em;object-fit:contain;flex:none}
+    /* The link through is a pill button in the block's own accent, centred
+       under the caption, built the same way as the nav pills: border and
+       ground mixed from currentColor, so one rule serves all five accents. */
+    .feature .featmore{margin:.4rem 0 .25rem;text-align:center}
+    .feature .featmore a{display:inline-flex;align-items:center;gap:.45rem;
+      padding:.5rem 1.05rem;border-radius:999px;font-weight:600;
+      text-decoration:none;
+      border:1px solid color-mix(in srgb,currentColor 34%,transparent);
+      background:color-mix(in srgb,currentColor 9%,transparent);
+      transition:border-color .15s,background .15s}
+    .feature .featmore a:hover{text-decoration:none;
+      border-color:color-mix(in srgb,currentColor 62%,transparent);
+      background:color-mix(in srgb,currentColor 16%,transparent)}
+    .feature .cardicon{width:1.15em;height:1.15em;object-fit:contain;flex:none}
+    /* invoiceNow and Receipt Manager are two halves of one problem, so their
+       feature blocks share one row — and stack again where two screenshots
+       will not fit across the window. */
+    .featpair{display:grid;grid-template-columns:1fr 1fr;gap:1rem;
+              margin:1.75rem 0 2rem}
+    .featpair .feature{margin:0}
+    @media (max-width:900px){.featpair{grid-template-columns:1fr}}
     @media (max-width:480px){.feature{padding:1.1rem 1rem .9rem}}
 
     /* The rest of what the work is for, folded away. A <details>, so it opens
@@ -385,6 +434,9 @@
     @media (min-width:1280px){
       .linkcard,.topiccard{max-width:44rem;margin-inline:auto}
       .leadlist{max-width:44rem;margin-inline:auto}
+      /* The disclosure chip has to sit on the same left edge as the list it
+         extends — left at the column edge it reads as unrelated to anything. */
+      .moreaims{max-width:44rem;margin-inline:auto}
       /* The photographs sit inside a 44rem card, so they can afford to grow
          from 30rem with it rather than leaving wide gutters either side. */
       .commshot{max-width:36rem}
@@ -426,7 +478,7 @@
             a user friendly interface and assistance tools.</li>
       </ul>
       <details class="moreaims">
-        <summary><span class="sumtext">See 5 more</span><span class="chev" aria-hidden="true"></span></summary>
+        <summary><span class="sumtext">See 5 more aims</span><span class="chev" aria-hidden="true"></span></summary>
         <ul class="leadlist">
           <li>Provide systems that eliminate common mistakes in your work by
               excluding the conditions that permit them.</li>
@@ -440,7 +492,7 @@
       </details>
 
       <section class="feature f-cmi" aria-labelledby="cmi-heading">
-        <h2 id="cmi-heading">Cross Market Intelligence</h2>
+        <h2 id="cmi-heading"><img class="cardicon" src="/projects/logos/cross-market-intelligence.png" alt="">Cross Market Intelligence</h2>
         <p>
           Is there such a thing as a good deal at the auctions? What could it be
           sold for privately, and how would you find out? Some say it takes years
@@ -448,9 +500,10 @@
           Intelligence exists to answer these questions.
         </p>
         <figure>
-          <img src="/projects/cross-market-intelligence/screenshots/auction-browse.jpg"
+          <a href="/projects/cross-market-intelligence/"><img
+               src="/projects/cross-market-intelligence/screenshots/auction-browse.jpg"
                width="1600" height="823" loading="lazy"
-               alt="The auction inventory, each vehicle carrying its forecast auction price, its private-sale forecast and the margin between them.">
+               alt="The auction inventory, each vehicle carrying its forecast auction price, its private-sale forecast and the margin between them."></a>
           <figcaption>The auction inventory, each vehicle carrying its forecast auction price, its private-sale forecast and the margin between them.</figcaption>
         </figure>
         <p class="featmore">
@@ -461,37 +514,81 @@
       <section class="feature f-ren" aria-labelledby="ren-heading">
         <h2 id="ren-heading"><img class="cardicon" src="/projects/renault-master/favicon.svg" alt="">Renault Master Camper Conversion</h2>
         <p>
-          Perhaps my most ambitious and educational undertaking: in 2025 I
-          converted an Australia Post van into a fully fitted-out campervan, and
-          put it to the test by taking it 4,400&nbsp;km to the top of Australia.
+          A once AusPost van became my blank canvas when I built it into a fully
+          livable home on wheels, including a kitchen, bed, heating, power, water
+          and a toilet all functioning within the tight space. Upon completion I
+          put the campervan to the test by driving 8,800&nbsp;km to Darwin and
+          back.
         </p>
         <figure>
-          <img src="/projects/renault-master/photos/ext-03-front-three-quarter.jpg"
-               width="1600" height="1067" loading="lazy"
-               alt="The van on the day it was bought, still in its red Australia Post livery.">
-          <figcaption>The van on the day it was bought, still in its red Australia Post livery.</figcaption>
+          <a href="/projects/renault-master/"><img
+               src="/projects/renault-master/photos/trip-02-boab.jpg"
+               width="1600" height="1200" loading="lazy"
+               alt="The van parked on a dirt road beside a large boab tree under a cloudy sky in the north of Australia"></a>
+          <figcaption>Trial by Northern Territory</figcaption>
         </figure>
         <p class="featmore">
           <a href="/projects/renault-master/">Read about the conversion &rarr;</a>
         </p>
       </section>
 
+      <div class="featpair">
+        <section class="feature f-inv" aria-labelledby="inv-heading">
+          <h2 id="inv-heading"><img class="cardicon" src="/projects/logos/invoicenow.png" alt="">invoiceNow</h2>
+          <p>
+            From the job you put off every week to a few clicks that keep it off
+            your mind for good.
+          </p>
+          <figure>
+            <a href="/projects/invoicenow/"><img
+                 src="/projects/invoicenow/screenshots/dashboard.png"
+                 width="3412" height="1846" loading="lazy"
+                 alt="The invoiceNow dashboard, showing the quarter's billed and received totals, the GST on them, and how many invoices are still unpaid."></a>
+            <figcaption>Where you stand financially, without working it out.</figcaption>
+          </figure>
+          <p class="featmore">
+            <a href="/projects/invoicenow/">Read about invoiceNow &rarr;</a>
+          </p>
+        </section>
+        <section class="feature f-rec" aria-labelledby="rec-heading">
+          <h2 id="rec-heading"><img class="cardicon" src="/projects/logos/receipt-manager.png" alt="">Receipt Manager</h2>
+          <p>
+            Could you prove you bought your vacuum cleaner, your car battery, the
+            shoes you are wearing? How long would it take you? What if it took
+            under a minute.
+          </p>
+          <figure>
+            <a href="/projects/receipt-manager/"><img
+                 src="/projects/receipt-manager/screenshots/dashboard.png"
+                 width="2912" height="1480" loading="lazy"
+                 alt="The Receipt Manager dashboard, where a stack goes into the scanner or files already on the computer are added."></a>
+            <figcaption>The dashboard, where a stack goes into the scanner or files already on the computer are added.</figcaption>
+          </figure>
+          <p class="featmore">
+            <a href="/projects/receipt-manager/">Read about Receipt Manager &rarr;</a>
+          </p>
+        </section>
+      </div>
+
+      <section class="feature f-hs" aria-labelledby="hs-heading">
+        <h2 id="hs-heading"><img class="cardicon" src="/projects/logos/homescreen.png" alt="">Home Screen</h2>
+        <p>
+          A browser new tab page laid out like a phone home screen — an app grid
+          you arrange yourself, with weather, sun times and an assistant bar.
+        </p>
+        <figure>
+          <a href="/projects/homescreen/"><img
+               src="/projects/homescreen/screenshots/home-screen.jpg"
+               width="1400" height="743" loading="lazy"
+               alt="The new tab page: a grid of app tiles with real site icons over a lake wallpaper, with a search bar, clock, weather, a sunrise countdown and an Ask Claude bar."></a>
+          <figcaption>The whole page. Tiles are placed by hand and stay put; the icons are each site's own, fetched once and cached.</figcaption>
+        </figure>
+        <p class="featmore">
+          <a href="/projects/homescreen/">Read about Home Screen &rarr;</a>
+        </p>
+      </section>
+
       <div class="projgrid">
-        <a class="projcard" href="/projects/invoicenow/">
-          <img src="/projects/logos/invoicenow.png" alt="">
-          <h3>invoiceNow</h3>
-          <p>From the job you put off every week to a few clicks that keep it off your
-             mind for good.</p>
-          <span class="more">Read more &rarr;</span>
-        </a>
-        <a class="projcard" href="/projects/receipt-manager/">
-          <img src="/projects/logos/receipt-manager.png" alt="">
-          <h3>Receipt Manager</h3>
-          <p>Could you prove you bought your vacuum cleaner, your car battery, the shoes
-             you are wearing? How long would it take you? What if it took under a
-             minute.</p>
-          <span class="more">Read more &rarr;</span>
-        </a>
         <a class="projcard" href="/projects/tagdexer/">
           <img src="/projects/logos/tagdexer.png" alt="">
           <h3>Tagdexer</h3>
@@ -525,13 +622,6 @@
           <h3>NitroTune</h3>
           <p>Fan and thermal control for the Acer Nitro AN515-55 on Linux — a native
              replacement for Windows-only NitroSense.</p>
-          <span class="more">Read more &rarr;</span>
-        </a>
-        <a class="projcard" href="/projects/homescreen/">
-          <img src="/projects/logos/homescreen.png" alt="">
-          <h3>Home Screen</h3>
-          <p>A browser new tab page laid out like a phone home screen — an app grid
-             you arrange yourself, with weather, sun times and an assistant bar.</p>
           <span class="more">Read more &rarr;</span>
         </a>
         <a class="projcard" href="/projects/n-of-1/">

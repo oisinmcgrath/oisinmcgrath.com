@@ -118,6 +118,13 @@ nav.backnav {
   flex: none;
 }
 
+/* Each screenshot links to its own full-size file: the captures are denser
+   than any column can show them, so the image itself is the way in, and the
+   browser's Back returns to the page. Same pattern as the Renault galleries. */
+.shotlink{display:block;width:fit-content;margin-inline:auto;cursor:zoom-in;
+  border-radius:8px}
+.shotlink:hover .shot{border-color:currentColor}
+
 /* ── Wide screens ────────────────────────────────────────────────────────────
    Everything on the page is sized in rem, so raising the root size scales the
    whole thing at once — type, spacing, column and screenshots together —

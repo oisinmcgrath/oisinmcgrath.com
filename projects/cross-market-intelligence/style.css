@@ -47,12 +47,15 @@ figcaption{margin-top:.7rem;text-align:center;font-size:.88rem;color:#93a0b2;
 .graphset{display:flex;flex-direction:column;gap:.5rem}
 .graphset .shot{max-height:none}
 /* The two phone captures are tall and narrow — side by side they occupy the
-   column properly and read as one device rather than two. Below 480px there is
-   not enough width for both, so they stack. */
+   column properly and read as one device rather than two. The 24rem cap is
+   what stops a wide monitor blowing each one up past the capture's own
+   resolution and blurring it. Below 480px there is not enough width for
+   both, so they stack. */
 .phones{display:flex;gap:.75rem;align-items:flex-start;justify-content:center}
-.phones .shot{max-height:none;flex:1 1 0;min-width:0}
+.phones .shotlink{flex:0 1 auto;min-width:0;max-width:24rem;margin:0}
+.phones .shot{max-height:none;width:100%}
 @media (max-width:480px){.phones{flex-direction:column;align-items:center}
-  .phones .shot{flex:none;max-width:min(100%,16rem)}}
+  .phones .shotlink{max-width:min(100%,16rem)}}
 footer.site-footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid #38455a;font-size:.88rem;color:#93a0b2;text-align:center}
 footer.site-footer p{margin:0 0 .4rem;color:inherit}
 footer.site-footer a{color:#7db3f7}
@@ -124,6 +127,13 @@ nav.backnav {
 .backbtn svg {
   flex: none;
 }
+
+/* Each screenshot links to its own full-size file: the captures are denser
+   than any column can show them, so the image itself is the way in, and the
+   browser's Back returns to the page. Same pattern as the Renault galleries. */
+.shotlink{display:block;width:fit-content;margin-inline:auto;cursor:zoom-in;
+  border-radius:8px}
+.shotlink:hover .shot{border-color:currentColor}
 
 /* ── Wide screens ────────────────────────────────────────────────────────────
    Everything on the page is sized in rem, so raising the root size scales the

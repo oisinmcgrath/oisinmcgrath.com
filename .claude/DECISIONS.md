@@ -663,3 +663,80 @@ What may be added alongside it, and has been: a repository block, a
 requirements list, and any limitation the page previously disclosed. Dropping a
 limitation while replacing a page is the one thing to be careful of — that is
 the honesty rule above, and NitroTune's page lost and regained one already.
+
+---
+
+## The homepage leads with five features
+
+**2026-09-08 — the feature tier grew from two blocks to five.**
+
+The two-block triage undersold three substantial applications, and Oisin asked
+for them to be promoted: invoiceNow, Receipt Manager and Home Screen now have
+feature blocks too. The shape is a rhythm rather than five identical slabs:
+CMI and the Renault Master stay full-width at the top, invoiceNow and Receipt
+Manager share one `.featpair` row — they are two halves of one problem, so the
+adjacency rule the grid used to carry moved up a tier with them — and Home
+Screen runs full-width below the pair. The remaining seven projects stay as
+equal cards.
+
+The blocks were also made to earn the ground they sit on: headings carry the
+project's own mark, the screenshot is wrapped in a link to the page (the
+biggest thing in the block is now also the biggest click target, and it lifts
+on hover), and the call-through became a centred pill in the block's own
+accent, built from `currentColor` like the nav pills so one rule serves all
+five. Blurbs reuse the approved card copy verbatim — no new marketing prose
+was written.
+
+Two corrections rode along on the Renault block. Its photograph was the
+finished van with its decals, captioned "the day it was bought, still in its
+red Australia Post livery" — false, and exactly the kind of slip the accuracy
+rule exists for. It now carries the boab-tree trip photograph with the page's
+own caption, "Trial by Northern Territory". And its blurb said 4,400 km to the
+top of Australia while the page itself says 8,800 km to Darwin and back; the
+blurb is now the page tagline's first two sentences verbatim.
+
+Also fixed: the "See 5 more" chip sat at the column's left edge on wide
+screens, hundreds of pixels from the centred list it extends, and its label
+did not say what the five more *were*. It now reads "See 5 more aims" and
+takes the same 44rem measure as the list.
+
+---
+
+## Screenshots open at full size
+
+**2026-09-08 — every project-page screenshot is a link to its own file.**
+
+The application captures are 1400–3400px wide; even the wide-screen column
+shows them at a fraction of that, and the fine detail in them — the whole
+argument of pages like CMI's — was illegible with no way in. Each `img.shot`
+on every project page is now wrapped in an `a.shotlink` pointing at the
+original file, with a zoom-in cursor; the browser's Back returns to the page.
+This is the same pattern the Renault galleries always used, and still no
+script.
+
+CMI's two phone captures had the opposite fault: `flex:1 1 0` let a wide
+monitor stretch each one to ~655 CSS pixels from a 794-pixel capture — an
+upscale past the capture's own resolution that blurred them on any hidpi
+display. They are now capped at 24rem each.
+
+---
+
+## The full-bleed wrappers lost their `100vw`
+
+**2026-09-08 — `width:100vw` includes the scrollbar, and every page paid for it.**
+
+Cadence's `.demo-wrap` and N-of-1's `.shot-wrap` spanned the viewport with
+`width:100vw; margin-left:50%; transform:translateX(-50%)`. 100vw includes
+the vertical scrollbar, so both pages scrolled sideways by half a scrollbar
+at every width. They now bleed with symmetric negative margins,
+`margin-inline: calc(50% - 50vw + 8px)` — the +8px backs the bleed off by
+about a scrollbar because no CSS unit means "viewport minus scrollbar", and
+the wrapper's edges are invisible (its own padding is wider), so the trim
+cannot be seen. This also centres the media on the visible area rather than
+on viewport-plus-scrollbar, which the old version was half a scrollbar off.
+
+The other sideways scroll was the `git clone` line on Capsule and Cadence:
+a `<pre>` neither stylesheet styled, so its unbroken line pushed the whole
+page wide on a phone. Both pages now give `pre` the treatment Home Screen,
+tagdexer, Epson and YT Downloader already had — the box scrolls, the page
+never does.

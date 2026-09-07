@@ -18,3 +18,10 @@ then the per-project theme colours, which lived in the `light-dark()` section.
 
 Not reachable from the site: `_redirects` turns away everything under
 `_archive/`.
+
+`media/` holds the three files that were only ever used by this carousel — the
+Cadence teaser loop and its poster, and the poster for the van's teaser — moved
+here when the live tree was tidied so the archive stands on its own. The paths
+in `carousel.html` were rewritten to match, so putting the markup back means
+putting those files back too. `teaser.mp4` itself is *not* here: the Renault
+page still uses it.

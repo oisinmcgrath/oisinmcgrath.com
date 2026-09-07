@@ -60,8 +60,10 @@ will give this site a few minutes. Everything below follows from that:
 
 Still open, as of 2026-09-08: Cross Market Intelligence is unreleased and
 nothing on the site says so; `figure.plate` and `.specbox` in the Renault
-stylesheet are now unused; and the corrected Tagdexer artwork exists only in
-this repo, not in the tagdexer repo it came from.
+stylesheet are now unused; the corrected Tagdexer artwork exists only in
+this repo, not in the tagdexer repo it came from; and two of the van's
+photographs (`ext-01-side.jpg`, `trip-03-ranges.jpg`) have never been
+published on any page.
 
 ## Layout
 

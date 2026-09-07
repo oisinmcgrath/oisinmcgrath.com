@@ -103,7 +103,7 @@
     .links .l-gh{--glow:rgba(36,41,47,.35)}
     .links .l-li{--glow:rgba(43,101,171,.38)}
     .links .l-pr{--glow:rgba(20,80,125,.38)}
-    /* Suffix mark on the Technical projects heading. */
+    /* Suffix mark on a section heading. */
     .hicon{margin-left:.4rem;vertical-align:-.15em;color:#14507d}
   </style>
   <style>
@@ -200,17 +200,24 @@
       box-shadow:0 3px 10px light-dark(rgba(20,60,100,.08),rgba(0,0,0,.5))}
     body .projcard h3{color:light-dark(#15191d,#e8ecf1)}
     body .projcard p{color:light-dark(#3b424a,#aab3be)}
-    body .projcard .more,
-    body .featcard .more{color:light-dark(#14507d,#7fb3e8)}
-    body .featcard{background:light-dark(#fbfcfd,#1b2026);
-      border-color:light-dark(#aab8c6,#39424d);
-      box-shadow:0 2px 10px light-dark(rgba(20,60,100,.10),rgba(0,0,0,.45))}
-    body .featcard:hover{border-color:light-dark(#14507d,#7fb3e8);
-      box-shadow:0 6px 20px light-dark(rgba(20,60,100,.18),rgba(0,0,0,.6))}
-    body .featcard > img,
-    body .featcard > video{border-bottom-color:light-dark(#aab8c6,#39424d)}
-    body .featcard h3{color:light-dark(#15191d,#e8ecf1)}
-    body .featcard p{color:light-dark(#3b424a,#aab3be)}
+    body .projcard .more{color:light-dark(#14507d,#7fb3e8)}
+    /* CMI keeps its own blue and orange; the van keeps its red. Both hold
+       their hue across the two themes, only the grounds invert. */
+    body .feature.f-cmi{background:light-dark(#eef4fc,#161d29);
+      border-color:light-dark(#bcd3ef,#2b3a52)}
+    body .feature.f-cmi h2{color:light-dark(#1a4f86,#7db3f7)}
+    body .feature.f-cmi p{color:light-dark(#2b3542,#c6d0dd)}
+    body .feature.f-cmi figcaption{color:light-dark(#5a6675,#93a0b2)}
+    body .feature.f-cmi figure img{border-color:light-dark(#bcd3ef,#2b3a52)}
+    body .feature.f-cmi .featmore a{color:light-dark(#b06200,#df8512)}
+    body .feature.f-ren{background:light-dark(#fdf1ea,#241610);
+      border-color:light-dark(#e8c3ae,#5c3423)}
+    body .feature.f-ren h2{color:light-dark(#8f3d17,#ffb26d)}
+    body .feature.f-ren p{color:light-dark(#3a2b23,#f0ddd0)}
+    body .feature.f-ren figcaption{color:light-dark(#6d5648,#c2a795)}
+    body .feature.f-ren figure img{border-color:light-dark(#e8c3ae,#5c3423)}
+    body .feature.f-ren .featmore a{color:light-dark(#a8431a,#ffb26d)}
+    body .moreaims summary{color:light-dark(#14507d,#7fb3e8)}
     body .commshot{border-color:light-dark(#aab8c6,#39424d);
       box-shadow:0 2px 10px light-dark(rgba(20,60,100,.10),rgba(0,0,0,.45))}
     body .commshot:hover{border-color:light-dark(#14507d,#7fb3e8);
@@ -250,6 +257,46 @@
   </style>
   <style>.card-links{margin-top:1.5rem;font-weight:600}</style>
   <style>
+    /* The two feature blocks. These are not cards in the grid: they take the
+       full column, carry a real screenshot at full width, and sit on their own
+       tinted ground so a reader can see at a glance that they are not one of
+       ten equal things. Each takes its own project's accents — CMI's blue and
+       orange, the van's red — the same way the Music and Community blocks take
+       theirs. */
+    .feature{margin:1.75rem 0 2rem;padding:1.4rem 1.5rem 1.1rem;
+             border:1px solid;border-radius:14px}
+    .feature h2{margin:.2rem 0 .7rem;display:flex;align-items:center;gap:.5rem}
+    .feature figure{margin:1.1rem 0 .9rem}
+    /* Scoped to the figure on purpose. Unscoped, `.feature img` also matches
+       the mark in the heading and blows it up to the full width of the block —
+       the same trap the old feature cards had. */
+    .feature figure img{display:block;width:100%;height:auto;border-radius:8px;
+                        border:1px solid}
+    .feature figcaption{margin-top:.6rem;text-align:center;font-size:.88rem;
+                        max-width:34rem;margin-inline:auto}
+    .feature .featmore{margin:0}
+    .feature .featmore a{font-weight:600;text-decoration:none}
+    .feature .featmore a:hover{text-decoration:underline}
+    .feature .cardicon{width:1.1em;height:1.1em;object-fit:contain;flex:none}
+    @media (max-width:480px){.feature{padding:1.1rem 1rem .9rem}}
+
+    /* The rest of what the work is for, folded away. A <details>, so it opens
+       without a script, exactly like the specifications box on the Renault
+       page. */
+    .moreaims{margin:-.35rem 0 1.25rem}
+    .moreaims summary{display:inline-flex;align-items:center;gap:.45rem;
+      cursor:pointer;list-style:none;font-size:.92rem;font-weight:600;
+      padding:.3rem .75rem;border-radius:999px;
+      border:1px solid color-mix(in srgb, currentColor 28%, transparent);
+      background:color-mix(in srgb, currentColor 6%, transparent)}
+    .moreaims summary::-webkit-details-marker{display:none}
+    .moreaims summary:hover{border-color:color-mix(in srgb, currentColor 55%, transparent)}
+    .moreaims .chev{width:.5rem;height:.5rem;border-right:2px solid currentColor;
+      border-bottom:2px solid currentColor;transform:rotate(45deg) translate(-1px,-1px);
+      transition:transform .2s}
+    .moreaims[open] .chev{transform:rotate(-135deg) translate(-2px,-2px)}
+    .moreaims > ul{margin-top:.7rem}
+
     .projgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem;margin:1rem 0 2rem}
     .projcard{display:flex;flex-direction:column;background:#fbfcfd;border:1px solid #e7ebef;
               border-radius:8px;padding:1.15rem 1.25rem;text-decoration:none;color:inherit;
@@ -260,150 +307,6 @@
     .projcard h3{margin:0 0 .4rem;font-size:1.05rem;color:#15191d}
     .projcard p{margin:0 0 .9rem;font-size:.92rem;color:#3b424a;flex:1}
     .projcard .more{font-size:.88rem;font-weight:600;color:#14507d}
-    /* Feature card: a large 16:9 thumbnail, the way a video listing shows one. */
-    /* The featured-project carousel. Same construction as the Renault page's:
-       a track carrying the cards twice over so the loop closes on itself, one
-       constant rate, and focus done by a horizontal mask on the viewport
-       rather than by timing — so whatever is passing the middle is the thing
-       in focus. Checking a radio holds it for five seconds and then the drift
-       picks up again from exactly there, which is an animation-delay, not a
-       timer. No script. */
-    .feat{position:relative;margin:.75rem 0 1.25rem}
-    .featinput{position:absolute;width:1px;height:1px;overflow:hidden;
-               clip:rect(0 0 0 0);white-space:nowrap}
-    .featviewport{overflow:hidden;padding:.5rem 0 1rem;
-      -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.16) 0%,rgba(0,0,0,.5) 11%,#000 24%,#000 76%,rgba(0,0,0,.5) 89%,rgba(0,0,0,.16) 100%);
-      mask-image:linear-gradient(90deg,rgba(0,0,0,.16) 0%,rgba(0,0,0,.5) 11%,#000 24%,#000 76%,rgba(0,0,0,.5) 89%,rgba(0,0,0,.16) 100%);
-      -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
-      -webkit-mask-size:100% 100%;mask-size:100% 100%}
-    /* Nine slots for three cards — the set three times over — on six and
-       three quarter viewports of track, so each slot is three quarters of the
-       viewport and the neighbours show at either side.
-
-       Left alone it drifts: -9.2593% of the track is 62.5% of a viewport,
-       which centres the second slot, and running on to -42.5926% moves it
-       exactly three slots — one full set — so the loop closes on itself with
-       nothing to see. 26 seconds a slot.
-
-       The arrows go both ways and come round, which is the part that needs
-       explaining. Three cards need three anchors, but "the card after
-       Cadence" is Renault *to the right*, and Renault's own anchor is two
-       slots to the left — so a plain three-state switch pans backwards across
-       everything, which is exactly what it used to do. The fix uses the third
-       copy: stepping off either end lands on the *neighbouring* copy of that
-       card (slot 2 or slot 6), and a zero-length animation with a 0.6s delay
-       — after the pan has finished — silently moves the track to the same
-       card's canonical slot. Both positions show the identical three cards,
-       so there is nothing to see; every subsequent click then starts from the
-       middle copy again. Five radios, no script.
-
-       Taking manual control stops the drift for good, as it does on the
-       Renault page. It used to resume after five seconds, which meant the
-       resumed run could reach the end of the track from the later anchors. */
-    .feattrack{display:flex;align-items:stretch;width:675%;
-               animation:featdrift 78s linear infinite;will-change:transform}
-    @keyframes featdrift{from{transform:translateX(-9.2593%)}
-                         to{transform:translateX(-42.5926%)}}
-    .feat:has(.featinput:checked) .feattrack{animation:none;
-      transition:transform .55s cubic-bezier(.65,0,.35,1)}
-    /* The three canonical anchors — the middle copy of each card. */
-    .feat:has(#feat-ren:checked) .feattrack{transform:translateX(-31.4815%)}
-    .feat:has(#feat-hs:checked)  .feattrack{transform:translateX(-42.5926%)}
-    .feat:has(#feat-cad:checked) .feattrack{transform:translateX(-53.7037%)}
-    /* Stepping off an end: pan one slot onto the neighbouring copy, then move
-       silently to that card's canonical slot once the pan has finished. */
-    .feat:has(#feat-cad-w:checked) .feattrack{transform:translateX(-20.3704%);
-      animation:featwrapcad 0s linear .6s forwards}
-    .feat:has(#feat-ren-w:checked) .feattrack{transform:translateX(-64.8148%);
-      animation:featwrapren 0s linear .6s forwards}
-    @keyframes featwrapcad{to{transform:translateX(-53.7037%)}}
-    @keyframes featwrapren{to{transform:translateX(-31.4815%)}}
-    .featbtn{position:absolute;top:calc(50% - 1.3rem);z-index:4;display:none;
-             align-items:center;justify-content:center;width:2.6rem;height:2.6rem;
-             border-radius:50%;cursor:pointer;font-size:1.6rem;line-height:1;
-             color:#fff;background:rgba(21,32,45,.5);
-             border:1px solid rgba(255,255,255,.55);backdrop-filter:blur(2px);
-             transition:background .15s ease,transform .15s ease}
-    .featbtn:hover{background:rgba(21,32,45,.75);transform:scale(1.06)}
-    .featbtn.prev{left:1.5%}
-    .featbtn.next{right:1.5%}
-        /* One pair of arrows per state, because plain CSS cannot compute "the
-       next card"; only the pair belonging to the current one is shown. The
-       two wrap states borrow the pair of the card they land on. */
-    .feat .fdefault{display:flex}
-    .feat:has(.featinput:checked) .featbtn{display:none}
-    .feat:has(#feat-ren:checked) .fren,
-    .feat:has(#feat-ren-w:checked) .fren,
-    .feat:has(#feat-hs:checked) .fhs,
-    .feat:has(#feat-cad:checked) .fcad,
-    .feat:has(#feat-cad-w:checked) .fcad{display:flex}
-    @media(prefers-reduced-motion:reduce){
-      .feattrack{animation:none;transform:translateX(-42.5926%)}}
-
-    .featslide{flex:0 0 11.1111%;padding:0 .6rem;display:flex}
-    /* Every card the same width and the same height: the slide stretches to
-       the tallest of them and the card fills it, so the media sits at one
-       height across the row and "See more" is pinned to the foot. */
-    .featcard{display:flex;flex-direction:column;width:100%;margin:0;padding:0;
-              text-decoration:none;
-              color:inherit;border:2px solid #aab8c6;border-radius:12px;overflow:hidden;
-              background:#fbfcfd;box-shadow:0 2px 10px rgba(20,60,100,.10);
-              transition:box-shadow .15s,transform .15s,border-color .15s}
-    .featcard:hover{transform:translateY(-2px);border-color:#14507d;
-                    box-shadow:0 6px 20px rgba(20,60,100,.18)}
-    .featcard > img,.featcard > video{display:block;width:100%;height:auto;
-                  aspect-ratio:16/9;object-fit:cover;
-                  border-bottom:2px solid #aab8c6}
-    /* The mark of the project, set into its title. */
-    .cardicon{width:1.25em;height:1.25em;object-fit:contain;
-              vertical-align:-.28em;margin-right:.45rem}
-    .featcard .body{padding:1.1rem 1.25rem;flex:1;display:flex;
-                    flex-direction:column}
-    .featcard .more{margin-top:auto}
-    .featcard h3{margin:0 0 .4rem;font-size:1.15rem;color:#15191d}
-    .featcard p{margin:0 0 .9rem;font-size:.95rem;color:#3b424a}
-    .featcard .more{font-size:.9rem;font-weight:600;color:#14507d}
-    /* A themed page's card wears that page's own colours, so the carousel
-       previews the theme as well as the work. The titles are the exception:
-       they are white on all three, because each theme's own heading colour —
-       sand on the van's red, teal on Cadence's navy — is a tint of the card
-       behind it and reads as low contrast at that size. The `body` prefix is there to
-       out-specify the light-dark palette further up the file. */
-    body .featcard.t-ren{border-color:#6d3a28;
-      /* The van's card carries the page's own descent — the dark ramp from
-         its stylesheet, sky through ember to night, sized to the whole card.
-         The photograph covers the sky, so what shows below it is the ground
-         half, which is the part of that page a reader spends their time on. */
-      background:linear-gradient(180deg,#062248 0%,#0a3a7c 14%,#14548f 28%,
-        #1b5f96 36%,#2a3a30 40%,#3a2a17 46%,#5a2f12 54%,#6b3312 64%,
-        #43210e 76%,#3a2013 88%,#2a1a12 100%);
-      box-shadow:0 2px 10px rgba(45,18,10,.45)}
-    body .featcard.t-ren:hover{border-color:#ffb26d;
-      box-shadow:0 6px 20px rgba(45,18,10,.6)}
-    body .featcard.t-ren > img,body .featcard.t-ren > video{
-      border-bottom-color:#6d3a28}
-    body .featcard.t-ren h3{color:#ffffff}
-    body .featcard.t-ren p{color:#fbeadd}
-    body .featcard.t-ren .more{color:#ffdcb8}
-    body .featcard.t-hs{background:#1c1f25;border-color:#2b3038;
-      box-shadow:0 2px 10px rgba(0,0,0,.45)}
-    body .featcard.t-hs:hover{border-color:#6fb3f2;
-      box-shadow:0 6px 20px rgba(0,0,0,.6)}
-    body .featcard.t-hs > img,body .featcard.t-hs > video{
-      border-bottom-color:#2b3038}
-    body .featcard.t-hs h3{color:#ffffff}
-    body .featcard.t-hs p{color:#c3cbd6}
-    body .featcard.t-hs .more{color:#6fb3f2}
-    body .featcard.t-cad{background:#151a2c;border-color:#242c46;
-      box-shadow:0 2px 10px rgba(0,0,0,.5)}
-    body .featcard.t-cad:hover{border-color:#4ad4d4;
-      box-shadow:0 6px 20px rgba(0,0,0,.65)}
-    body .featcard.t-cad > img,body .featcard.t-cad > video{
-      border-bottom-color:#242c46}
-    body .featcard.t-cad h3{color:#ffffff}
-    body .featcard.t-cad p{color:#ccd3e0}
-    body .featcard.t-cad .more{color:#4ad4d4}
-
     .commshot{display:block;max-width:30rem;margin:1rem auto 0;border:2px solid #aab8c6;
               border-radius:10px;overflow:hidden;line-height:0;
               box-shadow:0 2px 10px rgba(20,60,100,.10);
@@ -489,6 +392,10 @@
          photograph gain nothing from being flung to opposite ends of a
          1100px column — the extra width is for the body and the pictures. */
       header.site-header{max-width:44rem;margin-inline:auto}
+      /* The feature blocks are the other thing the extra width is for, so
+         they keep the column while their prose keeps the measure. */
+      .feature{max-width:none}
+      .feature p{max-width:44rem;margin-inline:auto}
     }
   </style>
 </head>
@@ -517,230 +424,64 @@
         <li>Automate and remove friction from daily tasks related to your work.</li>
         <li>Inform non technical users and enable them to do technical tasks with
             a user friendly interface and assistance tools.</li>
-        <li>Provide systems that eliminate common mistakes in your work by
-            excluding the conditions that permit them.</li>
-        <li>Add functionality to your computer, or tooling for specific kinds of
-            work, such as software development.</li>
-        <li>Provide tools that track and organise information that matters to
-            you, in a system convenient enough that you keep using it.</li>
-        <li>Get your equipment working when your computer doesn't support it.</li>
-        <li>Test a business model.</li>
       </ul>
+      <details class="moreaims">
+        <summary><span class="sumtext">See 5 more</span><span class="chev" aria-hidden="true"></span></summary>
+        <ul class="leadlist">
+          <li>Provide systems that eliminate common mistakes in your work by
+              excluding the conditions that permit them.</li>
+          <li>Provide tools that track and organise information that matters to
+              you, in a system convenient enough that you keep using it.</li>
+          <li>Get your equipment working when your computer doesn't support it.</li>
+          <li>Add functionality to your computer, or tooling for specific kinds of
+              work, such as software development.</li>
+          <li>Test a business model.</li>
+        </ul>
+      </details>
 
-      <section class="linkcard" aria-labelledby="links-heading">
-      <h2 id="links-heading">Links <svg class="hicon licon" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M15.197 3.355c1.673-1.68 4.25-1.816 5.756-.305 1.506 1.512 1.371 4.1-.302 5.78L18.227 11.263M10.046 14c-1.505-1.512-1.37-4.1.303-5.779L12.5 6.062"/><path d="M13.954 10c1.506 1.512 1.37 4.1-.303 5.779l-2.424 2.433-2.424 2.433c-1.673 1.68-4.25 1.816-5.756.305-1.506-1.512-1.37-4.1.303-5.779l2.424-2.433"/></svg></h2>
-      <ul class="links">
-        <li class="l-gh"><a href="https://github.com/oisinmcgrath"><svg class="ico ico-gh" viewBox="0 0 20 20" width="15" height="15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M10,0 C15.523,0 20,4.59 20,10.253 C20,14.782 17.138,18.624 13.167,19.981 C12.66,20.082 12.48,19.762 12.48,19.489 C12.48,19.151 12.492,18.047 12.492,16.675 C12.492,15.719 12.172,15.095 11.813,14.777 C14.04,14.523 16.38,13.656 16.38,9.718 C16.38,8.598 15.992,7.684 15.35,6.966 C15.454,6.707 15.797,5.664 15.252,4.252 C15.252,4.252 14.414,3.977 12.505,5.303 C11.706,5.076 10.85,4.962 10,4.958 C9.15,4.962 8.295,5.076 7.497,5.303 C5.586,3.977 4.746,4.252 4.746,4.252 C4.203,5.664 4.546,6.707 4.649,6.966 C4.01,7.684 3.619,8.598 3.619,9.718 C3.619,13.646 5.954,14.526 8.175,14.785 C7.889,15.041 7.63,15.493 7.54,16.156 C6.97,16.418 5.522,16.871 4.63,15.304 C4.63,15.304 4.101,14.319 3.097,14.247 C3.097,14.247 2.122,14.234 3.029,14.87 C3.029,14.87 3.684,15.185 4.139,16.37 C4.139,16.37 4.726,18.2 7.508,17.58 C7.513,18.437 7.522,19.245 7.522,19.489 C7.522,19.76 7.338,20.077 6.839,19.982 C2.865,18.627 0,14.783 0,10.253 C0,4.59 4.478,0 10,0"/></svg><span>GitHub — github.com/oisinmcgrath</span></a></li>
-        <li class="l-li"><a href="https://www.linkedin.com/in/oisinmcgrathdev/"><svg class="ico ico-li" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8" cy="7.5" r="1.25" fill="currentColor" stroke="none"/><path d="M8 11v6"/><path d="M12 17v-6"/><path d="M12 13.6c.6-2 1.6-2.6 2.5-2.6 1.4 0 2.5 1.1 2.5 2.57V17"/></svg><span>LinkedIn — Oisin McGrath</span></a></li>
-        <li class="l-pr"><a href="/projects/"><svg class="ico" viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M2 13.122a1 1 0 00.741.966l7 1.876A1 1 0 0011 14.998V14h2a1 1 0 001-1V3a1 1 0 00-1-1h-2v-.994A1 1 0 009.741.04l-7 1.876A1 1 0 002 2.882v10.24zM9 2.31v11.384l-5-1.34V3.65l5-1.34zM11 12V4h1v8h-1z"/></svg><span>Projects</span></a></li>
-      </ul>
+      <section class="feature f-cmi" aria-labelledby="cmi-heading">
+        <h2 id="cmi-heading">Cross Market Intelligence</h2>
+        <p>
+          Is there such a thing as a good deal at the auctions? What could it be
+          sold for privately, and how would you find out? Some say it takes years
+          of experience. Could a computer acquire that experience? Cross Market
+          Intelligence exists to answer these questions.
+        </p>
+        <figure>
+          <img src="/projects/cross-market-intelligence/screenshots/auction-browse.jpg"
+               width="1600" height="823" loading="lazy"
+               alt="The auction inventory, each vehicle carrying its forecast auction price, its private-sale forecast and the margin between them.">
+          <figcaption>The auction inventory, each vehicle carrying its forecast auction price, its private-sale forecast and the margin between them.</figcaption>
+        </figure>
+        <p class="featmore">
+          <a href="/projects/cross-market-intelligence/">Read about Cross Market Intelligence &rarr;</a>
+        </p>
       </section>
 
-
-
-      <h2>Technical projects <svg class="hicon" viewBox="0 0 512 512" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M476.007,209.804c25.297-25.281,37.25-58.859,35.891-91.984l-16.484-16.484l-57.453,57.453l-66.844-17.906l-17.906-66.828l57.453-57.453l-16.484-16.5c-33.125-1.359-66.703,10.594-91.984,35.891c-31.734,31.734-42.484,76.5-32.25,117.063L78.663,344.335c-19.703,1.234-39.031,9.359-54.078,24.406c-32.781,32.781-32.781,85.906,0,118.688c32.766,32.766,85.906,32.766,118.672,0c15.047-15.047,23.172-34.391,24.406-54.078l191.281-191.281C399.506,252.288,444.272,241.538,476.007,209.804z M264.256,219.819c7.703-7.719,20.219-7.719,27.922,0c7.719,7.703,7.719,20.219,0,27.938l-100,100c-7.719,7.719-20.219,7.719-27.938,0c-7.703-7.719-7.703-20.219,0-27.938L264.256,219.819z M92.756,468.179l-38.594-10.344l-10.344-38.594l28.25-28.25l38.609,10.328l10.344,38.609L92.756,468.179z"/></svg></h2>
-      <hr class="rule accent">
-
-      <!-- The same carousel as the Renault page: a track carrying the cards
-           twice over, drifting at one constant rate, focus done by a mask
-           rather than by timing. Radios stop it for five seconds and then it
-           picks up again. No script. -->
-      <section class="feat" aria-label="Featured projects">
-        <input class="featinput" type="radio" name="featured" id="feat-ren" autocomplete="off">
-        <input class="featinput" type="radio" name="featured" id="feat-hs" autocomplete="off">
-        <input class="featinput" type="radio" name="featured" id="feat-cad" autocomplete="off">
-        <input class="featinput" type="radio" name="featured" id="feat-cad-w" autocomplete="off">
-        <input class="featinput" type="radio" name="featured" id="feat-ren-w" autocomplete="off">
-
-        <div class="featviewport">
-          <div class="feattrack">
-          <div class="featslide">
-            <a class="featcard t-ren" href="/projects/renault-master/">
-              <video autoplay muted loop playsinline preload="auto"
-                   poster="/projects/renault-master/video/teaser-poster.jpg"
-                   width="864" height="648" aria-hidden="true">
-              <source src="/projects/renault-master/video/teaser.mp4" type="video/mp4">
-            </video>
-              <div class="body">
-                <h3><img class="cardicon" src="/projects/renault-master/favicon.svg" alt="">Renault Master Camper Conversion</h3>
-                <p>Perhaps my most ambitious and educational undertaking: in 2025 I converted an
-                 Australia Post van into a fully fitted-out campervan, and put it to the test by
-                 taking it 4,400&nbsp;km to the top of Australia.</p>
-                <span class="more">See more &rarr;</span>
-              </div>
-            </a>
-          </div>
-          <div class="featslide">
-            <a class="featcard t-hs" href="/projects/homescreen/">
-              <img src="/projects/homescreen/screenshots/home-screen.jpg" alt="The Home Screen new tab page: a grid of app tiles over a lake wallpaper, with a search bar, clock, weather and an Ask Claude bar">
-              <div class="body">
-                <h3><img class="cardicon" src="/projects/homescreen/logo/logo.png" alt="">Home Screen</h3>
-                <p>A browser new tab page laid out like a phone home screen — an app grid you
-                 arrange yourself, with weather, sun times and an assistant bar.</p>
-                <span class="more">See more &rarr;</span>
-              </div>
-            </a>
-          </div>
-          <div class="featslide">
-            <a class="featcard t-cad" href="/projects/cadence/">
-              <video autoplay muted loop playsinline preload="auto"
-                   poster="/projects/cadence/card-poster.jpg"
-                   width="1280" height="720" aria-hidden="true">
-              <source src="/projects/cadence/cadence-teaser-thumbnail-loop.mp4" type="video/mp4">
-            </video>
-              <div class="body">
-                <h3><img class="cardicon" src="/projects/cadence/logo/logo.png" alt="">Cadence</h3>
-                <p>Speak instead of typing, and have your computer read your emails back to you.</p>
-                <span class="more">See more &rarr;</span>
-              </div>
-            </a>
-          </div>
-          <div class="featslide">
-            <a class="featcard t-ren" href="/projects/renault-master/" aria-hidden="true" tabindex="-1">
-              <video autoplay muted loop playsinline preload="auto"
-                   poster="/projects/renault-master/video/teaser-poster.jpg"
-                   width="864" height="648" aria-hidden="true">
-              <source src="/projects/renault-master/video/teaser.mp4" type="video/mp4">
-            </video>
-              <div class="body">
-                <h3><img class="cardicon" src="/projects/renault-master/favicon.svg" alt="">Renault Master Camper Conversion</h3>
-                <p>Perhaps my most ambitious and educational undertaking: in 2025 I converted an
-                 Australia Post van into a fully fitted-out campervan, and put it to the test by
-                 taking it 4,400&nbsp;km to the top of Australia.</p>
-                <span class="more">See more &rarr;</span>
-              </div>
-            </a>
-          </div>
-          <div class="featslide">
-            <a class="featcard t-hs" href="/projects/homescreen/" aria-hidden="true" tabindex="-1">
-              <img src="/projects/homescreen/screenshots/home-screen.jpg" alt="">
-              <div class="body">
-                <h3><img class="cardicon" src="/projects/homescreen/logo/logo.png" alt="">Home Screen</h3>
-                <p>A browser new tab page laid out like a phone home screen — an app grid you
-                 arrange yourself, with weather, sun times and an assistant bar.</p>
-                <span class="more">See more &rarr;</span>
-              </div>
-            </a>
-          </div>
-          <div class="featslide">
-            <a class="featcard t-cad" href="/projects/cadence/" aria-hidden="true" tabindex="-1">
-              <video autoplay muted loop playsinline preload="auto"
-                   poster="/projects/cadence/card-poster.jpg"
-                   width="1280" height="720" aria-hidden="true">
-              <source src="/projects/cadence/cadence-teaser-thumbnail-loop.mp4" type="video/mp4">
-            </video>
-              <div class="body">
-                <h3><img class="cardicon" src="/projects/cadence/logo/logo.png" alt="">Cadence</h3>
-                <p>Speak instead of typing, and have your computer read your emails back to you.</p>
-                <span class="more">See more &rarr;</span>
-              </div>
-            </a>
-          </div>
-          <div class="featslide">
-            <a class="featcard t-ren" href="/projects/renault-master/" aria-hidden="true" tabindex="-1">
-              <video autoplay muted loop playsinline preload="auto"
-                   poster="/projects/renault-master/video/teaser-poster.jpg"
-                   width="864" height="648" aria-hidden="true">
-              <source src="/projects/renault-master/video/teaser.mp4" type="video/mp4">
-            </video>
-              <div class="body">
-                <h3><img class="cardicon" src="/projects/renault-master/favicon.svg" alt="">Renault Master Camper Conversion</h3>
-                <p>Perhaps my most ambitious and educational undertaking: in 2025 I converted an
-                 Australia Post van into a fully fitted-out campervan, and put it to the test by
-                 taking it 4,400&nbsp;km to the top of Australia.</p>
-                <span class="more">See more &rarr;</span>
-              </div>
-            </a>
-          </div>
-          <div class="featslide">
-            <a class="featcard t-hs" href="/projects/homescreen/" aria-hidden="true" tabindex="-1">
-              <img src="/projects/homescreen/screenshots/home-screen.jpg" alt="">
-              <div class="body">
-                <h3><img class="cardicon" src="/projects/homescreen/logo/logo.png" alt="">Home Screen</h3>
-                <p>A browser new tab page laid out like a phone home screen — an app grid you
-                 arrange yourself, with weather, sun times and an assistant bar.</p>
-                <span class="more">See more &rarr;</span>
-              </div>
-            </a>
-          </div>
-          <div class="featslide">
-            <a class="featcard t-cad" href="/projects/cadence/" aria-hidden="true" tabindex="-1">
-              <video autoplay muted loop playsinline preload="auto"
-                   poster="/projects/cadence/card-poster.jpg"
-                   width="1280" height="720" aria-hidden="true">
-              <source src="/projects/cadence/cadence-teaser-thumbnail-loop.mp4" type="video/mp4">
-            </video>
-              <div class="body">
-                <h3><img class="cardicon" src="/projects/cadence/logo/logo.png" alt="">Cadence</h3>
-                <p>Speak instead of typing, and have your computer read your emails back to you.</p>
-                <span class="more">See more &rarr;</span>
-              </div>
-            </a>
-          </div>
-          </div>
-        </div>
-
-        <label class="featbtn prev fdefault" for="feat-ren" title="Previous"><span aria-hidden="true">&#8249;</span></label>
-        <label class="featbtn next fdefault" for="feat-cad" title="Next"><span aria-hidden="true">&#8250;</span></label>
-        <label class="featbtn prev fren" for="feat-cad-w" title="Previous"><span aria-hidden="true">&#8249;</span></label>
-        <label class="featbtn next fren" for="feat-hs" title="Next"><span aria-hidden="true">&#8250;</span></label>
-        <label class="featbtn prev fhs" for="feat-ren" title="Previous"><span aria-hidden="true">&#8249;</span></label>
-        <label class="featbtn next fhs" for="feat-cad" title="Next"><span aria-hidden="true">&#8250;</span></label>
-        <label class="featbtn prev fcad" for="feat-hs" title="Previous"><span aria-hidden="true">&#8249;</span></label>
-        <label class="featbtn next fcad" for="feat-ren-w" title="Next"><span aria-hidden="true">&#8250;</span></label>
+      <section class="feature f-ren" aria-labelledby="ren-heading">
+        <h2 id="ren-heading"><img class="cardicon" src="/projects/renault-master/favicon.svg" alt="">Renault Master Camper Conversion</h2>
+        <p>
+          Perhaps my most ambitious and educational undertaking: in 2025 I
+          converted an Australia Post van into a fully fitted-out campervan, and
+          put it to the test by taking it 4,400&nbsp;km to the top of Australia.
+        </p>
+        <figure>
+          <img src="/projects/renault-master/photos/ext-03-front-three-quarter.jpg"
+               width="1600" height="1067" loading="lazy"
+               alt="The van on the day it was bought, still in its red Australia Post livery.">
+          <figcaption>The van on the day it was bought, still in its red Australia Post livery.</figcaption>
+        </figure>
+        <p class="featmore">
+          <a href="/projects/renault-master/">Read about the conversion &rarr;</a>
+        </p>
       </section>
 
-      <hr class="rule accent">
-
-      <h2>Software projects <svg class="hicon" viewBox="-6 -6 443.908 443.908" width="21" height="21" fill="currentColor" stroke="currentColor" stroke-width="10" aria-hidden="true"><path d="M423.908,152.051c4.418,0,8-3.582,8-8s-3.582-8-8-8h-24.006v-31.936h24.006c4.418,0,8-3.582,8-8s-3.582-8-8-8h-24.006 V71.996c0-22.056-17.944-40-40-40h-16.109V8c0-4.418-3.582-8-8-8s-8,3.582-8,8v23.996h-31.937V8c0-4.418-3.582-8-8-8s-8,3.582-8,8 v23.996H247.92V8c0-4.418-3.582-8-8-8s-8,3.582-8,8v23.996h-31.935V8c0-4.418-3.582-8-8-8s-8,3.582-8,8v23.996h-31.936V8 c0-4.418-3.582-8-8-8s-8,3.582-8,8v23.996h-31.936V8c0-4.418-3.582-8-8-8s-8,3.582-8,8v23.996H71.985c-22.056,0-40,17.944-40,40 v16.119H8c-4.418,0-8,3.582-8,8s3.582,8,8,8h23.985v31.936H8c-4.418,0-8,3.582-8,8s3.582,8,8,8h23.985v31.936H8 c-4.418,0-8,3.582-8,8s3.582,8,8,8h23.985v31.935H8c-4.418,0-8,3.582-8,8s3.582,8,8,8h23.985v31.936H8c-4.418,0-8,3.582-8,8 s3.582,8,8,8h23.985v31.936H8c-4.418,0-8,3.582-8,8s3.582,8,8,8h23.985v16.119c0,22.056,17.944,40,40,40h16.128v23.995 c0,4.418,3.582,8,8,8s8-3.582,8-8v-23.995h31.936v23.995c0,4.418,3.582,8,8,8s8-3.582,8-8v-23.995h31.936v23.995 c0,4.418,3.582,8,8,8s8-3.582,8-8v-23.995h31.935v23.995c0,4.418,3.582,8,8,8s8-3.582,8-8v-23.995h31.936v23.995 c0,4.418,3.582,8,8,8s8-3.582,8-8v-23.995h31.937v23.995c0,4.418,3.582,8,8,8s8-3.582,8-8v-23.995h16.109c22.056,0,40-17.944,40-40 v-16.119h24.006c4.418,0,8-3.582,8-8s-3.582-8-8-8h-24.006v-31.936h24.006c4.418,0,8-3.582,8-8s-3.582-8-8-8h-24.006v-31.936 h24.006c4.418,0,8-3.582,8-8s-3.582-8-8-8h-24.006v-31.935h24.006c4.418,0,8-3.582,8-8s-3.582-8-8-8h-24.006v-31.936H423.908z M383.902,359.912c0,13.233-10.767,24-24,24H71.985c-13.233,0-24-10.767-24-24V71.996c0-13.234,10.767-24,24-24h287.917 c13.233,0,24,10.766,24,24V359.912z"/><path d="M343.777,72.121H88.11c-8.822,0-16,7.177-16,16v255.667c0,8.822,7.178,16,16,16h255.667c8.822,0,16-7.178,16-16V88.121 C359.777,79.298,352.599,72.121,343.777,72.121z M88.11,343.787V88.121h255.667l0.002,255.667H88.11z"/></svg></h2>
       <div class="projgrid">
-        <a class="projcard" href="/projects/homescreen/">
-          <img src="/projects/logos/homescreen.png" alt="">
-          <h3>Home Screen</h3>
-          <p>A browser new tab page laid out like a phone home screen — an app grid
-             you arrange yourself, with weather, sun times and an assistant bar.</p>
-          <span class="more">Read more &rarr;</span>
-        </a>
-        <a class="projcard" href="/projects/epson-rr70w-autofeed/">
-          <img src="/projects/logos/epson-rr70w-autofeed.png" alt="">
-          <h3>Epson RR-70W batch scanner</h3>
-          <p>Driver-free batch scanning for the Epson RR-70W on Linux. Feed page after
-             page straight to PNG or PDF — no OEM software, no cloud account.</p>
-          <span class="more">Read more &rarr;</span>
-        </a>
         <a class="projcard" href="/projects/invoicenow/">
           <img src="/projects/logos/invoicenow.png" alt="">
           <h3>invoiceNow</h3>
           <p>From the job you put off every week to a few clicks that keep it off your
              mind for good.</p>
-          <span class="more">Read more &rarr;</span>
-        </a>
-        <a class="projcard" href="/projects/cadence/">
-          <img src="/projects/logos/cadence.png" alt="">
-          <h3>Cadence</h3>
-          <p>Offline dictation and clipboard text-to-speech for Linux. Speak into any
-             app, or hear selected text read aloud. Nothing leaves your machine.</p>
-          <span class="more">Read more &rarr;</span>
-        </a>
-        <a class="projcard" href="/projects/capsule/">
-          <img src="/projects/logos/capsule.png" alt="">
-          <h3>Capsule</h3>
-          <p>Sandboxed dev containers in one command — DevPod, rootless Podman and
-             VSCodium — for running AI coding agents safely away from your host.</p>
-          <span class="more">Read more &rarr;</span>
-        </a>
-        <a class="projcard" href="/projects/n-of-1/">
-          <img src="/projects/logos/n-of-1.png" alt="">
-          <h3>N-of-1</h3>
-          <p>Offline health tracker for Android, Linux and Windows. See what actually
-             drives your energy, mood and focus. No account, no cloud, no subscription.</p>
-          <span class="more">Read more &rarr;</span>
-        </a>
-        <a class="projcard" href="/projects/cross-market-intelligence/">
-          <img src="/projects/logos/cross-market-intelligence.png" alt="">
-          <h3>Cross Market Intelligence</h3>
-          <p>Is there such a thing as a good deal at the auctions? What could it be sold
-             for privately, and how would you find out?</p>
           <span class="more">Read more &rarr;</span>
         </a>
         <a class="projcard" href="/projects/receipt-manager/">
@@ -758,11 +499,46 @@
              places at once — with a permanent record of the decisions behind a project.</p>
           <span class="more">Read more &rarr;</span>
         </a>
+        <a class="projcard" href="/projects/cadence/">
+          <img src="/projects/logos/cadence.png" alt="">
+          <h3>Cadence</h3>
+          <p>Offline dictation and clipboard text-to-speech for Linux. Speak into any
+             app, or hear selected text read aloud. Nothing leaves your machine.</p>
+          <span class="more">Read more &rarr;</span>
+        </a>
+        <a class="projcard" href="/projects/capsule/">
+          <img src="/projects/logos/capsule.png" alt="">
+          <h3>Capsule</h3>
+          <p>Sandboxed dev containers in one command — DevPod, rootless Podman and
+             VSCodium — for running AI coding agents safely away from your host.</p>
+          <span class="more">Read more &rarr;</span>
+        </a>
+        <a class="projcard" href="/projects/epson-rr70w-autofeed/">
+          <img src="/projects/logos/epson-rr70w-autofeed.png" alt="">
+          <h3>Epson RR-70W batch scanner</h3>
+          <p>Driver-free batch scanning for the Epson RR-70W on Linux. Feed page after
+             page straight to PNG or PDF — no OEM software, no cloud account.</p>
+          <span class="more">Read more &rarr;</span>
+        </a>
         <a class="projcard" href="/projects/nitrotune/">
           <img src="/projects/logos/nitrotune.png" alt="">
           <h3>NitroTune</h3>
           <p>Fan and thermal control for the Acer Nitro AN515-55 on Linux — a native
              replacement for Windows-only NitroSense.</p>
+          <span class="more">Read more &rarr;</span>
+        </a>
+        <a class="projcard" href="/projects/homescreen/">
+          <img src="/projects/logos/homescreen.png" alt="">
+          <h3>Home Screen</h3>
+          <p>A browser new tab page laid out like a phone home screen — an app grid
+             you arrange yourself, with weather, sun times and an assistant bar.</p>
+          <span class="more">Read more &rarr;</span>
+        </a>
+        <a class="projcard" href="/projects/n-of-1/">
+          <img src="/projects/logos/n-of-1.png" alt="">
+          <h3>N-of-1</h3>
+          <p>Offline health tracker for Android, Linux and Windows. See what actually
+             drives your energy, mood and focus. No account, no cloud, no subscription.</p>
           <span class="more">Read more &rarr;</span>
         </a>
         <a class="projcard" href="/projects/yt-downloader/">
@@ -783,7 +559,7 @@
           Since my school days I have had a passion for playing music, and lost
           track of time sitting with songs I was working on. Through the
           community I discovered my love for Irish music and performing for
-          which&hellip;
+          which&hellip; <a href="/music.html">see more</a>
         </p>
         <a class="commshot natural" href="/music.html">
           <img src="/music/performing-paddys-day.jpg" alt="Playing guitar and fiddle outdoors under a tree at the St Patrick&rsquo;s Festival">
@@ -803,6 +579,17 @@
           <img src="/community/day-jerseys.jpg"
                alt="Three of us in Irish county jerseys at the festival, under the trees">
         </a>
+      </section>
+
+      <hr class="rule soft">
+
+      <section class="linkcard" aria-labelledby="links-heading">
+      <h2 id="links-heading">Links <svg class="hicon licon" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M15.197 3.355c1.673-1.68 4.25-1.816 5.756-.305 1.506 1.512 1.371 4.1-.302 5.78L18.227 11.263M10.046 14c-1.505-1.512-1.37-4.1.303-5.779L12.5 6.062"/><path d="M13.954 10c1.506 1.512 1.37 4.1-.303 5.779l-2.424 2.433-2.424 2.433c-1.673 1.68-4.25 1.816-5.756.305-1.506-1.512-1.37-4.1.303-5.779l2.424-2.433"/></svg></h2>
+      <ul class="links">
+        <li class="l-gh"><a href="https://github.com/oisinmcgrath"><svg class="ico ico-gh" viewBox="0 0 20 20" width="15" height="15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M10,0 C15.523,0 20,4.59 20,10.253 C20,14.782 17.138,18.624 13.167,19.981 C12.66,20.082 12.48,19.762 12.48,19.489 C12.48,19.151 12.492,18.047 12.492,16.675 C12.492,15.719 12.172,15.095 11.813,14.777 C14.04,14.523 16.38,13.656 16.38,9.718 C16.38,8.598 15.992,7.684 15.35,6.966 C15.454,6.707 15.797,5.664 15.252,4.252 C15.252,4.252 14.414,3.977 12.505,5.303 C11.706,5.076 10.85,4.962 10,4.958 C9.15,4.962 8.295,5.076 7.497,5.303 C5.586,3.977 4.746,4.252 4.746,4.252 C4.203,5.664 4.546,6.707 4.649,6.966 C4.01,7.684 3.619,8.598 3.619,9.718 C3.619,13.646 5.954,14.526 8.175,14.785 C7.889,15.041 7.63,15.493 7.54,16.156 C6.97,16.418 5.522,16.871 4.63,15.304 C4.63,15.304 4.101,14.319 3.097,14.247 C3.097,14.247 2.122,14.234 3.029,14.87 C3.029,14.87 3.684,15.185 4.139,16.37 C4.139,16.37 4.726,18.2 7.508,17.58 C7.513,18.437 7.522,19.245 7.522,19.489 C7.522,19.76 7.338,20.077 6.839,19.982 C2.865,18.627 0,14.783 0,10.253 C0,4.59 4.478,0 10,0"/></svg><span>GitHub — github.com/oisinmcgrath</span></a></li>
+        <li class="l-li"><a href="https://www.linkedin.com/in/oisinmcgrathdev/"><svg class="ico ico-li" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8" cy="7.5" r="1.25" fill="currentColor" stroke="none"/><path d="M8 11v6"/><path d="M12 17v-6"/><path d="M12 13.6c.6-2 1.6-2.6 2.5-2.6 1.4 0 2.5 1.1 2.5 2.57V17"/></svg><span>LinkedIn — Oisin McGrath</span></a></li>
+        <li class="l-pr"><a href="/projects/"><svg class="ico" viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M2 13.122a1 1 0 00.741.966l7 1.876A1 1 0 0011 14.998V14h2a1 1 0 001-1V3a1 1 0 00-1-1h-2v-.994A1 1 0 009.741.04l-7 1.876A1 1 0 002 2.882v10.24zM9 2.31v11.384l-5-1.34V3.65l5-1.34zM11 12V4h1v8h-1z"/></svg><span>Projects</span></a></li>
+      </ul>
       </section>
 
     </main>

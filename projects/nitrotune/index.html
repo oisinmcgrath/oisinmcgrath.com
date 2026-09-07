@@ -65,46 +65,6 @@
         left to chance.
       </p>
 
-      <div class="notice">
-        <p>
-          <strong>A word of caution.</strong> The fan-curve daemon writes directly
-          to embedded-controller registers that were identified by experiment on one
-          machine. On different hardware those addresses may mean something else
-          entirely. Watch the log for a few minutes before enabling it at boot, and
-          treat the whole project as what it is: a personal tool for one laptop
-          model, shared as-is with no warranty.
-        </p>
-      </div>
-
-      <section class="card" aria-labelledby="req-heading">
-        <h2 id="req-heading">Requirements</h2>
-        <ul>
-          <li>Linux with a recent kernel — developed on Linux Mint 22, kernel 6.8</li>
-          <li><a href="https://github.com/nbfc-linux/nbfc-linux">nbfc-linux</a>, for <code>ec_probe</code></li>
-          <li><code>nvidia-smi</code>, for GPU temperature on NVIDIA hardware</li>
-          <li><code>acer_wmi</code> loaded with <code>predator_v4=1</code>, for thermal profiles</li>
-          <li><code>python3-gi</code> and <code>gir1.2-gtk-3.0</code>, for the tray monitor</li>
-        </ul>
-        <p class="meta">
-          On the BIOS this was tested against (V2.06, 08/19/2021), only the
-          balanced thermal profile does anything — the other modes are accepted and
-          then quietly ignored by the firmware. Run <code>acer-profile status</code>
-          to see what yours honours before relying on it.
-        </p>
-      </section>
-
-      <section class="card" aria-labelledby="get-heading">
-        <h2 id="get-heading">Getting it</h2>
-        <p>
-          NitroTune is free software. The source is on GitHub, and the repository
-          is the whole distribution — there is no installer, no store listing
-          and no account.
-        </p>
-        <pre><code>git clone https://github.com/oisinmcgrath/nitrotune.git</code></pre>
-        <p>
-          <a href="https://github.com/oisinmcgrath/nitrotune">github.com/oisinmcgrath/nitrotune</a>
-        </p>
-      </section>
 
     </main>
 

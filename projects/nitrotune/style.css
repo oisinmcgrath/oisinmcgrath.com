@@ -29,11 +29,7 @@ main li{margin-bottom:.4rem}
 .card h2{margin-top:0}
 code,.mono{font-family:ui-monospace,"Cascadia Code","Source Code Pro",Menlo,Consolas,monospace;
   font-size:.88em;background:#161b22;color:#56d364;padding:.1em .35em;border-radius:3px;word-break:break-word}
-pre{background:#2c2823;border:1px solid #3a352f;border-radius:6px;padding:.85rem 1rem;overflow-x:auto;margin:0 0 1rem}
-pre code{background:none;padding:0;color:#e9e5df}
 /* EC register table — the one place this page needs tabular data. */
-.notice{background:#241318;border:1px solid #6b2a33;border-radius:8px;padding:.9rem 1.1rem;margin:1rem 0 1.5rem;color:#f2d6da}
-.notice p:last-child{margin-bottom:0}
 /* Screenshots. Both captures are narrower than they are tall relative to the
    text column, so max-width takes them to the column and the height cap holds
    the taller one to a screenful. */
@@ -120,4 +116,30 @@ nav.backnav {
 
 .backbtn svg {
   flex: none;
+}
+
+/* ── Wide screens ────────────────────────────────────────────────────────────
+   Everything on the page is sized in rem, so raising the root size scales the
+   whole thing at once — type, spacing, column and screenshots together —
+   rather than leaving 16px text stranded in the middle of a 27-inch monitor.
+
+   The column widens with it, but prose does not: a line of text stays around
+   40rem, because a 900px line is harder to read, not easier. So the extra
+   width goes where it helps — screenshots, figures and grids take the full
+   column while paragraphs keep their measure and stay centred on the same
+   axis. That is the split the Renault page already uses; this is it applied
+   to the rest of the site. */
+@media (min-width: 1280px) {
+  html { font-size: 17px; }
+  .wrap { max-width: 54rem; }
+  main p, main ul, main ol { max-width: 40rem; margin-inline: auto; }
+  .card, .notice { max-width: 44rem; margin-inline: auto; }
+}
+@media (min-width: 1800px) {
+  html { font-size: 18px; }
+  .wrap { max-width: 60rem; }
+}
+@media (min-width: 2400px) {
+  html { font-size: 19px; }
+  .wrap { max-width: 64rem; }
 }

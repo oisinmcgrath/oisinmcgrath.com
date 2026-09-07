@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <style>.site-header{position:relative;padding-top:0.75rem;padding-bottom:1.5rem;min-height:160px;display:flex;flex-direction:column;justify-content:center}.avatar{position:absolute;top:50%;transform:translateY(-50%);right:0;width:140px;height:140px;border-radius:50%;object-fit:cover}@media(max-width:600px){.avatar{position:static;display:block;margin:1rem 0}}</style>
+  <style>.site-header{position:relative;padding-top:0.75rem;padding-bottom:1.5rem;min-height:160px;display:flex;flex-direction:column;justify-content:center}.avatar{position:absolute;top:50%;transform:translateY(-50%);right:0;width:140px;height:140px;border-radius:50%;object-fit:cover}@media(max-width:600px){.site-header{min-height:0;padding-top:0}.avatar{position:static;display:block;width:96px;height:96px;margin:.25rem auto 1rem}}</style>
   <style>
     /* The three links under the bio are buttons, each carrying the mark of
        where it goes. GitHub keeps its own black; LinkedIn keeps its own blue. */
@@ -103,6 +103,13 @@
     .links .l-gh{--glow:rgba(36,41,47,.35)}
     .links .l-li{--glow:rgba(43,101,171,.38)}
     .links .l-pr{--glow:rgba(20,80,125,.38)}
+    /* On a wide screen the shared stylesheet gives .card a measure of its own;
+       this page's cards are not .card, so they are given the same one here.
+       The project grid and the carousel are deliberately left uncapped — they
+       are the things that should use the extra width. */
+    @media (min-width:1280px){
+      .linkcard,.topiccard{max-width:44rem;margin-inline:auto}
+    }
     /* Suffix mark on the Technical projects heading. */
     .hicon{margin-left:.4rem;vertical-align:-.15em;color:#14507d}
   </style>

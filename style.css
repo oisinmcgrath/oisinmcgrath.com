@@ -276,3 +276,29 @@ nav.backnav {
 .backbtn svg {
   flex: none;
 }
+
+/* ── Wide screens ────────────────────────────────────────────────────────────
+   Everything on the page is sized in rem, so raising the root size scales the
+   whole thing at once — type, spacing, column and screenshots together —
+   rather than leaving 16px text stranded in the middle of a 27-inch monitor.
+
+   The column widens with it, but prose does not: a line of text stays around
+   40rem, because a 900px line is harder to read, not easier. So the extra
+   width goes where it helps — screenshots, figures and grids take the full
+   column while paragraphs keep their measure and stay centred on the same
+   axis. That is the split the Renault page already uses; this is it applied
+   to the rest of the site. */
+@media (min-width: 1280px) {
+  html { font-size: 17px; }
+  .wrap { max-width: 54rem; }
+  main p, main ul, main ol { max-width: 40rem; margin-inline: auto; }
+  .card, .notice { max-width: 44rem; margin-inline: auto; }
+}
+@media (min-width: 1800px) {
+  html { font-size: 18px; }
+  .wrap { max-width: 60rem; }
+}
+@media (min-width: 2400px) {
+  html { font-size: 19px; }
+  .wrap { max-width: 64rem; }
+}

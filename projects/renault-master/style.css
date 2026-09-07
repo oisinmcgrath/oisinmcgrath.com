@@ -1356,3 +1356,15 @@ nav.backnav {
 .backbtn svg {
   flex: none;
 }
+
+/* ── Wide screens ────────────────────────────────────────────────────────────
+   This page already splits prose (--measure) from media (--col), so it needs
+   none of the column work the other stylesheets get here — only the root size.
+   --descent is authored in px and deliberately left alone: a larger root size
+   makes the header and nav above the prose taller, so body text starts further
+   down the gradient, not higher up it. The rule CLAUDE.md gives — that prose
+   must begin below the vivid band — is therefore made safer by this, not
+   riskier. */
+@media (min-width: 1280px) { html { font-size: 17px; } }
+@media (min-width: 1800px) { html { font-size: 18px; } }
+@media (min-width: 2400px) { html { font-size: 19px; } }

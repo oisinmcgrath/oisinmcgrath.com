@@ -415,9 +415,13 @@
        the links card: the header's own bottom margin is 2rem, the card's top
        margin 1.5rem, so the header is brought back to match. */
     header.site-header{margin-bottom:1.5rem}
-    /* The bio sets a little tighter than body text — three lines of it read
-       as a block rather than as a paragraph with air between the lines. */
-    .lead{line-height:1.35}
+    /* The lead is now a single line introducing the list below it, so it wants
+       no space beneath it beyond the list's own. The list keeps body line
+       height: seven items set tight would read as a wall on a phone. */
+    .lead{line-height:1.35;margin-bottom:.5rem}
+    .leadlist{margin:0 0 1rem;padding-left:1.25rem}
+    .leadlist li{margin-bottom:.5rem}
+    @media (max-width:480px){.leadlist{padding-left:1.1rem}}
     .linkcard{margin:1.5rem 0;padding:.6rem 1.35rem .7rem;
               border:1px solid #dbe2e9;border-radius:12px;background:#fbfcfd;
               box-shadow:0 1px 3px rgba(20,60,100,.06)}
@@ -456,11 +460,20 @@
     </header>
 
     <main>
-      <p class="lead">
-        I build practical desktop tools, primarily with Python — local databases, PDF generation,
-        and workflows that stay on your machine. My work focuses on software that
-        sole traders and small operators can actually use day to day.
-      </p>
+      <p class="lead">I develop software and technical projects to:</p>
+      <ul class="leadlist">
+        <li>Automate and remove friction from daily tasks related to your work.</li>
+        <li>Inform non technical users and enable them to do technical tasks with
+            a user friendly interface and assistance tools.</li>
+        <li>Provide systems that eliminate common mistakes in your work by
+            excluding the conditions that permit them.</li>
+        <li>Add functionality to your computer, or tooling for specific kinds of
+            work, such as software development.</li>
+        <li>Provide tools that track and organise information that matters to
+            you, in a system convenient enough that you keep using it.</li>
+        <li>Get your equipment working when your computer doesn't support it.</li>
+        <li>Test a business model.</li>
+      </ul>
 
       <section class="linkcard" aria-labelledby="links-heading">
       <h2 id="links-heading">Links <svg class="hicon licon" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M15.197 3.355c1.673-1.68 4.25-1.816 5.756-.305 1.506 1.512 1.371 4.1-.302 5.78L18.227 11.263M10.046 14c-1.505-1.512-1.37-4.1.303-5.779L12.5 6.062"/><path d="M13.954 10c1.506 1.512 1.37 4.1-.303 5.779l-2.424 2.433-2.424 2.433c-1.673 1.68-4.25 1.816-5.756.305-1.506-1.512-1.37-4.1.303-5.779l2.424-2.433"/></svg></h2>

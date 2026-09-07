@@ -130,23 +130,22 @@ nav.backnav {
    whole thing at once — type, spacing, column and screenshots together —
    rather than leaving 16px text stranded in the middle of a 27-inch monitor.
 
-   The column widens with it, but prose does not: a line of text stays around
-   40rem, because a 900px line is harder to read, not easier. So the extra
-   width goes where it helps — screenshots, figures and grids take the full
-   column while paragraphs keep their measure and stay centred on the same
-   axis. That is the split the Renault page already uses; this is it applied
-   to the rest of the site. */
+   The column is `min(92vw, …)`, so it takes nearly the whole window on a large
+   display and screenshots grow with it. Prose does not grow all the way with
+   it: a paragraph keeps a 44rem measure, because past about ninety characters
+   a line is harder to read, not easier. Cards take the same 44rem so the page
+   has two widths rather than three — one for reading, one for pictures. */
 @media (min-width: 1280px) {
   html { font-size: 17px; }
-  .wrap { max-width: 54rem; }
-  main p, main ul, main ol { max-width: 40rem; margin-inline: auto; }
+  .wrap { max-width: min(92vw, 68rem); }
+  main p, main ul, main ol { max-width: 44rem; margin-inline: auto; }
   .card, .notice { max-width: 44rem; margin-inline: auto; }
 }
 @media (min-width: 1800px) {
   html { font-size: 18px; }
-  .wrap { max-width: 60rem; }
+  .wrap { max-width: min(92vw, 76rem); }
 }
 @media (min-width: 2400px) {
   html { font-size: 19px; }
-  .wrap { max-width: 64rem; }
+  .wrap { max-width: min(92vw, 84rem); }
 }

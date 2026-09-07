@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <style>.site-header{position:relative;padding-top:0.75rem;padding-bottom:1.5rem;min-height:160px;display:flex;flex-direction:column;justify-content:center}.avatar{position:absolute;top:50%;transform:translateY(-50%);right:0;width:140px;height:140px;border-radius:50%;object-fit:cover}@media(max-width:600px){.site-header{min-height:0;padding-top:0}.avatar{position:static;display:block;width:96px;height:96px;margin:.25rem auto 1rem}}</style>
+  <style>.site-header{position:relative;padding-top:0.75rem;padding-bottom:1.5rem;min-height:160px;display:flex;flex-direction:column;justify-content:center}.avatar{position:absolute;top:50%;transform:translateY(-50%);right:0;width:140px;height:140px;border-radius:50%;object-fit:cover}@media(max-width:600px){.site-header{min-height:0;padding-top:0}.avatar{position:static;display:block;order:2;transform:none;width:96px;height:96px;margin:1rem auto .25rem}}</style>
   <style>
     /* The three links under the bio are buttons, each carrying the mark of
        where it goes. GitHub keeps its own black; LinkedIn keeps its own blue. */
@@ -103,13 +103,6 @@
     .links .l-gh{--glow:rgba(36,41,47,.35)}
     .links .l-li{--glow:rgba(43,101,171,.38)}
     .links .l-pr{--glow:rgba(20,80,125,.38)}
-    /* On a wide screen the shared stylesheet gives .card a measure of its own;
-       this page's cards are not .card, so they are given the same one here.
-       The project grid and the carousel are deliberately left uncapped — they
-       are the things that should use the extra width. */
-    @media (min-width:1280px){
-      .linkcard,.topiccard{max-width:44rem;margin-inline:auto}
-    }
     /* Suffix mark on the Technical projects heading. */
     .hicon{margin-left:.4rem;vertical-align:-.15em;color:#14507d}
   </style>
@@ -474,6 +467,24 @@
     hr.rule.accent{height:2px;margin:.85rem 0;border:0;opacity:.75;
       background:linear-gradient(90deg,transparent,rgba(20,80,125,.25) 12%,
         rgba(20,80,125,.85) 50%,rgba(20,80,125,.25) 88%,transparent)}
+
+    /* ── Wide screens ──────────────────────────────────────────────────────
+       This block has to sit last. The card and list rules above set `margin`
+       as a shorthand, which resets margin-inline to 0; at equal specificity
+       the later declaration wins, so anything placed before them is silently
+       undone and the cards sit hard against the left edge.
+
+       .linkcard, .topiccard and .leadlist are this page's own; the shared
+       stylesheet gives .card and main ul the same measure, but these are not
+       those. The project grid and the carousel are deliberately left alone —
+       they are what should be using the extra width. */
+    @media (min-width:1280px){
+      .linkcard,.topiccard{max-width:44rem;margin-inline:auto}
+      .leadlist{max-width:44rem;margin-inline:auto}
+      /* The photographs sit inside a 44rem card, so they can afford to grow
+         from 30rem with it rather than leaving wide gutters either side. */
+      .commshot{max-width:36rem}
+    }
   </style>
 </head>
 <body>

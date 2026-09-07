@@ -448,9 +448,10 @@
        no space beneath it beyond the list's own. The list keeps body line
        height: seven items set tight would read as a wall on a phone. */
     .lead{line-height:1.35;margin-bottom:.5rem}
-    .leadlist{margin:0 0 1rem;padding-left:1.25rem}
+    .lead{font-weight:600}
+    .leadlist{margin:0 0 1rem;padding-left:2.75rem}
     .leadlist li{margin-bottom:.5rem}
-    @media (max-width:480px){.leadlist{padding-left:1.1rem}}
+    @media (max-width:480px){.leadlist{padding-left:1.6rem}}
     .linkcard{margin:1.5rem 0;padding:.6rem 1.35rem .7rem;
               border:1px solid #dbe2e9;border-radius:12px;background:#fbfcfd;
               box-shadow:0 1px 3px rgba(20,60,100,.06)}
@@ -484,6 +485,10 @@
       /* The photographs sit inside a 44rem card, so they can afford to grow
          from 30rem with it rather than leaving wide gutters either side. */
       .commshot{max-width:36rem}
+      /* The header holds the reading measure too. A name, a tagline and a
+         photograph gain nothing from being flung to opposite ends of a
+         1100px column — the extra width is for the body and the pictures. */
+      header.site-header{max-width:44rem;margin-inline:auto}
     }
   </style>
 </head>
@@ -774,6 +779,12 @@
 
       <section class="topiccard musiccard" aria-labelledby="music-heading">
         <h2 id="music-heading">Music <svg class="hicon micon" viewBox="-5.5 0 32 32" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M5.688 9.656v10.906c-0.469-0.125-0.969-0.219-1.406-0.219-1 0-2.031 0.344-2.875 0.906s-1.406 1.469-1.406 2.531c0 1.125 0.563 1.969 1.406 2.531s1.875 0.875 2.875 0.875c0.938 0 2-0.313 2.844-0.875s1.375-1.406 1.375-2.531v-11.438l9.531-2.719v7.531c-0.438-0.125-0.969-0.188-1.438-0.188-0.969 0-2.031 0.281-2.875 0.844s-1.375 1.469-1.375 2.531c0 1.125 0.531 2 1.375 2.531 0.844 0.563 1.906 0.906 2.875 0.906 0.938 0 2.031-0.344 2.875-0.906 0.875-0.531 1.406-1.406 1.406-2.531v-14.406c0-0.688-0.469-1.156-1.156-1.156-0.063 0-0.438 0.125-1.031 0.281-1.25 0.344-3.125 0.875-5.25 1.5-1.094 0.281-2.063 0.594-3.031 0.844-0.938 0.281-1.75 0.563-2.469 0.75-0.75 0.219-1.219 0.344-1.406 0.406-0.5 0.156-0.844 0.594-0.844 1.094z"/></svg></h2>
+        <p>
+          Since my school days I have had a passion for playing music, and lost
+          track of time sitting with songs I was working on. Through the
+          community I discovered my love for Irish music and performing for
+          which&hellip;
+        </p>
         <a class="commshot natural" href="/music.html">
           <img src="/music/performing-paddys-day.jpg" alt="Playing guitar and fiddle outdoors under a tree at the St Patrick&rsquo;s Festival">
         </a>

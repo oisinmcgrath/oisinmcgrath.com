@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Cross Market Intelligence — predicts what a vehicle will fetch at auction and what it could be sold for privately, with every hidden cost included, so the margin on each lot is there before you bid.">
+  <title>Cross Market Intelligence</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Back link to the projects index, sitting above the page header. */
+    .backnav{padding:1rem 0 0 1.25rem}
+    .backnav a{display:inline-flex;align-items:center;gap:.4rem;font-size:.9rem;
+               text-decoration:none;font-weight:500}
+    .backnav a:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <nav class="backnav" aria-label="Back"><a class="backbtn" href="https://oisinmcgrath.com/projects/" data-back><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Back</a></nav>
+  <div class="wrap">
+    <header class="site-header">
+      <h1>Cross Market Intelligence</h1>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="https://oisinmcgrath.com/"><svg class="ico" viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0L0 6V8H1V15H4V10H7V15H15V8H16V6L14 4.5V1H11V2.25L8 0ZM9 10H12V13H9V10Z"/></svg>Home</a>
+      </nav>
+    </header>
+
+    <main>
+      <p class="lead">
+        Is there such a thing as a good deal at the auctions? What could it be
+        sold for privately, and how would you find out? Some say it takes years of
+        experience. Could a computer acquire that experience? Cross Market
+        Intelligence exists to answer these questions.
+      </p>
+
+      <p>
+        A car is about to be auctioned. The system predicts the final bid, and
+        what you could sell it for afterwards. Is there a profit margin there? It
+        provides the predicted margin for every vehicle.
+      </p>
+
+      <figure>
+        <img class="shot" src="screenshots/auction-browse.jpg" width="1600" height="823" loading="lazy"
+             alt="The auction inventory, each vehicle carrying its forecast auction price, its private-sale forecast and the margin between them.">
+        <figcaption>The auction inventory, each vehicle carrying its forecast auction price, its private-sale forecast and the margin between them.</figcaption>
+      </figure>
+
+      <p>
+        How long would it take you to work out that margin yourself? Registration,
+        stamp duty, the auction house's fee, the repairs and the rest of it. Each
+        one worked out by hand, for every car in the sale. Might take a few minutes
+        each time. CMI delivers prices that are transparent, prices that include
+        all the hidden costs. Without a tool that has that rigour built in, the
+        ones you miss turn into an expensive lesson.
+      </p>
+
+      <figure>
+        <div class="graphset">
+          <img class="shot" src="screenshots/damage-1.png" width="1600" height="741" loading="lazy"
+               alt="A bird's eye diagram of a vehicle, each panel shaded and counted where damage was recorded.">
+          <img class="shot" src="screenshots/damage-2.png" width="1600" height="675" loading="lazy"
+               alt="The same vehicle seen from the side, with damage marked panel by panel.">
+          <img class="shot" src="screenshots/damage-3.png" width="1600" height="796" loading="lazy"
+               alt="A third view of the same vehicle, completing the picture of where the damage is.">
+        </div>
+        <figcaption>Diagrams show damage per vehicle in a form you can see so you can spot unforeseen damages at a glance.</figcaption>
+      </figure>
+
+      <h2>Transparency</h2>
+
+      <p>
+        Every prediction tells you how often it has been right before, so you know
+        how reliable it is before you act on it.
+      </p>
+
+      <figure>
+        <img class="shot" src="screenshots/predictions.jpg" width="1400" height="1375" loading="lazy"
+             alt="Every model that made a prediction on one vehicle, what each one came to, and how confident it is.">
+        <figcaption>Every model that made a prediction on one vehicle, what each one came to, and how confident it is.</figcaption>
+      </figure>
+
+      <p>
+        Each one is built from cars that actually sold, and from what the system
+        has learned about which differences push a price up or down. The cars it
+        deems comparable to yours are listed along with what's the same about them
+        and what differs, so you can judge whether the comparison is fair.
+      </p>
+
+      <figure>
+        <img class="shot" src="screenshots/comparisons.jpg" width="1600" height="844" loading="lazy"
+             alt="The private sales judged comparable, with what matches and what differs set out beside each one.">
+        <figcaption>The private sales judged comparable, with what matches and what differs set out beside each one.</figcaption>
+      </figure>
+
+      <h2>While The Bidding Runs</h2>
+
+      <p>
+        Say you have about ninety seconds to bid on a vehicle. There is no time to
+        work anything out during the auction. You bid on the amount you see, but
+        that is not what the car will actually cost. The Live Auction page updates
+        live as the bidding runs, showing what the current bid comes to once every
+        charge is added, what it forecasts you could sell it for, and the gap
+        between the two, restated each time the bid moves.
+      </p>
+
+      <figure>
+        <img class="shot" src="screenshots/live-auction.jpg" width="1600" height="852" loading="lazy"
+             alt="The Live Auction page part way through a sale, with the lot on the block and every lot already sold that day listed below.">
+        <figcaption>The Live Auction page part way through a sale, with the lot on the block and every lot already sold that day listed below.</figcaption>
+      </figure>
+
+      <p>
+        Every car already sold that day stays on screen, so you can see if there
+        have been any good deals in this auction before your one comes up.
+      </p>
+
+      <h2>Ahead Of The Sale</h2>
+
+      <p>
+        See what vehicles are going to be in the next auction, and how many hours
+        or days away that auction is, so you can prepare.
+      </p>
+
+      <figure>
+        <img class="shot" src="screenshots/upcoming.jpg" width="1600" height="905" loading="lazy"
+             alt="Scheduled sales counting down to their start, with the matching vehicles listed under each.">
+        <figcaption>Scheduled sales counting down to their start, with the matching vehicles listed under each.</figcaption>
+      </figure>
+
+      <p>
+        Get notified when vehicles in your watchlist are going to auction.
+      </p>
+
+      <p>
+        If you decide to inspect a car in person before you buy, the phone app
+        means you can take CMI with you, and use the inspection feature which
+        gives you a form to fill in as you walk around it. Type into the fields,
+        add photos, or record a voice memo, so you have the same notes on every
+        vehicle when you get home.
+      </p>
+
+      <figure>
+        <div class="phones">
+          <img class="shot" src="screenshots/phone-browse.jpg" width="794" height="1624" loading="lazy"
+               alt="The phone app showing the same auction inventory, one vehicle card at a time.">
+          <img class="shot" src="screenshots/phone-inspection.png" width="860" height="1754" loading="lazy"
+               alt="The field inspection form on the phone, with fields filled in, comments typed, and buttons to add a photo or record a memo.">
+        </div>
+        <figcaption>The same inventory in your pocket, and the inspection form to fill in as you walk around a car.</figcaption>
+      </figure>
+
+      <figure>
+        <img class="shot" src="screenshots/status-centre.png" width="1600" height="849" loading="lazy"
+             alt="The Status Centre, showing each data source reporting as working and charts of how the collected data is growing.">
+        <figcaption>Check that CMI is collecting the latest information on sales and the system is healthy and growing.</figcaption>
+      </figure>
+
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 Oisin McGrath &middot; <a href="https://oisinmcgrath.com">oisinmcgrath.com</a></p>
+      <p>No tracking on this page.</p>
+    </footer>
+  </div>
+  <script src="/back.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+/* Cross Market Intelligence — plain CSS, no external fonts or CDNs.
+
+   The palette is sampled from the application in the screenshots: the dark
+   navy the damage diagrams are drawn on (#202b46) and the slate the chrome
+   uses (#1e242f, panels #28323e) settle into one navy family here, so the
+   page reads as the ground the captures are sitting on rather than a
+   different dark behind them. The two accents are the app's own — the blue
+   of the "Intelligence" wordmark and the pill outlines, and the orange it
+   marks section labels and figures with. Blue carries the links, orange the
+   headings, which is the division the application itself makes. */
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;line-height:1.6;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Cantarell,"Noto Sans",Arial,sans-serif;
+  color:#e6ebf2;background:#141d2c}
+a{color:#7db3f7;text-decoration:underline;text-underline-offset:2px}
+a:hover{color:#a8ccfa}
+a:focus-visible{outline:2px solid #7db3f7;outline-offset:2px}
+.wrap{max-width:42rem;margin:0 auto;padding:1.5rem 1.25rem 3rem}
+header.site-header{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid #38455a;text-align:center}
+header.site-header h1{margin:0 0 .35rem;font-size:1.65rem;font-weight:700;letter-spacing:-.02em;line-height:1.25;color:#7db3f7}
+nav.site-nav{margin-top:.85rem;display:flex;justify-content:center;flex-wrap:wrap;gap:.35rem 1rem;font-size:.95rem}
+nav.site-nav a{text-decoration:none;font-weight:500}
+nav.site-nav a:hover{text-decoration:underline}
+main h2{margin:1.75rem 0 .65rem;font-size:1.25rem;font-weight:700;letter-spacing:-.01em;line-height:1.3;color:#df8512}
+main p,main li{color:#c3ccd9}
+main p{margin:0 0 .85rem}
+main ul{margin:0 0 1rem;padding-left:1.35rem}
+main li{margin-bottom:.4rem}
+.lead{font-size:1.05rem;color:#e6ebf2}
+.card{background:#1f2a3d;border:1px solid #38455a;border-radius:8px;padding:1.15rem 1.25rem;margin:1rem 0 1.5rem}
+.card h2{margin-top:0}
+code,.mono{font-family:ui-monospace,"Cascadia Code","Source Code Pro",Menlo,Consolas,monospace;
+  font-size:.88em;background:#1f2a3d;padding:.1em .35em;border-radius:3px;word-break:break-word}
+.meta{color:#93a0b2;font-size:.92em}
+/* Screenshots. Every capture is wider than the text column, so max-width takes
+   them to the full column width; the height cap only bites on the tall ones. */
+figure{margin:1.5rem 0 1.75rem}
+.shot{display:block;margin:0 auto;width:auto;height:auto;max-width:100%;max-height:42rem;
+  border:1px solid #38455a;border-radius:8px}
+figcaption{margin-top:.7rem;text-align:center;font-size:.88rem;color:#93a0b2;
+  max-width:32rem;margin-left:auto;margin-right:auto}
+/* The three damage diagrams are one thing seen three ways, and each is wide and
+   short. Spaced out like separate figures they read as three unrelated strips,
+   so they stack tight against each other under a single caption. */
+.graphset{display:flex;flex-direction:column;gap:.5rem}
+.graphset .shot{max-height:none}
+/* The two phone captures are tall and narrow — side by side they occupy the
+   column properly and read as one device rather than two. Below 480px there is
+   not enough width for both, so they stack. */
+.phones{display:flex;gap:.75rem;align-items:flex-start;justify-content:center}
+.phones .shot{max-height:none;flex:1 1 0;min-width:0}
+@media (max-width:480px){.phones{flex-direction:column;align-items:center}
+  .phones .shot{flex:none;max-width:min(100%,16rem)}}
+footer.site-footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid #38455a;font-size:.88rem;color:#93a0b2;text-align:center}
+footer.site-footer p{margin:0 0 .4rem;color:inherit}
+footer.site-footer a{color:#7db3f7}
+@media (max-width:480px){.wrap{padding:1.15rem 1rem 2.5rem}header.site-header h1{font-size:1.4rem}}
+
+/* Header nav links are pill buttons, each prefixed with its own mark. The
+   colours are all derived from currentColor, so this same block sits in every
+   project stylesheet unchanged and picks up whatever palette the page has. */
+nav.site-nav {
+  gap: 0.5rem;
+}
+
+nav.site-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  line-height: 1.35;
+  text-decoration: none;
+  font-weight: 500;
+  border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+  background: color-mix(in srgb, currentColor 7%, transparent);
+}
+
+nav.site-nav a:hover {
+  text-decoration: none;
+  border-color: color-mix(in srgb, currentColor 58%, transparent);
+  background: color-mix(in srgb, currentColor 14%, transparent);
+}
+
+nav.site-nav a[aria-current="page"] {
+  border-color: color-mix(in srgb, currentColor 45%, transparent);
+  background: color-mix(in srgb, currentColor 12%, transparent);
+}
+
+nav.site-nav .ico {
+  flex: none;
+}
+
+/* The back button, top left of every page but the homepage. Like the nav
+   pills above, its colours come from currentColor, so this same block works
+   on every theme on the site. */
+nav.backnav {
+  padding: 1rem 0 0 1.25rem;
+}
+
+.backbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.34rem 0.8rem;
+  border-radius: 999px;
+  line-height: 1.35;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+  background: color-mix(in srgb, currentColor 7%, transparent);
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.backbtn:hover {
+  text-decoration: none;
+  border-color: color-mix(in srgb, currentColor 58%, transparent);
+  background: color-mix(in srgb, currentColor 14%, transparent);
+}
+
+.backbtn svg {
+  flex: none;
+}

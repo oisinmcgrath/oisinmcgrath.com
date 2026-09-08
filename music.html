@@ -9,6 +9,21 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <style>
+    /* Everything on this page shares one left edge.
+
+       The root stylesheet's wide-screen block gives prose a 44rem measure and
+       centres it inside the wider column. That is right on a page whose
+       pictures are also centred, but here the heading, the nav pills and the
+       channel screenshot all sit at the column's left edge, so the centred
+       button and paragraph started well to the right of them and the page
+       read as three different alignments stacked up.
+
+       The measure stays — a 44rem line is still the comfortable one to read.
+       Only the centring goes. This block sits after the linked stylesheet, so
+       it wins at equal specificity, and below 1280px there is no measure to
+       centre anyway, which makes it a no-op there. */
+    main p, main ul, main ol{margin-inline:0}
+
     /* The channel page, shown at the width of the reading column. */
     .shot{display:block;margin:1.5rem 0;border-radius:10px;overflow:hidden;
           border:2px solid light-dark(#aab8c6,#39424d);line-height:0;

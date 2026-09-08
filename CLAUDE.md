@@ -85,7 +85,14 @@ published on any page.
                             contact form (no server to send one to)
     music.html              the Oisín Mac Craith YouTube channel — Irish and
                             Scottish folk covers. Linked from the Music
-                            subsection under "What else drives me"
+                            feature block on the homepage. **Everything on it
+                            is left aligned**: its inline <style> sets
+                            `main p, main ul, main ol{margin-inline:0}` to undo
+                            the root stylesheet's centring, because the
+                            heading, nav and channel screenshot all sit at the
+                            column's left edge and a centred measure between
+                            them read as three alignments stacked up. The
+                            44rem measure itself is kept.
     music/                  channel.jpg (the channel page) and youtube.png
     site-privacy.html       privacy policy for the website itself (linked from
                             the homepage footer; distinct from the app policies

@@ -339,7 +339,7 @@ overrides need matching specificity — `footer.site-footer a`, not
   things below. Note `.feature figure img`, scoped on purpose: unscoped, it
   also matches the mark in the heading and blows it up to the full width of
   the block.
-- **Three feature thumbnails cross-fade.** `.fader` stacks two or three
+- **Four feature thumbnails cross-fade.** `.fader` stacks two or three
   captures absolutely in one frame; the **first is the base and never
   animates**, and the layers above fade in over it in turn. That is what makes
   the loop close: the topmost fades out at the end of the cycle onto a base
@@ -350,12 +350,21 @@ overrides need matching specificity — `footer.site-footer a`, not
   sets are hand-authored; check the arithmetic against the cycle before
   changing either. The van is weighted deliberately: the side-door interior
   holds 3s and the other two about 1.5s each, on a 6s cycle. CMI uses the same
-  6s weighting; invoiceNow has two images and splits evenly. Suppressed under
+  6s weighting; invoiceNow has two images and splits evenly; Music runs five
+  on a 9s cycle, base 3s then 1.5s each (keyframes `m2`-`m5`).
+  **Every layer paints `var(--cardbg)` behind itself.** Without that a
+  `contain` layer is transparent wherever it is letterboxed and the image
+  *below it in the stack* shows through down the edges — it happened on the
+  Upcoming Auctions and BAS captures and is not obvious until you look. Each
+  feature exposes its own ground as `--cardbg` for this. Suppressed under
   `prefers-reduced-motion`, which leaves the base showing — a still, not a
   blank frame. The van's three share a 3:2 frame with `object-fit:cover`; the
   two screenshot faders use `contain` against their own near-black, because
   cropping a UI capture loses content and a letterbox bar in the same
-  near-black cannot be seen. The fader rules are scoped through `.feature` so
+  near-black cannot be seen. Music's five photographs run 0.75 to 1.42, so it
+  takes a 5:4 frame with `cover` and a per-image `object-position` — every
+  anchor was picked against a rendered crop sheet, and every face sits in the
+  upper half of every shot. The fader rules are scoped through `.feature` so
   they out-specify `.feature figure img`.
 - **A feature block IS an anchor** — with one exception, Music. `<a class="feature f-x" href="…"
   aria-label="…">` wrapping the heading, prose, figure and pill — the same

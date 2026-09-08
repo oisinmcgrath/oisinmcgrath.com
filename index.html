@@ -213,7 +213,7 @@
        and a brand colour that shifted between themes would stop reading as
        the project's own. */
     body .feature.f-cmi{--cta:#a35a00;
-      background:light-dark(#e4eefc,#223047);
+      --cardbg:light-dark(#e4eefc,#223047);background:var(--cardbg);
       border-color:light-dark(#bcd3ef,#3a4d6b)}
     body .feature.f-cmi h2{color:light-dark(#1a4f86,#a8cbfa)}
     body .feature.f-cmi p{color:light-dark(#2b3542,#d3dcea)}
@@ -221,7 +221,7 @@
     body .feature.f-cmi figure img,
     body .feature.f-cmi .fader{border-color:light-dark(#bcd3ef,#4a5f80)}
     body .feature.f-ren{--cta:#a8431a;
-      background:light-dark(#fdf1ea,#3a251c);
+      --cardbg:light-dark(#fdf1ea,#3a251c);background:var(--cardbg);
       border-color:light-dark(#e8c3ae,#6b4130)}
     body .feature.f-ren h2{color:light-dark(#8f3d17,#ffc089)}
     body .feature.f-ren p{color:light-dark(#3a2b23,#f4e3d8)}
@@ -231,7 +231,7 @@
     /* invoiceNow holds its app's teal, Receipt Manager its app's blue, and
        Home Screen the cool blue of its tile glass. */
     body .feature.f-inv{--cta:#0d6b7e;
-      background:light-dark(#e9f6f8,#1e2c31);
+      --cardbg:light-dark(#e9f6f8,#1e2c31);background:var(--cardbg);
       border-color:light-dark(#b9dde6,#35525c)}
     body .feature.f-inv h2{color:light-dark(#0d6b7e,#78d3e3)}
     body .feature.f-inv p{color:light-dark(#26343a,#cfdde2)}
@@ -239,7 +239,7 @@
     body .feature.f-inv figure img,
     body .feature.f-inv .fader{border-color:light-dark(#b9dde6,#456872)}
     body .feature.f-rec{--cta:#1558b0;
-      background:light-dark(#ecf3fd,#1f2a3c);
+      --cardbg:light-dark(#ecf3fd,#1f2a3c);background:var(--cardbg);
       border-color:light-dark(#c0d6f2,#374966)}
     body .feature.f-rec h2{color:light-dark(#1558b0,#9cc3f8)}
     body .feature.f-rec p{color:light-dark(#28313e,#d0dae8)}
@@ -247,7 +247,7 @@
     body .feature.f-rec figure img,
     body .feature.f-rec .fader{border-color:light-dark(#c0d6f2,#475c7d)}
     body .feature.f-hs{--cta:#2a6cb3;
-      background:light-dark(#eef3f9,#212a35);
+      --cardbg:light-dark(#eef3f9,#212a35);background:var(--cardbg);
       border-color:light-dark(#c6d6e8,#3a485a)}
     body .feature.f-hs h2{color:light-dark(#2a6cb3,#8fc4f5)}
     body .feature.f-hs p{color:light-dark(#2b3542,#d0dae6)}
@@ -258,7 +258,7 @@
        club's green, matching community.html. Same construction as the five
        project blocks above — they are the same kind of object now. */
     body .feature.f-music{--cta:#8a5433;
-      background:light-dark(#fdf6ef,#2b211a);
+      --cardbg:light-dark(#fdf6ef,#2b211a);background:var(--cardbg);
       border-color:light-dark(#e1b890,#5c4632)}
     body .feature.f-music h2{color:light-dark(#8a5433,#e8bd93)}
     body .feature.f-music p{color:light-dark(#3a2e25,#e6d8c9)}
@@ -268,7 +268,7 @@
     body .feature.f-music .fader{border-color:light-dark(#2f7d4a,#4e9a68);
       border-width:2px}
     body .feature.f-comm{--cta:#1f6b3a;
-      background:light-dark(#eef6ee,#18241b);
+      --cardbg:light-dark(#eef6ee,#18241b);background:var(--cardbg);
       border-color:light-dark(#c9ddcd,#334b39)}
     body .feature.f-comm h2{color:light-dark(#14512b,#93d3a3)}
     body .feature.f-comm p{color:light-dark(#26332b,#d3e3d6)}
@@ -411,16 +411,28 @@
        Suppressed under prefers-reduced-motion, which leaves the base image
        showing: a still, not a blank frame. */
     .feature .fader{position:relative;display:block;overflow:hidden;
-      border-radius:10px;border:1px solid}
+      border-radius:10px;border:1px solid;background:var(--cardbg)}
+    /* Every layer paints the card's own ground behind itself. Without it a
+       `contain` layer is transparent wherever it is letterboxed, and the
+       image *below* it in the stack shows through down the edges — which is
+       exactly what happened on the Upcoming Auctions and BAS captures. */
     .feature .fader img{position:absolute;inset:0;width:100%;height:100%;
-      display:block;border:0;border-radius:0;margin:0}
+      display:block;border:0;border-radius:0;margin:0;background:var(--cardbg)}
     .feature .fader .fade2,
-    .feature .fader .fade3{opacity:0}
+    .feature .fader .fade3,
+    .feature .fader .fade4,
+    .feature .fader .fade5{opacity:0}
     @media (prefers-reduced-motion:no-preference){
       .feature .fader .fade2{animation:fade2 var(--cycle) linear infinite}
       .feature .fader .fade3{animation:fade3 var(--cycle) linear infinite}
       /* Two images: one crossfade out and back, half the cycle each. */
       .feature .fader.two .fade2{animation-name:fade-two}
+      /* Five images: same weighting as the others — the base holds a third
+         of the cycle, the four after it a sixth each. */
+      .feature .fader.five .fade2{animation-name:m2}
+      .feature .fader.five .fade3{animation-name:m3}
+      .feature .fader.five .fade4{animation:m4 var(--cycle) linear infinite}
+      .feature .fader.five .fade5{animation:m5 var(--cycle) linear infinite}
     }
     /* Three images, weighted: the base holds half the cycle, the other two a
        quarter each. The van's opening frame is meant to sit noticeably
@@ -435,6 +447,22 @@
     @keyframes fade-two{
       0%,41.67%{opacity:0} 50%,91.67%{opacity:1} 100%{opacity:0}
     }
+    /* Five images on a 9s cycle: base 3s, then 1.5s each. Each layer holds
+       until the one above it has finished fading in, then drops while hidden
+       behind it — so the last layer fades out onto the base with every other
+       layer already at zero. */
+    @keyframes m2{
+      0%,33.333%{opacity:0} 38.889%,55.556%{opacity:1} 61.111%,100%{opacity:0}
+    }
+    @keyframes m3{
+      0%,50%{opacity:0} 55.556%,72.222%{opacity:1} 77.778%,100%{opacity:0}
+    }
+    @keyframes m4{
+      0%,66.667%{opacity:0} 72.222%,88.889%{opacity:1} 94.444%,100%{opacity:0}
+    }
+    @keyframes m5{
+      0%,83.333%{opacity:0} 88.889%,94.444%{opacity:1} 100%{opacity:0}
+    }
     /* The van's photographs share a 3:2 frame — two of the three are 4:3, so
        they give up 11% of their height rather than the frame changing shape
        mid-cycle. The screenshots use `contain` against their own near-black
@@ -442,8 +470,8 @@
        the same near-black the capture is drawn on cannot be seen. */
     .feature.f-ren .fader{aspect-ratio:3/2}
     .feature.f-ren .fader img{object-fit:cover}
-    .feature.f-cmi .fader{aspect-ratio:37/20;background:#10151c}
-    .feature.f-inv .fader{aspect-ratio:8/5;background:#1a1b1e}
+    .feature.f-cmi .fader{aspect-ratio:37/20}
+    .feature.f-inv .fader{aspect-ratio:8/5}
     .feature.f-cmi .fader img,
     .feature.f-inv .fader img{object-fit:contain}
     .feature .cardicon{width:1.15em;height:1.15em;object-fit:contain;flex:none}
@@ -464,6 +492,14 @@
     .f-music figure img,
     .f-comm figure img{aspect-ratio:3/2;object-fit:cover}
     .f-music figure img{object-position:50% 8%}
+    /* Five photographs from 0.75 (a standing group shot) to 1.42, so a 5:4
+       frame with `cover` — letterboxing five different shapes would leave the
+       card mostly ground. Each anchor was chosen against the rendered crop:
+       every face is in the upper half of every one of them. */
+    .feature.f-music .fader{aspect-ratio:5/4}
+    .feature.f-music .fader img{object-fit:cover;object-position:50% 10%}
+    .feature.f-music .fader img:first-child{object-position:50% 8%}
+    .feature.f-music .fader .fade2{object-position:50% 50%}
     /* A divider between showcase cards, in the page's own blue, the same
        shape as the accent rule further down. */
     hr.featrule{height:2px;margin:1.6rem auto;border:0;opacity:.5;
@@ -732,9 +768,19 @@
           which&hellip;
         </p>
         <figure>
-          <img src="/music/performing-paddys-day.jpg"
-               width="1100" height="1163" loading="lazy"
-               alt="Playing guitar and fiddle outdoors under a tree at the St Patrick&rsquo;s Festival">
+          <span class="fader five" style="--cycle:9s">
+            <img src="/music/performing-paddys-day.jpg"
+                 width="1100" height="1163" loading="lazy"
+                 alt="Playing guitar and fiddle outdoors under a tree at the St Patrick&rsquo;s Festival">
+            <img class="fade2" src="/music/band-stage.jpg"
+                 width="1600" height="1124" loading="lazy" alt="">
+            <img class="fade3" src="/music/pub-session.jpg"
+                 width="1400" height="1400" loading="lazy" alt="">
+            <img class="fade4" src="/music/three-musicians.jpg"
+                 width="720" height="960" loading="lazy" alt="">
+            <img class="fade5" src="/music/playing-outdoors.jpg"
+                 width="726" height="726" loading="lazy" alt="">
+          </span>
         </figure>
         <p class="featmore">
           <a class="featbtn" href="/music.html">Read about the music &rarr;</a>

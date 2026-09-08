@@ -1087,3 +1087,34 @@ button, the button moves out of the card.
 
 The Home Screen and van captions came off at the same time, and both
 photographs on the Music and Community cards took a green outline.
+
+
+---
+
+## The fading layers had to paint their own ground
+
+**2026-09-08 — a `contain` layer is transparent where it is letterboxed.**
+
+The cross-fading thumbnails shipped with the screenshot faders using
+`object-fit: contain` against a near-black frame, so that no UI capture would
+be cropped. What that missed: the letterbox area of the *image element* is
+transparent, not filled — so wherever an overlay was narrower than the frame,
+the image **below it in the stack** showed through down the edge. On the CMI
+card the Upcoming Auctions capture had the auction-target screenshot visible
+down its left side; invoiceNow had the same with the BAS capture, which is
+much narrower again. Oisin spotted it; it is the kind of fault that is
+invisible until someone looks at the edge of a picture.
+
+Every layer now paints `var(--cardbg)` behind itself, and each feature block
+exposes its own ground as that property rather than the fader hard-coding a
+colour. The bars are the card's own colour, so a letterboxed capture reads as
+a picture sitting on the card.
+
+The Music card became a five-image slideshow at the same time. Its
+photographs run from 0.75 (a standing group shot) to 1.42, and letterboxing
+five different shapes would have left the card mostly ground — so it takes a
+5:4 frame with `cover` and a per-image anchor instead. The anchors were not
+guessed: all five crops were rendered to a contact sheet and checked before
+shipping, and every face sits in the upper half of every shot. Base three
+seconds, then a second and a half each on a nine-second cycle, verified by
+stepping the animation across the cycle as the others were.

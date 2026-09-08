@@ -114,9 +114,12 @@ published on any page.
                             download, no repository link and no call to
                             action of any kind — don't add one.
     projects/receipt-manager/  index only + its own style.css, logo, screenshots.
-                            The one project page that follows the OS theme:
-                            its palette came as a dark and a light column, so
-                            every colour is a `light-dark()` token.
+                            Its palette came as a dark and a light column, so
+                            every colour is a token — but the page is now
+                            **light only** (`color-scheme: light`, no
+                            `light-dark()` pairs). It used to follow the OS;
+                            in dark mode that put near-black screenshots on a
+                            near-black page. See DECISIONS.md, 2026-09-08.
     projects/tagdexer/      index only + its own style.css, logo, screenshots
     projects/nitrotune/     index only + its own style.css, logo, screenshots
     projects/homescreen/    index + privacy + its own style.css, logo, screenshots
@@ -152,8 +155,9 @@ nothing under `projects/*/`, and vice versa. Check which stylesheet a page links
 to before changing styles, and if a change should apply everywhere, make it in
 each file deliberately.
 
-Each project theme is different on purpose: the root pages, Capsule and the
-Epson scanner are light; invoiceNow, N-of-1, NitroTune, Home Screen and
+Each project theme is different on purpose: the root pages, Capsule, the
+Epson scanner, Cross Market Intelligence and Receipt Manager are light;
+invoiceNow, N-of-1, NitroTune, Home Screen and
 Tagdexer are dark (Tagdexer is navy, accented with the cyan sampled from its
 own logo); Cadence has its own palette; Renault Master is light, tinted toward
 community.html is light, tinted toward the club's green; Renault Master runs a
@@ -321,9 +325,32 @@ overrides need matching specificity — `footer.site-footer a`, not
   Screen's steel blue) so a reader can see they are not one of the equal
   things below. Note `.feature figure img`, scoped on purpose: unscoped, it
   also matches the mark in the heading and blows it up to the full width of
-  the block. The Renault feature carries the boab-tree trip photograph with
-  the page's own caption and the 8,800 km figure from the page's tagline —
-  its blurb is the tagline's first two sentences verbatim.
+  the block.
+- **A feature block is one link, and the whole card is clickable.** The
+  call-through anchor carries a transparent `::after` stretched over the card
+  (`.feature` is `position:relative`), so a click anywhere goes to the project
+  page. That is why the screenshot is **not** wrapped in an anchor of its own
+  — two nested links are invalid, and one link per card is what a screen
+  reader wants. Keep it to one anchor per block. The focus ring is drawn on
+  `.feature:focus-within`, because focus lands on the button while the card is
+  what activates.
+- The call-through is a **filled** pill: `--cta`, defined once per block, with
+  white ink. It is a single value rather than a `light-dark()` pair — white
+  ink needs a dark enough fill in either scheme, and a brand colour that
+  shifted between themes would stop reading as the project's own. `.featmore`
+  takes `margin:auto auto .25rem` — `auto` on top pins it to the foot of the
+  card so the pair's two buttons line up, and `auto` inline keeps it centred.
+  **A `margin: auto 0 …` shorthand there silently un-centres it**, because the
+  wide-screen block gives `.feature p` a 44rem measure and `.featmore` is a
+  `<p>`. That has already been wrong once.
+- `hr.featrule` separates the showcase blocks. Home Screen is held to the
+  reading measure (`.feature.f-hs{max-width:44rem}` in the wide-screen block)
+  rather than the full column, so its card and screenshot are no wider than
+  the body text above them.
+- Feature thumbnails, all deliberate: CMI takes `auction-target.png` (the
+  comparison page, not the inventory), the van takes `hero-gopro.jpg` —
+  "Looking inside through the side door." — and Receipt Manager takes its own
+  `screenshots/thumbnail.png`.
 - The seven remaining projects are `.projcard` tiles in one grid with **no
   headings above it** — the Software/Technical split is gone from this page.
   The order is deliberate: Tagdexer, Cadence, Capsule, Epson RR-70W,
@@ -333,6 +360,22 @@ overrides need matching specificity — `footer.site-footer a`, not
   "See 5 more aims" — no script, like the specifications box on the Renault
   page. On wide screens the chip takes the same 44rem measure as the list it
   extends, so the two share a left edge.
+- **Body text on the product pages sits on a `.prose` card.** Cross Market
+  Intelligence, Receipt Manager, invoiceNow and Home Screen wrap each run of
+  consecutive prose in `<div class="prose">`; the Renault page uses the same
+  class for its introduction. The card is *lighter* than the page on every
+  theme — the page is the mid tone, cards go up, screenshots go down. The
+  reason is that the reading measure is far narrower than the screenshots
+  either side of it, and unhoused the prose read as a stranded ribbon down
+  the middle of a wide column. In the wide-screen block `.prose` takes 47rem
+  (44rem of text plus its own padding) and `.prose p` has its 44rem cap
+  removed, or the paragraph would overflow the card's padding.
+- **Policy links live in the footer, not the nav.** invoiceNow, Capsule,
+  Cadence, N-of-1 and Home Screen used to carry "Privacy policy" and "Terms
+  of use" as nav pills under the logo; they are footer hyperlinks now. The
+  URLs themselves have not moved and must not — see the hard constraints.
+  Home Screen had no footer policy link before this and gained one, because
+  the Chrome Web Store holds that exact URL.
 - **Screenshots open at full size.** On every project page, each `img.shot` is
   wrapped in an `a.shotlink` pointing at its own file — the captures are
   denser than any column can show them, so the image is the way in and the

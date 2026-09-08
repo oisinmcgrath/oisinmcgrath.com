@@ -1,49 +1,40 @@
 /* Receipt Manager — plain CSS, no external fonts or CDNs.
 
-   The palette is the application's own, given as two columns: dark and light.
-   Every colour is therefore a token written once as `light-dark(light, dark)`
-   rather than a light rule plus a parallel dark override, the same way the
-   homepage and the projects index are built. `color-scheme: light dark` on
-   :root means the page follows the operating system; there is no switch here,
-   because no project page carries one.
+   The palette is still the application's own, but the page is now LIGHT only
+   and no longer follows the operating system. It used to carry both columns
+   as `light-dark()` tokens, which meant a visitor in dark mode got a
+   near-black page (#0F1115) behind near-black screenshots — the captures
+   dissolved into the page and the detail in them could not be made out. The
+   captures are the argument on this page, so the ground goes light and stays
+   light, exactly as the Cross Market Intelligence page does.
 
-   The neutrals invert by luminance and the chromatic colours hold their hue
-   across both, so a status colour means the same thing whichever theme is in
-   force. The light surfaces stop at #E6E8EC rather than going to white, which
-   is what keeps a card readable as a card against the page behind it.
+   The three surfaces are deliberately far apart now: the page is the mid
+   tone (#DDE2E9), cards and prose go *up* to near-white (#F4F6F9), and the
+   screenshots are the dark objects on top. The old light column had --bg
+   #E0E3E8 against --surface #E3E5EA — three points of luminance between a
+   card and the page it sits on, which is no separation at all.
 
-   The @supports guard matters: on a browser without light-dark() the whole
-   block is dropped, and the plain light values above it show through. */
+   The chromatic tokens are untouched: a status colour still means what it
+   means in the application. */
 *,*::before,*::after{box-sizing:border-box}
 html{font-size:16px;-webkit-text-size-adjust:100%}
 
 :root{
-  --bg:#E0E3E8;
-  --surface:#E3E5EA;
-  --surface-alt:#E2E5E9;
-  --border:#B8BCC5;
+  color-scheme:light;
+  --bg:#DDE2E9;
+  --surface:#F4F6F9;
+  --surface-alt:#E8ECF2;
+  --border:#B3BAC5;
   --text:#121417;
   --text-2:#2D3137;
   --text-muted:#585F66;
   --on-accent:#FFFFFF;
-  --accent:#1A73E8;
-  --accent-deep:#1558B0;
+  --accent:#1558B0;
+  --accent-deep:#0E3E7E;
   --success:#2E7D32;
   --warning:#F9A825;
   --danger:#E53935;
   --info:#5E35B1;
-}
-@supports (color:light-dark(#fff,#000)){
-  :root{
-    color-scheme:light dark;
-    --bg:light-dark(#E0E3E8,#0F1115);
-    --surface:light-dark(#E3E5EA,#1B1F27);
-    --surface-alt:light-dark(#E2E5E9,#171B22);
-    --border:light-dark(#B8BCC5,#2A2F3A);
-    --text:light-dark(#121417,#E8EAED);
-    --text-2:light-dark(#2D3137,#C4CCD6);
-    --text-muted:light-dark(#585F66,#9AA0A6);
-  }
 }
 
 body{margin:0;min-height:100vh;line-height:1.6;
@@ -70,12 +61,24 @@ main li{margin-bottom:.4rem}
 code,.mono{font-family:ui-monospace,"Cascadia Code","Source Code Pro",Menlo,Consolas,monospace;
   font-size:.88em;background:var(--surface-alt);padding:.1em .35em;border-radius:3px;word-break:break-word}
 .meta{color:var(--text-muted);font-size:.92em}
+/* Body text sits on its own card, for the reason the CMI page's does: the
+   reading measure is far narrower than the screenshots either side of it,
+   and without a ground the prose reads as a stranded ribbon down the middle
+   of a wide column. */
+.prose{background:var(--surface);border:1px solid var(--border);border-radius:12px;
+  padding:1.25rem 1.5rem .4rem;margin:1.25rem 0 1.5rem;
+  box-shadow:0 1px 3px rgba(18,20,23,.06)}
+.prose > h2:first-child{margin-top:.25rem}
+@media (max-width:480px){.prose{padding:1rem 1.1rem .15rem;border-radius:10px}}
 /* Screenshots. Every capture is wider than the text column, so max-width takes
    them to the full column width; the height cap only bites on the tall ones —
-   the export panel and the review queue are portrait. */
+   the export panel and the review queue are portrait. The border is darker
+   than --border: these captures are near-black, and on a light page a pale
+   edge would read as a gap rather than a frame. */
 figure{margin:1.5rem 0 1.75rem}
 .shot{display:block;margin:0 auto;width:auto;height:auto;max-width:100%;max-height:42rem;
-  border:1px solid var(--border);border-radius:8px}
+  border:1px solid #98A0AD;border-radius:8px;
+  box-shadow:0 2px 12px -4px rgba(18,20,23,.35)}
 figcaption{margin-top:.7rem;text-align:center;font-size:.88rem;color:var(--text-muted);
   max-width:32rem;margin-left:auto;margin-right:auto}
 /* The app icon closes the page. It is the mark, not a screenshot, so it takes
@@ -175,6 +178,11 @@ nav.backnav {
   .wrap { max-width: min(92vw, 68rem); }
   main p, main ul, main ol { max-width: 44rem; margin-inline: auto; }
   .card, .notice { max-width: 44rem; margin-inline: auto; }
+  /* The prose card carries the measure now, so it is 47rem — 44rem of text
+     plus its own padding — and the paragraphs inside it fill it rather than
+     taking a second 44rem cap and overflowing the padding. */
+  .prose { max-width: 47rem; margin-inline: auto; }
+  .prose p, .prose ul, .prose ol { max-width: none; }
 }
 @media (min-width: 1800px) {
   html { font-size: 18px; }

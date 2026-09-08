@@ -740,3 +740,124 @@ a `<pre>` neither stylesheet styled, so its unbroken line pushed the whole
 page wide on a phone. Both pages now give `pre` the treatment Home Screen,
 tagdexer, Epson and YT Downloader already had — the box scrolls, the page
 never does.
+
+---
+
+## Dark pages stopped hiding their own screenshots
+
+**2026-09-08 — Cross Market Intelligence and Receipt Manager are light pages now.**
+
+Both pages were dark because their palettes were sampled from the
+applications, which are dark. The consequence was only obvious once the
+screenshots were opened at full size: a near-black capture on a near-black
+page has no edge, and the detail inside it — which is the entire argument
+these two pages are making — could not be made out. Card, page and
+screenshot were three shades of the same thing.
+
+So the ground goes light on both and the ordering is now explicit: **the page
+is the mid tone, cards go up towards white, screenshots are the dark objects
+on top.** CMI takes a light blue-grey from its own navy family; Receipt
+Manager takes its light column. Screenshot borders are darker than the card
+borders on purpose — on a light page a pale edge around a black capture reads
+as a gap rather than a frame — and each capture carries a soft drop shadow so
+it sits on the page rather than being cut out of it.
+
+Two consequences worth knowing:
+
+- **Receipt Manager no longer follows the operating system.** It was the one
+  project page that did, and that is what produced the problem: a visitor in
+  dark mode got `#0F1115` behind black screenshots. It is `color-scheme:
+  light` with no `light-dark()` pairs now. This supersedes the note in the
+  per-page theme section above.
+- Its light column had `--bg #E0E3E8` against `--surface #E3E5EA` — three
+  points of luminance between a card and the page it sits on, which is no
+  separation at all. The surfaces are far apart now (`#DDE2E9` / `#F4F6F9`).
+
+Every colour on both pages was measured afterwards; the lowest ratio is
+4.59:1, so all of it clears AA.
+
+---
+
+## Body text sits on a card
+
+**2026-09-08 — `.prose` on the product pages.**
+
+The wide-screen work gave these pages two widths: 44rem for reading and the
+full column for pictures. That is right for the pictures and it left the
+prose looking abandoned — a narrow ribbon of text down the middle of a much
+wider column, with no ground of its own between two full-width screenshots.
+
+Each run of consecutive prose is now wrapped in `<div class="prose">`, a card
+one step *lighter* than the page. Cross Market Intelligence, Receipt Manager,
+invoiceNow and Home Screen carry it; the Renault page uses the same class for
+its introduction. The other project pages are unchanged so far.
+
+The wrapping was done mechanically and the rendered text diffed against the
+original on all four pages before anything shipped — the prose is Oisin's and
+none of it changed.
+
+---
+
+## The homepage features became single objects
+
+**2026-09-08 — the whole card is the link, and the button is filled.**
+
+A feature block had three separate links in it — the screenshot, the
+call-through, and nothing tying the rest of the card to either. It is one
+link now: the call-through anchor carries a transparent `::after` stretched
+over the whole card, so a click anywhere on it — heading, prose, screenshot,
+background — goes to the project page. The screenshot's own anchor was
+removed rather than kept, because nested anchors are invalid and because one
+link per card is what a screen reader wants to be told. The card lifts as a
+whole on hover so it reads as a single object; the focus ring is drawn on
+`:focus-within`, since focus lands on the button while the card is what
+activates.
+
+The call-through is now filled in the project's accent with white ink, from a
+`--cta` token defined once per block. It is deliberately *not* a
+`light-dark()` pair: white ink needs a fill dark enough for it in either
+scheme, and a brand colour that shifted between themes would stop reading as
+the project's own. All five fills clear 4.5:1 against white.
+
+`.featmore` takes `margin: auto auto .25rem`. The `auto` on top pins it to
+the foot of the card, so in the invoiceNow / Receipt Manager pair — where the
+grid stretches both cards to one height — the two buttons sit exactly the
+same distance from the bottom whatever the prose above them does. Measured:
+27px on both, and on all five blocks. The inline `auto` matters just as much:
+a `margin: auto 0 …` shorthand reset `margin-inline` to 0 and pinned the
+button's box to the card's left edge, so the two full-width blocks' buttons
+were visibly off centre. That is the same margin-shorthand trap the
+wide-screen note at the foot of the homepage warns about, and it has now
+caught us twice.
+
+The dark grounds were all lightened well clear of the page (`#14171b`) for
+the same reason the two product pages went light — these cards carry
+near-black screenshots, and CMI's card in particular was `#161d29` behind a
+black capture. Rules (`hr.featrule`) now separate the blocks, and Home Screen
+is held to the reading measure rather than the full column, so its card and
+screenshot are exactly as wide as the body text above them.
+
+Thumbnails changed with it: CMI shows the comparison page rather than the
+inventory, the van shows the interior through the open side door, and Receipt
+Manager has its own thumbnail. The van's blurb went back to Oisin's earlier
+"Perhaps my most ambitious and educational undertaking…" — the paragraph that
+was briefly doing that job moved onto the Renault page itself, below the
+carousel and in ordinary body type, which is where it always belonged: it is
+an opening paragraph, not a header tagline.
+
+---
+
+## Policy links moved to the footer
+
+**2026-09-08 — no more "Privacy policy" and "Terms of use" pills under the logo.**
+
+Five app pages carried their policies as nav pills beside Home, which gave
+two pieces of legal boilerplate the same weight as the page's own navigation.
+They are footer hyperlinks now, where the rest of the small print already
+sits.
+
+**The URLs themselves have not moved and must not** — they are registered
+with Google and, for Home Screen, the Chrome Web Store. Only the link to them
+changed. Home Screen had no footer policy link at all before this, so it
+gained one *before* its nav pill was removed; every page was checked to still
+link its own policies afterwards.

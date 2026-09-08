@@ -201,45 +201,54 @@
     body .projcard h3{color:light-dark(#15191d,#e8ecf1)}
     body .projcard p{color:light-dark(#3b424a,#aab3be)}
     body .projcard .more{color:light-dark(#14507d,#7fb3e8)}
-    /* CMI keeps its own blue and orange; the van keeps its red. Both hold
-       their hue across the two themes, only the grounds invert. */
-    body .feature.f-cmi{background:light-dark(#eef4fc,#161d29);
-      border-color:light-dark(#bcd3ef,#2b3a52)}
-    body .feature.f-cmi h2{color:light-dark(#1a4f86,#7db3f7)}
-    body .feature.f-cmi p{color:light-dark(#2b3542,#c6d0dd)}
-    body .feature.f-cmi figcaption{color:light-dark(#5a6675,#93a0b2)}
-    body .feature.f-cmi figure img{border-color:light-dark(#bcd3ef,#2b3a52)}
-    body .feature.f-cmi .featmore a{color:light-dark(#b06200,#df8512)}
-    body .feature.f-ren{background:light-dark(#fdf1ea,#241610);
-      border-color:light-dark(#e8c3ae,#5c3423)}
-    body .feature.f-ren h2{color:light-dark(#8f3d17,#ffb26d)}
-    body .feature.f-ren p{color:light-dark(#3a2b23,#f0ddd0)}
-    body .feature.f-ren figcaption{color:light-dark(#6d5648,#c2a795)}
-    body .feature.f-ren figure img{border-color:light-dark(#e8c3ae,#5c3423)}
-    body .feature.f-ren .featmore a{color:light-dark(#a8431a,#ffb26d)}
+    /* Each block keeps its project's hue across both themes; only the grounds
+       invert. The dark grounds are deliberately well clear of the page
+       (#14171b): these cards carry near-black application screenshots, and on
+       a ground as dark as the page the captures had no edge to sit against —
+       card, page and screenshot were three shades of the same thing.
+
+       `--cta` is the filled call-through. It is one value for both themes
+       rather than a `light-dark()` pair, because the button carries white
+       ink and therefore has to stay dark enough for white in either scheme —
+       and a brand colour that shifted between themes would stop reading as
+       the project's own. */
+    body .feature.f-cmi{--cta:#a35a00;
+      background:light-dark(#e4eefc,#223047);
+      border-color:light-dark(#bcd3ef,#3a4d6b)}
+    body .feature.f-cmi h2{color:light-dark(#1a4f86,#a8cbfa)}
+    body .feature.f-cmi p{color:light-dark(#2b3542,#d3dcea)}
+    body .feature.f-cmi figcaption{color:light-dark(#5a6675,#a7b4c7)}
+    body .feature.f-cmi figure img{border-color:light-dark(#bcd3ef,#4a5f80)}
+    body .feature.f-ren{--cta:#a8431a;
+      background:light-dark(#fdf1ea,#3a251c);
+      border-color:light-dark(#e8c3ae,#6b4130)}
+    body .feature.f-ren h2{color:light-dark(#8f3d17,#ffc089)}
+    body .feature.f-ren p{color:light-dark(#3a2b23,#f4e3d8)}
+    body .feature.f-ren figcaption{color:light-dark(#6d5648,#d0b6a4)}
+    body .feature.f-ren figure img{border-color:light-dark(#e8c3ae,#7d4f3a)}
     /* invoiceNow holds its app's teal, Receipt Manager its app's blue, and
        Home Screen the cool blue of its tile glass. */
-    body .feature.f-inv{background:light-dark(#e9f6f8,#131c1f);
-      border-color:light-dark(#b9dde6,#28414a)}
-    body .feature.f-inv h2{color:light-dark(#0d6b7e,#5fc4d6)}
-    body .feature.f-inv p{color:light-dark(#26343a,#c4d2d8)}
-    body .feature.f-inv figcaption{color:light-dark(#537077,#8fa9b1)}
-    body .feature.f-inv figure img{border-color:light-dark(#b9dde6,#28414a)}
-    body .feature.f-inv .featmore a{color:light-dark(#0d6b7e,#5fc4d6)}
-    body .feature.f-rec{background:light-dark(#ecf3fd,#131a26);
-      border-color:light-dark(#c0d6f2,#2a3b55)}
-    body .feature.f-rec h2{color:light-dark(#1558b0,#7fb0f5)}
-    body .feature.f-rec p{color:light-dark(#28313e,#c6d0dd)}
-    body .feature.f-rec figcaption{color:light-dark(#58687e,#93a3ba)}
-    body .feature.f-rec figure img{border-color:light-dark(#c0d6f2,#2a3b55)}
-    body .feature.f-rec .featmore a{color:light-dark(#1558b0,#7fb0f5)}
-    body .feature.f-hs{background:light-dark(#eef3f9,#151a21);
-      border-color:light-dark(#c6d6e8,#2c3a4b)}
-    body .feature.f-hs h2{color:light-dark(#2a6cb3,#6fb3f2)}
-    body .feature.f-hs p{color:light-dark(#2b3542,#c6d0dd)}
-    body .feature.f-hs figcaption{color:light-dark(#5a6a7c,#92a2b6)}
-    body .feature.f-hs figure img{border-color:light-dark(#c6d6e8,#2c3a4b)}
-    body .feature.f-hs .featmore a{color:light-dark(#2a6cb3,#6fb3f2)}
+    body .feature.f-inv{--cta:#0d6b7e;
+      background:light-dark(#e9f6f8,#1e2c31);
+      border-color:light-dark(#b9dde6,#35525c)}
+    body .feature.f-inv h2{color:light-dark(#0d6b7e,#78d3e3)}
+    body .feature.f-inv p{color:light-dark(#26343a,#cfdde2)}
+    body .feature.f-inv figcaption{color:light-dark(#537077,#a2b8be)}
+    body .feature.f-inv figure img{border-color:light-dark(#b9dde6,#456872)}
+    body .feature.f-rec{--cta:#1558b0;
+      background:light-dark(#ecf3fd,#1f2a3c);
+      border-color:light-dark(#c0d6f2,#374966)}
+    body .feature.f-rec h2{color:light-dark(#1558b0,#9cc3f8)}
+    body .feature.f-rec p{color:light-dark(#28313e,#d0dae8)}
+    body .feature.f-rec figcaption{color:light-dark(#58687e,#a5b4c8)}
+    body .feature.f-rec figure img{border-color:light-dark(#c0d6f2,#475c7d)}
+    body .feature.f-hs{--cta:#2a6cb3;
+      background:light-dark(#eef3f9,#212a35);
+      border-color:light-dark(#c6d6e8,#3a485a)}
+    body .feature.f-hs h2{color:light-dark(#2a6cb3,#8fc4f5)}
+    body .feature.f-hs p{color:light-dark(#2b3542,#d0dae6)}
+    body .feature.f-hs figcaption{color:light-dark(#5a6a7c,#a4b3c4)}
+    body .feature.f-hs figure img{border-color:light-dark(#c6d6e8,#4b5b6f)}
     body .moreaims summary{color:light-dark(#14507d,#7fb3e8)}
     body .commshot{border-color:light-dark(#aab8c6,#39424d);
       box-shadow:0 2px 10px light-dark(rgba(20,60,100,.10),rgba(0,0,0,.45))}
@@ -287,39 +296,69 @@
        blue and orange, the van's red, invoiceNow's teal, Receipt Manager's
        blue, Home Screen's steel blue — the same way the Music and Community
        blocks take theirs. */
-    .feature{margin:1.75rem 0 2rem;padding:1.5rem 1.6rem 1.2rem;
-             border:1px solid;border-radius:16px}
+    /* The whole block is one link. The call-through anchor carries a
+       transparent `::after` stretched over the entire card, so a click
+       anywhere — heading, prose, screenshot, background — goes to the
+       project page. That is why the screenshot is NOT wrapped in an anchor
+       of its own: two nested links are invalid, and one link per card is
+       also what a screen reader wants. The card lifts as a whole on hover,
+       so it reads as a single object rather than a panel with a button on
+       it. */
+    .feature{position:relative;display:flex;flex-direction:column;
+             margin:1.75rem 0 2rem;padding:1.5rem 1.6rem 1.2rem;
+             border:1px solid;border-radius:16px;
+             transition:transform .18s ease,box-shadow .18s ease,
+                        border-color .18s ease}
+    .feature:hover{transform:translateY(-3px);
+             box-shadow:0 14px 30px -14px rgba(0,0,0,.45)}
+    /* Focus lands on the anchor inside, so the ring has to be drawn on the
+       card or it would outline only the button while the whole card is what
+       activates. */
+    .feature:focus-within{outline:2px solid currentColor;outline-offset:3px}
+    .feature .featmore a:focus-visible{outline:none}
     .feature h2{margin:.2rem 0 .7rem;display:flex;align-items:center;gap:.55rem;
                 font-size:1.35rem;letter-spacing:-.015em}
     .feature figure{margin:1.15rem 0 .9rem}
-    /* The screenshot is the biggest thing in the block, so it is also the
-       biggest click target: the whole figure links through to the page, and
-       lifts under the pointer the way the cards below do. Scoped to the
-       figure on purpose. Unscoped, `.feature img` also matches the mark in
-       the heading and blows it up to the full width of the block — the same
-       trap the old feature cards had. */
-    .feature figure a{display:block;border-radius:10px;
-                      transition:transform .18s ease,box-shadow .18s ease}
-    .feature figure a:hover{transform:translateY(-3px);
-                      box-shadow:0 12px 28px -12px rgba(0,0,0,.5)}
+    /* Scoped to the figure on purpose. Unscoped, `.feature img` also matches
+       the mark in the heading and blows it up to the full width of the block
+       — the same trap the old feature cards had. */
     .feature figure img{display:block;width:100%;height:auto;border-radius:10px;
                         border:1px solid}
     .feature figcaption{margin-top:.65rem;text-align:center;font-size:.88rem;
                         max-width:34rem;margin-inline:auto}
-    /* The link through is a pill button in the block's own accent, centred
-       under the caption, built the same way as the nav pills: border and
-       ground mixed from currentColor, so one rule serves all five accents. */
-    .feature .featmore{margin:.4rem 0 .25rem;text-align:center}
+    /* The call-through is a filled pill in the block's own accent with white
+       ink, centred. `margin-top:auto` pins it to the foot of the card, so in
+       the invoiceNow / Receipt Manager pair — where the grid stretches both
+       cards to one height — the two buttons sit the same distance from the
+       bottom however much prose is above them. */
+    /* `margin-inline` must stay `auto`, not 0. The wide-screen block gives
+       `.feature p` a 44rem measure and centres it, and .featmore is a <p> —
+       a `margin: auto 0 …` shorthand here resets that to 0, which pins the
+       button's box to the card's left edge and the button stops looking
+       centred on the two full-width blocks. The same trap the card rules at
+       the foot of this file carry a warning about. */
+    .feature .featmore{margin:auto auto .25rem;padding-top:.4rem;text-align:center}
     .feature .featmore a{display:inline-flex;align-items:center;gap:.45rem;
-      padding:.5rem 1.05rem;border-radius:999px;font-weight:600;
-      text-decoration:none;
-      border:1px solid color-mix(in srgb,currentColor 34%,transparent);
-      background:color-mix(in srgb,currentColor 9%,transparent);
-      transition:border-color .15s,background .15s}
-    .feature .featmore a:hover{text-decoration:none;
-      border-color:color-mix(in srgb,currentColor 62%,transparent);
-      background:color-mix(in srgb,currentColor 16%,transparent)}
+      padding:.55rem 1.15rem;border-radius:999px;font-weight:600;
+      text-decoration:none;color:#fff;background:var(--cta);
+      border:1px solid transparent;
+      box-shadow:0 1px 3px rgba(0,0,0,.22);
+      transition:filter .15s,box-shadow .15s}
+    .feature:hover .featmore a{filter:brightness(1.1);
+      box-shadow:0 3px 10px rgba(0,0,0,.3)}
+    /* The stretched hit area. Transparent, above the figure, below nothing —
+       it is the last positioned thing in the card. */
+    .feature .featmore a::after{content:"";position:absolute;inset:0;
+      border-radius:16px;z-index:1}
     .feature .cardicon{width:1.15em;height:1.15em;object-fit:contain;flex:none}
+    /* A divider between showcase cards, in the page's own blue, the same
+       shape as the accent rule further down. */
+    hr.featrule{height:2px;margin:1.6rem auto;border:0;opacity:.5;
+      max-width:34rem;
+      background:linear-gradient(90deg,transparent,
+        light-dark(rgba(20,80,125,.3),rgba(127,179,232,.28)) 20%,
+        light-dark(rgba(20,80,125,.75),rgba(127,179,232,.6)) 50%,
+        light-dark(rgba(20,80,125,.3),rgba(127,179,232,.28)) 80%,transparent)}
     /* invoiceNow and Receipt Manager are two halves of one problem, so their
        feature blocks share one row — and stack again where two screenshots
        will not fit across the window. */
@@ -445,9 +484,12 @@
          1100px column — the extra width is for the body and the pictures. */
       header.site-header{max-width:44rem;margin-inline:auto}
       /* The feature blocks are the other thing the extra width is for, so
-         they keep the column while their prose keeps the measure. */
+         they keep the column while their prose keeps the measure. Home
+         Screen is the exception: it is held to the reading measure, so the
+         card and its screenshot are no wider than the body text above. */
       .feature{max-width:none}
       .feature p{max-width:44rem;margin-inline:auto}
+      .feature.f-hs{max-width:44rem;margin-inline:auto}
     }
   </style>
 </head>
@@ -500,37 +542,37 @@
           Intelligence exists to answer these questions.
         </p>
         <figure>
-          <a href="/projects/cross-market-intelligence/"><img
-               src="/projects/cross-market-intelligence/screenshots/auction-browse.jpg"
-               width="1600" height="823" loading="lazy"
-               alt="The auction inventory, each vehicle carrying its forecast auction price, its private-sale forecast and the margin between them."></a>
-          <figcaption>The auction inventory, each vehicle carrying its forecast auction price, its private-sale forecast and the margin between them.</figcaption>
+          <img src="/projects/cross-market-intelligence/screenshots/auction-target.png"
+               width="2000" height="1055" loading="lazy"
+               alt="One vehicle's auction and private-sale forecasts, with the comparable private sales set out beside them and what matches or differs listed against each.">
+          <figcaption>A vehicle's auction and private-sale forecasts, with the comparable private sales set out beside them — what matches, and what differs.</figcaption>
         </figure>
         <p class="featmore">
           <a href="/projects/cross-market-intelligence/">Read about Cross Market Intelligence &rarr;</a>
         </p>
       </section>
 
+      <hr class="featrule">
+
       <section class="feature f-ren" aria-labelledby="ren-heading">
         <h2 id="ren-heading"><img class="cardicon" src="/projects/renault-master/favicon.svg" alt="">Renault Master Camper Conversion</h2>
         <p>
-          A once AusPost van became my blank canvas when I built it into a fully
-          livable home on wheels, including a kitchen, bed, heating, power, water
-          and a toilet all functioning within the tight space. Upon completion I
-          put the campervan to the test by driving 8,800&nbsp;km to Darwin and
-          back.
+          Perhaps my most ambitious and educational undertaking: in 2025 I
+          converted an Australia Post van into a fully fitted-out campervan, and
+          put it to the test by taking it 4,400&nbsp;km to the top of Australia.
         </p>
         <figure>
-          <a href="/projects/renault-master/"><img
-               src="/projects/renault-master/photos/trip-02-boab.jpg"
-               width="1600" height="1200" loading="lazy"
-               alt="The van parked on a dirt road beside a large boab tree under a cloudy sky in the north of Australia"></a>
-          <figcaption>Trial by Northern Territory</figcaption>
+          <img src="/projects/renault-master/photos/hero-gopro.jpg"
+               width="1600" height="1067" loading="lazy"
+               alt="Inside the finished van looking out through the open side door and its fly screen, showing the bed, seating and sink">
+          <figcaption>Looking inside through the side door.</figcaption>
         </figure>
         <p class="featmore">
           <a href="/projects/renault-master/">Read about the conversion &rarr;</a>
         </p>
       </section>
+
+      <hr class="featrule">
 
       <div class="featpair">
         <section class="feature f-inv" aria-labelledby="inv-heading">
@@ -540,10 +582,9 @@
             your mind for good.
           </p>
           <figure>
-            <a href="/projects/invoicenow/"><img
-                 src="/projects/invoicenow/screenshots/dashboard.png"
+            <img src="/projects/invoicenow/screenshots/dashboard.png"
                  width="3412" height="1846" loading="lazy"
-                 alt="The invoiceNow dashboard, showing the quarter's billed and received totals, the GST on them, and how many invoices are still unpaid."></a>
+                 alt="The invoiceNow dashboard, showing the quarter's billed and received totals, the GST on them, and how many invoices are still unpaid.">
             <figcaption>Where you stand financially, without working it out.</figcaption>
           </figure>
           <p class="featmore">
@@ -558,10 +599,9 @@
             under a minute.
           </p>
           <figure>
-            <a href="/projects/receipt-manager/"><img
-                 src="/projects/receipt-manager/screenshots/dashboard.png"
-                 width="2912" height="1480" loading="lazy"
-                 alt="The Receipt Manager dashboard, where a stack goes into the scanner or files already on the computer are added."></a>
+            <img src="/projects/receipt-manager/screenshots/thumbnail.png"
+                 width="2000" height="1165" loading="lazy"
+                 alt="The Receipt Manager dashboard, where a stack goes into the scanner or files already on the computer are added, with the review queue and the quarter's totals below.">
             <figcaption>The dashboard, where a stack goes into the scanner or files already on the computer are added.</figcaption>
           </figure>
           <p class="featmore">
@@ -570,6 +610,8 @@
         </section>
       </div>
 
+      <hr class="featrule">
+
       <section class="feature f-hs" aria-labelledby="hs-heading">
         <h2 id="hs-heading"><img class="cardicon" src="/projects/logos/homescreen.png" alt="">Home Screen</h2>
         <p>
@@ -577,16 +619,17 @@
           you arrange yourself, with weather, sun times and an assistant bar.
         </p>
         <figure>
-          <a href="/projects/homescreen/"><img
-               src="/projects/homescreen/screenshots/home-screen.jpg"
+          <img src="/projects/homescreen/screenshots/home-screen.jpg"
                width="1400" height="743" loading="lazy"
-               alt="The new tab page: a grid of app tiles with real site icons over a lake wallpaper, with a search bar, clock, weather, a sunrise countdown and an Ask Claude bar."></a>
+               alt="The new tab page: a grid of app tiles with real site icons over a lake wallpaper, with a search bar, clock, weather, a sunrise countdown and an Ask Claude bar.">
           <figcaption>The whole page. Tiles are placed by hand and stay put; the icons are each site's own, fetched once and cached.</figcaption>
         </figure>
         <p class="featmore">
           <a href="/projects/homescreen/">Read about Home Screen &rarr;</a>
         </p>
       </section>
+
+      <hr class="featrule">
 
       <div class="projgrid">
         <a class="projcard" href="/projects/tagdexer/">

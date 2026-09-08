@@ -122,6 +122,16 @@ nav.backnav {
   flex: none;
 }
 
+/* Body text sits on its own card, for the reason the CMI page's does: the
+   reading measure is far narrower than the screenshots either side of it,
+   and without a ground the prose reads as a stranded ribbon down the middle
+   of a wide column. Lighter than the page, so it lifts rather than sinks. */
+.prose{background:#1c1f25;border:1px solid #2b3038;border-radius:12px;
+  padding:1.25rem 1.5rem .4rem;margin:1.25rem 0 1.5rem;
+  box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.prose > h2:first-child{margin-top:.25rem}
+@media (max-width:480px){.prose{padding:1rem 1.1rem .15rem;border-radius:10px}}
+
 /* Each screenshot links to its own full-size file: the captures are denser
    than any column can show them, so the image itself is the way in, and the
    browser's Back returns to the page. Same pattern as the Renault galleries. */
@@ -144,6 +154,11 @@ nav.backnav {
   .wrap { max-width: min(92vw, 68rem); }
   main p, main ul, main ol { max-width: 44rem; margin-inline: auto; }
   .card, .notice { max-width: 44rem; margin-inline: auto; }
+  /* The prose card carries the measure now, so it is 47rem — 44rem of text
+     plus its own padding — and the paragraphs inside it fill it rather than
+     taking a second 44rem cap and overflowing the padding. */
+  .prose { max-width: 47rem; margin-inline: auto; }
+  .prose p, .prose ul, .prose ol { max-width: none; }
 }
 @media (min-width: 1800px) {
   html { font-size: 18px; }

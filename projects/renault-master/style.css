@@ -387,6 +387,26 @@ main p {
   font-size: 1.04rem;
 }
 
+/* The introduction, moved off the header and onto the ground below the
+   carousel. It takes the same lighter card ground the specifications box
+   uses, so a block of prose sitting on saturated dust reads as something set
+   into the landscape rather than text floating on it — and it is the same
+   move every product page now makes with `.prose`. */
+.prose {
+  max-width: var(--measure);
+  margin: var(--sp-5) auto var(--sp-6);
+  padding: var(--sp-5) var(--sp-5) var(--sp-4);
+  border: 1px solid rgba(255, 214, 170, 0.3);
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+  box-shadow: 0 1px 2px rgba(24, 10, 4, 0.3),
+    0 8px 20px -10px rgba(24, 10, 4, 0.45);
+}
+
+.prose > p:last-child {
+  margin-bottom: 0;
+}
+
 .lead {
   font-size: 1.08rem;
 }

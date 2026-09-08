@@ -314,7 +314,15 @@
        the full width. Holding the card itself to the reading measure means
        heading, prose and screenshot all start and end on the same two lines.
        The screenshots lose some size; they link through to the page, where
-       they open at full resolution. */
+       they open at full resolution.
+
+       The block is a real `<a>`, not a section with a stretched overlay over
+       it. The overlay version hit-tested correctly in every browser it was
+       measured in and still did not behave as a link for Oisin, so it was
+       replaced with the construction `.projcard` below has always used and
+       which has never been in doubt: the anchor IS the card, and the pill
+       inside it is a span. Nothing to nest, nothing to stack, nothing that
+       depends on a pseudo-element winning a paint order. */
     .feature{position:relative;display:flex;flex-direction:column;
              max-width:44rem;margin:1.75rem auto 2rem;
              padding:1.5rem 1.6rem 1.2rem;
@@ -323,11 +331,10 @@
                         border-color .18s ease}
     .feature:hover{transform:translateY(-3px);
              box-shadow:0 14px 30px -14px rgba(0,0,0,.45)}
-    /* Focus lands on the anchor inside, so the ring has to be drawn on the
-       card or it would outline only the button while the whole card is what
-       activates. */
-    .feature:focus-within{outline:2px solid currentColor;outline-offset:3px}
-    .feature .featmore a:focus-visible{outline:none}
+    /* The card IS the anchor, so it takes the ring itself. */
+    body a.feature{text-decoration:none;color:inherit;cursor:pointer}
+    body a.feature:hover{color:inherit}
+    .feature:focus-visible{outline:2px solid currentColor;outline-offset:3px}
     .feature h2{margin:.2rem 0 .7rem;display:flex;align-items:center;gap:.55rem;
                 font-size:1.35rem;letter-spacing:-.015em}
     /* The card is a column flex container, and a flex item with auto inline
@@ -358,18 +365,16 @@
        centred on the two full-width blocks. The same trap the card rules at
        the foot of this file carry a warning about. */
     .feature .featmore{margin:auto auto .25rem;padding-top:.4rem;text-align:center}
-    .feature .featmore a{display:inline-flex;align-items:center;gap:.45rem;
+    /* A span, not a link. The whole card is the anchor, so the pill is only
+       the visible affordance — there is no second link to nest. */
+    .feature .featbtn{display:inline-flex;align-items:center;gap:.45rem;
       padding:.55rem 1.15rem;border-radius:999px;font-weight:600;
-      text-decoration:none;color:#fff;background:var(--cta);
+      color:#fff;background:var(--cta);
       border:1px solid transparent;
       box-shadow:0 1px 3px rgba(0,0,0,.22);
       transition:filter .15s,box-shadow .15s}
-    .feature:hover .featmore a{filter:brightness(1.1);
+    .feature:hover .featbtn{filter:brightness(1.1);
       box-shadow:0 3px 10px rgba(0,0,0,.3)}
-    /* The stretched hit area. Transparent, above the figure, below nothing —
-       it is the last positioned thing in the card. */
-    .feature .featmore a::after{content:"";position:absolute;inset:0;
-      border-radius:16px;z-index:1}
     .feature .cardicon{width:1.15em;height:1.15em;object-fit:contain;flex:none}
     /* Music and Community are full-width blocks like the five above them.
        They were briefly set two abreast, which made each card about half the
@@ -408,6 +413,13 @@
       border:1px solid color-mix(in srgb, currentColor 28%, transparent);
       background:color-mix(in srgb, currentColor 6%, transparent)}
     .moreaims summary::-webkit-details-marker{display:none}
+    /* Once it is open the pill has done its job, so it goes rather than
+       sitting between the first two aims and the other five and cutting one
+       list in half. The trade, and it is a real one: there is then nothing
+       to click to close it again, so opening the list is a one-way move
+       until the page is reloaded. */
+    .moreaims[open] > summary{display:none}
+    .moreaims[open]{margin-bottom:0}
     .moreaims summary:hover{border-color:color-mix(in srgb, currentColor 55%, transparent)}
     .moreaims .chev{width:.5rem;height:.5rem;border-right:2px solid currentColor;
       border-bottom:2px solid currentColor;transform:rotate(45deg) translate(-1px,-1px);
@@ -515,7 +527,7 @@
             a user friendly interface and assistance tools.</li>
       </ul>
       <details class="moreaims">
-        <summary><span class="sumtext">See 5 more aims</span><span class="chev" aria-hidden="true"></span></summary>
+        <summary><span class="sumtext">See 5 more</span><span class="chev" aria-hidden="true"></span></summary>
         <ul class="leadlist">
           <li>Provide systems that eliminate common mistakes in your work by
               excluding the conditions that permit them.</li>
@@ -528,7 +540,7 @@
         </ul>
       </details>
 
-      <section class="feature f-cmi" aria-labelledby="cmi-heading">
+      <a class="feature f-cmi" href="/projects/cross-market-intelligence/" aria-label="Read about Cross Market Intelligence">
         <h2 id="cmi-heading"><img class="cardicon" src="/projects/logos/cross-market-intelligence.png" alt="">Cross Market Intelligence</h2>
         <p>
           Is there such a thing as a good deal at the auctions? What could it be
@@ -543,17 +555,17 @@
           <figcaption>A vehicle's auction and private-sale forecasts, with the comparable private sales set out beside them — what matches, and what differs.</figcaption>
         </figure>
         <p class="featmore">
-          <a href="/projects/cross-market-intelligence/">Read about Cross Market Intelligence &rarr;</a>
+          <span class="featbtn">Read about Cross Market Intelligence &rarr;</span>
         </p>
-      </section>
+      </a>
 
       <hr class="featrule">
 
-      <section class="feature f-ren" aria-labelledby="ren-heading">
+      <a class="feature f-ren" href="/projects/renault-master/" aria-label="Read about the conversion">
         <h2 id="ren-heading"><img class="cardicon" src="/projects/renault-master/favicon.svg" alt="">Renault Master Camper Conversion</h2>
         <p>
-          I built it into a fully livable home on wheels, including a kitchen,
-          bed, heating, power, water and a toilet.
+          I built a postvan into a fully liveable home on wheels, including a
+          kitchen, bed, heating, power, water and a toilet.
         </p>
         <figure>
           <img src="/projects/renault-master/photos/hero-gopro.jpg"
@@ -562,13 +574,13 @@
           <figcaption>Looking inside through the side door.</figcaption>
         </figure>
         <p class="featmore">
-          <a href="/projects/renault-master/">Read about the conversion &rarr;</a>
+          <span class="featbtn">Read about the conversion &rarr;</span>
         </p>
-      </section>
+      </a>
 
       <hr class="featrule">
 
-      <section class="feature f-inv" aria-labelledby="inv-heading">
+      <a class="feature f-inv" href="/projects/invoicenow/" aria-label="Read about invoiceNow">
         <h2 id="inv-heading"><img class="cardicon" src="/projects/logos/invoicenow.png" alt="">invoiceNow</h2>
         <p>
           From the job you put off every week to a few clicks that keep it off
@@ -581,13 +593,13 @@
           <figcaption>Where you stand financially, without working it out.</figcaption>
         </figure>
         <p class="featmore">
-          <a href="/projects/invoicenow/">Read about invoiceNow &rarr;</a>
+          <span class="featbtn">Read about invoiceNow &rarr;</span>
         </p>
-      </section>
+      </a>
 
       <hr class="featrule">
 
-      <section class="feature f-rec" aria-labelledby="rec-heading">
+      <a class="feature f-rec" href="/projects/receipt-manager/" aria-label="Read about Receipt Manager">
         <h2 id="rec-heading"><img class="cardicon" src="/projects/logos/receipt-manager.png" alt="">Receipt Manager</h2>
         <p>
           Could you prove you bought your vacuum cleaner, your car battery, the
@@ -601,13 +613,13 @@
           <figcaption>The dashboard, where a stack goes into the scanner or files already on the computer are added.</figcaption>
         </figure>
         <p class="featmore">
-          <a href="/projects/receipt-manager/">Read about Receipt Manager &rarr;</a>
+          <span class="featbtn">Read about Receipt Manager &rarr;</span>
         </p>
-      </section>
+      </a>
 
       <hr class="featrule">
 
-      <section class="feature f-hs" aria-labelledby="hs-heading">
+      <a class="feature f-hs" href="/projects/homescreen/" aria-label="Read about Home Screen">
         <h2 id="hs-heading"><img class="cardicon" src="/projects/logos/homescreen.png" alt="">Home Screen</h2>
         <p>
           A browser new tab page laid out like a phone home screen — an app grid
@@ -620,13 +632,13 @@
           <figcaption>The whole page. Tiles are placed by hand and stay put; the icons are each site's own, fetched once and cached.</figcaption>
         </figure>
         <p class="featmore">
-          <a href="/projects/homescreen/">Read about Home Screen &rarr;</a>
+          <span class="featbtn">Read about Home Screen &rarr;</span>
         </p>
-      </section>
+      </a>
 
       <hr class="featrule">
 
-      <section class="feature f-music" aria-labelledby="music-heading">
+      <a class="feature f-music" href="/music.html" aria-label="Read about the music">
         <h2 id="music-heading"><svg class="cardicon" viewBox="-5.5 0 32 32" fill="currentColor" aria-hidden="true"><path d="M5.688 9.656v10.906c-0.469-0.125-0.969-0.219-1.406-0.219-1 0-2.031 0.344-2.875 0.906s-1.406 1.469-1.406 2.531c0 1.125 0.563 1.969 1.406 2.531s1.875 0.875 2.875 0.875c0.938 0 2-0.313 2.844-0.875s1.375-1.406 1.375-2.531v-11.438l9.531-2.719v7.531c-0.438-0.125-0.969-0.188-1.438-0.188-0.969 0-2.031 0.281-2.875 0.844s-1.375 1.469-1.375 2.531c0 1.125 0.531 2 1.375 2.531 0.844 0.563 1.906 0.906 2.875 0.906 0.938 0 2.031-0.344 2.875-0.906 0.875-0.531 1.406-1.406 1.406-2.531v-14.406c0-0.688-0.469-1.156-1.156-1.156-0.063 0-0.438 0.125-1.031 0.281-1.25 0.344-3.125 0.875-5.25 1.5-1.094 0.281-2.063 0.594-3.031 0.844-0.938 0.281-1.75 0.563-2.469 0.75-0.75 0.219-1.219 0.344-1.406 0.406-0.5 0.156-0.844 0.594-0.844 1.094z"/></svg>Music</h2>
         <p>
           Since my school days I have had a passion for playing music, and lost
@@ -640,13 +652,13 @@
                alt="Playing guitar and fiddle outdoors under a tree at the St Patrick&rsquo;s Festival">
         </figure>
         <p class="featmore">
-          <a href="/music.html">Read about the music &rarr;</a>
+          <span class="featbtn">Read about the music &rarr;</span>
         </p>
-      </section>
+      </a>
 
       <hr class="featrule">
 
-      <section class="feature f-comm" aria-labelledby="community-heading">
+      <a class="feature f-comm" href="/community.html" aria-label="Read about the community">
         <h2 id="community-heading"><img class="cardicon" src="/community/shamrock.svg" alt="">Community</h2>
         <p>
           We had a blast volunteering for the St Patrick's Festival with the
@@ -658,9 +670,9 @@
                alt="Three of us in Irish county jerseys at the festival, under the trees">
         </figure>
         <p class="featmore">
-          <a href="/community.html">Read about the community &rarr;</a>
+          <span class="featbtn">Read about the community &rarr;</span>
         </p>
-      </section>
+      </a>
 
       <hr class="featrule">
 

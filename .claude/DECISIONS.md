@@ -988,3 +988,55 @@ worth re-running after any layout work: load every page in an iframe, walk
 parent's centre by more than 4px. Two false positives to expect, both fine:
 `projects/index.html` is left-aligned by design, so its `h1`, tagline and
 `h2` all share x=68 and the narrower tagline box is correct.
+
+
+---
+
+## The feature cards became real anchors
+
+**2026-09-08 — the stretched-overlay link was replaced with an `<a>`.**
+
+The blocks were `<section>`s with a transparent `::after` on the call-through
+anchor, stretched over the whole card — the standard "stretched link" pattern,
+chosen so the card stayed one link without nesting anchors.
+
+Oisin reported the cards were not clickable, only the buttons. It could not be
+reproduced: `elementFromPoint` at the heading, the prose, the image centre and
+the far corner of all seven cards, at 375, 1280 and 1707px, every one resolved
+to the call-through anchor, and the anchor navigated. So the overlay was doing
+its job in the browser it was measured in.
+
+It was replaced anyway. When the person looking at the site says a control does
+not work, the measurement is not the thing that matters — and there was a
+construction available with no ambiguity in it at all: make the card itself the
+`<a>`, exactly as `.projcard` does further down the same page, and demote the
+pill to a `<span>`. No overlay, no pseudo-element in the paint order, no
+stacking context to reason about, and nothing to nest.
+
+What that costs, and it is worth knowing: the card's accessible name would be
+the whole of its text, so each carries an `aria-label` instead ("Read about
+Cross Market Intelligence"). Selecting the prose inside a card is awkward, as
+it was with the overlay. `body a.feature{color:inherit;text-decoration:none}`
+stops the card taking link ink now that it is genuinely a link, and the focus
+ring moved from `:focus-within` to `:focus-visible` on the card itself.
+
+**Do not add a second anchor inside a feature block.** The screenshot in
+particular must stay an unwrapped `<img>`.
+
+---
+
+## The disclosure pill disappears once it is open
+
+**2026-09-08 — and that makes opening one-way.**
+
+"See 5 more" sat between the first two aims and the other five once opened,
+cutting what reads as one list in half. `.moreaims[open] > summary` is
+`display:none` now, so the seven aims read as a single list.
+
+The trade is real and was accepted: with the summary hidden there is nothing
+left to click to close it again, so opening the list is one-way until the page
+is reloaded. A `<details>` has no other closing affordance without script, and
+the script budget is spent.
+
+The label also lost the word "aims" it had briefly gained — it was doing no
+work, since the list it opens is plainly the same list.

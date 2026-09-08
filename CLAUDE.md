@@ -333,14 +333,17 @@ overrides need matching specificity — `footer.site-footer a`, not
   things below. Note `.feature figure img`, scoped on purpose: unscoped, it
   also matches the mark in the heading and blows it up to the full width of
   the block.
-- **A feature block is one link, and the whole card is clickable.** The
-  call-through anchor carries a transparent `::after` stretched over the card
-  (`.feature` is `position:relative`), so a click anywhere goes to the project
-  page. That is why the screenshot is **not** wrapped in an anchor of its own
-  — two nested links are invalid, and one link per card is what a screen
-  reader wants. Keep it to one anchor per block. The focus ring is drawn on
-  `.feature:focus-within`, because focus lands on the button while the card is
-  what activates.
+- **A feature block IS an anchor.** `<a class="feature f-x" href="…"
+  aria-label="…">` wrapping the heading, prose, figure and pill — the same
+  construction `.projcard` uses. The pill inside is a `<span class="featbtn">`,
+  not a link, so there is nothing to nest. An earlier version kept `<section>`
+  and stretched a transparent `::after` from the button over the card; it
+  hit-tested correctly everywhere it was measured and still did not behave as
+  a link for Oisin, so it was replaced with the construction that has never
+  been in doubt. **Do not put a second anchor inside a feature block** — the
+  screenshot must not be wrapped in one. The focus ring is on
+  `.feature:focus-visible`, and `body a.feature{color:inherit;
+  text-decoration:none}` stops the card taking link ink.
 - The call-through is a **filled** pill: `--cta`, defined once per block, with
   white ink. It is a single value rather than a `light-dark()` pair — white
   ink needs a dark enough fill in either scheme, and a brand colour that
@@ -390,9 +393,13 @@ overrides need matching specificity — `footer.site-footer a`, not
   NitroTune, N-of-1, YT Downloader. `projects/index.html` still carries its
   own headings and its own order; the difference is deliberate.
 - The bio shows two bullets and folds the other five into a `<details>` labelled
-  "See 5 more aims" — no script, like the specifications box on the Renault
+  "See 5 more" — no script, like the specifications box on the Renault
   page. On wide screens the chip takes the same 44rem measure as the list it
-  extends, so the two share a left edge.
+  extends, so the two share a left edge. `.moreaims[open] > summary` is
+  `display:none`, so once opened the pill goes rather than sitting between the
+  two bullets and the other five and cutting one list in half. **The trade:
+  there is then nothing to click to close it, so opening is one-way until a
+  reload.** That was asked for explicitly.
 - **Body text on the product pages sits on a `.prose` card.** Cross Market
   Intelligence, Receipt Manager, invoiceNow and Home Screen wrap each run of
   consecutive prose in `<div class="prose">`; the Renault page uses the same

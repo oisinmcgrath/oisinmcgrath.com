@@ -363,18 +363,20 @@ overrides need matching specificity — `footer.site-footer a`, not
   comparison page, not the inventory), the van takes `hero-gopro.jpg` —
   "Looking inside through the side door." — and Receipt Manager takes its own
   `screenshots/thumbnail.png`.
-- **Music and Community are feature blocks too, two abreast, above the grid.**
-  They were `.topiccard` sections at the foot of the page; they are now
-  `.feature f-music` and `.feature f-comm` inside a `.featpair`, sitting
-  directly under Home Screen with the project grid below them. The pair holds
-  the same 44rem measure a single feature block does — two across is a
-  *narrower card*, not a wider row, so the page still has exactly one content
-  width — and `auto-fit` stacks them on a phone. Both photographs take a
-  shared 4:3 frame so the two cards read as a pair; the music shot is anchored
-  at `50% 20%` because it is nearly square and a centred crop takes the
-  players' heads off, which is why it was left uncropped when it stood alone.
-  Their blurbs lost their inline "see more" links — the card is the link now,
-  and an anchor inside an anchor is invalid.
+- **Music and Community are feature blocks too.** They were `.topiccard`
+  sections at the foot of the page; they are now `.feature f-music` and
+  `.feature f-comm`, full width like the other five, sitting directly under
+  Home Screen with the project grid below them. So the page carries **seven
+  identical blocks**. They were briefly set two abreast and that was reverted:
+  half-width cards shrank the photographs below the size they had as topic
+  cards, and two 44rem cards cannot sit side by side inside a 44rem measure.
+  Both photographs take a shared 3:2 frame, the proportion the van's
+  photograph already has — the community shot is natively 3:2 so nothing is
+  cropped from it, and the music shot is anchored at `50% 8%` because it is
+  nearly square and a centred crop takes the players' heads off, which is why
+  it was left uncropped when it stood alone. Their blurbs lost their inline
+  "see more" links — the card is the link now, and an anchor inside an anchor
+  is invalid.
 - The seven remaining projects are `.projcard` tiles in one grid with **no
   headings above it** — the Software/Technical split is gone from this page.
   The order is deliberate: Tagdexer, Cadence, Capsule, Epson RR-70W,

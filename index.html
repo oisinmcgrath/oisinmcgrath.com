@@ -371,23 +371,23 @@
     .feature .featmore a::after{content:"";position:absolute;inset:0;
       border-radius:16px;z-index:1}
     .feature .cardicon{width:1.15em;height:1.15em;object-fit:contain;flex:none}
-    /* Music and Community sit side by side under the project features. The
-       PAIR holds the same 44rem measure a single feature block does, so the
-       page still has exactly one content width — two cards across is a
-       narrower card, not a wider row. `auto-fit` stacks them on its own once
-       two 17rem columns no longer fit, which is every phone. */
-    .featpair{display:grid;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));
-              gap:1rem;max-width:44rem;margin:1.75rem auto 2rem}
-    .featpair .feature{margin:0;max-width:none;padding:1.25rem 1.3rem 1rem}
-    .featpair .feature h2{font-size:1.2rem}
-    /* One frame for both photographs, so the two cards read as a pair rather
-       than as two different shapes. The music shot is nearly square and its
-       players' heads sit in the upper half, so the crop is anchored high —
-       a centred 4:3 crop of a portrait photograph takes the heads off, which
-       is the reason it was left uncropped when it sat on its own. */
-    .featpair figure img{aspect-ratio:4/3;object-fit:cover}
-    .f-music figure img{object-position:50% 20%}
-    .f-comm figure img{object-position:50% 45%}
+    /* Music and Community are full-width blocks like the five above them.
+       They were briefly set two abreast, which made each card about half the
+       width and shrank the photographs well below the size they had as topic
+       cards. Two 44rem cards cannot sit side by side inside a 44rem measure,
+       so restoring their size means stacking them — and it also makes all
+       seven blocks on the page identical, which is the point of holding one
+       width.
+
+       One frame for both photographs, 3:2, the proportion the van's
+       photograph on this page already has. The community shot is natively
+       3:2 so nothing is cropped from it. The music shot is nearly square and
+       both players' heads sit in the upper half, so its crop is anchored
+       near the top — a centred crop takes the heads off, which is the reason
+       it was left uncropped when it stood on its own. */
+    .f-music figure img,
+    .f-comm figure img{aspect-ratio:3/2;object-fit:cover}
+    .f-music figure img{object-position:50% 8%}
     /* A divider between showcase cards, in the page's own blue, the same
        shape as the accent rule further down. */
     hr.featrule{height:2px;margin:1.6rem auto;border:0;opacity:.5;
@@ -626,40 +626,41 @@
 
       <hr class="featrule">
 
-      <div class="featpair">
-        <section class="feature f-music" aria-labelledby="music-heading">
-          <h2 id="music-heading"><svg class="cardicon" viewBox="-5.5 0 32 32" fill="currentColor" aria-hidden="true"><path d="M5.688 9.656v10.906c-0.469-0.125-0.969-0.219-1.406-0.219-1 0-2.031 0.344-2.875 0.906s-1.406 1.469-1.406 2.531c0 1.125 0.563 1.969 1.406 2.531s1.875 0.875 2.875 0.875c0.938 0 2-0.313 2.844-0.875s1.375-1.406 1.375-2.531v-11.438l9.531-2.719v7.531c-0.438-0.125-0.969-0.188-1.438-0.188-0.969 0-2.031 0.281-2.875 0.844s-1.375 1.469-1.375 2.531c0 1.125 0.531 2 1.375 2.531 0.844 0.563 1.906 0.906 2.875 0.906 0.938 0 2.031-0.344 2.875-0.906 0.875-0.531 1.406-1.406 1.406-2.531v-14.406c0-0.688-0.469-1.156-1.156-1.156-0.063 0-0.438 0.125-1.031 0.281-1.25 0.344-3.125 0.875-5.25 1.5-1.094 0.281-2.063 0.594-3.031 0.844-0.938 0.281-1.75 0.563-2.469 0.75-0.75 0.219-1.219 0.344-1.406 0.406-0.5 0.156-0.844 0.594-0.844 1.094z"/></svg>Music</h2>
-          <p>
-            Since my school days I have had a passion for playing music, and lost
-            track of time sitting with songs I was working on. Through the
-            community I discovered my love for Irish music and performing for
-            which&hellip;
-          </p>
-          <figure>
-            <img src="/music/performing-paddys-day.jpg"
-                 width="1100" height="1163" loading="lazy"
-                 alt="Playing guitar and fiddle outdoors under a tree at the St Patrick&rsquo;s Festival">
-          </figure>
-          <p class="featmore">
-            <a href="/music.html">Read about the music &rarr;</a>
-          </p>
-        </section>
-        <section class="feature f-comm" aria-labelledby="community-heading">
-          <h2 id="community-heading"><img class="cardicon" src="/community/shamrock.svg" alt="">Community</h2>
-          <p>
-            We had a blast volunteering for the St Patrick's Festival with the
-            South West Irish Community Group for both 2024 and 2025.
-          </p>
-          <figure>
-            <img src="/community/day-jerseys.jpg"
-                 width="1600" height="1066" loading="lazy"
-                 alt="Three of us in Irish county jerseys at the festival, under the trees">
-          </figure>
-          <p class="featmore">
-            <a href="/community.html">Read about the community &rarr;</a>
-          </p>
-        </section>
-      </div>
+      <section class="feature f-music" aria-labelledby="music-heading">
+        <h2 id="music-heading"><svg class="cardicon" viewBox="-5.5 0 32 32" fill="currentColor" aria-hidden="true"><path d="M5.688 9.656v10.906c-0.469-0.125-0.969-0.219-1.406-0.219-1 0-2.031 0.344-2.875 0.906s-1.406 1.469-1.406 2.531c0 1.125 0.563 1.969 1.406 2.531s1.875 0.875 2.875 0.875c0.938 0 2-0.313 2.844-0.875s1.375-1.406 1.375-2.531v-11.438l9.531-2.719v7.531c-0.438-0.125-0.969-0.188-1.438-0.188-0.969 0-2.031 0.281-2.875 0.844s-1.375 1.469-1.375 2.531c0 1.125 0.531 2 1.375 2.531 0.844 0.563 1.906 0.906 2.875 0.906 0.938 0 2.031-0.344 2.875-0.906 0.875-0.531 1.406-1.406 1.406-2.531v-14.406c0-0.688-0.469-1.156-1.156-1.156-0.063 0-0.438 0.125-1.031 0.281-1.25 0.344-3.125 0.875-5.25 1.5-1.094 0.281-2.063 0.594-3.031 0.844-0.938 0.281-1.75 0.563-2.469 0.75-0.75 0.219-1.219 0.344-1.406 0.406-0.5 0.156-0.844 0.594-0.844 1.094z"/></svg>Music</h2>
+        <p>
+          Since my school days I have had a passion for playing music, and lost
+          track of time sitting with songs I was working on. Through the
+          community I discovered my love for Irish music and performing for
+          which&hellip;
+        </p>
+        <figure>
+          <img src="/music/performing-paddys-day.jpg"
+               width="1100" height="1163" loading="lazy"
+               alt="Playing guitar and fiddle outdoors under a tree at the St Patrick&rsquo;s Festival">
+        </figure>
+        <p class="featmore">
+          <a href="/music.html">Read about the music &rarr;</a>
+        </p>
+      </section>
+
+      <hr class="featrule">
+
+      <section class="feature f-comm" aria-labelledby="community-heading">
+        <h2 id="community-heading"><img class="cardicon" src="/community/shamrock.svg" alt="">Community</h2>
+        <p>
+          We had a blast volunteering for the St Patrick's Festival with the
+          South West Irish Community Group for both 2024 and 2025.
+        </p>
+        <figure>
+          <img src="/community/day-jerseys.jpg"
+               width="1600" height="1066" loading="lazy"
+               alt="Three of us in Irish county jerseys at the festival, under the trees">
+        </figure>
+        <p class="featmore">
+          <a href="/community.html">Read about the community &rarr;</a>
+        </p>
+      </section>
 
       <hr class="featrule">
 

@@ -929,19 +929,24 @@ has already decided whether to keep going. They now sit directly under Home
 Screen, built exactly like the project features, with the project grid below
 them.
 
-The pair holds **the same 44rem measure a single feature block does**. That
-matters: the whole point of the previous entry is that the page has one
-content width, so two cards across has to mean a narrower card, not a wider
-row. `auto-fit` stacks them once two 17rem columns no longer fit, which is
-every phone.
+They were first built two abreast, and that lasted one round. Holding the
+pair to the same 44rem measure a single block uses — which the one-width rule
+requires — made each card about half width, and the photographs came out
+smaller than they had been as topic cards. Oisin asked for their old size
+back, and since two 44rem cards cannot sit side by side inside a 44rem
+measure, restoring the size means stacking them. The upshot is better than
+the pair was: **seven identical blocks**, which is what holding one width was
+for in the first place. The photographs are now a little larger than they
+ever were as topic cards (692px against 612px at 1707).
 
-Both photographs take a shared 4:3 frame, so the two cards read as a pair
-rather than as two different shapes — but the music shot is anchored at
-`50% 20%` rather than centred. It is nearly square (1100x1163) with both
-players' heads in the upper half, and a centred 4:3 crop of a portrait
-photograph takes the heads off. That is the same fact that kept it uncropped
-when it stood on its own; the anchor is what lets it join the pair without
-losing anything.
+Both photographs take a shared 3:2 frame — the proportion the van's
+photograph on this page already has. The community shot is natively 3:2, so
+nothing is cropped from it at all. The music shot is anchored at `50% 8%`
+rather than centred: it is nearly square (1100x1163) with both players' heads
+in the upper half, and a centred crop takes the heads off. That is the same
+fact that kept it uncropped when it stood on its own. The rendered crop was
+checked rather than assumed — the band is y=34..767 of 1163, which clears the
+higher head by about 20px and is a tighter composition than the full frame.
 
 Their blurbs lost their inline "see more" links. The card is the link now,
 and an anchor inside an anchor is invalid — the community blurb also lost the

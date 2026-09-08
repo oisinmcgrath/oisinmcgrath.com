@@ -333,7 +333,25 @@ overrides need matching specificity — `footer.site-footer a`, not
   things below. Note `.feature figure img`, scoped on purpose: unscoped, it
   also matches the mark in the heading and blows it up to the full width of
   the block.
-- **A feature block IS an anchor.** `<a class="feature f-x" href="…"
+- **Three feature thumbnails cross-fade.** `.fader` stacks two or three
+  captures absolutely in one frame; the **first is the base and never
+  animates**, and the layers above fade in over it in turn. That is what makes
+  the loop close: the topmost fades out at the end of the cycle onto a base
+  that is always fully opaque, so there is never a frame with nothing behind
+  it. Each layer also holds `opacity:1` until the layer above has finished
+  fading in, then drops to 0 while hidden behind it — fading a lower layer out
+  while it is still visible would show the base mid-transition. Both keyframe
+  sets are hand-authored; check the arithmetic against the cycle before
+  changing either. The van is weighted deliberately: the side-door interior
+  holds 3s and the other two about 1.5s each, on a 6s cycle. CMI uses the same
+  6s weighting; invoiceNow has two images and splits evenly. Suppressed under
+  `prefers-reduced-motion`, which leaves the base showing — a still, not a
+  blank frame. The van's three share a 3:2 frame with `object-fit:cover`; the
+  two screenshot faders use `contain` against their own near-black, because
+  cropping a UI capture loses content and a letterbox bar in the same
+  near-black cannot be seen. The fader rules are scoped through `.feature` so
+  they out-specify `.feature figure img`.
+- **A feature block IS an anchor** — with one exception, Music. `<a class="feature f-x" href="…"
   aria-label="…">` wrapping the heading, prose, figure and pill — the same
   construction `.projcard` uses. The pill inside is a `<span class="featbtn">`,
   not a link, so there is nothing to nest. An earlier version kept `<section>`
@@ -341,7 +359,13 @@ overrides need matching specificity — `footer.site-footer a`, not
   hit-tested correctly everywhere it was measured and still did not behave as
   a link for Oisin, so it was replaced with the construction that has never
   been in doubt. **Do not put a second anchor inside a feature block** — the
-  screenshot must not be wrapped in one. The focus ring is on
+  screenshot must not be wrapped in one.
+- **Music is the exception and is a `<section>`.** It carries two destinations
+  — the music page and the YouTube channel — so a card-wide click would have
+  no single answer. Both pills are real `<a class="featbtn">` links there,
+  stacked and centred by `.featmore` (a flex column). The consequence, and it
+  was flagged: that one card is not clickable as a whole. Every other card is.
+  `.featbtn` styles a `<span>` and an `<a>` identically. The focus ring is on
   `.feature:focus-visible`, and `body a.feature{color:inherit;
   text-decoration:none}` stops the card taking link ink.
 - The call-through is a **filled** pill: `--cta`, defined once per block, with

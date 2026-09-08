@@ -218,14 +218,16 @@
     body .feature.f-cmi h2{color:light-dark(#1a4f86,#a8cbfa)}
     body .feature.f-cmi p{color:light-dark(#2b3542,#d3dcea)}
     body .feature.f-cmi figcaption{color:light-dark(#5a6675,#a7b4c7)}
-    body .feature.f-cmi figure img{border-color:light-dark(#bcd3ef,#4a5f80)}
+    body .feature.f-cmi figure img,
+    body .feature.f-cmi .fader{border-color:light-dark(#bcd3ef,#4a5f80)}
     body .feature.f-ren{--cta:#a8431a;
       background:light-dark(#fdf1ea,#3a251c);
       border-color:light-dark(#e8c3ae,#6b4130)}
     body .feature.f-ren h2{color:light-dark(#8f3d17,#ffc089)}
     body .feature.f-ren p{color:light-dark(#3a2b23,#f4e3d8)}
     body .feature.f-ren figcaption{color:light-dark(#6d5648,#d0b6a4)}
-    body .feature.f-ren figure img{border-color:light-dark(#e8c3ae,#7d4f3a)}
+    body .feature.f-ren figure img,
+    body .feature.f-ren .fader{border-color:light-dark(#e8c3ae,#7d4f3a)}
     /* invoiceNow holds its app's teal, Receipt Manager its app's blue, and
        Home Screen the cool blue of its tile glass. */
     body .feature.f-inv{--cta:#0d6b7e;
@@ -234,21 +236,24 @@
     body .feature.f-inv h2{color:light-dark(#0d6b7e,#78d3e3)}
     body .feature.f-inv p{color:light-dark(#26343a,#cfdde2)}
     body .feature.f-inv figcaption{color:light-dark(#537077,#a2b8be)}
-    body .feature.f-inv figure img{border-color:light-dark(#b9dde6,#456872)}
+    body .feature.f-inv figure img,
+    body .feature.f-inv .fader{border-color:light-dark(#b9dde6,#456872)}
     body .feature.f-rec{--cta:#1558b0;
       background:light-dark(#ecf3fd,#1f2a3c);
       border-color:light-dark(#c0d6f2,#374966)}
     body .feature.f-rec h2{color:light-dark(#1558b0,#9cc3f8)}
     body .feature.f-rec p{color:light-dark(#28313e,#d0dae8)}
     body .feature.f-rec figcaption{color:light-dark(#58687e,#a5b4c8)}
-    body .feature.f-rec figure img{border-color:light-dark(#c0d6f2,#475c7d)}
+    body .feature.f-rec figure img,
+    body .feature.f-rec .fader{border-color:light-dark(#c0d6f2,#475c7d)}
     body .feature.f-hs{--cta:#2a6cb3;
       background:light-dark(#eef3f9,#212a35);
       border-color:light-dark(#c6d6e8,#3a485a)}
     body .feature.f-hs h2{color:light-dark(#2a6cb3,#8fc4f5)}
     body .feature.f-hs p{color:light-dark(#2b3542,#d0dae6)}
     body .feature.f-hs figcaption{color:light-dark(#5a6a7c,#a4b3c4)}
-    body .feature.f-hs figure img{border-color:light-dark(#c6d6e8,#4b5b6f)}
+    body .feature.f-hs figure img,
+    body .feature.f-hs .fader{border-color:light-dark(#c6d6e8,#4b5b6f)}
     /* Music keeps the warm tan it had as a topic card; Community keeps the
        club's green, matching community.html. Same construction as the five
        project blocks above — they are the same kind of object now. */
@@ -257,13 +262,19 @@
       border-color:light-dark(#e1b890,#5c4632)}
     body .feature.f-music h2{color:light-dark(#8a5433,#e8bd93)}
     body .feature.f-music p{color:light-dark(#3a2e25,#e6d8c9)}
-    body .feature.f-music figure img{border-color:light-dark(#e1b890,#6d5540)}
+    /* Both photographs are outlined in the club's green, which ties the two
+       cards together as the pair they were. */
+    body .feature.f-music figure img,
+    body .feature.f-music .fader{border-color:light-dark(#2f7d4a,#4e9a68);
+      border-width:2px}
     body .feature.f-comm{--cta:#1f6b3a;
       background:light-dark(#eef6ee,#18241b);
       border-color:light-dark(#c9ddcd,#334b39)}
     body .feature.f-comm h2{color:light-dark(#14512b,#93d3a3)}
     body .feature.f-comm p{color:light-dark(#26332b,#d3e3d6)}
-    body .feature.f-comm figure img{border-color:light-dark(#c9ddcd,#3d5943)}
+    body .feature.f-comm figure img,
+    body .feature.f-comm .fader{border-color:light-dark(#2f7d4a,#4e9a68);
+      border-width:2px}
     body .moreaims summary{color:light-dark(#14507d,#7fb3e8)}
     body .linkcard{background:light-dark(#fbfcfd,#1b2026);
       border-color:light-dark(#dbe2e9,#2c333c);
@@ -364,17 +375,77 @@
        button's box to the card's left edge and the button stops looking
        centred on the two full-width blocks. The same trap the card rules at
        the foot of this file carry a warning about. */
-    .feature .featmore{margin:auto auto .25rem;padding-top:.4rem;text-align:center}
-    /* A span, not a link. The whole card is the anchor, so the pill is only
-       the visible affordance — there is no second link to nest. */
+    .feature .featmore{margin:auto auto .25rem;padding-top:.4rem;text-align:center;
+      display:flex;flex-direction:column;align-items:center;gap:.55rem}
+    /* Usually a span: the whole card is the anchor, so the pill is only the
+       visible affordance and there is no second link to nest. The Music card
+       is the exception — it has two destinations, so there the card is a
+       <section> and both pills are real links. One rule serves both. */
     .feature .featbtn{display:inline-flex;align-items:center;gap:.45rem;
       padding:.55rem 1.15rem;border-radius:999px;font-weight:600;
       color:#fff;background:var(--cta);
       border:1px solid transparent;
       box-shadow:0 1px 3px rgba(0,0,0,.22);
       transition:filter .15s,box-shadow .15s}
-    .feature:hover .featbtn{filter:brightness(1.1);
+    body .feature a.featbtn{color:#fff;text-decoration:none}
+    .feature:hover .featbtn,
+    .feature a.featbtn:hover{filter:brightness(1.1);
       box-shadow:0 3px 10px rgba(0,0,0,.3)}
+    .feature a.featbtn:focus-visible{outline:2px solid currentColor;
+      outline-offset:3px}
+    .feature .featbtn .btnico{width:1.15em;height:auto;flex:none}
+
+    /* ── Cross-fading thumbnails ────────────────────────────────────────────
+       Three cards show more than one capture, fading between them. The images
+       are stacked absolutely in one frame; the FIRST is the base and never
+       animates, and the ones above it fade in over it in turn. That is what
+       makes the loop close cleanly: the topmost fades out at the end of the
+       cycle onto a base that is always fully opaque, so there is never a
+       frame with nothing behind it.
+
+       The order matters as much as the timing. Each layer holds opacity 1
+       until the layer above it has finished fading in, then drops to 0 while
+       hidden behind it — fading a lower layer out while it is still visible
+       would show the base through the middle of a transition.
+
+       Suppressed under prefers-reduced-motion, which leaves the base image
+       showing: a still, not a blank frame. */
+    .feature .fader{position:relative;display:block;overflow:hidden;
+      border-radius:10px;border:1px solid}
+    .feature .fader img{position:absolute;inset:0;width:100%;height:100%;
+      display:block;border:0;border-radius:0;margin:0}
+    .feature .fader .fade2,
+    .feature .fader .fade3{opacity:0}
+    @media (prefers-reduced-motion:no-preference){
+      .feature .fader .fade2{animation:fade2 var(--cycle) linear infinite}
+      .feature .fader .fade3{animation:fade3 var(--cycle) linear infinite}
+      /* Two images: one crossfade out and back, half the cycle each. */
+      .feature .fader.two .fade2{animation-name:fade-two}
+    }
+    /* Three images, weighted: the base holds half the cycle, the other two a
+       quarter each. The van's opening frame is meant to sit noticeably
+       longer than the two that follow it. */
+    @keyframes fade2{
+      0%,50%{opacity:0} 58.33%,83.33%{opacity:1} 91.67%,100%{opacity:0}
+    }
+    @keyframes fade3{
+      0%,75%{opacity:0} 83.33%,91.67%{opacity:1} 100%{opacity:0}
+    }
+    /* Two images, evenly split. */
+    @keyframes fade-two{
+      0%,41.67%{opacity:0} 50%,91.67%{opacity:1} 100%{opacity:0}
+    }
+    /* The van's photographs share a 3:2 frame — two of the three are 4:3, so
+       they give up 11% of their height rather than the frame changing shape
+       mid-cycle. The screenshots use `contain` against their own near-black
+       instead: cropping a UI capture loses content, and a letterbox bar in
+       the same near-black the capture is drawn on cannot be seen. */
+    .feature.f-ren .fader{aspect-ratio:3/2}
+    .feature.f-ren .fader img{object-fit:cover}
+    .feature.f-cmi .fader{aspect-ratio:37/20;background:#10151c}
+    .feature.f-inv .fader{aspect-ratio:8/5;background:#1a1b1e}
+    .feature.f-cmi .fader img,
+    .feature.f-inv .fader img{object-fit:contain}
     .feature .cardicon{width:1.15em;height:1.15em;object-fit:contain;flex:none}
     /* Music and Community are full-width blocks like the five above them.
        They were briefly set two abreast, which made each card about half the
@@ -549,10 +620,16 @@
           Intelligence exists to answer these questions.
         </p>
         <figure>
-          <img src="/projects/cross-market-intelligence/screenshots/auction-target.png"
-               width="2000" height="1055" loading="lazy"
-               alt="One vehicle's auction and private-sale forecasts, with the comparable private sales set out beside them and what matches or differs listed against each.">
-          <figcaption>A vehicle's auction and private-sale forecasts, with the comparable private sales set out beside them — what matches, and what differs.</figcaption>
+          <span class="fader" style="--cycle:6s">
+            <img src="/projects/cross-market-intelligence/screenshots/auction-target.png"
+                 width="2000" height="1055" loading="lazy"
+                 alt="One vehicle's auction and private-sale forecasts, with the comparable private sales set out beside them and what matches or differs listed against each.">
+            <img class="fade2" src="/projects/cross-market-intelligence/screenshots/upcoming.jpg"
+                 width="1600" height="905" loading="lazy" alt="">
+            <img class="fade3" src="/projects/cross-market-intelligence/screenshots/live-auction.jpg"
+                 width="1600" height="852" loading="lazy" alt="">
+          </span>
+          <figcaption>A vehicle's forecasts against the comparable private sales, the sales counting down to their start, and the bidding as it runs.</figcaption>
         </figure>
         <p class="featmore">
           <span class="featbtn">Read about Cross Market Intelligence &rarr;</span>
@@ -568,10 +645,15 @@
           kitchen, bed, heating, power, water and a toilet.
         </p>
         <figure>
-          <img src="/projects/renault-master/photos/hero-gopro.jpg"
-               width="1600" height="1067" loading="lazy"
-               alt="Inside the finished van looking out through the open side door and its fly screen, showing the bed, seating and sink">
-          <figcaption>Looking inside through the side door.</figcaption>
+          <span class="fader" style="--cycle:6s">
+            <img src="/projects/renault-master/photos/hero-gopro.jpg"
+                 width="1600" height="1200" loading="lazy"
+                 alt="Inside the finished van looking out through the open side door and its fly screen, showing the bed, seating and sink">
+            <img class="fade2" src="/projects/renault-master/photos/ext-02-front.jpg"
+                 width="1600" height="1067" loading="lazy" alt="">
+            <img class="fade3" src="/projects/renault-master/photos/trip-02-boab.jpg"
+                 width="1600" height="1200" loading="lazy" alt="">
+          </span>
         </figure>
         <p class="featmore">
           <span class="featbtn">Read about the conversion &rarr;</span>
@@ -587,10 +669,14 @@
           your mind for good.
         </p>
         <figure>
-          <img src="/projects/invoicenow/screenshots/dashboard.png"
-               width="3412" height="1846" loading="lazy"
-               alt="The invoiceNow dashboard, showing the quarter's billed and received totals, the GST on them, and how many invoices are still unpaid.">
-          <figcaption>Where you stand financially, without working it out.</figcaption>
+          <span class="fader two" style="--cycle:6s">
+            <img src="/projects/invoicenow/screenshots/dashboard.png"
+                 width="3412" height="1846" loading="lazy"
+                 alt="The invoiceNow dashboard, showing the quarter's billed and received totals, the GST on them, and how many invoices are still unpaid.">
+            <img class="fade2" src="/projects/invoicenow/screenshots/bas-statements.png"
+                 width="2000" height="1496" loading="lazy" alt="">
+          </span>
+          <figcaption>Where you stand financially, and the quarter's BAS figures, without working either out.</figcaption>
         </figure>
         <p class="featmore">
           <span class="featbtn">Read about invoiceNow &rarr;</span>
@@ -629,7 +715,6 @@
           <img src="/projects/homescreen/screenshots/home-screen.jpg"
                width="1400" height="743" loading="lazy"
                alt="The new tab page: a grid of app tiles with real site icons over a lake wallpaper, with a search bar, clock, weather, a sunrise countdown and an Ask Claude bar.">
-          <figcaption>The whole page. Tiles are placed by hand and stay put; the icons are each site's own, fetched once and cached.</figcaption>
         </figure>
         <p class="featmore">
           <span class="featbtn">Read about Home Screen &rarr;</span>
@@ -638,7 +723,7 @@
 
       <hr class="featrule">
 
-      <a class="feature f-music" href="/music.html" aria-label="Read about the music">
+      <section class="feature f-music" aria-labelledby="music-heading">
         <h2 id="music-heading"><svg class="cardicon" viewBox="-5.5 0 32 32" fill="currentColor" aria-hidden="true"><path d="M5.688 9.656v10.906c-0.469-0.125-0.969-0.219-1.406-0.219-1 0-2.031 0.344-2.875 0.906s-1.406 1.469-1.406 2.531c0 1.125 0.563 1.969 1.406 2.531s1.875 0.875 2.875 0.875c0.938 0 2-0.313 2.844-0.875s1.375-1.406 1.375-2.531v-11.438l9.531-2.719v7.531c-0.438-0.125-0.969-0.188-1.438-0.188-0.969 0-2.031 0.281-2.875 0.844s-1.375 1.469-1.375 2.531c0 1.125 0.531 2 1.375 2.531 0.844 0.563 1.906 0.906 2.875 0.906 0.938 0 2.031-0.344 2.875-0.906 0.875-0.531 1.406-1.406 1.406-2.531v-14.406c0-0.688-0.469-1.156-1.156-1.156-0.063 0-0.438 0.125-1.031 0.281-1.25 0.344-3.125 0.875-5.25 1.5-1.094 0.281-2.063 0.594-3.031 0.844-0.938 0.281-1.75 0.563-2.469 0.75-0.75 0.219-1.219 0.344-1.406 0.406-0.5 0.156-0.844 0.594-0.844 1.094z"/></svg>Music</h2>
         <p>
           Since my school days I have had a passion for playing music, and lost
@@ -652,9 +737,11 @@
                alt="Playing guitar and fiddle outdoors under a tree at the St Patrick&rsquo;s Festival">
         </figure>
         <p class="featmore">
-          <span class="featbtn">Read about the music &rarr;</span>
+          <a class="featbtn" href="/music.html">Read about the music &rarr;</a>
+          <a class="featbtn" href="https://www.youtube.com/@oisinmcgrath1916"><img
+             class="btnico" src="/music/youtube-icon.png" alt="" width="76" height="48">YouTube Channel</a>
         </p>
-      </a>
+      </section>
 
       <hr class="featrule">
 

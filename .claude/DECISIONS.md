@@ -1040,3 +1040,50 @@ the script budget is spent.
 
 The label also lost the word "aims" it had briefly gained — it was doing no
 work, since the list it opens is plainly the same list.
+
+
+---
+
+## Three thumbnails cross-fade, and the Music card gained a second door
+
+**2026-09-08 — animated feature thumbnails, still without a script.**
+
+The van, Cross Market Intelligence and invoiceNow each had more than one
+capture worth showing, so their thumbnails now fade between them. The
+construction is worth writing down because the obvious version does not work:
+
+**The first image is the base and never animates.** Everything above it fades
+in over it. That is what lets the loop close — the topmost layer fades out at
+the end of the cycle onto a base that is always fully opaque, so there is
+never a frame with nothing behind it. And each layer holds `opacity:1` until
+the layer above has finished fading in, then drops to 0 while hidden behind
+it. Fading a lower layer out while it is still visible would show the base
+through the middle of a transition, which reads as a flicker.
+
+The keyframes are hand-authored percentages, verified by pausing the animation
+and stepping `animation-delay` across the cycle in 0.25s steps rather than by
+eye. The van is weighted as asked: the side-door interior holds three seconds,
+the front view and the boab about a second and a half each, on a six-second
+cycle. CMI takes the same weighting; invoiceNow has two images and splits
+evenly.
+
+Frames differ by material. The van's three photographs share a 3:2 frame with
+`object-fit:cover` — two of them are 4:3 and give up 11% of their height
+rather than the frame changing shape mid-cycle. The two screenshot faders use
+`contain` against their own near-black instead: cropping a UI capture loses
+content, and a letterbox bar in the same near-black the capture is drawn on
+cannot be seen. Suppressed under `prefers-reduced-motion`, which leaves the
+base image showing — a still, not a blank frame.
+
+**The Music card is now the one feature block that is not an anchor.** It has
+two destinations — the music page and the YouTube channel — and a card-wide
+click has no honest answer when there are two. So it is a `<section>` with two
+real link pills, stacked and centred, and the card as a whole is not
+clickable. That is a genuine regression against the rule set the day before,
+taken deliberately and flagged: the alternative was either a nested anchor,
+which is invalid, or the stretched overlay that had just been removed for not
+behaving as a link. If whole-card clicking matters more than the second
+button, the button moves out of the card.
+
+The Home Screen and van captions came off at the same time, and both
+photographs on the Music and Community cards took a green outline.

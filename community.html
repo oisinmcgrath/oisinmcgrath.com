@@ -28,7 +28,15 @@
 
     .shamrock{width:1.15em;height:1.15em;vertical-align:-.2em;margin-left:.35rem}
 
-    .photos{display:grid;grid-template-columns:1fr;gap:1.1rem;margin:1rem 0 0;padding:0;list-style:none}
+    /* `max-width:none` on purpose. The root stylesheet caps `main ul` at the
+       44rem reading measure and centres it, which is right for a list of
+       prose and wrong for these two — the photo grid and the row of club
+       marks are media, and on this site media takes the whole column while
+       prose keeps the measure. Worse, both rules set `margin` as a shorthand,
+       which resets the centring margin-inline that came with that cap, so the
+       grid sat 183px to the left of the paragraph above it. Full width, and
+       it shares the prose's median again. */
+    .photos{display:grid;grid-template-columns:1fr;gap:1.1rem;margin:1rem 0 0;padding:0;list-style:none;max-width:none}
     .photos figure{margin:0}
     /* Uniform 4:3 tiles: the set mixes portrait and landscape, and letting each
        keep its own shape left large gaps beside the shorter ones. */
@@ -44,7 +52,7 @@
        is images rather than text buttons; the title attribute is the hover
        tooltip and the img alt is what a screen reader announces. */
     .support{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
-             gap:1.75rem;margin:1.25rem 0 .5rem;padding:0;list-style:none}
+             gap:1.75rem;margin:1.25rem 0 .5rem;padding:0;list-style:none;max-width:none}
     .support a{display:block;border-radius:10px}
     .support img{display:block;width:110px;height:110px;object-fit:contain;
                  transition:transform .15s}

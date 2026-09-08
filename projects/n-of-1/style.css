@@ -180,7 +180,12 @@ footer.site-footer a {
 }
 
 .beats p {
-  margin: 0 0 0.9rem;
+  /* `auto` inline, not 0. The wide-screen block gives `main p` a 44rem
+     measure and centres it, but `.beats p` out-specifies that rule, so a
+     `margin: 0 0 …` shorthand here reset margin-inline and pinned the whole
+     block to the left edge of .beats — 183px off centre on a wide screen,
+     while every other paragraph on the page stayed centred. */
+  margin: 0 auto 0.9rem;
   font-size: 1.05rem;
   color: #dbe4e3;
 }

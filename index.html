@@ -249,22 +249,25 @@
     body .feature.f-hs p{color:light-dark(#2b3542,#d0dae6)}
     body .feature.f-hs figcaption{color:light-dark(#5a6a7c,#a4b3c4)}
     body .feature.f-hs figure img{border-color:light-dark(#c6d6e8,#4b5b6f)}
+    /* Music keeps the warm tan it had as a topic card; Community keeps the
+       club's green, matching community.html. Same construction as the five
+       project blocks above — they are the same kind of object now. */
+    body .feature.f-music{--cta:#8a5433;
+      background:light-dark(#fdf6ef,#2b211a);
+      border-color:light-dark(#e1b890,#5c4632)}
+    body .feature.f-music h2{color:light-dark(#8a5433,#e8bd93)}
+    body .feature.f-music p{color:light-dark(#3a2e25,#e6d8c9)}
+    body .feature.f-music figure img{border-color:light-dark(#e1b890,#6d5540)}
+    body .feature.f-comm{--cta:#1f6b3a;
+      background:light-dark(#eef6ee,#18241b);
+      border-color:light-dark(#c9ddcd,#334b39)}
+    body .feature.f-comm h2{color:light-dark(#14512b,#93d3a3)}
+    body .feature.f-comm p{color:light-dark(#26332b,#d3e3d6)}
+    body .feature.f-comm figure img{border-color:light-dark(#c9ddcd,#3d5943)}
     body .moreaims summary{color:light-dark(#14507d,#7fb3e8)}
-    body .commshot{border-color:light-dark(#aab8c6,#39424d);
-      box-shadow:0 2px 10px light-dark(rgba(20,60,100,.10),rgba(0,0,0,.45))}
-    body .commshot:hover{border-color:light-dark(#14507d,#7fb3e8);
-      box-shadow:0 6px 20px light-dark(rgba(20,60,100,.18),rgba(0,0,0,.6))}
     body .linkcard{background:light-dark(#fbfcfd,#1b2026);
       border-color:light-dark(#dbe2e9,#2c333c);
       box-shadow:0 1px 3px light-dark(rgba(20,60,100,.06),rgba(0,0,0,.4))}
-    body .musiccard{background:light-dark(#fdf6ef,#241c15);
-      border-color:light-dark(#e1b890,#6b4a30)}
-    body .musiccard h2{color:light-dark(#8a5433,#e1b890)}
-    body .commcard{background:light-dark(#eef6ee,#161f19);
-      border-color:light-dark(#c9ddcd,#2f4536)}
-    body .commcard h2{color:light-dark(#14512b,#8fce9f)}
-    body .commcard a:not(.commshot){color:light-dark(#1f6b3a,#7fc793)}
-    body .commcard a:not(.commshot):hover{color:light-dark(#14512b,#a5dab4)}
     body hr.rule{border-top-color:light-dark(#dfe4e8,#2a3038)}
     body hr.rule.accent{background:linear-gradient(90deg,transparent,
       light-dark(rgba(20,80,125,.25),rgba(127,179,232,.2)) 12%,
@@ -368,6 +371,23 @@
     .feature .featmore a::after{content:"";position:absolute;inset:0;
       border-radius:16px;z-index:1}
     .feature .cardicon{width:1.15em;height:1.15em;object-fit:contain;flex:none}
+    /* Music and Community sit side by side under the project features. The
+       PAIR holds the same 44rem measure a single feature block does, so the
+       page still has exactly one content width — two cards across is a
+       narrower card, not a wider row. `auto-fit` stacks them on its own once
+       two 17rem columns no longer fit, which is every phone. */
+    .featpair{display:grid;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));
+              gap:1rem;max-width:44rem;margin:1.75rem auto 2rem}
+    .featpair .feature{margin:0;max-width:none;padding:1.25rem 1.3rem 1rem}
+    .featpair .feature h2{font-size:1.2rem}
+    /* One frame for both photographs, so the two cards read as a pair rather
+       than as two different shapes. The music shot is nearly square and its
+       players' heads sit in the upper half, so the crop is anchored high —
+       a centred 4:3 crop of a portrait photograph takes the heads off, which
+       is the reason it was left uncropped when it sat on its own. */
+    .featpair figure img{aspect-ratio:4/3;object-fit:cover}
+    .f-music figure img{object-position:50% 20%}
+    .f-comm figure img{object-position:50% 45%}
     /* A divider between showcase cards, in the page's own blue, the same
        shape as the accent rule further down. */
     hr.featrule{height:2px;margin:1.6rem auto;border:0;opacity:.5;
@@ -405,36 +425,6 @@
     .projcard h3{margin:0 0 .4rem;font-size:1.05rem;color:#15191d}
     .projcard p{margin:0 0 .9rem;font-size:.92rem;color:#3b424a;flex:1}
     .projcard .more{font-size:.88rem;font-weight:600;color:#14507d}
-    .commshot{display:block;max-width:30rem;margin:1rem auto 0;border:2px solid #aab8c6;
-              border-radius:10px;overflow:hidden;line-height:0;
-              box-shadow:0 2px 10px rgba(20,60,100,.10);
-              transition:box-shadow .15s,transform .15s,border-color .15s}
-    .commshot:hover{transform:translateY(-2px);border-color:#14507d;
-                    box-shadow:0 6px 20px rgba(20,60,100,.18)}
-    .commshot img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
-    /* The music photograph is close to square. Cropping it to the 16:9 frame the
-       other shots use takes the fiddle player's head off, so it keeps its own
-       proportions and the full 30rem width — legible at that size, and its
-       edges line up with the community shot below. */
-    .commshot.natural img{aspect-ratio:auto}
-    /* Music and Community each sit on a card of their own, tinted to the thing
-       it is about: warm tan for the music, the club's green for the community,
-       matching community.html's palette. Same geometry as .linkcard above, so
-       the three cards on the page read as one family. The soft rule between
-       them is the standard hr.rule at half strength — enough to separate the
-       two cards without cutting the run of them in half. */
-    .topiccard{margin:1.5rem 0;padding:.75rem 1.35rem 1.1rem;
-               border:1px solid;border-radius:12px}
-    .topiccard h2{margin-top:.35rem}
-    .musiccard{border-color:#e1b890;background:#fdf6ef}
-    .musiccard h2{color:#8a5433}
-    .commcard{border-color:#c9ddcd;background:#eef6ee}
-    .commcard h2{color:#14512b}
-    .commcard a:not(.commshot){color:#1f6b3a}
-    .commcard a:not(.commshot):hover{color:#14512b}
-    .hicon.micon{color:currentColor}
-    .shamrock{vertical-align:-.2em}
-    hr.rule.soft{margin:1.5rem auto;width:70%;opacity:.55}
     /* The channel image is a deliberate 16:9 crop of the screenshot — banner,
        name, handle and the first row of videos — rather than the automatic
        one, which cut the banner off the top. Padding it to 16:9 instead was
@@ -476,19 +466,16 @@
        the later declaration wins, so anything placed before them is silently
        undone and the cards sit hard against the left edge.
 
-       .linkcard, .topiccard and .leadlist are this page's own; the shared
-       stylesheet gives .card and main ul the same measure, but these are not
-       those. The project grid and the carousel are deliberately left alone —
-       they are what should be using the extra width. */
+       .linkcard and .leadlist are this page's own; the shared stylesheet
+       gives .card and main ul the same measure, but these are not those. The
+       project grid is deliberately left alone — it is what should be using
+       the extra width. */
     @media (min-width:1280px){
-      .linkcard,.topiccard{max-width:44rem;margin-inline:auto}
+      .linkcard{max-width:44rem;margin-inline:auto}
       .leadlist{max-width:44rem;margin-inline:auto}
       /* The disclosure chip has to sit on the same left edge as the list it
          extends — left at the column edge it reads as unrelated to anything. */
       .moreaims{max-width:44rem;margin-inline:auto}
-      /* The photographs sit inside a 44rem card, so they can afford to grow
-         from 30rem with it rather than leaving wide gutters either side. */
-      .commshot{max-width:36rem}
       /* The header holds the reading measure too. A name, a tagline and a
          photograph gain nothing from being flung to opposite ends of a
          1100px column — the extra width is for the body and the pictures. */
@@ -565,9 +552,8 @@
       <section class="feature f-ren" aria-labelledby="ren-heading">
         <h2 id="ren-heading"><img class="cardicon" src="/projects/renault-master/favicon.svg" alt="">Renault Master Camper Conversion</h2>
         <p>
-          Perhaps my most ambitious and educational undertaking: in 2025 I
-          converted an Australia Post van into a fully fitted-out campervan, and
-          put it to the test by taking it 4,400&nbsp;km to the top of Australia.
+          I built it into a fully livable home on wheels, including a kitchen,
+          bed, heating, power, water and a toilet.
         </p>
         <figure>
           <img src="/projects/renault-master/photos/hero-gopro.jpg"
@@ -640,6 +626,43 @@
 
       <hr class="featrule">
 
+      <div class="featpair">
+        <section class="feature f-music" aria-labelledby="music-heading">
+          <h2 id="music-heading"><svg class="cardicon" viewBox="-5.5 0 32 32" fill="currentColor" aria-hidden="true"><path d="M5.688 9.656v10.906c-0.469-0.125-0.969-0.219-1.406-0.219-1 0-2.031 0.344-2.875 0.906s-1.406 1.469-1.406 2.531c0 1.125 0.563 1.969 1.406 2.531s1.875 0.875 2.875 0.875c0.938 0 2-0.313 2.844-0.875s1.375-1.406 1.375-2.531v-11.438l9.531-2.719v7.531c-0.438-0.125-0.969-0.188-1.438-0.188-0.969 0-2.031 0.281-2.875 0.844s-1.375 1.469-1.375 2.531c0 1.125 0.531 2 1.375 2.531 0.844 0.563 1.906 0.906 2.875 0.906 0.938 0 2.031-0.344 2.875-0.906 0.875-0.531 1.406-1.406 1.406-2.531v-14.406c0-0.688-0.469-1.156-1.156-1.156-0.063 0-0.438 0.125-1.031 0.281-1.25 0.344-3.125 0.875-5.25 1.5-1.094 0.281-2.063 0.594-3.031 0.844-0.938 0.281-1.75 0.563-2.469 0.75-0.75 0.219-1.219 0.344-1.406 0.406-0.5 0.156-0.844 0.594-0.844 1.094z"/></svg>Music</h2>
+          <p>
+            Since my school days I have had a passion for playing music, and lost
+            track of time sitting with songs I was working on. Through the
+            community I discovered my love for Irish music and performing for
+            which&hellip;
+          </p>
+          <figure>
+            <img src="/music/performing-paddys-day.jpg"
+                 width="1100" height="1163" loading="lazy"
+                 alt="Playing guitar and fiddle outdoors under a tree at the St Patrick&rsquo;s Festival">
+          </figure>
+          <p class="featmore">
+            <a href="/music.html">Read about the music &rarr;</a>
+          </p>
+        </section>
+        <section class="feature f-comm" aria-labelledby="community-heading">
+          <h2 id="community-heading"><img class="cardicon" src="/community/shamrock.svg" alt="">Community</h2>
+          <p>
+            We had a blast volunteering for the St Patrick's Festival with the
+            South West Irish Community Group for both 2024 and 2025.
+          </p>
+          <figure>
+            <img src="/community/day-jerseys.jpg"
+                 width="1600" height="1066" loading="lazy"
+                 alt="Three of us in Irish county jerseys at the festival, under the trees">
+          </figure>
+          <p class="featmore">
+            <a href="/community.html">Read about the community &rarr;</a>
+          </p>
+        </section>
+      </div>
+
+      <hr class="featrule">
+
       <div class="projgrid">
         <a class="projcard" href="/projects/tagdexer/">
           <img src="/projects/logos/tagdexer.png" alt="">
@@ -694,36 +717,6 @@
       </div>
 
       <hr class="rule">
-
-      <section class="topiccard musiccard" aria-labelledby="music-heading">
-        <h2 id="music-heading">Music <svg class="hicon micon" viewBox="-5.5 0 32 32" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M5.688 9.656v10.906c-0.469-0.125-0.969-0.219-1.406-0.219-1 0-2.031 0.344-2.875 0.906s-1.406 1.469-1.406 2.531c0 1.125 0.563 1.969 1.406 2.531s1.875 0.875 2.875 0.875c0.938 0 2-0.313 2.844-0.875s1.375-1.406 1.375-2.531v-11.438l9.531-2.719v7.531c-0.438-0.125-0.969-0.188-1.438-0.188-0.969 0-2.031 0.281-2.875 0.844s-1.375 1.469-1.375 2.531c0 1.125 0.531 2 1.375 2.531 0.844 0.563 1.906 0.906 2.875 0.906 0.938 0 2.031-0.344 2.875-0.906 0.875-0.531 1.406-1.406 1.406-2.531v-14.406c0-0.688-0.469-1.156-1.156-1.156-0.063 0-0.438 0.125-1.031 0.281-1.25 0.344-3.125 0.875-5.25 1.5-1.094 0.281-2.063 0.594-3.031 0.844-0.938 0.281-1.75 0.563-2.469 0.75-0.75 0.219-1.219 0.344-1.406 0.406-0.5 0.156-0.844 0.594-0.844 1.094z"/></svg></h2>
-        <p>
-          Since my school days I have had a passion for playing music, and lost
-          track of time sitting with songs I was working on. Through the
-          community I discovered my love for Irish music and performing for
-          which&hellip; <a href="/music.html">see more</a>
-        </p>
-        <a class="commshot natural" href="/music.html">
-          <img src="/music/performing-paddys-day.jpg" alt="Playing guitar and fiddle outdoors under a tree at the St Patrick&rsquo;s Festival">
-        </a>
-      </section>
-
-      <hr class="rule soft">
-
-      <section class="topiccard commcard" aria-labelledby="community-heading">
-        <h2 id="community-heading">Community <img class="hicon shamrock" src="/community/shamrock.svg" alt="" width="19" height="19"></h2>
-        <p>
-          We had a blast volunteering for the St Patrick's Festival with the South West
-          Irish Community Group for both 2024 and 2025 —
-          <a href="/community.html">see more about that here</a>.
-        </p>
-        <a class="commshot" href="/community.html">
-          <img src="/community/day-jerseys.jpg"
-               alt="Three of us in Irish county jerseys at the festival, under the trees">
-        </a>
-      </section>
-
-      <hr class="rule soft">
 
       <section class="linkcard" aria-labelledby="links-heading">
       <h2 id="links-heading">Links <svg class="hicon licon" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M15.197 3.355c1.673-1.68 4.25-1.816 5.756-.305 1.506 1.512 1.371 4.1-.302 5.78L18.227 11.263M10.046 14c-1.505-1.512-1.37-4.1.303-5.779L12.5 6.062"/><path d="M13.954 10c1.506 1.512 1.37 4.1-.303 5.779l-2.424 2.433-2.424 2.433c-1.673 1.68-4.25 1.816-5.756.305-1.506-1.512-1.37-4.1.303-5.779l2.424-2.433"/></svg></h2>

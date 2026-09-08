@@ -363,6 +363,18 @@ overrides need matching specificity — `footer.site-footer a`, not
   comparison page, not the inventory), the van takes `hero-gopro.jpg` —
   "Looking inside through the side door." — and Receipt Manager takes its own
   `screenshots/thumbnail.png`.
+- **Music and Community are feature blocks too, two abreast, above the grid.**
+  They were `.topiccard` sections at the foot of the page; they are now
+  `.feature f-music` and `.feature f-comm` inside a `.featpair`, sitting
+  directly under Home Screen with the project grid below them. The pair holds
+  the same 44rem measure a single feature block does — two across is a
+  *narrower card*, not a wider row, so the page still has exactly one content
+  width — and `auto-fit` stacks them on a phone. Both photographs take a
+  shared 4:3 frame so the two cards read as a pair; the music shot is anchored
+  at `50% 20%` because it is nearly square and a centred crop takes the
+  players' heads off, which is why it was left uncropped when it stood alone.
+  Their blurbs lost their inline "see more" links — the card is the link now,
+  and an anchor inside an anchor is invalid.
 - The seven remaining projects are `.projcard` tiles in one grid with **no
   headings above it** — the Software/Technical split is gone from this page.
   The order is deliberate: Tagdexer, Cadence, Capsule, Epson RR-70W,
@@ -404,7 +416,16 @@ overrides need matching specificity — `footer.site-footer a`, not
   galleries already worked this way. CMI's two phone captures are capped at
   24rem each so a wide monitor cannot blow them up past the capture's own
   resolution and blur them.
-- The Links card sits at the **foot** of the page, after Community.
+- The Links card sits at the **foot** of the page, after the project grid.
+- **The `margin` shorthand has now silently broken centring four times on this
+  site.** Any rule that sets `margin` on an element the wide-screen block gives
+  a measure to — `main p`, `main ul`, `main ol` — resets `margin-inline` to 0
+  and pins that element to the left edge, and a class selector beats `main p`
+  on specificity so ordering does not save you. Confirmed victims: the
+  homepage cards, `.featmore`, N-of-1's `.beats p` (183px off centre) and
+  community.html's `.photos` / `.support` (183px, and they should have been
+  full-width media anyway). Write `margin: X auto Y`, or set `margin-inline`
+  separately. There is a browser sweep for this in the decision log's entry.
 - The featured-project carousel that used to sit under a Technical projects
   heading is gone from the live page. Its markup and CSS are kept in
   `_archive/homepage-carousel/`, which `_redirects` turns away.

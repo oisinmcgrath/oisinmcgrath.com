@@ -914,3 +914,72 @@ stylesheet so it overrides the older `img.logo` block rather than needing that
 block rewritten. N-of-1 needed one extra line: its own rule set
 `border-radius: 22px`, which is a circle once the mark is 24px, so it takes a
 proportional 18% instead.
+
+
+---
+
+## Music and Community joined the features
+
+**2026-09-08 — they are feature blocks now, two abreast, above the grid.**
+
+They sat at the foot of the page as `.topiccard` sections — a heading, a
+paragraph with a "see more" link in it, and a photograph — which put the
+music and the community work after ten project tiles, at the point a reader
+has already decided whether to keep going. They now sit directly under Home
+Screen, built exactly like the project features, with the project grid below
+them.
+
+The pair holds **the same 44rem measure a single feature block does**. That
+matters: the whole point of the previous entry is that the page has one
+content width, so two cards across has to mean a narrower card, not a wider
+row. `auto-fit` stacks them once two 17rem columns no longer fit, which is
+every phone.
+
+Both photographs take a shared 4:3 frame, so the two cards read as a pair
+rather than as two different shapes — but the music shot is anchored at
+`50% 20%` rather than centred. It is nearly square (1100x1163) with both
+players' heads in the upper half, and a centred 4:3 crop of a portrait
+photograph takes the heads off. That is the same fact that kept it uncropped
+when it stood on its own; the anchor is what lets it join the pair without
+losing anything.
+
+Their blurbs lost their inline "see more" links. The card is the link now,
+and an anchor inside an anchor is invalid — the community blurb also lost the
+trailing "— see more about that here", so it ends on the year instead. Worth
+knowing that is a copy change, small as it is.
+
+The dead CSS went with them: `.topiccard`, `.musiccard`, `.commcard`,
+`.commshot`, `.hicon.micon`, `.shamrock` and `hr.rule.soft` are all gone, and
+the wide-screen block no longer mentions `.topiccard` or `.commshot`.
+
+---
+
+## The `margin` shorthand has broken centring four times
+
+**2026-09-08 — and there is now a sweep that finds it.**
+
+Every stylesheet's wide-screen block gives prose a 44rem measure and centres
+it with `margin-inline: auto`. Any *other* rule that then sets `margin` as a
+shorthand on the same element resets that to 0 and pins the element to the
+left edge of a much wider column. A class selector beats `main p` on
+specificity, so putting the wide-screen block last does not save you — which
+is the part that keeps catching us.
+
+Four confirmed so far: the homepage cards (noted long ago), `.featmore` on
+the feature blocks, N-of-1's `.beats p`, and community.html's `.photos` and
+`.support`. The last two were both 183px off centre — the N-of-1 opening,
+which is the first thing on that page, and the community photo grid, which
+sat well to the left of the paragraph directly above it.
+
+The community pair had a second fault underneath the first: they are media,
+not prose, so they should never have been taking the reading measure at all.
+They are `max-width: none` now and use the whole column, which puts them back
+on the same median as the prose.
+
+**Write `margin: X auto Y`, or set `margin-inline` separately.** And the check
+worth re-running after any layout work: load every page in an iframe, walk
+`main` for `p, ul, ol, .beats, .card, .notice`, skip anything whose computed
+`max-width` is `none`, and flag any element whose centre differs from its
+parent's centre by more than 4px. Two false positives to expect, both fine:
+`projects/index.html` is left-aligned by design, so its `h1`, tagline and
+`h2` all share x=68 and the narrower tagline box is correct.

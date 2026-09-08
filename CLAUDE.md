@@ -44,11 +44,11 @@ will give this site a few minutes. Everything below follows from that:
   the source before you ship. Do not improve it, reorder it, or merge in
   sentences from the page you are replacing. If something in it looks wrong,
   say so rather than fixing it.
-- **The homepage is triaged, not a catalogue.** Five feature blocks lead —
-  Cross Market Intelligence and the Renault Master full-width because they are
-  the biggest pieces of work, then invoiceNow and Receipt Manager side by side
-  as one row, then Home Screen — and the remaining seven projects are
-  equal-weight cards. Do not flatten the features back into the grid.
+- **The homepage is triaged, not a catalogue.** Five feature blocks lead, in
+  one column at the reading measure — Cross Market Intelligence, the Renault
+  Master, invoiceNow, Receipt Manager, Home Screen — and the remaining seven
+  projects are equal-weight cards. Do not flatten the features back into the
+  grid.
 - **Recent direction has been toward hooks over specifications.** The card
   blurbs and page openings are being rewritten as questions and consequences
   ("Could you prove you bought your vacuum cleaner?") rather than feature
@@ -314,10 +314,10 @@ overrides need matching specificity — `footer.site-footer a`, not
   homepage, built the same way (`color-scheme` plus `light-dark()` under an
   `@supports` guard), and defaults to System.
 - **The homepage is triaged, not a uniform grid.** Five `.feature` blocks come
-  first — Cross Market Intelligence and the Renault Master full-width, then
-  invoiceNow and Receipt Manager sharing one `.featpair` row (they are two
-  halves of one problem, which is why they sit together; the pair stacks below
-  900px), then Home Screen full-width. Each has a heading carrying the
+  first, in one column, in this order: Cross Market Intelligence, the Renault
+  Master, invoiceNow, Receipt Manager, Home Screen. invoiceNow and Receipt
+  Manager stay adjacent because they are two halves of one problem. Each has
+  a heading carrying the
   project's own mark, a paragraph, one screenshot with a caption, and a pill
   CTA; the screenshot itself links through to the page and lifts on hover.
   They sit on their own tinted ground in their project's accents (CMI's blue
@@ -343,10 +343,22 @@ overrides need matching specificity — `footer.site-footer a`, not
   **A `margin: auto 0 …` shorthand there silently un-centres it**, because the
   wide-screen block gives `.feature p` a 44rem measure and `.featmore` is a
   `<p>`. That has already been wrong once.
-- `hr.featrule` separates the showcase blocks. Home Screen is held to the
-  reading measure (`.feature.f-hs{max-width:44rem}` in the wide-screen block)
-  rather than the full column, so its card and screenshot are no wider than
-  the body text above them.
+- **Every feature block holds the 44rem reading measure, at every width, and
+  everything inside it shares that width.** The blocks used to take the full
+  column while their prose kept the measure, which gave each card three
+  different left edges — heading against the padding, prose inset and centred,
+  screenshot running the full width. It looked wrong and was called out. Now
+  heading, prose and screenshot start and end on the same two lines; measured
+  aligned at 375, 768, 1280, 1707 and 2560px. The extra width on a wide screen
+  goes to the project grid and to the project pages' pictures, not to these.
+- Note `.feature p:not(.featmore){max-width:none;margin-inline:0}`. The card is
+  a column flex container, and **a flex item with auto inline margins is sized
+  to fit its content rather than stretched** — so `main p`'s `margin-inline:
+  auto` made every blurb as wide as its own longest line, a few pixels
+  narrower than the card and a different few on each block. `.featmore` keeps
+  its autos: they are what pin it to the foot of the card.
+- `hr.featrule` separates the showcase blocks, including between invoiceNow and
+  Receipt Manager.
 - Feature thumbnails, all deliberate: CMI takes `auction-target.png` (the
   comparison page, not the inventory), the van takes `hero-gopro.jpg` —
   "Looking inside through the side door." — and Receipt Manager takes its own
@@ -376,6 +388,14 @@ overrides need matching specificity — `footer.site-footer a`, not
   URLs themselves have not moved and must not — see the hard constraints.
   Home Screen had no footer policy link before this and gained one, because
   the Chrome Web Store holds that exact URL.
+- **The project mark is a prefix to the `h1`, not a block under it.** All
+  eleven project pages that carry a logo put it inside the heading at `1.5em`,
+  with `alt=""` since the heading names the project. Standing on its own it
+  cost roughly 160px at the top of every page and pushed the first screenshot
+  below the fold. The rule sits near the foot of each project stylesheet and
+  overrides the older `header.site-header img.logo` block further up; N-of-1
+  additionally restores a proportional `border-radius:18%`, because its own
+  rule set 22px, which on a 24px mark is a circle.
 - **Screenshots open at full size.** On every project page, each `img.shot` is
   wrapped in an `a.shotlink` pointing at its own file — the captures are
   denser than any column can show them, so the image is the way in and the

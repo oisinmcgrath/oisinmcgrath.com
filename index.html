@@ -304,8 +304,17 @@
        also what a screen reader wants. The card lifts as a whole on hover,
        so it reads as a single object rather than a panel with a button on
        it. */
+    /* One width for the whole block, and everything in it shares that width.
+       The features used to take the full column while their prose kept a
+       44rem measure, which gave a card three different left edges — heading
+       hard against the padding, prose inset and centred, screenshot running
+       the full width. Holding the card itself to the reading measure means
+       heading, prose and screenshot all start and end on the same two lines.
+       The screenshots lose some size; they link through to the page, where
+       they open at full resolution. */
     .feature{position:relative;display:flex;flex-direction:column;
-             margin:1.75rem 0 2rem;padding:1.5rem 1.6rem 1.2rem;
+             max-width:44rem;margin:1.75rem auto 2rem;
+             padding:1.5rem 1.6rem 1.2rem;
              border:1px solid;border-radius:16px;
              transition:transform .18s ease,box-shadow .18s ease,
                         border-color .18s ease}
@@ -318,6 +327,14 @@
     .feature .featmore a:focus-visible{outline:none}
     .feature h2{margin:.2rem 0 .7rem;display:flex;align-items:center;gap:.55rem;
                 font-size:1.35rem;letter-spacing:-.015em}
+    /* The card is a column flex container, and a flex item with auto inline
+       margins is sized to fit its content rather than stretched to the cross
+       axis. `main p` in style.css sets `margin-inline:auto`, so each blurb
+       came out as wide as its own longest line — a couple of pixels narrower
+       than the card, and a different couple on every block. The prose
+       stretches to the card's edges instead. `.featmore` keeps its autos on
+       purpose: they are what pin it to the foot of the card. */
+    .feature p:not(.featmore){max-width:none;margin-inline:0}
     .feature figure{margin:1.15rem 0 .9rem}
     /* Scoped to the figure on purpose. Unscoped, `.feature img` also matches
        the mark in the heading and blows it up to the full width of the block
@@ -359,13 +376,6 @@
         light-dark(rgba(20,80,125,.3),rgba(127,179,232,.28)) 20%,
         light-dark(rgba(20,80,125,.75),rgba(127,179,232,.6)) 50%,
         light-dark(rgba(20,80,125,.3),rgba(127,179,232,.28)) 80%,transparent)}
-    /* invoiceNow and Receipt Manager are two halves of one problem, so their
-       feature blocks share one row — and stack again where two screenshots
-       will not fit across the window. */
-    .featpair{display:grid;grid-template-columns:1fr 1fr;gap:1rem;
-              margin:1.75rem 0 2rem}
-    .featpair .feature{margin:0}
-    @media (max-width:900px){.featpair{grid-template-columns:1fr}}
     @media (max-width:480px){.feature{padding:1.1rem 1rem .9rem}}
 
     /* The rest of what the work is for, folded away. A <details>, so it opens
@@ -483,13 +493,11 @@
          photograph gain nothing from being flung to opposite ends of a
          1100px column — the extra width is for the body and the pictures. */
       header.site-header{max-width:44rem;margin-inline:auto}
-      /* The feature blocks are the other thing the extra width is for, so
-         they keep the column while their prose keeps the measure. Home
-         Screen is the exception: it is held to the reading measure, so the
-         card and its screenshot are no wider than the body text above. */
-      .feature{max-width:none}
-      .feature p{max-width:44rem;margin-inline:auto}
-      .feature.f-hs{max-width:44rem;margin-inline:auto}
+      /* The feature blocks hold the reading measure at every width — see the
+         note on `.feature` above. The extra width on a wide screen goes to
+         the project grid and to the pictures on the project pages, not to
+         these. */
+      .featrule{max-width:44rem}
     }
   </style>
 </head>
@@ -574,41 +582,42 @@
 
       <hr class="featrule">
 
-      <div class="featpair">
-        <section class="feature f-inv" aria-labelledby="inv-heading">
-          <h2 id="inv-heading"><img class="cardicon" src="/projects/logos/invoicenow.png" alt="">invoiceNow</h2>
-          <p>
-            From the job you put off every week to a few clicks that keep it off
-            your mind for good.
-          </p>
-          <figure>
-            <img src="/projects/invoicenow/screenshots/dashboard.png"
-                 width="3412" height="1846" loading="lazy"
-                 alt="The invoiceNow dashboard, showing the quarter's billed and received totals, the GST on them, and how many invoices are still unpaid.">
-            <figcaption>Where you stand financially, without working it out.</figcaption>
-          </figure>
-          <p class="featmore">
-            <a href="/projects/invoicenow/">Read about invoiceNow &rarr;</a>
-          </p>
-        </section>
-        <section class="feature f-rec" aria-labelledby="rec-heading">
-          <h2 id="rec-heading"><img class="cardicon" src="/projects/logos/receipt-manager.png" alt="">Receipt Manager</h2>
-          <p>
-            Could you prove you bought your vacuum cleaner, your car battery, the
-            shoes you are wearing? How long would it take you? What if it took
-            under a minute.
-          </p>
-          <figure>
-            <img src="/projects/receipt-manager/screenshots/thumbnail.png"
-                 width="2000" height="1165" loading="lazy"
-                 alt="The Receipt Manager dashboard, where a stack goes into the scanner or files already on the computer are added, with the review queue and the quarter's totals below.">
-            <figcaption>The dashboard, where a stack goes into the scanner or files already on the computer are added.</figcaption>
-          </figure>
-          <p class="featmore">
-            <a href="/projects/receipt-manager/">Read about Receipt Manager &rarr;</a>
-          </p>
-        </section>
-      </div>
+      <section class="feature f-inv" aria-labelledby="inv-heading">
+        <h2 id="inv-heading"><img class="cardicon" src="/projects/logos/invoicenow.png" alt="">invoiceNow</h2>
+        <p>
+          From the job you put off every week to a few clicks that keep it off
+          your mind for good.
+        </p>
+        <figure>
+          <img src="/projects/invoicenow/screenshots/dashboard.png"
+               width="3412" height="1846" loading="lazy"
+               alt="The invoiceNow dashboard, showing the quarter's billed and received totals, the GST on them, and how many invoices are still unpaid.">
+          <figcaption>Where you stand financially, without working it out.</figcaption>
+        </figure>
+        <p class="featmore">
+          <a href="/projects/invoicenow/">Read about invoiceNow &rarr;</a>
+        </p>
+      </section>
+
+      <hr class="featrule">
+
+      <section class="feature f-rec" aria-labelledby="rec-heading">
+        <h2 id="rec-heading"><img class="cardicon" src="/projects/logos/receipt-manager.png" alt="">Receipt Manager</h2>
+        <p>
+          Could you prove you bought your vacuum cleaner, your car battery, the
+          shoes you are wearing? How long would it take you? What if it took
+          under a minute.
+        </p>
+        <figure>
+          <img src="/projects/receipt-manager/screenshots/thumbnail.png"
+               width="2000" height="1165" loading="lazy"
+               alt="The Receipt Manager dashboard, where a stack goes into the scanner or files already on the computer are added, with the review queue and the quarter's totals below.">
+          <figcaption>The dashboard, where a stack goes into the scanner or files already on the computer are added.</figcaption>
+        </figure>
+        <p class="featmore">
+          <a href="/projects/receipt-manager/">Read about Receipt Manager &rarr;</a>
+        </p>
+      </section>
 
       <hr class="featrule">
 

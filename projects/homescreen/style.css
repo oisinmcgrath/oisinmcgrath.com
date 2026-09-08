@@ -139,6 +139,17 @@ nav.backnav {
   border-radius:8px}
 .shotlink:hover .shot{border-color:currentColor}
 
+/* The mark is a prefix to the title now, not a block standing under it.
+   On its own it cost roughly 150px at the top of every page and pushed the
+   first screenshot below the fold — costly on a site a reader gives a few
+   minutes. Inline it identifies the project just as well. `1.5em` sizes it
+   off the h1, so it tracks the heading at every breakpoint, and the h1
+   wraps rather than squashing the mark on a narrow screen. */
+header.site-header h1{display:flex;align-items:center;justify-content:center;
+  gap:.5rem;flex-wrap:wrap}
+header.site-header img.logo{width:1.5em;height:1.5em;object-fit:contain;
+  margin:0;flex:none;border-radius:0}
+
 /* ── Wide screens ────────────────────────────────────────────────────────────
    Everything on the page is sized in rem, so raising the root size scales the
    whole thing at once — type, spacing, column and screenshots together —

@@ -861,3 +861,56 @@ with Google and, for Home Screen, the Chrome Web Store. Only the link to them
 changed. Home Screen had no footer policy link at all before this, so it
 gained one *before* its nav pill was removed; every page was checked to still
 link its own policies afterwards.
+
+---
+
+## One width per feature block
+
+**2026-09-08 — the full-width feature blocks were a mistake, and are undone.**
+
+Promoting the features gave them the full column while their prose kept the
+44rem measure. The result had three different left edges inside one card: the
+heading hard against the padding, the prose inset and centred, the screenshot
+running the full width. Oisin called it out on sight, and he was right — it
+read as three unrelated things stacked rather than one block.
+
+Every feature block now holds the reading measure at every width, and
+everything inside shares that width: heading, prose and screenshot start and
+end on the same two lines. Measured aligned at 375, 768, 1280, 1707 and
+2560px, with all five cards the same width and the card exactly as wide as
+the body list above it. The screenshots are smaller for it; they link through
+to their pages, where they open at full resolution.
+
+The invoiceNow / Receipt Manager pair went with it. Two cards side by side is
+a second width, and a second width is the thing being removed — they are
+ordinary siblings now, still adjacent because they are still two halves of
+one problem, with a rule between them like every other pair of blocks.
+
+**A flex trap worth remembering.** With the card as a column flex container,
+`main p`'s `margin-inline: auto` stopped the blurbs stretching: a flex item
+with auto cross-axis margins is sized to fit its content, not stretched to
+the cross axis. Each blurb came out as wide as its own longest line — a few
+pixels narrower than the card, and a different few on every block, which is
+the same misalignment in miniature. `.feature p:not(.featmore)` now sets
+`max-width:none; margin-inline:0`. `.featmore` keeps its autos deliberately:
+they are what pin it to the foot of the card.
+
+---
+
+## The project mark moved into the heading
+
+**2026-09-08 — the logo is a prefix to the `h1`, not a block beneath it.**
+
+Every project page opened with the title, then the mark at 130–160px, then
+the nav, then a rule — roughly 160px of vertical space spent before the page
+said anything, which on several pages pushed the first screenshot below the
+fold. For a site a reader gives a few minutes, that is the most expensive
+space on it.
+
+The mark now sits inside the heading at `1.5em`, so it scales with the title
+at every breakpoint, and carries `alt=""` because the heading already names
+the project. Eleven pages, one rule, appended near the foot of each
+stylesheet so it overrides the older `img.logo` block rather than needing that
+block rewritten. N-of-1 needed one extra line: its own rule set
+`border-radius: 22px`, which is a circle once the mark is 24px, so it takes a
+proportional 18% instead.

@@ -86,13 +86,19 @@ published on any page.
     music.html              the Oisín Mac Craith YouTube channel — Irish and
                             Scottish folk covers. Linked from the Music
                             feature block on the homepage. **Everything on it
-                            is left aligned**: its inline <style> sets
-                            `main p, main ul, main ol{margin-inline:0}` to undo
-                            the root stylesheet's centring, because the
-                            heading, nav and channel screenshot all sit at the
-                            column's left edge and a centred measure between
-                            them read as three alignments stacked up. The
-                            44rem measure itself is kept.
+                            is left aligned AND takes the full column**: its
+                            inline <style> sets `margin-inline:0` to undo the
+                            root stylesheet's centring and `main p{max-width:
+                            none}` to drop the 44rem measure, so the prose
+                            shares both edges with the channel screenshot.
+                            This is the one page on the site whose text is not
+                            held to a reading measure — asked for
+                            deliberately, and the reason its long paragraph
+                            was broken into four. Lines run ~110-130
+                            characters at 1707px and ~170 at 2560px, well past
+                            the comfortable 60-90. If that ever reads as too
+                            wide, the other way to make text and picture agree
+                            is to cap `.shot` at 44rem instead.
     music/                  channel.jpg (the channel page) and youtube.png
     site-privacy.html       privacy policy for the website itself (linked from
                             the homepage footer; distinct from the app policies

@@ -24,6 +24,15 @@
        centre anyway, which makes it a no-op there. */
     main p, main ul, main ol{margin-inline:0}
 
+    /* The text takes the same width as the channel screenshot below it, so
+       the two share a right edge as well as a left one. That means dropping
+       the 44rem measure the root stylesheet gives prose everywhere else on
+       the site — asked for deliberately, and the reason the paragraph above
+       was broken into four: a line this long needs short paragraphs to stay
+       readable. If it ever reads as too wide, the other way to make the two
+       agree is to cap `.shot` at 44rem instead. */
+    main p{max-width:none}
+
     /* The channel page, shown at the width of the reading column. */
     .shot{display:block;margin:1.5rem 0;border-radius:10px;overflow:hidden;
           border:2px solid light-dark(#aab8c6,#39424d);line-height:0;
@@ -130,20 +139,33 @@
         </a>
       </p>
 
+      <!-- One paragraph broken into four. Not a word of it changed — the
+           breaks fall on sentence boundaries that were already there. -->
       <p>
         Since my school days I have had a passion for playing music, and lost
-        track of time sitting with songs I was working on. Through the community
-        I discovered my love for Irish music and performing for which I began
-        recording and publishing my covers on YouTube and performing many times
-        as a professional musician. While it is the artistic nature of music that
-        draws me back each time rather than making it my career, I have
-        thoroughly enjoyed performing for crowds and events, the great people I
-        have connected with and played beside, and growing and interacting with a
-        fan base on YouTube who are incredibly supportive. Adding to my channel
-        is something I like to do in my spare time, keeping me in touch with the
-        people who support the venture and building a portfolio for my musical
-        work in doing so. I hope you might enjoy some of the recordings there, if
-        you so choose to visit. Press the button above to visit the channel.
+        track of time sitting with songs I was working on.
+      </p>
+
+      <p>
+        Through the community I discovered my love for Irish music and
+        performing for which I began recording and publishing my covers on
+        YouTube and performing many times as a professional musician.
+      </p>
+
+      <p>
+        While it is the artistic nature of music that draws me back each time
+        rather than making it my career, I have thoroughly enjoyed performing
+        for crowds and events, the great people I have connected with and
+        played beside, and growing and interacting with a fan base on YouTube
+        who are incredibly supportive.
+      </p>
+
+      <p>
+        Adding to my channel is something I like to do in my spare time,
+        keeping me in touch with the people who support the venture and
+        building a portfolio for my musical work in doing so. I hope you might
+        enjoy some of the recordings there, if you so choose to visit. Press
+        the button above to visit the channel.
       </p>
 
       <a class="shot" href="https://www.youtube.com/@oisinmcgrath1916">

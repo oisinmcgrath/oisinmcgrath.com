@@ -422,9 +422,13 @@ overrides need matching specificity — `footer.site-footer a`, not
   started as — a YouTube register rather than a folk one. Both photographs
   keep their green outlines, which was asked for separately and now reads as
   a deliberate contrast rather than a match.
-- Pill labels: "Read more about Music", "Read more about Community", and the
-  van's is simply "Read more" — its `aria-label` still names the project, so
-  the accessible name is not seven identical "Read more" links.
+- Pill labels are **"See more about X"** across every feature card, and the
+  van's is simply "See more" — its `aria-label` still names the project, so
+  the accessible name is not a run of identical links. The `.projcard` tiles
+  in the grid below still say "Read more"; they were not part of that change.
+- Music outlines its slideshow in the card's own red
+  (`light-dark(#b71c1c,#d4544c)`) and Community keeps the club's green. They
+  were briefly both green, from when Music was brown and the pair matched.
 - Only Cross Market Intelligence still carries a `figcaption` on its feature
   card; the others were taken off one at a time. The project pages keep all of
   theirs.

@@ -257,11 +257,11 @@
     /* Music keeps the warm tan it had as a topic card; Community keeps the
        club's green, matching community.html. Same construction as the five
        project blocks above — they are the same kind of object now. */
-    body .feature.f-music{--cta:#8a5433;
-      --cardbg:light-dark(#fdf6ef,#2b211a);background:var(--cardbg);
-      border-color:light-dark(#e1b890,#5c4632)}
-    body .feature.f-music h2{color:light-dark(#8a5433,#e8bd93)}
-    body .feature.f-music p{color:light-dark(#3a2e25,#e6d8c9)}
+    body .feature.f-music{--cta:#b71c1c;
+      --cardbg:light-dark(#fdf0ee,#2b1616);background:var(--cardbg);
+      border-color:light-dark(#eab8b2,#5e2f2c)}
+    body .feature.f-music h2{color:light-dark(#a81818,#f7a6a0)}
+    body .feature.f-music p{color:light-dark(#3a2725,#f0d9d5)}
     /* Both photographs are outlined in the club's green, which ties the two
        cards together as the pair they were. */
     body .feature.f-music figure img,
@@ -489,9 +489,6 @@
        both players' heads sit in the upper half, so its crop is anchored
        near the top — a centred crop takes the heads off, which is the reason
        it was left uncropped when it stood on its own. */
-    .f-music figure img,
-    .f-comm figure img{aspect-ratio:3/2;object-fit:cover}
-    .f-music figure img{object-position:50% 8%}
     /* Five photographs from 0.75 (a standing group shot) to 1.42, so a 5:4
        frame with `cover` — letterboxing five different shapes would leave the
        card mostly ground. Each anchor was chosen against the rendered crop:
@@ -500,6 +497,15 @@
     .feature.f-music .fader img{object-fit:cover;object-position:50% 10%}
     .feature.f-music .fader img:first-child{object-position:50% 8%}
     .feature.f-music .fader .fade2{object-position:50% 50%}
+    /* Community keeps the 3:2 frame it already had, and `contain` rather than
+       `cover`. Its lead photograph is natively 3:2, so it fills the frame
+       exactly and the card looks as it did; the other four run from 0.75 (a
+       portrait at a picnic table) to 2.22 (three wide panoramas of the setup
+       crew), and cropping those to 3:2 would take half the height off one and
+       a third of the width off the others. They letterbox against the card's
+       own ground instead. */
+    .feature.f-comm .fader{aspect-ratio:3/2}
+    .feature.f-comm .fader img{object-fit:contain}
     /* A divider between showcase cards, in the page's own blue, the same
        shape as the accent rule further down. */
     hr.featrule{height:2px;margin:1.6rem auto;border:0;opacity:.5;
@@ -508,13 +514,23 @@
         light-dark(rgba(20,80,125,.3),rgba(127,179,232,.28)) 20%,
         light-dark(rgba(20,80,125,.75),rgba(127,179,232,.6)) 50%,
         light-dark(rgba(20,80,125,.3),rgba(127,179,232,.28)) 80%,transparent)}
+    /* The last rule is the one between the feature column and the project
+       grid, so it spans the whole column rather than the reading measure —
+       it is a section break, not a divider between two like things. Beats the
+       wide-screen block's `.featrule` on specificity, so order is irrelevant. */
+    hr.featrule.wide{max-width:none}
     @media (max-width:480px){.feature{padding:1.1rem 1rem .9rem}}
 
     /* The rest of what the work is for, folded away. A <details>, so it opens
        without a script, exactly like the specifications box on the Renault
        page. */
     .moreaims{margin:-.35rem 0 1.25rem}
-    .moreaims summary{display:inline-flex;align-items:center;gap:.45rem;
+    /* Indented to the list's own content edge, so the pill sits under the
+       bullets it extends rather than under the line introducing them. Set on
+       the summary, not the <details>, or the nested list would be indented a
+       second time on top of its own padding. */
+    .moreaims summary{margin-left:2.75rem;
+      display:inline-flex;align-items:center;gap:.45rem;
       cursor:pointer;list-style:none;font-size:.92rem;font-weight:600;
       padding:.3rem .75rem;border-radius:999px;
       border:1px solid color-mix(in srgb, currentColor 28%, transparent);
@@ -561,7 +577,8 @@
     .lead{font-weight:600}
     .leadlist{margin:0 0 1rem;padding-left:2.75rem}
     .leadlist li{margin-bottom:.5rem}
-    @media (max-width:480px){.leadlist{padding-left:1.6rem}}
+    @media (max-width:480px){.leadlist{padding-left:1.6rem}
+      .moreaims summary{margin-left:1.6rem}}
     .linkcard{margin:1.5rem 0;padding:.6rem 1.35rem .7rem;
               border:1px solid #dbe2e9;border-radius:12px;background:#fbfcfd;
               box-shadow:0 1px 3px rgba(20,60,100,.06)}
@@ -783,7 +800,7 @@
           </span>
         </figure>
         <p class="featmore">
-          <a class="featbtn" href="/music.html">Read about the music &rarr;</a>
+          <a class="featbtn" href="/music.html">Read about The Music &rarr;</a>
           <a class="featbtn" href="https://www.youtube.com/@oisinmcgrath1916"><img
              class="btnico" src="/music/youtube-icon.png" alt="" width="76" height="48">YouTube Channel</a>
         </p>
@@ -791,23 +808,33 @@
 
       <hr class="featrule">
 
-      <a class="feature f-comm" href="/community.html" aria-label="Read about the community">
+      <a class="feature f-comm" href="/community.html" aria-label="Read more about The Community">
         <h2 id="community-heading"><img class="cardicon" src="/community/shamrock.svg" alt="">Community</h2>
         <p>
           We had a blast volunteering for the St Patrick's Festival with the
           South West Irish Community Group for both 2024 and 2025.
         </p>
         <figure>
-          <img src="/community/day-jerseys.jpg"
-               width="1600" height="1066" loading="lazy"
-               alt="Three of us in Irish county jerseys at the festival, under the trees">
+          <span class="fader five" style="--cycle:9s">
+            <img src="/community/day-jerseys.jpg"
+                 width="1600" height="1066" loading="lazy"
+                 alt="Three of us in Irish county jerseys at the festival, under the trees">
+            <img class="fade2" src="/community/setup-crew.jpg"
+                 width="1600" height="720" loading="lazy" alt="">
+            <img class="fade3" src="/community/lunch.jpg"
+                 width="1050" height="1400" loading="lazy" alt="">
+            <img class="fade4" src="/community/setup-2024-b.jpg"
+                 width="1422" height="640" loading="lazy" alt="">
+            <img class="fade5" src="/community/setup-2024-a.jpg"
+                 width="1422" height="640" loading="lazy" alt="">
+          </span>
         </figure>
         <p class="featmore">
-          <span class="featbtn">Read about the community &rarr;</span>
+          <span class="featbtn">Read more about The Community &rarr;</span>
         </p>
       </a>
 
-      <hr class="featrule">
+      <hr class="featrule wide">
 
       <div class="projgrid">
         <a class="projcard" href="/projects/tagdexer/">

@@ -1118,3 +1118,40 @@ guessed: all five crops were rendered to a contact sheet and checked before
 shipping, and every face sits in the upper half of every shot. Base three
 seconds, then a second and a half each on a nine-second cycle, verified by
 stepping the animation across the cycle as the others were.
+
+
+---
+
+## Community joined the slideshows, and Music went red
+
+**2026-09-11 — the last static feature thumbnail became a fader.**
+
+Community now cycles five photographs the same way Music does: "Colours on."
+holds three seconds, then the breakfast-roll setup, the lunch at Sears, the
+two 2024 setup shots for a second and a half each.
+
+The frame is the interesting part. Its five photographs run from 0.75 — a
+portrait at a picnic table — to 2.22, three wide panoramas of the setup crew.
+`cover` in the card's existing 3:2 frame would have taken half the height off
+the portrait and a third of the width off each panorama. So Community uses
+`contain` instead, and because its lead photograph is natively 3:2 it still
+fills the frame exactly: the card looks precisely as it did, and the other
+four letterbox against the card's own ground. That was the brief — keep the
+card as it is, animate what is inside it.
+
+**The captions stay on the community page.** They are specific ("Burgers from
+Sears cafe were much appreciated…") and belong with the full set, not under a
+thumbnail that changes every second and a half.
+
+Music moved from golden brown to a deep red (`#b71c1c`), which reads as
+YouTube without being the pillar-box red of the logo itself — the card carries
+a YouTube button, and brown was pulling it toward folk-club rather than
+channel. Both cards keep the green photo outlines asked for earlier; against
+red that is now a deliberate contrast rather than a match, and worth a second
+look if it ever grates.
+
+Two smaller things: the "See 5 more" pill is indented to the list's content
+edge so it sits under the bullets rather than under the line introducing them,
+and the rule below Community spans the whole column, because it is the break
+between the feature stack and the project grid rather than a divider between
+two like things.

@@ -339,7 +339,7 @@ overrides need matching specificity — `footer.site-footer a`, not
   things below. Note `.feature figure img`, scoped on purpose: unscoped, it
   also matches the mark in the heading and blows it up to the full width of
   the block.
-- **Four feature thumbnails cross-fade.** `.fader` stacks two or three
+- **Five feature thumbnails cross-fade.** `.fader` stacks two or three
   captures absolutely in one frame; the **first is the base and never
   animates**, and the layers above fade in over it in turn. That is what makes
   the loop close: the topmost fades out at the end of the cycle onto a base
@@ -350,8 +350,14 @@ overrides need matching specificity — `footer.site-footer a`, not
   sets are hand-authored; check the arithmetic against the cycle before
   changing either. The van is weighted deliberately: the side-door interior
   holds 3s and the other two about 1.5s each, on a 6s cycle. CMI uses the same
-  6s weighting; invoiceNow has two images and splits evenly; Music runs five
-  on a 9s cycle, base 3s then 1.5s each (keyframes `m2`-`m5`).
+  6s weighting; invoiceNow has two images and splits evenly; Music and
+  Community each run five on a 9s cycle, base 3s then 1.5s each (keyframes
+  `m2`-`m5`). Community keeps the 3:2 frame it had as a static card and uses
+  `contain`: its lead photograph ("Colours on.") is natively 3:2 so it fills
+  the frame exactly and the card looks unchanged, while the other four run
+  0.75 to 2.22 and would lose half a height or a third of a width to `cover`.
+  Its four extra photographs are the same files the community page shows, and
+  **the captions stay on that page only** — the card carries none.
   **Every layer paints `var(--cardbg)` behind itself.** Without that a
   `contain` layer is transparent wherever it is letterboxed and the image
   *below it in the stack* shows through down the edges — it happened on the
@@ -412,6 +418,19 @@ overrides need matching specificity — `footer.site-footer a`, not
   comparison page, not the inventory), the van takes `hero-gopro.jpg` —
   "Looking inside through the side door." — and Receipt Manager takes its own
   `screenshots/thumbnail.png`.
+- The Music card is **deep red** (`--cta:#b71c1c`), not the golden brown it
+  started as — a YouTube register rather than a folk one. Both photographs
+  keep their green outlines, which was asked for separately and now reads as
+  a deliberate contrast rather than a match.
+- The pill labels capitalise the destinations: "Read about The Music" and
+  "Read more about The Community".
+- `.moreaims summary` carries `margin-left:2.75rem` (1.6rem below 480px) so
+  the disclosure pill sits on the list's own content edge, under the bullets
+  it extends rather than under the line introducing them. Set on the summary,
+  not the `<details>`, or the nested list indents twice.
+- The last `hr.featrule` carries `.wide` (`max-width:none`): it is the break
+  between the feature column and the project grid, not a divider between two
+  like things, so it spans the whole column.
 - **Music and Community are feature blocks too.** They were `.topiccard`
   sections at the foot of the page; they are now `.feature f-music` and
   `.feature f-comm`, full width like the other five, sitting directly under

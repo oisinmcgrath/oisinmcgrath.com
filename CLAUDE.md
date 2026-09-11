@@ -438,9 +438,10 @@ overrides need matching specificity — `footer.site-footer a`, not
 - Music outlines its slideshow in the card's own red
   (`light-dark(#b71c1c,#d4544c)`) and Community keeps the club's green. They
   were briefly both green, from when Music was brown and the pair matched.
-- Only Cross Market Intelligence still carries a `figcaption` on its feature
-  card; the others were taken off one at a time. The project pages keep all of
-  theirs.
+- **No feature card carries a `figcaption` any more** — they came off one at a
+  time, Cross Market Intelligence last. The heading and blurb already say what
+  the picture is, and the three cards whose thumbnails cycle were describing a
+  frame that had already changed. The project pages keep all of theirs.
 - `.moreaims summary` carries `margin-left:2.75rem` (1.6rem below 480px) so
   the disclosure pill sits on the list's own content edge, under the bullets
   it extends rather than under the line introducing them. Set on the summary,

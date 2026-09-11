@@ -423,7 +423,8 @@
     .feature .fader .fade2,
     .feature .fader .fade3,
     .feature .fader .fade4,
-    .feature .fader .fade5{opacity:0}
+    .feature .fader .fade5,
+    .feature .fader .fade6{opacity:0}
     @media (prefers-reduced-motion:no-preference){
       .feature .fader .fade2{animation:fade2 var(--cycle) linear infinite}
       .feature .fader .fade3{animation:fade3 var(--cycle) linear infinite}
@@ -435,6 +436,16 @@
       .feature .fader.five .fade3{animation-name:m3}
       .feature .fader.five .fade4{animation:m4 var(--cycle) linear infinite}
       .feature .fader.five .fade5{animation:m5 var(--cycle) linear infinite}
+      /* Six images: same weighting again — base 3s, five more at 1.5s, so a
+         10.5s cycle. */
+      .feature .fader.six .fade2{animation-name:n2}
+      .feature .fader.six .fade3{animation-name:n3}
+      /* The shorthand, not just a name: .fade4 and .fade5 get their duration
+         from a `.five`-scoped rule, so under `.six` an `animation-name` alone
+         leaves them at the initial 0s duration and they never run at all. */
+      .feature .fader.six .fade4{animation:n4 var(--cycle) linear infinite}
+      .feature .fader.six .fade5{animation:n5 var(--cycle) linear infinite}
+      .feature .fader.six .fade6{animation:n6 var(--cycle) linear infinite}
     }
     /* Three images, weighted: the base holds half the cycle, the other two a
        quarter each. The van's opening frame is meant to sit noticeably
@@ -466,6 +477,22 @@
     }
     @keyframes m5{
       0%,83.333%{opacity:0} 88.889%,94.444%{opacity:1} 100%{opacity:0}
+    }
+    /* Six images on a 10.5s cycle: base 3s, then 1.5s each. */
+    @keyframes n2{
+      0%,28.571%{opacity:0} 33.333%,47.619%{opacity:1} 52.381%,100%{opacity:0}
+    }
+    @keyframes n3{
+      0%,42.857%{opacity:0} 47.619%,61.905%{opacity:1} 66.667%,100%{opacity:0}
+    }
+    @keyframes n4{
+      0%,57.143%{opacity:0} 61.905%,76.190%{opacity:1} 80.952%,100%{opacity:0}
+    }
+    @keyframes n5{
+      0%,71.429%{opacity:0} 76.190%,90.476%{opacity:1} 95.238%,100%{opacity:0}
+    }
+    @keyframes n6{
+      0%,85.714%{opacity:0} 90.476%,95.238%{opacity:1} 100%{opacity:0}
     }
     /* The van's photographs share a 3:2 frame — two of the three are 4:3, so
        they give up 11% of their height rather than the frame changing shape
@@ -501,6 +528,11 @@
     .feature.f-music .fader img{object-fit:cover;object-position:50% 10%}
     .feature.f-music .fader img:first-child{object-position:50% 8%}
     .feature.f-music .fader .fade2{object-position:50% 50%}
+    /* The multitrack still is a 16:9 montage of four separate takes across
+       its full width. `cover` in the 5:4 frame would cut 15% off each side
+       and take two of the four with it, so this one layer letterboxes
+       against the card's own ground instead. */
+    .feature.f-music .fader .fade6{object-fit:contain}
     /* Community keeps the 3:2 frame it already had, and `contain` rather than
        `cover`. Its lead photograph is natively 3:2, so it fills the frame
        exactly and the card looks as it did; the other four run from 0.75 (a
@@ -791,7 +823,7 @@
           which&hellip;
         </p>
         <figure>
-          <span class="fader five" style="--cycle:9s">
+          <span class="fader six" style="--cycle:10.5s">
             <img src="/music/performing-paddys-day.jpg"
                  width="1100" height="1163" loading="lazy"
                  alt="Playing guitar and fiddle outdoors under a tree at the St Patrick&rsquo;s Festival">
@@ -803,6 +835,8 @@
                  width="720" height="960" loading="lazy" alt="">
             <img class="fade5" src="/music/playing-outdoors.jpg"
                  width="726" height="726" loading="lazy" alt="">
+            <img class="fade6" src="/music/multitrack.jpg"
+                 width="1600" height="895" loading="lazy" alt="">
           </span>
         </figure>
         <p class="featmore">

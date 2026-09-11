@@ -352,7 +352,8 @@ overrides need matching specificity — `footer.site-footer a`, not
   holds 3s and the other two about 1.5s each, on a 6s cycle. CMI uses the same
   6s weighting; invoiceNow has two on a 4.5s cycle, same weighting; Music and
   Community each run five on a 9s cycle, base 3s then 1.5s each (keyframes
-  `m2`-`m5`). Community keeps the 3:2 frame it had as a static card and uses
+  `m2`-`m5`; Music runs six on a 10.5s cycle, keyframes `n2`-`n6`). Community
+  keeps the 3:2 frame it had as a static card and uses
   `contain`: its lead photograph ("Colours on.") is natively 3:2 so it fills
   the frame exactly and the card looks unchanged, while the other four run
   0.75 to 2.22 and would lose half a height or a third of a width to `cover`.
@@ -370,7 +371,15 @@ overrides need matching specificity — `footer.site-footer a`, not
   near-black cannot be seen. Music's five photographs run 0.75 to 1.42, so it
   takes a 5:4 frame with `cover` and a per-image `object-position` — every
   anchor was picked against a rendered crop sheet, and every face sits in the
-  upper half of every shot. The fader rules are scoped through `.feature` so
+  upper half of every shot. Its sixth layer, a 16:9 multitrack still, is the
+  exception and uses `contain` — `cover` would cut 15% off each side and take
+  two of the montage's four panels with it.
+  **Scope the whole `animation` shorthand, not just `animation-name`, when
+  adding a layer count.** `.fade4` and `.fade5` take their duration from a
+  `.five`-scoped rule, so the first `.six` pass set only a name on them and
+  they sat at the initial 0s duration — two of the six images never appeared
+  at all, and nothing else looked wrong. Step the cycle and check each layer
+  actually runs. The fader rules are scoped through `.feature` so
   they out-specify `.feature figure img`.
 - **A feature block IS an anchor** — with one exception, Music. `<a class="feature f-x" href="…"
   aria-label="…">` wrapping the heading, prose, figure and pill — the same

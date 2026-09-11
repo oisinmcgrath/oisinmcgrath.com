@@ -1155,3 +1155,33 @@ edge so it sits under the bullets rather than under the line introducing them,
 and the rule below Community spans the whole column, because it is the break
 between the feature stack and the project grid rather than a divider between
 two like things.
+
+
+---
+
+## The feature cards lost their captions, and the grid gained a heading
+
+**2026-09-11 — the last tidying pass over the homepage.**
+
+Captions came off the invoiceNow and Receipt Manager cards, following Home
+Screen and the van. Only Cross Market Intelligence keeps one, because its
+thumbnail cycles three quite different screens and the caption is what says
+so. The project pages keep every caption they had — this was only ever about
+the cards, where the heading and blurb already say what the picture is.
+
+invoiceNow's two-image fader was the odd one out: it split its cycle evenly
+while every other fader holds its base three seconds and gives the rest a
+second and a half. It now runs a 4.5s cycle on the same weighting, so the
+dashboard is what a reader sees unless they linger.
+
+The seven remaining projects sit under **"Other Projects"**. The grid has had
+no heading since the Software/Technical split was dropped, which left it
+reading as an unlabelled overflow of tiles after seven featured blocks. One
+heading is not the old split coming back; it takes the column rather than the
+reading measure, so it lines up with the grid it introduces rather than with
+the cards above it.
+
+The van's pill is now simply "Read more" — the heading directly above it
+already names the project, so repeating it was noise. Its `aria-label` still
+names the conversion in full, so a screen reader is not handed a page of
+identical "Read more" links.

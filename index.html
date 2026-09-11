@@ -425,7 +425,7 @@
     @media (prefers-reduced-motion:no-preference){
       .feature .fader .fade2{animation:fade2 var(--cycle) linear infinite}
       .feature .fader .fade3{animation:fade3 var(--cycle) linear infinite}
-      /* Two images: one crossfade out and back, half the cycle each. */
+      /* Two images, weighted like the rest: base 3s, the second 1.5s. */
       .feature .fader.two .fade2{animation-name:fade-two}
       /* Five images: same weighting as the others — the base holds a third
          of the cycle, the four after it a sixth each. */
@@ -443,9 +443,11 @@
     @keyframes fade3{
       0%,75%{opacity:0} 83.33%,91.67%{opacity:1} 100%{opacity:0}
     }
-    /* Two images, evenly split. */
+    /* Two images on a 4.5s cycle: the base holds 3s and the second 1.5s —
+       the same weighting the three- and five-image faders use, rather than
+       the even split it had. */
     @keyframes fade-two{
-      0%,41.67%{opacity:0} 50%,91.67%{opacity:1} 100%{opacity:0}
+      0%,66.667%{opacity:0} 77.778%,88.889%{opacity:1} 100%{opacity:0}
     }
     /* Five images on a 9s cycle: base 3s, then 1.5s each. Each layer holds
        until the one above it has finished fading in, then drops while hidden
@@ -550,6 +552,10 @@
     .moreaims[open] .chev{transform:rotate(-135deg) translate(-2px,-2px)}
     .moreaims > ul{margin-top:.7rem}
 
+    /* The heading over the remaining projects. It takes the column rather
+       than the reading measure, so it shares a left edge with the grid it
+       introduces rather than with the feature cards above it. */
+    .gridheading{margin:.25rem 0 .9rem}
     .projgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem;margin:1rem 0 2rem}
     .projcard{display:flex;flex-direction:column;background:#fbfcfd;border:1px solid #e7ebef;
               border-radius:8px;padding:1.15rem 1.25rem;text-decoration:none;color:inherit;
@@ -691,7 +697,7 @@
 
       <hr class="featrule">
 
-      <a class="feature f-ren" href="/projects/renault-master/" aria-label="Read about the conversion">
+      <a class="feature f-ren" href="/projects/renault-master/" aria-label="Read more about the Renault Master camper conversion">
         <h2 id="ren-heading"><img class="cardicon" src="/projects/renault-master/favicon.svg" alt="">Renault Master Camper Conversion</h2>
         <p>
           I built a postvan into a fully liveable home on wheels, including a
@@ -709,7 +715,7 @@
           </span>
         </figure>
         <p class="featmore">
-          <span class="featbtn">Read about the conversion &rarr;</span>
+          <span class="featbtn">Read more &rarr;</span>
         </p>
       </a>
 
@@ -722,14 +728,13 @@
           your mind for good.
         </p>
         <figure>
-          <span class="fader two" style="--cycle:6s">
+          <span class="fader two" style="--cycle:4.5s">
             <img src="/projects/invoicenow/screenshots/dashboard.png"
                  width="3412" height="1846" loading="lazy"
                  alt="The invoiceNow dashboard, showing the quarter's billed and received totals, the GST on them, and how many invoices are still unpaid.">
             <img class="fade2" src="/projects/invoicenow/screenshots/bas-statements.png"
                  width="2000" height="1496" loading="lazy" alt="">
           </span>
-          <figcaption>Where you stand financially, and the quarter's BAS figures, without working either out.</figcaption>
         </figure>
         <p class="featmore">
           <span class="featbtn">Read about invoiceNow &rarr;</span>
@@ -749,7 +754,6 @@
           <img src="/projects/receipt-manager/screenshots/thumbnail.png"
                width="2000" height="1165" loading="lazy"
                alt="The Receipt Manager dashboard, where a stack goes into the scanner or files already on the computer are added, with the review queue and the quarter's totals below.">
-          <figcaption>The dashboard, where a stack goes into the scanner or files already on the computer are added.</figcaption>
         </figure>
         <p class="featmore">
           <span class="featbtn">Read about Receipt Manager &rarr;</span>
@@ -800,7 +804,7 @@
           </span>
         </figure>
         <p class="featmore">
-          <a class="featbtn" href="/music.html">Read about The Music &rarr;</a>
+          <a class="featbtn" href="/music.html">Read more about Music &rarr;</a>
           <a class="featbtn" href="https://www.youtube.com/@oisinmcgrath1916"><img
              class="btnico" src="/music/youtube-icon.png" alt="" width="76" height="48">YouTube Channel</a>
         </p>
@@ -808,7 +812,7 @@
 
       <hr class="featrule">
 
-      <a class="feature f-comm" href="/community.html" aria-label="Read more about The Community">
+      <a class="feature f-comm" href="/community.html" aria-label="Read more about Community">
         <h2 id="community-heading"><img class="cardicon" src="/community/shamrock.svg" alt="">Community</h2>
         <p>
           We had a blast volunteering for the St Patrick's Festival with the
@@ -830,11 +834,13 @@
           </span>
         </figure>
         <p class="featmore">
-          <span class="featbtn">Read more about The Community &rarr;</span>
+          <span class="featbtn">Read more about Community &rarr;</span>
         </p>
       </a>
 
       <hr class="featrule wide">
+
+      <h2 class="gridheading">Other Projects</h2>
 
       <div class="projgrid">
         <a class="projcard" href="/projects/tagdexer/">

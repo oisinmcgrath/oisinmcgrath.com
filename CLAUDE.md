@@ -350,7 +350,7 @@ overrides need matching specificity — `footer.site-footer a`, not
   sets are hand-authored; check the arithmetic against the cycle before
   changing either. The van is weighted deliberately: the side-door interior
   holds 3s and the other two about 1.5s each, on a 6s cycle. CMI uses the same
-  6s weighting; invoiceNow has two images and splits evenly; Music and
+  6s weighting; invoiceNow has two on a 4.5s cycle, same weighting; Music and
   Community each run five on a 9s cycle, base 3s then 1.5s each (keyframes
   `m2`-`m5`). Community keeps the 3:2 frame it had as a static card and uses
   `contain`: its lead photograph ("Colours on.") is natively 3:2 so it fills
@@ -422,8 +422,12 @@ overrides need matching specificity — `footer.site-footer a`, not
   started as — a YouTube register rather than a folk one. Both photographs
   keep their green outlines, which was asked for separately and now reads as
   a deliberate contrast rather than a match.
-- The pill labels capitalise the destinations: "Read about The Music" and
-  "Read more about The Community".
+- Pill labels: "Read more about Music", "Read more about Community", and the
+  van's is simply "Read more" — its `aria-label` still names the project, so
+  the accessible name is not seven identical "Read more" links.
+- Only Cross Market Intelligence still carries a `figcaption` on its feature
+  card; the others were taken off one at a time. The project pages keep all of
+  theirs.
 - `.moreaims summary` carries `margin-left:2.75rem` (1.6rem below 480px) so
   the disclosure pill sits on the list's own content edge, under the bullets
   it extends rather than under the line introducing them. Set on the summary,
@@ -445,8 +449,11 @@ overrides need matching specificity — `footer.site-footer a`, not
   it was left uncropped when it stood alone. Their blurbs lost their inline
   "see more" links — the card is the link now, and an anchor inside an anchor
   is invalid.
-- The seven remaining projects are `.projcard` tiles in one grid with **no
-  headings above it** — the Software/Technical split is gone from this page.
+- The seven remaining projects are `.projcard` tiles in one grid under a
+  single **"Other Projects"** heading (`.gridheading`). It takes the column
+  rather than the reading measure, so it shares a left edge with the grid it
+  introduces rather than with the feature cards above. The old
+  Software/Technical split is still gone — this is one heading, not two.
   The order is deliberate: Tagdexer, Cadence, Capsule, Epson RR-70W,
   NitroTune, N-of-1, YT Downloader. `projects/index.html` still carries its
   own headings and its own order; the difference is deliberate.
